@@ -1,5 +1,32 @@
 {
-  "BWEClaudeHung": {"purpose": "Diagnose whether another Claude Code session is hung or working.", "dependencies": "none", "projects": "all"},
-  "BWEClaudeStatus": {"purpose": "Summarize what this session and its agents are doing.", "dependencies": "none", "projects": "all"},
-  "BWEProductionReady": {"purpose": "Project-aware production-readiness gate (GO / NO-GO).", "dependencies": "project test/build tooling", "projects": "all"}
+  "BWEClaudeHung": {
+    "purpose": "Diagnose whether another Claude Code session is hung or working.",
+    "dependencies": "none",
+    "projects": "all"
+  },
+  "BWEClaudeStatus": {
+    "purpose": "Summarize what this session and its agents are doing.",
+    "dependencies": "none",
+    "projects": "all"
+  },
+  "BWEProductionReady": {
+    "purpose": "Project-aware production-readiness gate (GO / NO-GO).",
+    "dependencies": "project test/build tooling",
+    "projects": "all"
+  },
+  "BWESEO": {
+    "purpose": "SEO front door: state-aware controller for the BWESEO engine.",
+    "dependencies": "BWERepo/SEOEngine checkout ($BWESEO_ENGINE); Node; delegates to other BWESEO* skills (not yet in this catalog)",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOInstall": {
+    "purpose": "Install, verify or sync the BWESEO engine in a website project.",
+    "dependencies": "BWERepo/SEOEngine checkout ($BWESEO_ENGINE); Node",
+    "projects": "website projects"
+  },
+  "BWESEOUpdate": {
+    "purpose": "Update the BWESEO engine and its skills in the current website.",
+    "dependencies": "BWERepo/SEOEngine checkout ($BWESEO_ENGINE); Node",
+    "projects": "website projects with BWESEO installed"
+  }
 }
