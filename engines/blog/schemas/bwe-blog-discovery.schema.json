@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.bwe.invalid/bwe-blog-discovery/1.0.json",
+  "title": "BWE Blog Engine discovery file (/.well-known/bwe-blog.json)",
+  "type": "object",
+  "required": ["schemaVersion", "type", "engine", "engineVersion", "blogIndex", "indexSchemaVersion", "sitemap", "blogRoot", "articleCount", "lastUpdated"],
+  "properties": {
+    "schemaVersion": { "type": "string", "pattern": "^1\\.\\d+$" },
+    "type": { "const": "bwe-blog-engine" },
+    "engine": { "const": "BWE Blog Engine" },
+    "engineVersion": { "type": "string" },
+    "blogIndex": { "type": "string", "pattern": "^/" },
+    "indexSchemaVersion": { "type": "string" },
+    "sitemap": { "type": "string", "pattern": "^/" },
+    "blogSitemap": { "type": "string", "pattern": "^/" },
+    "blogRoot": { "type": "string", "pattern": "^/" },
+    "articleCount": { "type": "integer", "minimum": 0 },
+    "lastUpdated": { "type": "string", "format": "date-time" }
+  }
+}

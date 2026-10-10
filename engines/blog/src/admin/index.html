@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BWE Blog Engine</title>
+<link rel="stylesheet" href="/dashboard.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+  <h1>BWE Blog Engine</h1>
+  <nav aria-label="Sections" class="tabs" id="tabs">
+    <button type="button" data-tab="overview" aria-current="page">Overview</button>
+    <button type="button" data-tab="recommendations">Recommendations</button>
+    <button type="button" data-tab="articles">Articles</button>
+    <button type="button" data-tab="links">Internal Links</button>
+    <button type="button" data-tab="clusters">Clusters</button>
+    <button type="button" data-tab="seo">SEO Index</button>
+    <button type="button" data-tab="settings">Settings</button>
+    <button type="button" data-tab="guide">Guide</button>
+  </nav>
+  <label class="token-field">
+    <span>Admin token</span>
+    <input id="token" type="password" autocomplete="off" placeholder="paste token">
+  </label>
+</header>
+
+<div id="progress" class="progress-bar" role="status" aria-live="polite" hidden></div>
+<div id="toast" class="toast" role="alert" aria-live="assertive" hidden></div>
+
+<main id="main">
+  <section id="panel-overview" class="panel" aria-labelledby="h-overview">
+    <h2 id="h-overview">Overview</h2>
+    <div class="conductor" id="conductor-panel" aria-live="polite">
+      <h3>Where you are</h3>
+      <p id="conductor-summary"></p>
+      <ul id="conductor-done"></ul>
+      <p class="conductor-next"><strong>Next:</strong> <span id="conductor-next-desc"></span> <code id="conductor-next-command"></code> <button type="button" id="conductor-next-guide" class="link-button" hidden></button></p>
+      <ul id="conductor-also"></ul>
+      <details id="conductor-activity-wrap">
+        <summary>Recent activity</summary>
+        <ul id="conductor-activity"></ul>
+      </details>
+    </div>
+    <div class="actions">
+      <button type="button" data-action="analyze">Analyze Website</button>
+      <button type="button" data-action="reanalyze">Reanalyze Website</button>
+      <button type="button" data-action="rebuild-index">Rebuild Blog SEO Index</button>
+    </div>
+    <dl class="stat-grid" id="overview-stats" aria-live="polite"></dl>
+  </section>
+
+  <section id="panel-recommendations" class="panel" hidden aria-labelledby="h-recs">
+    <h2 id="h-recs">Recommendations <span class="hint">(up to the configured limit &mdash; a ceiling, not a quota)</span></h2>
+    <div class="actions">
+      <button type="button" data-action="rec-select-all">Select all</button>
+      <button type="button" data-action="rec-select-none">Select none</button>
+      <button type="button" data-action="rec-select-high">Select critical/high</button>
+      <button type="button" data-action="rec-create-selected">Create selected</button>
+      <button type="button" data-action="rec-reject-selected" class="secondary">Reject selected</button>
+    </div>
+    <table class="data-table" id="rec-table">
+      <thead><tr><th scope="col"><span class="visually-hidden">Select</span></th><th scope="col">Title</th><th scope="col">Priority</th><th scope="col">Action</th><th scope="col">Intent</th><th scope="col">Reason</th><th scope="col"></th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section id="panel-articles" class="panel" hidden aria-labelledby="h-articles">
+    <h2 id="h-articles">Articles</h2>
+    <table class="data-table" id="article-table">
+      <thead><tr><th scope="col">Title</th><th scope="col">Source</th><th scope="col">Status</th><th scope="col">Words</th><th scope="col">In</th><th scope="col">Out</th><th scope="col"></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <dialog id="article-dialog">
+      <form method="dialog" id="article-form">
+        <h3 id="article-dialog-title">Article</h3>
+        <label>Draft (Markdown)<textarea id="article-draft" rows="16"></textarea></label>
+        <div class="dialog-actions">
+          <button type="button" data-action="save-draft">Save draft</button>
+          <button type="button" data-action="approve">Approve</button>
+          <button type="button" data-action="publish">Publish</button>
+          <button type="button" data-action="unpublish" class="secondary">Unpublish</button>
+          <button type="button" data-action="regenerate" class="secondary">Regenerate</button>
+          <button type="button" data-action="archive" class="secondary">Archive</button>
+          <button value="close">Close</button>
+        </div>
+        <div id="article-issues" class="issues" aria-live="polite"></div>
+      </form>
+    </dialog>
+  </section>
+
+  <section id="panel-links" class="panel" hidden aria-labelledby="h-links">
+    <h2 id="h-links">Internal Links</h2>
+    <div class="stat-grid" id="links-stats"></div>
+    <h3>Suggestions</h3>
+    <table class="data-table" id="links-table">
+      <thead><tr><th scope="col">From</th><th scope="col">To</th><th scope="col">Anchor</th><th scope="col">Score</th><th scope="col">Band</th><th scope="col">Status</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section id="panel-clusters" class="panel" hidden aria-labelledby="h-clusters">
+    <h2 id="h-clusters">Topical Clusters</h2>
+    <div id="clusters-list"></div>
+  </section>
+
+  <section id="panel-seo" class="panel" hidden aria-labelledby="h-seo">
+    <h2 id="h-seo">SEO Index</h2>
+    <dl class="stat-grid" id="seo-stats"></dl>
+  </section>
+
+  <section id="panel-settings" class="panel" hidden aria-labelledby="h-settings">
+    <h2 id="h-settings">Settings</h2>
+    <pre id="settings-json" class="settings-json"></pre>
+  </section>
+
+  <section id="panel-guide" class="panel" hidden aria-labelledby="h-guide">
+    <h2 id="h-guide">Guide</h2>
+    <div id="guide-content" class="guide-content"></div>
+  </section>
+</main>
+
+<script src="/dashboard.js"></script>
+</body>
+</html>

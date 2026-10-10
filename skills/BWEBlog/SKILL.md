@@ -3,8 +3,7 @@ name: BWEBlog
 description: The Blog Engine front door. Reads the current website's real Blog Engine state (bwe-blog status), shows a short status dashboard (stage, what is done, what needs the owner), recommends the ONE best next step with the exact command, then asks before proceeding. Never selects, generates, approves or publishes anything on its own. Use when the user says "blog", "Blog Engine", "work on the blog", "what's next for the blog", "blog status", "where are we with the blog", or invokes /BWEBlog, in any website project.
 ---
 
-> `$BLOG_ENGINE_HOME` = the Blog Engine repository checkout (the folder containing `package.json` with the `bwe-blog` bin; source: private repo `BWERepo/BlogEngine`).
-> Build it once (`npm ci && npm run build`); then run it from the website's root as `node $BLOG_ENGINE_HOME/dist/cli/main.js <command>` (written `bwe-blog <command>` below).
+> The Blog Engine runs from the website's own copy, installed by `/BWEBlogInstall` into `.bwe-engine/`. `bwe-blog <command>` below means `node .bwe-engine/dist/cli/main.js <command>` run from the website's root.
 
 # BWEBlog: the Blog Engine front door
 
@@ -18,7 +17,7 @@ ANALYZE → REVIEW RECOMMENDATIONS → SELECT → GENERATE → REVIEW AND APPROV
 
 From the website's repository root:
 
-1. If `bwe-blog.config.json` does not exist, the engine is not set up here. The next step is `bwe-blog init` (then set `siteUrl`). If `$BLOG_ENGINE_HOME` is unset or not built, say so and stop with that one step.
+1. If `bwe-blog.config.json` does not exist, the engine is not set up here. The next step is `bwe-blog init` (then set `siteUrl`). If `.bwe-engine/dist/cli/main.js` does not exist, the engine is not installed: the one step is `/BWEBlogInstall`.
 2. Otherwise run `bwe-blog status` (read-only; add `--json` if you need to parse it). It prints a summary, what is done so far, the single next action with its command, and anything else worth a look (broken links, orphans, stale index).
 3. Sanity-check it against this conversation. If the owner says something the records cannot show ("I published it"), say so and carry on; never edit engine state to match a claim.
 

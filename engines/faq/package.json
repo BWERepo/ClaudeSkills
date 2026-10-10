@@ -1,0 +1,23 @@
+{
+  "name": "faq-engine",
+  "version": "1.0.0",
+  "description": "Reusable website FAQ Engine: inventory, grounded question generation, duplicate control, categories, internal links, SEO registry, accessible collapsible rendering and update mode. Zero dependencies.",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "faq-engine": "src/cli.mjs"
+  },
+  "exports": {
+    ".": "./src/index.mjs",
+    "./client": "./client/faq-client.js",
+    "./css": "./client/faq.css"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "guide": "node scripts/show-guide.mjs",
+    "docs": "node scripts/build-docs.mjs"
+  }
+}

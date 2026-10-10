@@ -1,0 +1,61 @@
+{
+  "$schema": "./schema/business-profile.schema.json",
+  "schemaVersion": 1,
+  "profileId": "example-business",
+  "lastReviewed": "YYYY-MM-DD",
+  "identity": {
+    "businessName": { "value": "", "status": "needs-input", "source": "" },
+    "website": { "value": "https://www.example.com", "status": "needs-input", "source": "" },
+    "industry": { "value": "", "status": "needs-input", "source": "" },
+    "businessType": { "value": "", "status": "needs-input", "source": "", "notes": "e.g. local service business, retail store, professional practice" },
+    "description": { "value": "", "status": "needs-input", "source": "" },
+    "ownerName": { "value": "", "status": "needs-input", "source": "", "public": false }
+  },
+  "markets": {
+    "locationDependence": { "value": "local", "status": "needs-input", "source": "" },
+    "primaryLocation": { "value": "", "status": "needs-input", "source": "" },
+    "serviceAreas": { "value": [], "status": "needs-input", "source": "" },
+    "locations": []
+  },
+  "offerings": {
+    "services": [],
+    "products": [],
+    "priorityServices": { "value": [], "status": "needs-input", "source": "questionnaire:<slug>_priority_*" },
+    "highValueServices": { "value": [], "status": "needs-input", "source": "questionnaire:<slug>_valuable_work" }
+  },
+  "customers": {
+    "primaryCustomers": { "value": [], "status": "needs-input", "source": "" },
+    "industriesServed": { "value": [], "status": "not-applicable", "source": "" }
+  },
+  "positioning": {
+    "primaryConversion": { "value": "", "status": "needs-input", "source": "" },
+    "secondaryConversions": { "value": [], "status": "needs-input", "source": "" },
+    "brandVoice": { "value": "", "status": "needs-input", "source": "" },
+    "differentiators": []
+  },
+  "contact": {
+    "phone": { "value": "", "status": "needs-input", "source": "" },
+    "email": { "value": "", "status": "needs-input", "source": "" },
+    "businessHours": { "value": "", "status": "needs-input", "source": "" },
+    "socialProfiles": { "value": [], "status": "needs-input", "source": "" }
+  },
+  "trust": {
+    "licenses": [],
+    "certifications": [],
+    "memberships": [],
+    "awards": [],
+    "testimonials": [],
+    "reviews": [],
+    "caseStudies": []
+  },
+  "competitors": [],
+  "claims": {
+    "verified": [],
+    "prohibited": [
+      { "text": "Any ranking guarantee (#1 on Google, page one, rank in N days)", "reason": "Not controllable; prohibited by the engine" }
+    ]
+  },
+  "doNotPromote": [],
+  "openQuestions": [],
+  "notes": ""
+}

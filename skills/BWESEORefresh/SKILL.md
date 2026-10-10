@@ -3,9 +3,8 @@ name: BWESEORefresh
 description: Finds published pages in the current website project that need updating using the BWESEO engine — stale facts or prices versus the business profile, old lastReviewed dates, weak CTR or declining Search Console numbers, broken links, missing internal links, outdated images, changed search intent, traffic without conversions — and produces a prioritized refresh queue. Use when the user says "refresh content", "what pages are outdated", "content review", or invokes /BWESEORefresh, in any website project.
 ---
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (see `/BWESEOInstall`). Engine code lives in `$BWESEO_ENGINE/src`, methodology in
-> `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 # BWESEORefresh
 

@@ -1,0 +1,16 @@
+name: Display install-and-use guide
+
+on:
+  workflow_dispatch:
+
+jobs:
+  guide:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - name: Render guide to job summary
+        run: node_modules/.bin/tsx src/cli/main.ts guide >> "$GITHUB_STEP_SUMMARY"

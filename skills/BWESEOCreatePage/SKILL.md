@@ -3,9 +3,8 @@ name: BWESEOCreatePage
 description: Creates exactly ONE user-approved SEO page in the current website project using the BWESEO engine — rechecks cannibalization, confirms intent, outlines, builds a claims ledger against verified business facts, writes original content in the site's existing design, adds metadata, schema, internal links, CTA and sitemap entry, runs build/tests and SEO QA, and reports without deploying. Refuses if the page isn't approved in seo/content-inventory.json. Use when the user says "create the page", "build the approved SEO page", or invokes /BWESEOCreatePage <page id or URL>, in any website project.
 ---
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (see `/BWESEOInstall`). Engine code lives in `$BWESEO_ENGINE/src`, methodology in
-> `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 # BWESEOCreatePage
 

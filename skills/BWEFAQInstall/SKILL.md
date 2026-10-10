@@ -13,15 +13,14 @@ This skill installs the **engine** only. The site's own settings are `/BWEFAQSet
 
 ## Locate the engine
 
-`$BWEFAQ_ENGINE_HOME` is the FAQ Engine repository checkout (it contains `package.json` and `src/cli.mjs`). If it is not set and the current folder is not that checkout, ask the owner
-where it is checked out (or to clone `BWERepo/FAQEngine`). Do not guess a path, and never write a machine path into the website repository.
+`$BWEFAQ_ENGINE` = the FAQ Engine bundled in this plugin: `../../engines/faq`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first). No separate checkout is needed, and never write a machine path into the website repository.
 
 ## Run it
 
-From the engine checkout, targeting the website folder:
+Targeting the website folder:
 
 ```
-node "$BWEFAQ_ENGINE_HOME/src/cli.mjs" install <website-folder> [--dry-run | --update | --verify | --sync-skills [--dir <folder>]]
+node "$BWEFAQ_ENGINE/src/cli.mjs" install <website-folder> [--dry-run | --update | --verify | --sync-skills [--dir <folder>]]
 ```
 
 ## Steps

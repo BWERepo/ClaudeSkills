@@ -1,0 +1,681 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bweseo/content-inventory.schema.json",
+  "title": "BWESEO content inventory — every public page plus every planned/rejected idea for ONE project",
+  "type": "object",
+  "required": ["schemaVersion", "projectId", "pages"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "projectId": {
+      "type": "string"
+    },
+    "updated": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "keywordDecisions": {
+      "type": "array",
+      "description": "Engine 1.10.0 - the owner's decisions about DISCOVERED Search Console queries that are not registered keywords. Nothing here creates a page.",
+      "items": {
+        "type": "object",
+        "required": ["query", "decision"],
+        "properties": {
+          "query": { "type": "string" },
+          "decision": { "enum": ["ignore", "monitor", "investigate"] },
+          "on": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "url", "type", "topic", "status", "indexable"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^/"
+          },
+          "type": {
+            "enum": [
+              "home",
+              "pillar",
+              "service",
+              "location",
+              "industry",
+              "pricing",
+              "comparison",
+              "resource",
+              "case-study",
+              "portfolio",
+              "about",
+              "contact",
+              "legal",
+              "utility"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "description": "Short display name used by /BWESEO (e.g. 'Pricing page'); falls back to the title"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "primaryIntent": {
+            "enum": [
+              "high-commercial",
+              "service",
+              "local",
+              "comparison",
+              "problem-solution",
+              "informational",
+              "navigational",
+              "legal",
+              null
+            ]
+          },
+          "secondaryIntents": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "keywords": {
+            "type": "object",
+            "description": "Engine 1.10.0 - the keyword -> target page registry for this page: ONE primary keyword and any number of secondary/related keywords that share its search intent. A keyword never creates a page.",
+            "properties": {
+              "primary": { "type": ["string", "null"] },
+              "secondary": { "type": "array", "items": { "type": "string" } },
+              "searchIntent": { "type": "string", "description": "informational | transactional | commercial | navigational | local | tool | unknown" },
+              "addedOn": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+              "notes": { "type": "string" }
+            }
+          },
+          "audience": {
+            "type": "string"
+          },
+          "location": {
+            "type": ["string", "null"]
+          },
+          "funnelStage": {
+            "enum": ["awareness", "consideration", "decision", null]
+          },
+          "status": {
+            "enum": [
+              "idea",
+              "planned",
+              "approved",
+              "draft",
+              "review",
+              "published",
+              "update-needed",
+              "rejected"
+            ]
+          },
+          "priority": {
+            "enum": ["P1", "P2", "P3", null]
+          },
+          "roadmapOrder": {
+            "type": "number",
+            "description": "Position on CONTENT-ROADMAP.md (set by /BWESEOContentPlan). Entries sharing a number are one roadmap item and are approved together"
+          },
+          "indexable": {
+            "type": "boolean"
+          },
+          "created": {
+            "type": ["string", "null"]
+          },
+          "lastReviewed": {
+            "type": ["string", "null"]
+          },
+          "approvedOn": {
+            "type": ["string", "null"]
+          },
+          "approvedBy": {
+            "const": "user"
+          },
+          "proposedOn": {
+            "type": ["string", "null"],
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "lastModifiedOn": {
+            "type": ["string", "null"],
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Last meaningful content change (set by /BWESEOCreatePage and refreshes)"
+          },
+          "lastRefreshedOn": {
+            "type": ["string", "null"],
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Date a /BWESEORefresh improvement went live"
+          },
+          "blockedBy": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "description": "business-profile openQuestions ids this page waits on. An id that is no longer an open question counts as resolved"
+          },
+          "hold": {
+            "type": "object",
+            "required": ["since", "source"],
+            "description": "The owner paused this page. scope 'deploy' (default): holds the PRODUCTION deploy only — QA, staging deploys, the staging review and the staging approval go ahead; 'all': nothing happens on the page until the owner says go",
+            "properties": {
+              "since": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              "scope": {
+                "enum": ["deploy", "all"]
+              },
+              "reason": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string",
+                "description": "owner:<date> chat"
+              }
+            }
+          },
+          "parent": {
+            "type": ["string", "null"]
+          },
+          "relatedPages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cta": {
+            "type": ["string", "null"]
+          },
+          "service": {
+            "type": ["string", "null"],
+            "description": "offerings.services[].id this page sells"
+          },
+          "cannibalization": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "enum": ["create", "improve-existing", "merge", "reject", "existing"]
+              },
+              "competingUrl": {
+                "type": ["string", "null"]
+              },
+              "risk": {
+                "enum": ["low", "medium", "high"]
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          },
+          "claims": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "claims.verified ids / fact paths used on the page (claims ledger)"
+          },
+          "qa": {
+            "type": "object",
+            "required": ["result", "date"],
+            "properties": {
+              "result": {
+                "enum": ["pass", "fail"]
+              },
+              "date": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              "sourceHash": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{8,64}$",
+                "description": "seo-state.mjs --hash <id> at QA time; a different hash later means the page changed after QA"
+              },
+              "report": {
+                "type": "string"
+              }
+            }
+          },
+          "source": {
+            "type": "string",
+            "description": "Where the page lives in the codebase/CMS"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "refresh": {
+            "type": "object",
+            "required": ["trigger", "evidence"],
+            "description": "Why this page should be improved — written by /BWESEORefresh or a Search Console review. /BWESEO recommends a refresh only when this evidence exists",
+            "properties": {
+              "trigger": {
+                "type": "string",
+                "description": "e.g. low CTR, outdated price, wrong intent, declining clicks"
+              },
+              "evidence": {
+                "type": "string",
+                "description": "The numbers or facts behind it, with the period"
+              },
+              "flaggedOn": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              "source": {
+                "type": "string",
+                "description": "Report path, e.g. docs/seo/reports/search-console-<date>.md"
+              },
+              "resolvedOn": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              }
+            }
+          },
+          "verifyText": {
+            "type": "string",
+            "description": "Text only this page contains; /BWESEOPublish checks it is on the live page"
+          },
+          "linksFrom": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Planned pages that should link TO this page (paths)"
+          },
+          "publishedOn": {
+            "type": ["string", "null"],
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "description": "Date the page went live on production — the monitoring baseline"
+          },
+          "productionUrl": {
+            "type": "string"
+          },
+          "canonicalUrl": {
+            "type": "string",
+            "description": "Canonical URL verified on the live page, or \"unknown\""
+          },
+          "nextReview": {
+            "type": ["string", "null"],
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "navigation": {
+            "description": "Where the page is linked from site navigation (decided by /BWESEOPublish)",
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "primary",
+                    "service",
+                    "resource",
+                    "footer",
+                    "sitemap-only",
+                    "contextual-only"
+                  ]
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "placement": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "primary",
+                        "service",
+                        "resource",
+                        "footer",
+                        "sitemap-only",
+                        "contextual-only"
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          "postPublication": {
+            "type": "object",
+            "description": "Written by /BWESEOPublish. Unknown values are \"unknown\" — never guessed.",
+            "required": ["checkedOn", "result"],
+            "properties": {
+              "checkedOn": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              "result": {
+                "enum": ["ready", "action-required", "not-live"]
+              },
+              "sitemapStatus": {
+                "enum": ["included", "missing", "not-applicable", "unknown"]
+              },
+              "internalLinkStatus": {
+                "enum": ["linked", "orphaned", "unknown"]
+              },
+              "inboundLinks": {
+                "type": ["integer", "string"]
+              },
+              "searchConsole": {
+                "type": "object",
+                "properties": {
+                  "property": {
+                    "enum": ["known", "unknown"]
+                  },
+                  "urlInspection": {
+                    "enum": ["verified", "not verified"]
+                  },
+                  "indexingRequest": {
+                    "enum": ["REQUESTED", "NOT REQUESTED", "REQUEST FAILED", "UNKNOWN"]
+                  },
+                  "liveUrlTest": {
+                    "type": "object",
+                    "description": "Engine 1.4.0 — Search Console's Live URL Test for this page (production URL only)",
+                    "properties": {
+                      "result": { "enum": ["not tested", "passed", "failed", "unknown"] },
+                      "testedOn": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                      "availableToGoogle": { "type": ["boolean", "null"] },
+                      "canBeIndexed": { "type": ["boolean", "null"] },
+                      "source": { "type": ["string", "null"] }
+                    }
+                  },
+                  "indexed": {
+                    "type": "object",
+                    "description": "Engine 1.4.0 — whether Google has actually indexed the URL. INDEXED needs verifiedOn, evidence and source; a request, a passed test or a sitemap is never evidence",
+                    "properties": {
+                      "status": { "enum": ["INDEXED", "NOT VERIFIED"] },
+                      "verifiedOn": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                      "lastCheckedOn": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                      "evidence": { "type": ["string", "null"] },
+                      "source": { "type": ["string", "null"] },
+                      "note": { "type": ["string", "null"] }
+                    }
+                  },
+                  "requestedOn": {
+                    "type": ["string", "null"],
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  },
+                  "requestSource": {
+                    "type": ["string", "null"],
+                    "description": "e.g. owner:<date> chat — required for REQUESTED"
+                  }
+                }
+              },
+              "google": {
+                "type": "object",
+                "description": "Engine 1.7.0 — the page-level Google workflow. Readiness, sitemap membership, discovery, crawl and performance are separate facts, each with its own evidence (a date and a source). Indexed status lives in searchConsole.indexed. Never infer a later stage from an earlier one; published ≠ discovered ≠ crawled ≠ indexed ≠ ranking well ≠ conversions.",
+                "properties": {
+                  "readiness": {
+                    "type": "object",
+                    "description": "Is the page technically ready for Google? PASSED means only that — never that Google has discovered, crawled or indexed it",
+                    "properties": {
+                      "status": { "enum": ["PASSED", "FAILED", "PENDING", "UNKNOWN"] },
+                      "checkedAt": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                      "source": { "type": ["string", "null"] },
+                      "items": { "type": "array", "items": { "type": "object" } },
+                      "failures": { "type": "array", "items": { "type": "string" } },
+                      "warnings": { "type": "array", "items": { "type": "string" } },
+                      "note": { "type": ["string", "null"] }
+                    }
+                  },
+                  "sitemap": {
+                    "type": "object",
+                    "properties": {
+                      "included": { "enum": ["yes", "no", "unknown"] },
+                      "verifiedAt": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                      "lastmod": { "type": ["string", "null"] },
+                      "source": { "type": ["string", "null"] }
+                    }
+                  },
+                  "discovered": {
+                    "type": "object",
+                    "properties": {
+                      "status": { "enum": ["DISCOVERED", "PENDING", "UNKNOWN"] },
+                      "at": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                      "source": { "type": ["string", "null"] },
+                      "evidence": { "type": ["string", "null"] },
+                      "note": { "type": ["string", "null"] }
+                    }
+                  },
+                  "crawled": {
+                    "type": "object",
+                    "properties": {
+                      "status": { "enum": ["CRAWLED", "PENDING", "UNKNOWN"] },
+                      "at": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                      "source": { "type": ["string", "null"] },
+                      "evidence": { "type": ["string", "null"] },
+                      "note": { "type": ["string", "null"] }
+                    }
+                  },
+                  "lastCheckedOn": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                  "performance": {
+                    "type": "object",
+                    "description": "Search Console performance for a window. Zero impressions/clicks is valid ('No Search Console performance data yet') — never estimate",
+                    "properties": {
+                      "checkedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                      "windowDays": { "type": "integer" },
+                      "source": { "type": "string" },
+                      "impressions": { "type": "number", "minimum": 0 },
+                      "clicks": { "type": "number", "minimum": 0 },
+                      "ctr": { "type": "number", "minimum": 0 },
+                      "position": { "type": ["number", "null"] },
+                      "queries": { "type": "array", "items": { "type": "object" } },
+                      "conversions": { "type": "object", "description": "Business outcomes where analytics allows: qualified leads / prototype requests" }
+                    }
+                  },
+                  "indexingApi": {
+                    "type": "object",
+                    "description": "Guardrail: Google's Indexing API is only for JobPosting / BroadcastEvent content. Ordinary pages are never eligible (default eligible: false)",
+                    "properties": {
+                      "eligible": { "type": "boolean" },
+                      "contentType": { "enum": ["JobPosting", "BroadcastEvent", null] }
+                    }
+                  }
+                }
+              },
+              "monitoring": {
+                "type": "object",
+                "properties": {
+                  "review7": {
+                    "type": ["string", "null"],
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  },
+                  "review30": {
+                    "type": ["string", "null"],
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  },
+                  "review90": {
+                    "type": ["string", "null"],
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  },
+                  "completed": {
+                    "type": "object",
+                    "description": "Date each review was actually done (set by /BWESEOSearchConsole)",
+                    "properties": {
+                      "review7": {
+                        "type": ["string", "null"],
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      "review30": {
+                        "type": ["string", "null"],
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      },
+                      "review90": {
+                        "type": ["string", "null"],
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                      }
+                    }
+                  }
+                }
+              },
+              "report": {
+                "type": "string"
+              }
+            }
+          },
+          "production": {
+            "type": "object",
+            "description": "Engine 1.5.0 — production DEPLOYMENT history. The only thing that reverses a completed Production milestone is a verified `reversal` (a deliberate rollback, removal or reverted deployment). A failed HTTP request, timeout or 5xx is live-site HEALTH, never a reversal.",
+            "properties": {
+              "reversal": {
+                "type": "object",
+                "properties": {
+                  "kind": { "enum": ["rollback", "removed", "reverted"] },
+                  "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                  "source": { "type": "string", "description": "e.g. owner:<date> chat, deploy log, git revert commit" },
+                  "evidence": { "type": "string", "description": "What verified it (deployment id, commit, the owner's words)" }
+                },
+                "required": ["kind", "date", "source", "evidence"]
+              }
+            }
+          },
+          "staging": {
+            "type": "object",
+            "description": "Engine 1.3.0 — the page on the project's staging site. A live check of staging outranks deployedOn. Each record keeps the page version it saw (sourceHash), so a later edit sends the page back through QA and staging. Never a reason to request indexing: only production URLs are ever submitted to search engines",
+            "properties": {
+              "deployedOn": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                "description": "Date this version was deployed to staging (when no live check is possible)"
+              },
+              "review": {
+                "type": "object",
+                "required": ["result", "date"],
+                "description": "/BWESEOQA <id> staging — Claude's technical, SEO, content and environment checks on staging",
+                "properties": {
+                  "result": {
+                    "enum": ["pass", "fail"]
+                  },
+                  "date": {
+                    "type": "string",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  },
+                  "sourceHash": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8,64}$",
+                    "description": "seo-state.mjs --hash of the page's source files when this was recorded"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              },
+              "approval": {
+                "type": "object",
+                "required": ["approvedOn", "source"],
+                "description": "The owner looked at the page on staging (desktop and mobile) and approved it for production. Approving is NOT permission to deploy — the production deploy still needs the owner's go",
+                "properties": {
+                  "approvedOn": {
+                    "type": "string",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  },
+                  "source": {
+                    "type": "string",
+                    "description": "owner:<date> chat"
+                  },
+                  "sourceHash": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8,64}$",
+                    "description": "seo-state.mjs --hash of the page's source files when this was recorded"
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "issues": {
+      "type": "array",
+      "description": "Site-wide findings from the audits (engine 1.2.0). /BWESEO routes open ones to the matching specialized skill",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "severity", "area", "status"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "area": {
+            "enum": [
+              "technical",
+              "schema",
+              "local",
+              "internal-links",
+              "content",
+              "legal",
+              "measurement",
+              "environment"
+            ]
+          },
+          "status": {
+            "enum": ["open", "approved", "fixed", "verified", "deferred", "wont-fix"],
+            "description": "fixed = done in code, not yet confirmed live; verified = confirmed on production"
+          },
+          "blocking": {
+            "type": "boolean",
+            "description": "Stops every page from being indexed or published safely"
+          },
+          "needsApproval": {
+            "type": "boolean",
+            "description": "Default true. false only for fixes that change nothing a visitor sees"
+          },
+          "pages": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^/"
+            }
+          },
+          "foundOn": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "fixedOn": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "verifiedOn": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "source": {
+            "type": "string",
+            "description": "Where the finding is written up, e.g. docs/seo/SEO-BASELINE.md §12 #3"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

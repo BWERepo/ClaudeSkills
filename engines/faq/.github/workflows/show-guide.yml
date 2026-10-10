@@ -1,0 +1,32 @@
+# A "Run workflow" button in the repository's Actions tab that shows the user manual (docs/USER_MANUAL.md) on the run page.
+# Leave "section" empty for the whole manual, or give a section number ("5") or a word from its heading ("troubleshooting").
+# It also runs the manual's drift check, so the run turns red if the manual no longer matches the engine.
+name: Show user manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      section:
+        description: 'Section to show: a number ("5") or a word from its heading ("troubleshooting"). Empty = the whole manual.'
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  guide:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Show the manual
+        env:
+          SECTION: ${{ inputs.section }}
+        run: |
+          if [ -n "$SECTION" ]; then node scripts/show-guide.mjs "$SECTION" | tee -a "$GITHUB_STEP_SUMMARY"
+          else node scripts/show-guide.mjs | tee -a "$GITHUB_STEP_SUMMARY"; fi
+      - name: Check the manual matches the engine
+        run: node scripts/show-guide.mjs --check

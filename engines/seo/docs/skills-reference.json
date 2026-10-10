@@ -1,0 +1,401 @@
+{
+  "_comment": "Curated operating details for every BWESEO skill. The manual (BWESEO-SKILLS-AND-PROCEDURES.md) generates its skill catalog and command quick-reference from this file plus each skills/<name>/SKILL.md. scripts/build-manual.mjs --check fails when a skill exists without an entry here, an entry names a skill that does not exist, or a documented syntax is not a form the skill's own description advertises. Customer-neutral: fictional examples only.",
+  "lastUpdated": "2026-10-03",
+  "skills": {
+    "BWESEO": {
+      "purpose": "The state-aware front door. Reads the project's real SEO state, says which environment it is describing, shows a short dashboard (with the pipeline lines) and recommends the ONE best next action and the skill that does it.",
+      "whenToUse": "Any time you open an SEO project or don't know what to do next. It is the only command you normally need to remember.",
+      "syntax": [
+        "/BWESEO",
+        "/BWESEO <page>",
+        "/BWESEO show details",
+        "/BWESEO keyword <phrase>"
+      ],
+      "arguments": "No argument: whole-project assessment. <page>: an inventory id (service-page), a site path (/service-page) or a full URL on this project's own production or staging host, for a page-focused assessment. \"show details\" / \"full SEO status\": the long view. `keyword <phrase>`: analyzes one Google keyword from the site's own Search Console data (not a Google search).",
+      "examples": [
+        "/BWESEO",
+        "/BWESEO /service-page",
+        "/BWESEO https://example.com/service-page",
+        "/BWESEO keyword \"metric to imperial converter\""
+      ],
+      "inputs": "The project's seo/ files and docs/seo/, the installation receipt, and read-only requests to production and staging.",
+      "outputs": "Environment block, project stages, the current page's pipeline and steps, other pages, site issues, live-site health, the NEXT RECOMMENDED STEP with WHAT WE ARE DOING / WHY IT MATTERS / WHAT HAPPENS NEXT.",
+      "automatic": "Read-only state assessment and read-only GET requests. Records only what the owner told it (approvals, holds, indexing requests) and only with the owner's dated word.",
+      "approval": "Asks \"Would you like me to go ahead?\" before routing to any other skill. Never skips an approval gate.",
+      "external": "Read-only HTTP GETs to the project's production and staging sites. Nothing is submitted anywhere.",
+      "safety": "Never recommends indexing actions for staging, preview or local URLs. Never lets staging status stand in for production status. A failed live-health check never changes lifecycle history. Refuses a URL that is not on the project's own hosts.",
+      "next": "Whatever it recommends (for a new project: /BWESEOInstall, then /BWESEOSetup).",
+      "approvalRequired": "Asks before routing",
+      "externalEffect": "None (read-only GETs)"
+    },
+    "BWESEOInstall": {
+      "purpose": "The standard way to install, verify, update and sync the reusable BWESEO engine and its Claude skills in a website project, from the canonical engine, through an explicit allowlist manifest.",
+      "whenToUse": "A brand-new website (install), before any real install (--dry-run), after installing or updating (--verify), when the engine has a new version (--update), when installed skills drift from the canonical source (--sync-skills).",
+      "syntax": [
+        "/BWESEOInstall",
+        "/BWESEOInstall --dry-run",
+        "/BWESEOInstall --verify",
+        "/BWESEOInstall --update",
+        "/BWESEOInstall --dry-run --update",
+        "/BWESEOInstall --sync-skills"
+      ],
+      "arguments": "--dry-run (change nothing, show the plan), --verify (change nothing, report), --update (engine files only; customer data preserved), --sync-skills (install/update Claude skills from the canonical source; combine with --dry-run to preview), --json, --allow-subdir, --with-optional, --engine <dir>.",
+      "examples": [
+        "/BWESEOInstall --dry-run",
+        "/BWESEOInstall",
+        "/BWESEOInstall --verify",
+        "/BWESEOInstall --dry-run --update"
+      ],
+      "inputs": "The canonical engine (engine-manifest.json + files) and the target website project.",
+      "outputs": "Engine files under seo/tools, seo/schema and docs/seo; empty seo/ and seo/data/; .gitignore rules; a BWESEO-managed CLAUDE.md section; the installation receipt seo/bweseo-install.json (versions, hashes, adapter — no secrets).",
+      "automatic": "Verifies the manifest and every hash, scans the payload for secrets and other projects' identities before writing, then copies only allowlisted files. Never commits. If the website already has the engine installed, a plain /BWESEOInstall hands off to /BWESEOUpdate.",
+      "approval": "A dry run is shown and approved before the first real install on a customer project. Conflicts are marked REVIEW REQUIRED and left untouched.",
+      "external": "None. No network, deploy, commit, push, DNS or Google call.",
+      "safety": "Direction is canonical engine to website only. Never modifies the canonical engine, never copies business facts, Search Console/analytics/health state, lifecycle history or credentials. Refuses rather than works around a failed gate.",
+      "next": "/BWESEOInstall --verify, then /BWESEOSetup.",
+      "approvalRequired": "Dry run first; conflicts need the owner",
+      "externalEffect": "None (writes engine files to the project)"
+    },
+    "BWESEOSetup": {
+      "purpose": "Creates the customer-specific configuration after the engine is installed: seo-config, business profile, content inventory and docs/seo, from the owner's verified facts.",
+      "whenToUse": "Once, after /BWESEOInstall --verify, for a new customer site (or to re-verify facts later).",
+      "syntax": [
+        "/BWESEOSetup"
+      ],
+      "arguments": "None. It asks for and discovers project-specific information.",
+      "examples": [
+        "/BWESEOSetup"
+      ],
+      "inputs": "Owner statements, a questionnaire export, the live site and admin data (read-only), deploy configuration.",
+      "outputs": "seo/seo-config.json (environments, publication, Search Console settings), seo/business-profile.json (every fact with provenance), seo/content-inventory.json, docs/seo/ shells, registration of the project's identity for isolation scans.",
+      "automatic": "Read-only discovery of the stack, hosts and sitemap; validation of the created files.",
+      "approval": "Confirms the business and site with the owner before creating anything. Unknown facts become open questions, never guesses.",
+      "external": "Read-only requests to the site.",
+      "safety": "Never copies configuration from another project, never fabricates facts, never stores credentials (a name only).",
+      "next": "/BWESEO",
+      "approvalRequired": "Confirms the target and facts",
+      "externalEffect": "None (read-only requests)"
+    },
+    "BWESEOAudit": {
+      "purpose": "A full read-only SEO baseline audit of the site.",
+      "whenToUse": "After setup, and again when the audit is over 180 days old.",
+      "syntax": [
+        "/BWESEOAudit"
+      ],
+      "arguments": "None.",
+      "examples": [
+        "/BWESEOAudit"
+      ],
+      "inputs": "The site's code and live pages, the profile and inventory.",
+      "outputs": "docs/seo/SEO-BASELINE.md with Critical/High/Medium/Low findings, and site issues recorded in the inventory.",
+      "automatic": "Read-only analysis; records findings.",
+      "approval": "None to run. Fixing findings needs approval.",
+      "external": "Read-only requests.",
+      "safety": "Changes nothing on the site.",
+      "next": "/BWESEOOpportunities",
+      "approvalRequired": "No (read-only)",
+      "externalEffect": "None"
+    },
+    "BWESEOTechnical": {
+      "purpose": "Technical SEO audit of the site or one page: crawl/index rules, robots groups, environment protection, sitemap, canonicals, status codes, redirects, metadata, performance.",
+      "whenToUse": "To check robots/sitemap/canonicals, or when /BWESEO routes a technical site issue.",
+      "syntax": [
+        "/BWESEOTechnical",
+        "/BWESEOTechnical <issue id or URL>"
+      ],
+      "arguments": "Optional: an inventory issue id, or a URL/route to scope the run.",
+      "examples": [
+        "/BWESEOTechnical",
+        "/BWESEOTechnical robots-agent-groups"
+      ],
+      "inputs": "Source, build output and read-only requests.",
+      "outputs": "A findings table with suggested regression tests; issues recorded in the inventory.",
+      "automatic": "Read-only checks.",
+      "approval": "Any fix needs the owner's approval.",
+      "external": "Read-only requests.",
+      "safety": "Changes nothing unless specific fixes are approved.",
+      "next": "The approved fix through the normal change process, then re-check.",
+      "approvalRequired": "Fixes only",
+      "externalEffect": "None"
+    },
+    "BWESEOSchema": {
+      "purpose": "Structured-data (JSON-LD) audit: every block per page, conflicts, unsupported or fabricated properties.",
+      "whenToUse": "To check or improve structured data.",
+      "syntax": [
+        "/BWESEOSchema"
+      ],
+      "arguments": "None.",
+      "examples": [
+        "/BWESEOSchema"
+      ],
+      "inputs": "Source and rendered pages, the verified profile.",
+      "outputs": "Findings and recommended schema that the visible page and verified facts support.",
+      "automatic": "Read-only analysis.",
+      "approval": "Changes need approval.",
+      "external": "Read-only requests.",
+      "safety": "Never recommends ratings, reviews, hours or sameAs that are not real and verified.",
+      "next": "The approved fix, then /BWESEOQA.",
+      "approvalRequired": "Fixes only",
+      "externalEffect": "None"
+    },
+    "BWESEOLocal": {
+      "purpose": "Local SEO analysis for location-dependent businesses: NAP consistency, address type, service-area honesty, location pages, Google Business Profile actions for the owner.",
+      "whenToUse": "Only when location matters to the business.",
+      "syntax": [
+        "/BWESEOLocal",
+        "/BWESEOLocal gbp"
+      ],
+      "arguments": "Optional gbp: Google Business Profile builder in manual mode.",
+      "examples": [
+        "/BWESEOLocal"
+      ],
+      "inputs": "The verified profile and the site.",
+      "outputs": "Findings and a list of Google Business Profile actions for the owner.",
+      "automatic": "Read-only analysis.",
+      "approval": "Changes need approval; Business Profile actions are the owner's.",
+      "external": "None (owner acts in Google Business Profile).",
+      "safety": "Never fabricates locations, addresses or a Business Profile.",
+      "next": "/BWESEOOpportunities or /BWESEOContentPlan.",
+      "approvalRequired": "Fixes only",
+      "externalEffect": "None"
+    },
+    "BWESEOOpportunities": {
+      "purpose": "Finds searches that could bring a qualified customer, maps them to verified offerings, classifies intent, scores P1/P2/P3 without invented volumes and runs the cannibalization check.",
+      "whenToUse": "After the audit, or when planning what to build next.",
+      "syntax": [
+        "/BWESEOOpportunities"
+      ],
+      "arguments": "None.",
+      "examples": [
+        "/BWESEOOpportunities"
+      ],
+      "inputs": "Verified offerings, the existing inventory, the audit.",
+      "outputs": "Scored opportunities with a create / improve-existing / merge / reject decision.",
+      "automatic": "Analysis only; records ideas.",
+      "approval": "None to run; the owner approves which page to build.",
+      "external": "None (web research only in /BWESEOCompetitors).",
+      "safety": "Never invents keyword volumes; a keyword never establishes that the business offers a service.",
+      "next": "/BWESEOContentPlan",
+      "approvalRequired": "No (owner approves pages later)",
+      "externalEffect": "None"
+    },
+    "BWESEOCompetitors": {
+      "purpose": "Search-results and competitor gap analysis for approved target topics.",
+      "whenToUse": "Before writing a page, or to test an opportunity.",
+      "syntax": [
+        "/BWESEOCompetitors"
+      ],
+      "arguments": "None (asks which approved topics).",
+      "examples": [
+        "/BWESEOCompetitors"
+      ],
+      "inputs": "Approved target topics; standard web search.",
+      "outputs": "Who ranks, page types that win, questions answered, gaps this business can honestly fill.",
+      "automatic": "Web searches.",
+      "approval": "None.",
+      "external": "Standard web search (read-only).",
+      "safety": "Never copies competitor content, never invents volumes.",
+      "next": "/BWESEOContentPlan or /BWESEOCreatePage.",
+      "approvalRequired": "No",
+      "externalEffect": "Web search only"
+    },
+    "BWESEOContentPlan": {
+      "purpose": "Builds the page map, pillar/cluster architecture and a prioritized roadmap, then presents the top P1 pages for approval and stops.",
+      "whenToUse": "After opportunities are scored.",
+      "syntax": [
+        "/BWESEOContentPlan"
+      ],
+      "arguments": "None.",
+      "examples": [
+        "/BWESEOContentPlan"
+      ],
+      "inputs": "Scored opportunities and the inventory.",
+      "outputs": "docs/seo/CONTENT-ROADMAP.md and page-map records, and an approval report.",
+      "automatic": "Planning only.",
+      "approval": "The owner picks ONE page to build.",
+      "external": "None.",
+      "safety": "Never creates pages.",
+      "next": "The owner's approval, then /BWESEOCreatePage.",
+      "approvalRequired": "Yes (which page)",
+      "externalEffect": "None"
+    },
+    "BWESEOCreatePage": {
+      "purpose": "Creates exactly one owner-approved SEO page: claims ledger against verified facts, original content, metadata, schema, internal links, CTA, sitemap entry, build and tests.",
+      "whenToUse": "After the owner approves one page.",
+      "syntax": [
+        "/BWESEOCreatePage <page id or URL>"
+      ],
+      "arguments": "The approved page's inventory id or URL. Refuses if the page is not approved in the inventory.",
+      "examples": [
+        "/BWESEOCreatePage service-page"
+      ],
+      "inputs": "The approved inventory entry and the verified profile.",
+      "outputs": "The page's code and content, inventory updates (verifyText, linksFrom, claims) and a change report.",
+      "automatic": "Writes the page files and runs build and tests.",
+      "approval": "The page must be approved by the owner first; deploying is a separate approval.",
+      "external": "None (no deploy).",
+      "safety": "One page per approval; no fabricated customers, testimonials, statistics or locations; no ranking promises.",
+      "next": "/BWESEOQA <page>",
+      "approvalRequired": "Yes (page approval)",
+      "externalEffect": "None"
+    },
+    "BWESEOInternalLinks": {
+      "purpose": "Internal-link analysis: link graph, orphan pages, broken or weak anchors, and planned links to and from each roadmap page.",
+      "whenToUse": "To fix link structure or plan links for a new page.",
+      "syntax": [
+        "/BWESEOInternalLinks"
+      ],
+      "arguments": "None.",
+      "examples": [
+        "/BWESEOInternalLinks"
+      ],
+      "inputs": "The site's navigation, footer and body links.",
+      "outputs": "Findings and specific link recommendations.",
+      "automatic": "Read-only analysis.",
+      "approval": "Link changes need approval.",
+      "external": "Read-only requests.",
+      "safety": "Links must help visitors; never added for SEO alone.",
+      "next": "The approved changes, then /BWESEOQA.",
+      "approvalRequired": "Changes only",
+      "externalEffect": "None"
+    },
+    "BWESEOQA": {
+      "purpose": "The SEO QA gate for a page (content, on-page, technical), and with `staging` the staging review of the page on the staging site.",
+      "whenToUse": "After a page is created (QA), and once it is deployed to staging (staging review).",
+      "syntax": [
+        "/BWESEOQA <page>",
+        "/BWESEOQA <page> staging"
+      ],
+      "arguments": "<page>: an inventory id, path or URL. staging: run the staging review against the staging URL.",
+      "examples": [
+        "/BWESEOQA service-page",
+        "/BWESEOQA service-page staging"
+      ],
+      "inputs": "Build and test output, the served HTML, the claims ledger against the profile.",
+      "outputs": "A QA table with PASS/FAIL, recorded as qa (or staging.review) with a source hash; for staging, a visual checklist for the owner.",
+      "automatic": "Runs the checks and records the result.",
+      "approval": "The owner's staging approval is a separate, human step and is not permission to deploy.",
+      "external": "Read-only requests; staging is labelled SEARCH ENGINE INDEXING ACTIONS: DISABLED.",
+      "safety": "Never marks visual checks PASS without evidence; never requests indexing for a staging URL.",
+      "next": "Staging deploy, then /BWESEOQA <page> staging, then the owner's approval; after a production deploy, /BWESEOPublish.",
+      "approvalRequired": "Staging approval is the owner's",
+      "externalEffect": "None (read-only)"
+    },
+    "BWESEOPublish": {
+      "purpose": "The mandatory post-publication check on production: live, indexable, canonical, robots, sitemap, internal links, metadata, structured data, no staging leakage; then Google readiness and the monitoring checkpoints.",
+      "whenToUse": "After the owner has deployed the page to production.",
+      "syntax": [
+        "/BWESEOPublish <page id or URL>"
+      ],
+      "arguments": "The page's inventory id or URL. The checker classifies the environment: local is not applicable, staging runs a technical check with indexing actions disabled, production runs the full check.",
+      "examples": [
+        "/BWESEOPublish service-page"
+      ],
+      "inputs": "The inventory entry, seo-config, and read-only production requests.",
+      "outputs": "A report in docs/seo/reports, the inventory update (published status, Google readiness, monitoring dates) and the exact manual Search Console steps.",
+      "automatic": "Runs the read-only checker and records the result.",
+      "approval": "None to run. Requesting indexing is the owner's manual action.",
+      "external": "Read-only requests. Never deploys, never requests indexing.",
+      "safety": "PUBLISHED does not mean DISCOVERED or INDEXED. Staging never counts as production.",
+      "next": "/BWESEOSearchConsole",
+      "approvalRequired": "No (read-only)",
+      "externalEffect": "None (read-only)"
+    },
+    "BWESEOSearchConsole": {
+      "purpose": "The Google side: idempotent sitemap registration through the official Search Console API, page discovery/crawl/index status through the URL Inspection API, performance analysis and the 7/30/90-day reviews. Also reads the site's Google Index Monitoring snapshot (which production URLs are indexed, which need attention, how long new pages typically take). Also answers, per registered keyword, which page is meant to rank, whether Google has indexed it (confirmed / inferred / unknown), whether Google shows it, and how it performs, with wrong-page and cannibalization detection and discovered queries.",
+      "whenToUse": "After publication, at each review date, or to check whether a page is indexed.",
+      "syntax": [
+        "/BWESEOSearchConsole",
+        "/BWESEOSearchConsole index pull",
+        "/BWESEOSearchConsole index status",
+        "/BWESEOSearchConsole index investigate",
+        "/BWESEOSearchConsole index explain <path>",
+        "/BWESEOSearchConsole index impressions",
+        "/BWESEOSearchConsole keywords pull",
+        "/BWESEOSearchConsole keywords status",
+        "/BWESEOSearchConsole keywords analyze <keyword>",
+        "/BWESEOSearchConsole keywords discovered",
+        "/BWESEOSearchConsole keywords add <page-id> <keyword>"
+      ],
+      "arguments": "None, or `index pull|status|investigate|impressions|explain <path>` for the Google Index Monitoring snapshot. `keywords add|remove|list|validate|pull|refresh|status|analyze|table|page|discovered|investigate` for the Keyword Performance System (which page is meant to rank for a keyword, whether Google indexed it and shows it, and how it performs — from the site's own Search Console data).",
+      "examples": [
+        "/BWESEOSearchConsole",
+        "/BWESEOSearchConsole index investigate",
+        "/BWESEOSearchConsole index explain /word-counter",
+        "/BWESEOSearchConsole keywords analyze \"metric to imperial converter\"",
+        "/BWESEOSearchConsole keywords discovered"
+      ],
+      "inputs": "The project's Search Console configuration, an optional API credential (by name), or the owner's exports in seo/data/search-console/. For index monitoring: the site's own monitor data, pulled to seo/data/google-index/ with the developer's wrangler login. For keywords: pages[].keywords in seo/content-inventory.json and the site's stored keyword data, pulled to seo/data/keyword-performance/.",
+      "outputs": "Site-level sitemap record, page-level discovered/crawled/indexed records each with evidence, performance summaries, a Search Console report. An indexing status (Search Console, Sitemap, Indexing, indexing rate), per-URL explanations with Google's own evidence, and an indexing timeline. A keyword analysis (status, why, next action), a keyword table, page view and discovered-query list.",
+      "automatic": "Read-only URL Inspection and Search Analytics reads when the API is enabled. Sitemap registration only after the owner agrees.",
+      "approval": "Sitemap registration needs the owner's yes. Adding, replacing or removing a registered keyword needs the owner's yes.",
+      "external": "Official Search Console API calls (sitemaps, URL Inspection, Search Analytics) when enabled. `index pull` reads the production KV with the developer's own wrangler login (read-only). `keywords refresh` calls Search Analytics for production only (cached; cooldown and daily ceiling); `keywords pull` reads the production KV.",
+      "safety": "Never simulates Request Indexing, never uses the Indexing API for ordinary pages, production URLs only, credentials never stored in the repo, indexed is only ever set from Google's own report.",
+      "next": "/BWESEORefresh or /BWESEOReport.",
+      "approvalRequired": "Sitemap registration",
+      "externalEffect": "Search Console API (when enabled)"
+    },
+    "BWESEORefresh": {
+      "purpose": "Finds published pages that need updating (stale facts, weak performance, broken links, changed intent) and produces a prioritized refresh queue.",
+      "whenToUse": "After a review, or on a periodic content review.",
+      "syntax": [
+        "/BWESEORefresh",
+        "/BWESEORefresh <page id>"
+      ],
+      "arguments": "Optional: one page id.",
+      "examples": [
+        "/BWESEORefresh",
+        "/BWESEORefresh service-page"
+      ],
+      "inputs": "The profile, the inventory, Search Console data and analytics where present.",
+      "outputs": "A refresh queue with evidence for each item.",
+      "automatic": "Analysis only.",
+      "approval": "Substantial changes to a live page need approval.",
+      "external": "None.",
+      "safety": "Recommended only on evidence; never rewrites a page just to create activity or artificial freshness.",
+      "next": "The approved changes, then /BWESEOQA.",
+      "approvalRequired": "Page changes",
+      "externalEffect": "None"
+    },
+    "BWESEOReport": {
+      "purpose": "A plain-language SEO progress and performance report with honest data caveats.",
+      "whenToUse": "Monthly, or to answer how SEO is doing.",
+      "syntax": [
+        "/BWESEOReport"
+      ],
+      "arguments": "None.",
+      "examples": [
+        "/BWESEOReport"
+      ],
+      "inputs": "The inventory, Search Console data, analytics conversions.",
+      "outputs": "A report in docs/seo/reports with what shipped, results, pages to refresh and next month's plan.",
+      "automatic": "Read-only analysis.",
+      "approval": "None.",
+      "external": "None.",
+      "safety": "Weighs qualified business conversions over vanity traffic; never invents data.",
+      "next": "/BWESEORefresh or /BWESEO.",
+      "approvalRequired": "No",
+      "externalEffect": "None"
+    },
+    "BWESEOUpdate": {
+      "purpose": "Updates the BWESEO engine and its Claude skills in the current website to the latest canonical engine version in one guided pass: pull the engine checkout, preview, apply, sync skills, verify.",
+      "whenToUse": "When the engine has a new version and you want this website brought up to date without running the individual /BWESEOInstall modes yourself.",
+      "syntax": [
+        "/BWESEOUpdate"
+      ],
+      "arguments": "None. It works on the current website project and asks before applying.",
+      "examples": [
+        "/BWESEOUpdate"
+      ],
+      "inputs": "The canonical engine (a Git checkout is pulled fast-forward only when clean) and this website's installation receipt.",
+      "outputs": "Updated engine files under seo/tools and seo/schema, a refreshed receipt and managed CLAUDE.md section, synced Claude skills, and a before/after version report. Changes are left uncommitted.",
+      "automatic": "Runs --dry-run --update, --update, --sync-skills and --verify through the installer; schema migrations back up and roll back on failure.",
+      "approval": "The dry-run plan is shown and approved before applying. Conflicts are marked REVIEW REQUIRED and left untouched.",
+      "external": "None except a fast-forward git pull of the engine checkout. No deploy, commit, push, DNS or Google call.",
+      "safety": "Never touches the website's SEO data, profile, configuration or inventory; never overwrites customer-modified files; refuses rather than works around a failed gate.",
+      "next": "/BWESEO",
+      "approvalRequired": "Dry run first; conflicts need the owner",
+      "externalEffect": "None (writes engine files to the project)"
+    }
+  }
+}

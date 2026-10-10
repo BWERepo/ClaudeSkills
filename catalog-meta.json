@@ -16,37 +16,37 @@
   },
   "BWESEO": {
     "purpose": "SEO front door: state-aware controller for the BWESEO engine.",
-    "dependencies": "BWERepo/SEOEngine checkout ($BWESEO_ENGINE); Node; delegates to other BWESEO* skills (not yet in this catalog)",
+    "dependencies": "bundled SEO engine (engines/seo); Node; delegates to other BWESEO* skills",
     "projects": "website projects with BWESEO installed"
   },
   "BWESEOInstall": {
     "purpose": "Install, verify or sync the BWESEO engine in a website project.",
-    "dependencies": "BWERepo/SEOEngine checkout ($BWESEO_ENGINE); Node",
+    "dependencies": "bundled SEO engine (engines/seo); Node",
     "projects": "website projects"
   },
   "BWESEOUpdate": {
     "purpose": "Update the BWESEO engine and its skills in the current website.",
-    "dependencies": "BWERepo/SEOEngine checkout ($BWESEO_ENGINE); Node",
+    "dependencies": "bundled SEO engine (engines/seo); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWEFAQ": {
     "purpose": "FAQ front door for the BWE FAQ Engine.",
-    "dependencies": "BWERepo/FAQEngine checkout ($BWEFAQ_ENGINE_HOME); Node; delegates to other BWEFAQ* skills (not in this catalog)",
+    "dependencies": "bundled FAQ engine (engines/faq); Node; delegates to other BWEFAQ* skills",
     "projects": "website projects with the FAQ Engine installed"
   },
   "BWEFAQInstall": {
     "purpose": "Install, verify or sync the FAQ Engine in a website project.",
-    "dependencies": "BWERepo/FAQEngine checkout ($BWEFAQ_ENGINE_HOME); Node",
+    "dependencies": "bundled FAQ engine (engines/faq); Node",
     "projects": "website projects"
   },
   "BWEFAQUpdate": {
     "purpose": "Update the FAQ Engine and its skills in the current website.",
-    "dependencies": "BWERepo/FAQEngine checkout ($BWEFAQ_ENGINE_HOME); Node",
+    "dependencies": "bundled FAQ engine (engines/faq); Node",
     "projects": "website projects with the FAQ Engine installed"
   },
   "BWEBlog": {
     "purpose": "The Blog Engine front door.",
-    "dependencies": "BWE Blog Engine installed in the project",
+    "dependencies": "bundled Blog engine (engines/blog), installed by BWEBlogInstall; Node 20+",
     "projects": "website projects with the Blog Engine"
   },
   "BWEExport": {
@@ -173,5 +173,55 @@
     "purpose": "Implements a design upgrade of a website by offering a checklist of every installed Impeccable command (default: the seven design stages in ",
     "dependencies": "Impeccable design skill (impeccable) and its agents/",
     "projects": "website projects"
+  },
+  "BWEFAQSetup": {
+    "purpose": "Set up the FAQ Engine configuration for the current website.",
+    "dependencies": "BWEFAQInstall; Node",
+    "projects": "website projects with the FAQ Engine installed"
+  },
+  "BWEFAQGenerate": {
+    "purpose": "Generate FAQ candidates from the site's own content.",
+    "dependencies": "BWEFAQInstall, BWEFAQSetup; Node",
+    "projects": "website projects with the FAQ Engine installed"
+  },
+  "BWEFAQReview": {
+    "purpose": "Review FAQ candidates and approve answers the site supports.",
+    "dependencies": "BWEFAQGenerate",
+    "projects": "website projects with the FAQ Engine installed"
+  },
+  "BWEFAQPublish": {
+    "purpose": "Publish approved FAQs to the site's FAQ registry.",
+    "dependencies": "BWEFAQReview",
+    "projects": "website projects with the FAQ Engine installed"
+  },
+  "BWEBlogInstall": {
+    "purpose": "Install the bundled Blog Engine into the current website.",
+    "dependencies": "bundled Blog engine (engines/blog); Node 20+; npm",
+    "projects": "website projects"
+  },
+  "BWEBlogUpdate": {
+    "purpose": "Update the website's Blog Engine to the bundled version.",
+    "dependencies": "BWEBlogInstall",
+    "projects": "website projects with the Blog Engine installed"
+  },
+  "BWEBlogSetup": {
+    "purpose": "Configure the Blog Engine for the current website.",
+    "dependencies": "BWEBlogInstall",
+    "projects": "website projects with the Blog Engine installed"
+  },
+  "BWEBlogGenerate": {
+    "purpose": "Analyze, recommend and generate blog articles the owner selects.",
+    "dependencies": "BWEBlogSetup",
+    "projects": "website projects with the Blog Engine installed"
+  },
+  "BWEBlogReview": {
+    "purpose": "Review and approve generated blog drafts.",
+    "dependencies": "BWEBlogGenerate",
+    "projects": "website projects with the Blog Engine installed"
+  },
+  "BWEBlogPublish": {
+    "purpose": "Publish approved blog articles through the validation gate.",
+    "dependencies": "BWEBlogReview",
+    "projects": "website projects with the Blog Engine installed"
   }
 }

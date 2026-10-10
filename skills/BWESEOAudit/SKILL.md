@@ -3,9 +3,8 @@ name: BWESEOAudit
 description: Full read-only SEO baseline audit of the current website project using the BWESEO engine — architecture, page inventory, metadata, sitemap/robots/canonicals, structured data, analytics/Search Console, conversion paths, trust/claims, local signals, performance and accessibility — written to docs/seo/SEO-BASELINE.md with Critical/High/Medium/Low findings. Use when the user says "SEO audit", "audit the site's SEO", "SEO baseline", or invokes /BWESEOAudit, in any website project.
 ---
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (see `/BWESEOInstall`). Engine code lives in `$BWESEO_ENGINE/src`, methodology in
-> `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 # BWESEOAudit
 

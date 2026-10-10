@@ -3,9 +3,8 @@ name: BWESEOInternalLinks
 description: Internal-link analysis for the current website project using the BWESEO engine — builds the link graph from nav, footer and body links, finds orphan pages, broken or page-specific anchors, weak pillar/cluster linking and repetitive exact-match anchors, and plans natural links to and from each roadmap page. Use when the user says "internal links", "orphan pages", "link structure", or invokes /BWESEOInternalLinks, in any website project.
 ---
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (see `/BWESEOInstall`). Engine code lives in `$BWESEO_ENGINE/src`, methodology in
-> `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 # BWESEOInternalLinks
 

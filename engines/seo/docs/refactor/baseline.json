@@ -1,0 +1,48 @@
+{
+  "recordedAt": "2026-09-30T12:59:16.983Z",
+  "bweRepo": {
+    "branch": "main",
+    "commit": "a32fbe557f6a3117ea18bc609a1d405cbd6820cd",
+    "statusLines": [
+      "M docs/seo/SEO-MEASUREMENT.md",
+      " M docs/seo/SEO-OPERATIONS.md",
+      " M seo/content-inventory.json",
+      " M seo/schema/content-inventory.schema.json",
+      " M seo/schema/seo-config.schema.json",
+      " M seo/seo-config.json",
+      " M seo/tools/post-publish-check.mjs",
+      " M seo/tools/post-publish-check.test.mjs",
+      " M seo/tools/seo-state-core.d.mts",
+      " M seo/tools/seo-state-core.mjs",
+      " M seo/tools/seo-state.mjs",
+      " M seo/tools/seo-state.test.mjs",
+      " M seo/tools/validate-seo-data.mjs",
+      " M seo/tools/validate-seo-data.test.mjs",
+      " M src/components/admin/SeoStatusManage.gui.test.tsx",
+      " M src/components/admin/SeoStatusManage.tsx",
+      " M src/lib/seo-status.functions.ts",
+      " M src/lib/seo-status.test.ts",
+      " M src/lib/seo-status.ts",
+      " M version.json",
+      "?? seo/tools/bweseo-install.test.mjs",
+      "?? seo/tools/seo-google.mjs",
+      "?? seo/tools/seo-google.test.mjs",
+      "?? seo/tools/seo-project.test.mjs"
+    ]
+  },
+  "legacyEngine": {
+    "dir": "<legacy-engine>",
+    "files": 63
+  },
+  "classificationSummary": {
+    "FRAMEWORK_ADAPTER": 16,
+    "REUSABLE_DOC": 32,
+    "GENERATED": 3,
+    "REUSABLE_ENGINE": 24,
+    "REUSABLE_TEMPLATE": 4,
+    "REUSABLE_TEST": 7,
+    "REUSABLE_SKILL": 17,
+    "PROJECT_SPECIFIC": 12,
+    "PRIVATE": 2
+  }
+}

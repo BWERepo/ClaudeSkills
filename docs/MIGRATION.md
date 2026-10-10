@@ -14,3 +14,7 @@ Excluded:
 Added in 0.4.0 from BWERepo/OneClickAnswers `.claude/skills`: BWEBlog, BWEExport, BWEImport, BWESkills, BWEWow, BWEImpeccableCommands, bweimpeccable, impeccable and 18 BWESEO* skills, plus the four Impeccable agents in `agents/`.
 `skills/impeccable` is third-party (Apache 2.0) and ships with its own LICENSE and NOTICE.md, which must stay with it.
 Not copied (OneClickAnswers-specific): the BWEOCA*, BWEDeploy*, BWEE2E*, BWEWorkQueue*, OCA* skills and the BWEFAQ* skills not picked.
+
+## Bundled engines (0.5.0)
+
+The SEO, FAQ and Blog engines live in `engines/`. To refresh one, copy the new engine source over `engines/<name>` (omit `.git`, `node_modules`, the engine repo's `CLAUDE.md`), bump the plugin version and re-run `scripts/validate.sh`. Websites keep their own installed copy; updating the plugin does not change a website until its Update skill is run.

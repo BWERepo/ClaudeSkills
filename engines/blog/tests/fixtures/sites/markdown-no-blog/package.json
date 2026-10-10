@@ -1,0 +1,6 @@
+{
+  "name": "corvette-club-site",
+  "private": true,
+  "dependencies": { "astro": "^4.0.0" },
+  "scripts": { "build": "astro build" }
+}

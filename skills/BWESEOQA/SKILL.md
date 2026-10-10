@@ -3,9 +3,8 @@ name: BWESEOQA
 description: SEO QA gate for a page in the current website project using the BWESEO engine — content checks (every claim verified, no fabricated proof, labeled demos, clear intent, no stuffing, no cannibalization), on-page checks (unique title/description, one H1, canonical, indexability, schema validity, internal links, CTA, images/alt) and technical checks (build, tests, SSR/200/404, mobile, accessibility, sitemap). Any blocking failure fails QA. `/BWESEOQA <page> staging` is the STAGING REVIEW: page function, SEO, environment (hidden from search engines, no production contamination) and content checks on the staging URL with SEARCH ENGINE INDEXING ACTIONS DISABLED, visual checks listed for the owner, then it stops at the owner's staging approval. Use when the user says "SEO QA", "check this page before publishing", "staging review", "review the page on staging", or invokes /BWESEOQA <page> [staging], in any website project.
 ---
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (see `/BWESEOInstall`). Engine code lives in `$BWESEO_ENGINE/src`, methodology in
-> `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 # BWESEOQA
 

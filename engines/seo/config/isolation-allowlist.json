@@ -1,0 +1,6 @@
+{
+  "_comment": "Terms the engine may mention even though they could also appear in a project profile. The product name only \u2014 no business, client or site name ever goes here.",
+  "allowedTerms": [
+    "BWESEO"
+  ]
+}

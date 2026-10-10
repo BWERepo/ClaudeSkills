@@ -3,7 +3,7 @@ name: BWEFAQ
 description: The FAQ front door and coordinator. Reads the current website's real FAQ Engine state (faq-engine status), shows a short status dashboard (stage, FAQ counts by status, what needs the owner, last validation), recommends the ONE best next step and the skill that does it, then asks before proceeding. Guides the owner through installing the engine and creating the FAQ pages step by step, never skipping a review gate, never publishing an answer the site does not support. Use when the user says "FAQ", "FAQs", "work on the FAQ page", "what's next for the FAQ", "FAQ status", "where are we with FAQs", or invokes /BWEFAQ, in any website project.
 ---
 
-> `$BWEFAQ_ENGINE_HOME` = the FAQ Engine repository checkout (the folder containing `package.json` and `src/cli.mjs`). It is only needed to install or
+> `$BWEFAQ_ENGINE` = the FAQ Engine bundled in this plugin: `../../engines/faq`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first). It is only needed to install or
 > update. Once installed, everything runs from the site's own copy: `node faq/engine/src/cli.mjs <command>`.
 
 # BWEFAQ: the FAQ front door

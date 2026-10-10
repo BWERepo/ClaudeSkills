@@ -1,0 +1,14 @@
+{
+  "site": { "name": "Your Site", "url": "https://example.com" },
+  "adapters": [{ "type": "html-dir", "dir": "dist" }],
+  "faqPage": { "path": "/faq", "title": "Frequently asked questions", "description": "" },
+  "categories": [
+    { "id": "getting-started", "title": "Getting started", "keywords": ["start", "begin", "sign up"], "pages": ["/getting-started"] },
+    { "id": "pricing", "title": "Pricing and billing", "keywords": ["price", "billing", "refund"], "pages": ["/pricing"] }
+  ],
+  "fallbackCategory": { "id": "general", "title": "General questions" },
+  "exclusions": { "pages": ["/admin", "/404"], "questions": [] },
+  "schema": { "faqPage": true },
+  "tokens": {},
+  "knownPaths": []
+}

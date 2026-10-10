@@ -1,0 +1,36 @@
+/* FAQ Engine default styles. Every colour and size is a variable that falls back to the host site's own tokens,
+   so the FAQ looks native: set --faq-* in the site's CSS (or nothing, and these fallbacks apply). */
+.faq-engine { --faq-line: var(--line, #d0d4da); --faq-ink: var(--ink, inherit); --faq-muted: var(--muted, #5b616b); --faq-accent: var(--accent, #1a5fd0); --faq-bg-hover: var(--soft, rgba(127,127,127,.08)); max-width: 44rem; margin: 1rem 0; color: var(--faq-ink); }
+.faq-engine summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: .6rem; min-height: 2.75rem; padding: .35rem .25rem; }
+.faq-engine summary::-webkit-details-marker { display: none; }
+.faq-engine summary::before { content: ""; flex: none; width: .5rem; height: .5rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .12s ease; margin-right: .1rem; }
+.faq-engine details[open] > summary::before { transform: rotate(45deg); }
+.faq-engine summary:hover { background: var(--faq-bg-hover); }
+.faq-engine summary:focus-visible, .faq-search-input:focus-visible, .faq-permalink a:focus-visible { outline: 3px solid var(--focus, var(--faq-accent)); outline-offset: 2px; }
+.faq-category { border: 1px solid var(--faq-line); border-radius: .5rem; margin: 0 0 .6rem; }
+.faq-category > summary { font-weight: 700; padding-left: .75rem; }
+.faq-cat-title, .faq-q { margin: 0; font-size: 1rem; font-weight: inherit; line-height: 1.35; }
+.faq-cat-title { font-size: 1.05rem; font-weight: 700; }
+.faq-count { color: var(--faq-muted); font-weight: 400; font-size: .9rem; }
+.faq-cat-body { padding: 0 .75rem .5rem; }
+.faq-cat-desc { margin: .1rem 0 .4rem; color: var(--faq-muted); font-size: .95rem; }
+.faq-item { border-top: 1px solid var(--faq-line); }
+.faq-flat > .faq-item:last-child { border-bottom: 1px solid var(--faq-line); }
+.faq-q { font-weight: 600; }
+.faq-a { padding: 0 .25rem .6rem 1.35rem; }
+.faq-a p { margin: 0 0 .6rem; }
+.faq-permalink { font-size: .85rem; }
+.faq-permalink a { color: var(--faq-muted); }
+.faq-search { margin: 0 0 1rem; }
+.faq-search-label { display: block; font-weight: 700; margin: 0 0 .25rem; }
+.faq-search-input { width: 100%; box-sizing: border-box; min-height: 2.75rem; padding: .5rem .75rem; font: inherit; color: inherit; background: var(--paper, transparent); border: 1px solid var(--line-strong, var(--faq-line)); border-radius: .4rem; }
+.faq-status, .faq-empty { color: var(--faq-muted); margin: .4rem 0 0; min-height: 1.2em; }
+.faq-empty { font-weight: 600; }
+.faq-engine [hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .faq-engine summary::before { transition: none; } }
+@media print { .faq-search { display: none; } .faq-engine details > * { display: block; } }
+.faq-subcategory { border: 0; border-top: 1px solid var(--faq-line); border-radius: 0; margin: 0; }
+.faq-subcategory > summary { font-weight: 600; padding-left: .25rem; }
+.faq-links { list-style: none; margin: 0; padding: 0 0 .4rem .25rem; }
+.faq-link { border-top: 0; padding: .35rem 0; line-height: 1.4; }
+.faq-from { color: var(--faq-muted); font-size: .85rem; margin-left: .35rem; }

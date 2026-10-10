@@ -1,0 +1,10 @@
+/node_modules/
+/dist/
+/coverage/
+*.log
+.env
+.env.*
+!.env.example
+# Engine working data created when the engine runs against a fixture or site checkout
+tests/.tmp/
+.bwe-blog/

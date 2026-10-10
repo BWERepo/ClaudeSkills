@@ -5,8 +5,8 @@ description: Updates the BWESEO engine and its Claude skills in the CURRENT webs
 
 # BWESEOUpdate
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json`. If neither exists, stop and say so; do not guess a location.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 One command for "bring this website up to the current engine". It chains the steps of `/BWESEOInstall`
 (`--dry-run --update`, `--update`, `--sync-skills`, `--verify`) and never does anything those modes would not.
@@ -18,10 +18,7 @@ Direction of travel is one way: `CANONICAL ENGINE → THIS WEBSITE`. Nothing her
    project (it has `seo/bweseo-install.json`), not the engine directory. If there is no receipt, stop and recommend
    `/BWESEOInstall --dry-run` instead. If the working tree has uncommitted changes, say so and recommend committing
    or backing up first; do not commit for them.
-2. **Get the newest engine.** Read `$BWESEO_ENGINE/VERSION`. If `$BWESEO_ENGINE` is a Git checkout with a clean
-   tree, run `git -C "$BWESEO_ENGINE" pull --ff-only` and report the version before and after. If it is not a
-   checkout, is dirty, or the pull cannot fast-forward, do not force anything: say so and continue with the engine
-   as it is, or stop if the owner wants the newer version.
+2. **Engine version.** The engine is bundled in this plugin, so read `$BWESEO_ENGINE/VERSION` and report it. A newer engine arrives only by updating the plugin (`claude plugin update bwe-skills@bwe-skills`); never `git pull` inside the plugin folder.
 3. **Preview.** Run `node "$BWESEO_ENGINE/installer/bweseo-install.mjs" --dry-run --update` and show the plan
    **verbatim** (installed vs available version, files to update, files preserved, conflicts, migrations). If it says
    nothing needs updating, run step 6 only and report "already current".
