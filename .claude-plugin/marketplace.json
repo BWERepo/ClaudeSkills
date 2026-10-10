@@ -1,0 +1,8 @@
+{
+  "name": "bwe-skills",
+  "description": "Shared BWE Claude Code skills",
+  "owner": { "name": "Business Web Express" },
+  "plugins": [
+    { "name": "bwe-skills", "source": "./", "description": "Shared BWE Claude Code skills" }
+  ]
+}
