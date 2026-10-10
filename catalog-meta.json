@@ -1,0 +1,5 @@
+{
+  "BWEClaudeHung": {"purpose": "Diagnose whether another Claude Code session is hung or working.", "dependencies": "none", "projects": "all"},
+  "BWEClaudeStatus": {"purpose": "Summarize what this session and its agents are doing.", "dependencies": "none", "projects": "all"},
+  "BWEProductionReady": {"purpose": "Project-aware production-readiness gate (GO / NO-GO).", "dependencies": "project test/build tooling", "projects": "all"}
+}
