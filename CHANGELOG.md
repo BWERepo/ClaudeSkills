@@ -1,4 +1,7 @@
 # Changelog
+## [0.4.0] - 2026-10-10
+- Added 26 skills from BWERepo/OneClickAnswers `.claude/skills`: BWEBlog, BWEExport, BWEImport, BWESkills, BWEWow, BWEImpeccableCommands, bweimpeccable, impeccable (third-party, Apache 2.0, with its LICENSE and NOTICE.md) and 18 BWESEO* skills. Added agents/ (the four Impeccable agents).
+
 ## [0.3.0] - 2026-10-10
 - Added BWEFAQ, BWEFAQInstall, BWEFAQUpdate (copied unchanged from BWERepo/FAQEngine `skills/`). BWEFAQRefresh was requested but does not exist in that repo.
 
