@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// BWEWow helper. Project-agnostic, no dependencies (Node 18+). Screenshots, rollback and the report come from bweimpeccable's compare.mjs, not from here.
+// BWEWow helper. Project-agnostic, no dependencies (Node 18+). Screenshots, rollback and the report come from BWEImpeccable's compare.mjs, not from here.
 //   node wow.mjs inspect [--root .]                       framework, design system hints, breakpoints, tests, deploy files (facts read from files)
 //   node wow.mjs detect (--file page.html | --url http://...) [--mode tools]   page mode with the evidence for it
 //   node wow.mjs gallery --dir <previews dir> --out <file.html> --dirs A,B,C      HTML picker of direction previews (viewing only; never an approval)
@@ -86,8 +86,8 @@ async function main() {
   }
   if (cmd === 'find-compare') {
     const root = args.root || '.';
-    const c = [path.join(root, '.claude/skills/bweimpeccable/compare.mjs'), path.join(os.homedir(), '.claude/skills/bweimpeccable/compare.mjs'), path.join(root, '.claude/skills/BWEWow/compare.mjs'), path.join(os.homedir(), '.claude/skills/bewow/compare.mjs'), path.join(root, '.claude/skills/bewow/compare.mjs')].find(f => fs.existsSync(f));
-    if (!c) { console.error('compare.mjs not found: install the bweimpeccable skill, or write the bootstrap copy from the BWEWow SKILL.md'); process.exit(1); }
+    const c = [path.join(root, '.claude/skills/BWEImpeccable/compare.mjs'), path.join(os.homedir(), '.claude/skills/BWEImpeccable/compare.mjs'), path.join(root, '.claude/skills/bweimpeccable/compare.mjs'), path.join(os.homedir(), '.claude/skills/bweimpeccable/compare.mjs'), path.join(root, '.claude/skills/BWEWow/compare.mjs'), path.join(os.homedir(), '.claude/skills/bewow/compare.mjs'), path.join(root, '.claude/skills/bewow/compare.mjs')].find(f => fs.existsSync(f));
+    if (!c) { console.error('compare.mjs not found: install the BWEImpeccable skill, or write the bootstrap copy from the BWEWow SKILL.md'); process.exit(1); }
     return console.log(path.resolve(c));
   }
   if (cmd === 'gallery') {

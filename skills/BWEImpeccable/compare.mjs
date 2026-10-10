@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// bweimpeccable visual comparison helper. Reusable in any BWE website repo. No dependencies except Playwright.
+// BWEImpeccable visual comparison helper. Reusable in any BWE website repo. No dependencies except Playwright.
 //
 //   node compare.mjs capture --label before|after --out <dir> --page <path> [--page <path>...]
 //        (--base-url http://localhost:4321 | --serve <built-folder>) [--wait-ms 500] [--selector-ready <css>]

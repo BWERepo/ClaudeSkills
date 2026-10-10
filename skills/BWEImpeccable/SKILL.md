@@ -1,9 +1,9 @@
 ---
-name: bweimpeccable
-description: Implements a design upgrade of a website by offering a checklist of every installed Impeccable command (default: the seven design stages in order). Every change is PROPOSED: it captures before and after screenshots (1440 and 375 pixels) with a slider, side-by-side, highlighted differences and an HTML report, then asks the user to approve, revise or reject (reject restores only the files of this run), then validates. Supports whole site, one page or component, --audit-only and --staging. Never deploys to production. Use when the user says "run impeccable", "improve the design of the site", or invokes /bweimpeccable, in any BWE website repository.
+name: BWEImpeccable
+description: Implements a design upgrade of a website by offering a checklist of every installed Impeccable command (default: the seven design stages in order). Every change is PROPOSED: it captures before and after screenshots (1440 and 375 pixels) with a slider, side-by-side, highlighted differences and an HTML report, then asks the user to approve, revise or reject (reject restores only the files of this run), then validates. Supports whole site, one page or component, --audit-only and --staging. Never deploys to production. Use when the user says "run impeccable", "improve the design of the site", or invokes /BWEImpeccable, in any BWE website repository.
 ---
 
-# bweimpeccable: Impeccable design upgrade, implemented and validated
+# BWEImpeccable: Impeccable design upgrade, implemented and validated
 
 Reusable in any BWE website repository. Nothing in this file is specific to one site: the site's own rules come from its `CLAUDE.md` and docs, which you read in Phase 1.
 
@@ -11,12 +11,12 @@ Reusable in any BWE website repository. Nothing in this file is specific to one 
 
 | Invocation | Meaning |
 |---|---|
-| `/bweimpeccable` | Whole website. |
-| `/bweimpeccable <page>` (for example `homepage`) | That page plus the shared components it needs. |
-| `/bweimpeccable <component>` (for example `navigation`) | That component system only. |
-| `/bweimpeccable --audit-only` | Phases 1 and 2 plus a ranked recommendation list. Changes no code. Can combine with a page or component. |
-| `/bweimpeccable polish colorize` | Preselect exactly those Impeccable commands in the checklist (still confirmed before running). |
-| `/bweimpeccable --staging` | Implement for staging: work on a branch and open a pull request or use the repo's staging route. Never production. |
+| `/BWEImpeccable` | Whole website. |
+| `/BWEImpeccable <page>` (for example `homepage`) | That page plus the shared components it needs. |
+| `/BWEImpeccable <component>` (for example `navigation`) | That component system only. |
+| `/BWEImpeccable --audit-only` | Phases 1 and 2 plus a ranked recommendation list. Changes no code. Can combine with a page or component. |
+| `/BWEImpeccable polish colorize` | Preselect exactly those Impeccable commands in the checklist (still confirmed before running). |
+| `/BWEImpeccable --staging` | Implement for staging: work on a branch and open a pull request or use the repo's staging route. Never production. |
 
 No argument means the whole site, implemented on a branch for review. Production is never touched in any mode.
 
@@ -41,7 +41,7 @@ Show every discovered command with its one-line explanation and let the user tic
 
 ## Before & After Visual Approval Workflow (mandatory whenever an existing site is modified)
 
-Helper: `compare.mjs` in this skill's folder (`.claude/skills/bweimpeccable/compare.mjs`). Playwright only (project or global install, installed Chromium). Use it in every BWE repo; do not write a second tool. `<H>` below means `node .claude/skills/bweimpeccable/compare.mjs` and `<O>` the run folder `.tmp/impeccable-compare/<run>` (git-ignored; never commit screenshots unless asked). The run's whole state lives in `<O>/state.json`.
+Helper: `compare.mjs` in this skill's folder (`.claude/skills/BWEImpeccable/compare.mjs`). Playwright only (project or global install, installed Chromium). Use it in every BWE repo; do not write a second tool. `<H>` below means `node .claude/skills/BWEImpeccable/compare.mjs` and `<O>` the run folder `.tmp/impeccable-compare/<run>` (git-ignored; never commit screenshots unless asked). The run's whole state lives in `<O>/state.json`.
 
 **Every change Impeccable makes is PROPOSED until the user approves it. Never deploy, and never continue with more design edits, until the user answers.**
 
