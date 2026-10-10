@@ -3,6 +3,8 @@ Source reviewed: backup of the user's `~/.claude/skills` (111 skills) and `~/.ag
 
 Migrated verbatim (generic): BWEClaudeHung, BWEClaudeStatus, BWEProductionReady.
 
+Added in 0.2.0 from BWERepo/SEOEngine: BWESEO, BWESEOInstall, BWESEOUpdate (the other BWESEO* skills remain in that repo).
+
 Excluded:
 - `bweimpeccable`: not found in the backup; only upstream `impeccable` (third-party, installed from its own source; the project instructions already say to install it if missing).
 - Cloudflare / wrangler / agents-sdk / durable-objects / sandbox-* / web-perf / workers-best-practices / turnstile-spin / Supabase: third-party or vendor content, not redistributed without permission.
