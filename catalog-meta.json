@@ -28,5 +28,20 @@
     "purpose": "Update the BWESEO engine and its skills in the current website.",
     "dependencies": "BWERepo/SEOEngine checkout ($BWESEO_ENGINE); Node",
     "projects": "website projects with BWESEO installed"
+  },
+  "BWEFAQ": {
+    "purpose": "FAQ front door for the BWE FAQ Engine.",
+    "dependencies": "BWERepo/FAQEngine checkout ($BWEFAQ_ENGINE_HOME); Node; delegates to other BWEFAQ* skills (not in this catalog)",
+    "projects": "website projects with the FAQ Engine installed"
+  },
+  "BWEFAQInstall": {
+    "purpose": "Install, verify or sync the FAQ Engine in a website project.",
+    "dependencies": "BWERepo/FAQEngine checkout ($BWEFAQ_ENGINE_HOME); Node",
+    "projects": "website projects"
+  },
+  "BWEFAQUpdate": {
+    "purpose": "Update the FAQ Engine and its skills in the current website.",
+    "dependencies": "BWERepo/FAQEngine checkout ($BWEFAQ_ENGINE_HOME); Node",
+    "projects": "website projects with the FAQ Engine installed"
   }
 }
