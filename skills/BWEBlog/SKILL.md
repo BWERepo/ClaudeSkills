@@ -53,6 +53,6 @@ Say what the step will and will not change, and ask before running it.
 ## Rules (always)
 
 - A human decides what to write, whether a draft is good enough, and when to publish. Never run `select`, `approve` or `publish` without the owner's explicit choice of articles.
-- Articles must be supported by the site's own content; never invent facts, prices, policies or claims. Honour the site's own quality rules (for OCA: CLAUDE.md "Quality policy", `/OCAArticle`).
+- Articles must be supported by the site's own content; never invent facts, prices, policies or claims. Honour the site's own quality rules (follow the quality rules in the project's CLAUDE.md).
 - Do not deploy, commit or push unless the owner asks. Published content is not live until the site is deployed.
 - Keep messages short: current stage, what changed, what is needed from the owner.

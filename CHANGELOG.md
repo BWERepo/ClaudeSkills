@@ -1,4 +1,7 @@
 # Changelog
+## [0.4.2] - 2026-10-10
+- Removed OneClickAnswers-specific wording from BWEBlog, BWEExport, BWEImport, BWEProductionReady and BWESkills (dropped the OCA adapter section; handoff files are now `session-handoff-*.txt`). Engine-checkout dependencies are addressed in a later release.
+
 ## [0.4.1] - 2026-10-10
 - Renamed skill `bweimpeccable` to `BWEImpeccable` (folder, name, references). Invoke as `/BWEImpeccable`. BWEWow still finds a project-local lowercase copy.
 
