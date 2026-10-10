@@ -13,7 +13,7 @@ Question to answer: **can the exact current commit be safely deployed to product
 - `--quick`: discovery, scope, clean build, static analysis, unit tests, remnants and secrets only. The report must say "QUICK: not a full verdict" and can never be a clean GO.
 
 ## Hard safety rules (override everything)
-1. Never run a production deploy, release, publish, `wrangler deploy` to a production Worker, `npm run deploy -- --confirm`, `/BWEOCACheckpoint` or `/BWEOCAAll`. Never push to a branch that triggers a deploy.
+1. Never run a production deploy, release, publish, `wrangler deploy` to a production Worker, `npm run deploy -- --confirm`, any project release skill or command. Never push to a branch that triggers a deploy.
 2. Never change production config, DNS, secrets, KV, D1, R2 or any production data. Read-only checks of the live site (GET) are allowed.
 3. Never print a secret value. Report only that a variable or secret is present or missing, by NAME.
 4. No destructive migrations, no `rm -rf` outside build output, no `git reset --hard`, `git checkout --`, `stash` or force-push. Never commit unless the owner asks.
@@ -24,7 +24,7 @@ Question to answer: **can the exact current commit be safely deployed to product
 ## Flow
 
 ### 0. Discover (read-only)
-Read CLAUDE.md, the project status file, `package.json` scripts, `wrangler.jsonc` / hosting config, test config, registries. Write down: stack, build command, test commands, environments (staging vs production), indexing rules, routes source, secrets by name, third-party services, project switches. Adapters: generic phases below plus project-specific checks found in CLAUDE.md. For One Click Answers see "OCA adapter".
+Read CLAUDE.md, the project status file, `package.json` scripts, `wrangler.jsonc` / hosting config, test config, registries. Write down: stack, build command, test commands, environments (staging vs production), indexing rules, routes source, secrets by name, third-party services, project switches. Adapters: generic phases below plus project-specific checks found in CLAUDE.md.
 
 ### 1. Deployment scope
 `git branch --show-current`, `git rev-parse HEAD`, `git status --short`. Record the exact commit. Uncommitted changes, untracked files that the build needs, or a branch that is not the release branch = finding (HIGH; BLOCKER if the build depends on uncommitted files). Scan the working tree and diff for secrets (`.dev.vars`, private-key blocks, key-like strings, tokens).
@@ -42,7 +42,7 @@ Run all unit and built-site tests. Record honest counts: total, passed, failed, 
 List every route from the build output and from the registry. Check: each public route returns 200 in a local production preview; every sitemap URL exists; every built page is either in the sitemap or deliberately excluded; no OFF/gated page is linked or listed; counts shown on pages match the registry; no staging-only file exists in the production output; redirects and 404s behave as documented.
 
 ### 6. Application integrity (project-specific)
-Registries vs routes vs sitemap vs counts agree. For OCA: QUESTION -> INTENT -> TOOL -> ANSWER (below).
+Registries vs routes vs sitemap vs counts agree.
 
 ### 7. Browser and runtime errors
 Open the production preview in the built-in browser (`mcp__Claude_Browser__*`): console errors, failed requests, mixed content, on every page TYPE (home, a tool, a category, an answer, blog, legal, 404). Skipped when browser tooling is unavailable: `NOT RUN`.
@@ -117,11 +117,3 @@ Production checklist (owner actions, by name, no values): <list>
 Phases NOT RUN and why: <list>
 Has production been deployed? NO. Production has NOT been deployed by this skill.
 ```
-
-## OCA adapter (One Click Answers, Z:\Backup\websites\OneClickAnswers)
-- Build: `npm run check`, `npm test` (includes both-mode site tests), production build `npx astro build` (never `--mode staging` for the verdict). Never `npm run deploy -- --confirm`. `.e2e-disabled` exists: apply the E2E rule. Do not touch `publication.ts`, legal review, or production KV (owner approval only).
-- Indexing: production indexable, canonical `https://oneclickanswers.com`; staging noindex; staging-only files never in `public/`. Production OFF tools: real 404 for page, `.html`, `/og/`, no link, no sitemap entry, not in search.
-- Release traps from CLAUDE.md: `SITE_LOGIN_DEFAULT` must not be "on" without a production password (check by KV key NAME presence only); cron trigger limit; `src/worker/index.ts` exports only the default handler; no external link except the Cloudflare one on Privacy.
-- QUESTION -> INTENT -> TOOL -> ANSWER: through `askTools` / the readers (`src/lib/ask/readers.ts`) and the homepage Ask box, ask: "how much is a 20% tip on 85", "30% off then 10% off 80", "what is 98.6 F in C", "unit price of 12 oz for 3.49", "what is APR", an unknown nonsense string, a blank question, a 5,000-character question, a question for an OFF tool in production. Expect: the right tool or an honest "nothing found"; a direct answer only through the tool's engine with working shown; never a fabricated answer; Ask button, Enter and arrow-key selection behave as documented; failures are graceful.
-- Run `npm run audit` and `npm run registry:export` check (stale export is a test failure); `npm run verify:production` is a READ-ONLY check of the live site and may run; `npm run verify:staging` likewise.
-- Registry vs routes vs sitemap vs counts: `tests/site.test.ts` plus your own cross-check of `dist/sitemap.xml` against built pages.
