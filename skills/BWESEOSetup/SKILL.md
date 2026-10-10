@@ -3,13 +3,12 @@ name: BWESEOSetup
 description: Configures BWESEO for the current customer's website project AFTER the engine is installed (/BWESEOInstall) — creates the customer-specific seo/seo-config.json, business profile and content inventory (and docs/seo/), picks the stack adapter, and builds a verified business profile from the customer questionnaire, the live site and the owner's answers, flagging missing facts instead of inventing them. Determines the project's environments (verified production URL, staging URL or STAGING ENVIRONMENT - NOT CONFIGURED, preview, deployment architecture, how staging is kept out of search results), the sitemap URL, the Search Console property and who owns it, whether the optional Search Console API integration will be used and where its credential lives (a NAME, never the credential), and the analytics status. Use when the user says "set up SEO", "configure SEO for this client", "SEO onboarding", or invokes /BWESEOSetup, in any website project.
 ---
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (see `/BWESEOInstall`). Engine code lives in `$BWESEO_ENGINE/src`, methodology in
-> `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 # BWESEOSetup
 
-Engine: `$BWESEO_ENGINE/` (or `$BWESEO_ENGINE_HOME`). Read `docs/ENGINE.md`,
+Engine: `$BWESEO_ENGINE/`. Read `docs/ENGINE.md`,
 `docs/methodology/discovery-onboarding.md` and `docs/methodology/questionnaire-mapping.md`.
 
 Setup is the **customer-specific** phase. The **engine** is installed separately by `/BWESEOInstall`.

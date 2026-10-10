@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bweseo/business-profile.schema.json",
+  "title": "BWESEO business profile (Layer 2) — verified facts about ONE business",
+  "description": "Every factual field is a Fact with provenance. Keyword opportunities never go here. Enforced by tools/validate-seo-data.mjs (the validator is authoritative; this schema is for editor hints).",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "profileId",
+    "lastReviewed",
+    "identity",
+    "markets",
+    "offerings",
+    "customers",
+    "positioning",
+    "contact",
+    "trust",
+    "competitors",
+    "claims",
+    "doNotPromote",
+    "openQuestions"
+  ],
+  "$defs": {
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "status": { "enum": ["verified", "unverified", "needs-input", "not-applicable"] },
+    "fact": {
+      "type": "object",
+      "required": ["value", "status"],
+      "properties": {
+        "value": { "description": "Any JSON value (string, number, array, object)." },
+        "status": { "$ref": "#/$defs/status" },
+        "source": {
+          "type": "string",
+          "description": "owner:<date> chat | questionnaire:<answer_key> | db:<table.column> | site:<path> | repo:<file:line> | url:<https://…>"
+        },
+        "verifiedOn": { "$ref": "#/$defs/date" },
+        "public": {
+          "type": "boolean",
+          "description": "false = never publish on pages or in schema"
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "offering": {
+      "type": "object",
+      "required": ["id", "name", "status"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": {
+          "type": "object",
+          "properties": {
+            "amount": { "type": "number" },
+            "currency": { "type": "string" },
+            "model": { "enum": ["fixed", "from", "monthly", "hourly", "quote", "free"] },
+            "display": { "type": "string" }
+          }
+        },
+        "priority": { "type": "boolean" },
+        "highValue": { "type": "boolean" },
+        "status": { "$ref": "#/$defs/status" },
+        "source": { "type": "string" },
+        "verifiedOn": { "$ref": "#/$defs/date" },
+        "public": { "type": "boolean" },
+        "notes": { "type": "string" }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "required": ["id", "text", "status", "source", "verifiedOn"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "text": { "type": "string" },
+        "status": { "const": "verified" },
+        "source": { "type": "string" },
+        "verifiedOn": { "$ref": "#/$defs/date" },
+        "notes": { "type": "string" }
+      }
+    }
+  },
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "profileId": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "lastReviewed": { "$ref": "#/$defs/date" },
+    "identity": {
+      "type": "object",
+      "required": ["businessName", "website", "industry", "businessType", "description"],
+      "additionalProperties": { "$ref": "#/$defs/fact" }
+    },
+    "markets": {
+      "type": "object",
+      "required": ["locationDependence"],
+      "properties": {
+        "locationDependence": {
+          "$ref": "#/$defs/fact",
+          "description": "value: local | regional | multi-location | non-local"
+        },
+        "primaryLocation": { "$ref": "#/$defs/fact" },
+        "serviceAreas": { "$ref": "#/$defs/fact" },
+        "locations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/fact" },
+          "description": "value: { label, type: storefront|office|service-area-only|mailing|private, address? }"
+        }
+      }
+    },
+    "offerings": {
+      "type": "object",
+      "required": ["services", "products"],
+      "properties": {
+        "services": { "type": "array", "items": { "$ref": "#/$defs/offering" } },
+        "products": { "type": "array", "items": { "$ref": "#/$defs/offering" } },
+        "priorityServices": { "$ref": "#/$defs/fact" },
+        "highValueServices": { "$ref": "#/$defs/fact" }
+      }
+    },
+    "customers": { "type": "object", "additionalProperties": { "$ref": "#/$defs/fact" } },
+    "positioning": {
+      "type": "object",
+      "required": ["primaryConversion"],
+      "properties": {
+        "primaryConversion": { "$ref": "#/$defs/fact" },
+        "secondaryConversions": { "$ref": "#/$defs/fact" },
+        "brandVoice": { "$ref": "#/$defs/fact" },
+        "differentiators": { "type": "array", "items": { "$ref": "#/$defs/fact" } }
+      }
+    },
+    "contact": { "type": "object", "additionalProperties": { "$ref": "#/$defs/fact" } },
+    "trust": {
+      "type": "object",
+      "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+      "description": "licenses, certifications, memberships, awards, testimonials, reviews, caseStudies — each a Fact incl. permission to publish"
+    },
+    "competitors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "status"],
+        "properties": {
+          "name": { "type": "string" },
+          "url": { "type": "string" },
+          "status": { "$ref": "#/$defs/status" },
+          "source": { "type": "string" },
+          "verifiedOn": { "$ref": "#/$defs/date" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "claims": {
+      "type": "object",
+      "required": ["verified", "prohibited"],
+      "properties": {
+        "verified": { "type": "array", "items": { "$ref": "#/$defs/claim" } },
+        "prohibited": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["text", "reason"],
+            "properties": { "text": { "type": "string" }, "reason": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "doNotPromote": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["topic", "reason"],
+        "properties": {
+          "topic": { "type": "string" },
+          "reason": { "type": "string" },
+          "source": { "type": "string" }
+        }
+      }
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "question"],
+        "properties": {
+          "id": { "type": "string" },
+          "question": { "type": "string" },
+          "blocks": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Inventory ids/paths (or named areas) this question holds up; /BWESEO asks it only when one of them is next"
+          },
+          "blocking": {
+            "type": "boolean",
+            "description": "true = holds up the whole SEO programme, not just the items in blocks"
+          },
+          "askedOn": { "$ref": "#/$defs/date" },
+          "answeredOn": {
+            "$ref": "#/$defs/date",
+            "description": "Set when the owner answers (or delete the question); an answered question never blocks"
+          }
+        }
+      }
+    },
+    "notes": { "type": "string" }
+  }
+}

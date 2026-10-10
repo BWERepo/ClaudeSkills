@@ -1,0 +1,459 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bweseo/seo-config.schema.json",
+  "title": "BWESEO project config (Layer 3 — website adapter settings for ONE project)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "projectId",
+    "website",
+    "repo",
+    "engine",
+    "adapter",
+    "stack",
+    "workflows",
+    "conversion",
+    "paths"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "website": {
+      "type": "string",
+      "pattern": "^https://[^/]+$",
+      "description": "Canonical production origin"
+    },
+    "repo": {
+      "type": "object",
+      "description": "Project guard: skills refuse to run unless the current repo matches.",
+      "properties": {
+        "gitRemote": {
+          "type": "string",
+          "description": "Substring expected in `git remote get-url origin`"
+        },
+        "rootFolderName": {
+          "type": "string"
+        }
+      }
+    },
+    "engine": {
+      "type": "object",
+      "required": ["version"],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "adapter": {
+      "type": "string",
+      "description": "File name in adapters/ without .md"
+    },
+    "stack": {
+      "type": "object",
+      "description": "Where SEO concerns live in THIS project (free-form strings: file paths, commands, notes)",
+      "properties": {
+        "framework": {
+          "type": "string"
+        },
+        "rendering": {
+          "type": "string"
+        },
+        "hosting": {
+          "type": "string"
+        },
+        "routes": {
+          "type": "string"
+        },
+        "pageRegistry": {
+          "type": "string"
+        },
+        "headMetadata": {
+          "type": "string"
+        },
+        "siteDefaults": {
+          "type": "string"
+        },
+        "sitemap": {
+          "type": "string"
+        },
+        "robots": {
+          "type": "string"
+        },
+        "structuredData": {
+          "type": "string"
+        },
+        "contentSources": {
+          "type": "string"
+        },
+        "notFound": {
+          "type": "string"
+        },
+        "redirects": {
+          "type": "string"
+        },
+        "images": {
+          "type": "string"
+        }
+      }
+    },
+    "environments": {
+      "type": "object",
+      "description": "Engine 1.3.0 — where the site lives. LOCAL = build it, STAGING = test it, PRODUCTION = customers and search engines see it. Record only verified values; a site with no staging says status 'not-configured'. Search-engine indexing actions are only ever for PRODUCTION URLs",
+      "required": ["production"],
+      "properties": {
+        "health": {
+          "type": "object",
+          "description": "Engine 1.6.0 — where the Admin card's live check runs. A host serving the site must not fetch its own zone (on an edge runtime that request does not reach the public site and can return a false 522). 'browser' (default): the admin's browser probes the site it is on; 'server': the host fetches only targets NOT on its own zone (others are skipped, never failed); 'off': records only. The CLI (/BWESEO in Claude Code) always probes from the developer's machine.",
+          "properties": {
+            "strategy": { "enum": ["browser", "server", "off"] },
+            "endpoint": { "type": "string", "description": "Optional lightweight health path probed instead of the home page (default '/')" },
+            "notes": { "type": "string" }
+          }
+        },
+        "production": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": ["url"],
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "pattern": "^https://[^/]+$",
+                  "description": "Same origin as website"
+                },
+                "hosts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Every host that serves production (e.g. apex + www)"
+                },
+                "deploy": {
+                  "type": "string",
+                  "description": "How production is deployed (the project's own workflow)"
+                },
+                "notes": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "string",
+              "description": "Pre-1.3.0 form: the production origin"
+            }
+          ]
+        },
+        "staging": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": ["status"],
+              "properties": {
+                "status": {
+                  "enum": ["configured", "not-configured", "unknown"],
+                  "description": "not-configured: the project has no staging — pages go from QA to the owner's production approval"
+                },
+                "url": {
+                  "type": ["string", "null"],
+                  "pattern": "^https?://[^/]+$"
+                },
+                "hosts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Every host that serves staging (custom domain, workers.dev / platform hostnames…)"
+                },
+                "deploy": {
+                  "type": "string",
+                  "description": "How staging is deployed"
+                },
+                "indexProtection": {
+                  "type": "string",
+                  "description": "How staging is kept out of search results (X-Robots-Tag, noindex meta, sign-in, robots.txt) — robots.txt alone is weak"
+                },
+                "notes": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "string",
+              "description": "Pre-1.3.0 form: the staging origin"
+            }
+          ]
+        },
+        "preview": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": ["configured", "not-configured"]
+            },
+            "hostPatterns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Exact hosts or '*.example.com' patterns for preview deployments"
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        },
+        "local": {
+          "type": "object",
+          "properties": {
+            "urls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "run": {
+              "type": "string",
+              "description": "How to run the site locally"
+            }
+          }
+        },
+        "stagingBlockedFromIndexing": {
+          "type": "boolean",
+          "description": "Deprecated in 1.3.0 — use staging.indexProtection (the live check measures it)"
+        }
+      }
+    },
+    "workflows": {
+      "type": "object",
+      "required": ["build", "test"],
+      "properties": {
+        "build": {
+          "type": "string"
+        },
+        "test": {
+          "type": "string"
+        },
+        "typecheck": {
+          "type": "string"
+        },
+        "deployStaging": {
+          "type": "string"
+        },
+        "deployProduction": {
+          "type": "string"
+        },
+        "commitPolicy": {
+          "type": "string"
+        }
+      }
+    },
+    "conversion": {
+      "type": "object",
+      "required": ["primary"],
+      "properties": {
+        "primary": {
+          "type": "string"
+        },
+        "mechanism": {
+          "type": "string"
+        },
+        "records": {
+          "type": "string"
+        },
+        "attribution": {
+          "type": "string"
+        }
+      }
+    },
+    "analytics": {
+      "type": "object",
+      "properties": {
+        "tagManager": {
+          "type": "string"
+        },
+        "analytics": {
+          "type": "string"
+        },
+        "searchConsole": {
+          "type": "object",
+          "properties": {
+            "property": {
+              "type": "string"
+            },
+            "access": {
+              "type": "string"
+            },
+            "dataDir": {
+              "type": "string"
+            },
+            "configured": {
+              "enum": ["yes", "no", "unknown"],
+              "description": "Engine 1.4.0 — is the site's Search Console property set up and verified? Site-level, recorded once. Owned by the website owner's own Google account."
+            },
+            "propertyType": { "enum": ["Domain", "URL-prefix", "domain", "url-prefix", "unknown"] },
+            "enabled": { "type": "boolean", "description": "Engine 1.7.0 — is the optional Search Console API integration enabled for this project?" },
+            "credentialsSource": {
+              "type": "string",
+              "pattern": "^(env|secret):[A-Z][A-Z0-9_]{2,63}$",
+              "description": "A NAME (e.g. env:BWESEO_GSC_SERVICE_ACCOUNT_JSON) of the host secret that holds the service-account key. NEVER the credential itself — credentials are never stored in the project, the inventory, client code or logs."
+            },
+            "keywordPerformance": {
+              "type": "object",
+              "description": "Engine 1.10.0 - Keyword Performance: which page is meant to rank for each keyword and how Google shows it, from the site's own Search Console data (not a SERP tracker). Site configuration only; never holds credentials.",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "defaultRange": { "enum": ["7d", "28d", "3m"] },
+                "staleAfterDays": { "type": "integer", "minimum": 1 },
+                "thresholds": { "type": "object", "additionalProperties": { "type": "number", "minimum": 0 }, "description": "Optional overrides of the engine defaults (see docs/methodology/keyword-performance.md)" }
+              }
+            },
+            "indexMonitor": {
+              "type": "object",
+              "description": "Engine 1.9.0 — Google Index Monitoring: scheduled URL Inspection / Search Analytics / sitemap checks of PRODUCTION URLs only, run by the site's own scheduler. Site configuration only; the engine code is generic. Never holds credentials.",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "staleAfterDays": { "type": "integer", "minimum": 1, "description": "How old the pulled snapshot may be before /BWESEO asks for a fresh pull (default 3)" },
+                "thresholds": {
+                  "type": "object",
+                  "description": "Optional overrides of the engine defaults (see docs/methodology/google-index-monitoring.md)",
+                  "additionalProperties": { "type": "number", "minimum": 0 }
+                },
+                "snapshot": {
+                  "type": "object",
+                  "description": "How /BWESEO reads the monitor's state without a secret: pulled with the developer's own wrangler login.",
+                  "properties": {
+                    "source": { "enum": ["cloudflare-kv", "file"] },
+                    "kvNamespaceId": { "type": "string", "pattern": "^[0-9a-f]{32}$", "description": "The PRODUCTION KV namespace id (an identifier, not a secret)" },
+                    "summaryKey": { "type": "string" },
+                    "registryKey": { "type": "string" },
+                    "wranglerConfig": { "type": "string" },
+                    "dir": { "type": "string", "description": "source \"file\" only: folder (relative to the project) holding summary.json and registry.json written by the site's own monitor job" }
+                  }
+                }
+              }
+            },
+            "requestIndexing": { "enum": ["optional", "recommended"], "description": "Manual 'Request Indexing' is an optional accelerator by default; 'recommended' only for a specific diagnostic reason" },
+            "statusCheckDays": { "type": "integer", "minimum": 1, "description": "How often (days) to check Google's discovery/crawl/index status while a page is not yet indexed (default 7)" },
+            "verifiedProperty": { "type": "string" },
+            "verificationMethod": {
+              "type": "string",
+              "description": "e.g. DNS, HTML tag, HTML file. Never store the verification token or any secret."
+            },
+            "verifiedOn": {
+              "type": ["string", "null"],
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "sitemap": {
+              "type": "object",
+              "description": "Engine 1.4.0 — the site's sitemap in Search Console. Success does not mean any page is indexed.",
+              "properties": {
+                "url": { "type": "string" },
+                "submitted": { "enum": ["yes", "no", "unknown"] },
+                "status": { "type": "string" },
+                "verifiedOn": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                "lastRead": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                "submissionMethod": { "enum": ["api", "manual", "unknown"] },
+                "submissionAt": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+                "discoveredPages": { "type": ["integer", "null"] }
+              }
+            },
+            "sitemapSubmission": {
+              "enum": ["verified", "not verified"],
+              "description": "Has the sitemap been confirmed as submitted in Search Console?"
+            },
+            "sitemapSubmissionVerifiedOn": {
+              "type": ["string", "null"],
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
+          }
+        },
+        "bingWebmaster": {
+          "type": "string"
+        },
+        "indexNow": {
+          "type": "string"
+        }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "required": ["businessProfile", "contentInventory", "docs"],
+      "properties": {
+        "businessProfile": {
+          "type": "string"
+        },
+        "contentInventory": {
+          "type": "string"
+        },
+        "docs": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "string"
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "publication": {
+      "type": "object",
+      "description": "What /BWESEOPublish needs to check the LIVE site (engine 1.1.0). All values belong to this project only.",
+      "properties": {
+        "usesSitemap": {
+          "type": "boolean",
+          "description": "false if the site architecture has no XML sitemap"
+        },
+        "sitemapUrl": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "robotsUrl": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "stagingHosts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Deprecated in 1.3.0 — use environments.staging.hosts (still read)"
+        },
+        "navigation": {
+          "type": "object",
+          "description": "Where the site's navigation areas live (primary nav, footer, service/resource menus)"
+        },
+        "indexNow": {
+          "type": "object",
+          "properties": {
+            "keyUrl": {
+              "type": "string",
+              "pattern": "^https://"
+            },
+            "mechanism": {
+              "type": "string",
+              "description": "How the owner submits (e.g. an admin button) — never automatic"
+            }
+          }
+        },
+        "bingWebmaster": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

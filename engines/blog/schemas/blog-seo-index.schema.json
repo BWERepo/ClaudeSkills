@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.bwe.invalid/blog-seo-index/1.0.json",
+  "title": "BWE Blog SEO Index",
+  "description": "Machine-readable index of every blog article on a website, produced by the BWE Blog Engine. Version 1.x changes are additive only; consumers must ignore unknown fields.",
+  "type": "object",
+  "required": ["schemaVersion", "engine", "engineVersion", "generatedAt", "site", "blogRoot", "visibility", "articleCount", "summary", "articles", "clusters", "sitePageCoverage", "overlaps"],
+  "properties": {
+    "schemaVersion": { "type": "string", "pattern": "^1\\.\\d+$", "description": "Index shape version. Major changes are breaking." },
+    "engine": { "const": "BWE Blog Engine" },
+    "engineVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https?://[^/]+$" },
+    "blogRoot": { "type": "string", "pattern": "^/" },
+    "visibility": { "enum": ["public", "internal"], "description": "public: published articles only. internal: every status plus open opportunities." },
+    "articleCount": { "type": "integer", "minimum": 0 },
+    "summary": {
+      "type": "object",
+      "required": ["published", "existing", "blogEngine", "orphans", "weaklyLinked", "brokenLinks", "needsRefresh", "clusters", "incompleteClusters"],
+      "properties": {
+        "published": { "type": "integer", "minimum": 0 },
+        "existing": { "type": "integer", "minimum": 0 },
+        "blogEngine": { "type": "integer", "minimum": 0 },
+        "orphans": { "type": "integer", "minimum": 0 },
+        "weaklyLinked": { "type": "integer", "minimum": 0 },
+        "brokenLinks": { "type": "integer", "minimum": 0 },
+        "needsRefresh": { "type": "integer", "minimum": 0 },
+        "clusters": { "type": "integer", "minimum": 0 },
+        "incompleteClusters": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "articles": { "type": "array", "items": { "$ref": "#/$defs/article" } },
+    "clusters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "supportingArticles", "relatedSitePages", "complete", "gaps"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "pillar": { "type": "string", "format": "uri" },
+          "supportingArticles": { "type": "array", "items": { "type": "string", "format": "uri" } },
+          "relatedSitePages": { "type": "array", "items": { "type": "string", "format": "uri" } },
+          "complete": { "type": "boolean" },
+          "gaps": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "sitePageCoverage": {
+      "type": "array",
+      "description": "Commercial/tool pages and the published articles that support them. An empty supportingArticles list is a content gap.",
+      "items": {
+        "type": "object",
+        "required": ["url", "pageType", "title", "supportingArticles"],
+        "properties": {
+          "url": { "type": "string", "format": "uri" },
+          "pageType": { "type": "string" },
+          "title": { "type": "string" },
+          "supportingArticles": { "type": "array", "items": { "type": "string", "format": "uri" } }
+        }
+      }
+    },
+    "overlaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["a", "b", "similarity"],
+        "properties": { "a": { "type": "string", "format": "uri" }, "b": { "type": "string", "format": "uri" }, "similarity": { "type": "number", "minimum": 0, "maximum": 1 } }
+      }
+    },
+    "opportunities": {
+      "type": "array",
+      "description": "Internal index only. Open recommendations. Never contains invented search data: searchVolume is 'Unknown' unless a real source supplied it.",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "priority", "status", "recommendedAction", "supportsPages", "opportunitySource", "searchVolume"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "priority": { "enum": ["Critical", "High", "Medium", "Low"] },
+          "status": { "enum": ["recommended", "selected"] },
+          "recommendedAction": { "enum": ["Create", "Consider", "Skip", "Consolidate With Existing Content"] },
+          "supportsPages": { "type": "array", "items": { "type": "string" } },
+          "opportunitySource": { "type": "string" },
+          "searchVolume": { "oneOf": [{ "const": "Unknown" }, { "type": "number", "minimum": 0 }] }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "article": {
+      "type": "object",
+      "required": ["id", "url", "slug", "title", "description", "source", "status", "category", "tags", "primaryTopic", "secondaryTopics", "searchIntent", "canonicalUrl", "indexable", "internalLinksIn", "internalLinksOut", "relatedArticles", "relatedSitePages", "schemaTypes", "wordCount", "orphan", "linkCount", "brokenLinks", "lastIndexedAt", "refreshRecommended"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "slug": { "type": "string" },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "source": { "enum": ["existing", "blog-engine"] },
+        "status": { "enum": ["recommended", "selected", "generating", "draft", "review", "approved", "published", "rejected", "archived", "error"] },
+        "category": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "primaryTopic": { "type": "string" },
+        "secondaryTopics": { "type": "array", "items": { "type": "string" } },
+        "searchIntent": { "enum": ["informational", "commercial", "transactional", "navigational", "mixed"] },
+        "author": { "type": "string" },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "modifiedAt": { "type": "string", "format": "date-time" },
+        "canonicalUrl": { "type": "string", "format": "uri" },
+        "indexable": { "type": "boolean" },
+        "internalLinksIn": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "internalLinksOut": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "relatedArticles": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "relatedSitePages": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "clusterId": { "type": "string" },
+        "pillarArticle": { "type": "string", "format": "uri" },
+        "schemaTypes": { "type": "array", "items": { "type": "string" } },
+        "wordCount": { "type": "integer", "minimum": 0 },
+        "orphan": { "type": "boolean" },
+        "linkCount": { "type": "object", "required": ["in", "out"], "properties": { "in": { "type": "integer", "minimum": 0 }, "out": { "type": "integer", "minimum": 0 } } },
+        "brokenLinks": { "type": "integer", "minimum": 0 },
+        "contentHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "metadataHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "lastAnalyzedAt": { "type": "string", "format": "date-time" },
+        "lastIndexedAt": { "type": "string", "format": "date-time" },
+        "lastReviewedAt": { "type": "string", "format": "date-time" },
+        "refreshRecommended": { "type": "boolean" },
+        "refreshReason": { "type": "array", "items": { "type": "string" } },
+        "generatedBy": { "type": "string" }
+      }
+    }
+  }
+}

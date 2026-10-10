@@ -1,0 +1,111 @@
+{
+  "$schema": "./schema/seo-config.schema.json",
+  "schemaVersion": 1,
+  "projectId": "example-business",
+  "website": "https://www.example.com",
+  "repo": {
+    "gitRemote": "",
+    "rootFolderName": ""
+  },
+  "engine": {
+    "version": "1.10.0"
+  },
+  "adapter": "static-html",
+  "stack": {
+    "framework": "",
+    "rendering": "",
+    "hosting": "",
+    "routes": "",
+    "pageRegistry": "",
+    "headMetadata": "",
+    "siteDefaults": "",
+    "sitemap": "",
+    "robots": "",
+    "structuredData": "",
+    "contentSources": "",
+    "notFound": "",
+    "redirects": "",
+    "images": ""
+  },
+  "environments": {
+    "health": { "strategy": "browser", "endpoint": "/", "notes": "Where the Admin card's live check runs. A host serving the site must not fetch its own zone (false 522s). browser = the admin's browser probes; server = only targets not on the host's own zone; off = records only." },
+    "production": {
+      "url": "https://www.example.com",
+      "hosts": ["www.example.com", "example.com"],
+      "deploy": "Only on the user's explicit instruction"
+    },
+    "staging": {
+      "status": "unknown",
+      "url": null,
+      "hosts": [],
+      "deploy": "",
+      "indexProtection": ""
+    },
+    "preview": {
+      "status": "not-configured",
+      "hostPatterns": []
+    },
+    "local": {
+      "urls": [],
+      "run": ""
+    }
+  },
+  "workflows": {
+    "build": "",
+    "test": "",
+    "typecheck": "",
+    "deployStaging": "",
+    "deployProduction": "Only on the user's explicit instruction",
+    "commitPolicy": "Commit/push only when the user asks"
+  },
+  "conversion": {
+    "primary": "",
+    "mechanism": "",
+    "records": "",
+    "attribution": ""
+  },
+  "analytics": {
+    "tagManager": "",
+    "analytics": "",
+    "searchConsole": {
+      "property": "",
+      "access": "manual-export",
+      "dataDir": "seo/data/search-console",
+      "configured": "unknown",
+      "propertyType": null,
+      "verifiedProperty": "",
+      "verificationMethod": "",
+      "verifiedOn": null,
+      "sitemap": { "url": "", "submitted": "unknown", "status": "", "verifiedOn": null, "lastRead": null, "discoveredPages": null },
+      "enabled": false,
+      "credentialsSource": null,
+      "requestIndexing": "optional",
+      "statusCheckDays": 7,
+      "indexMonitor": { "enabled": false },
+      "keywordPerformance": { "enabled": false, "defaultRange": "28d", "staleAfterDays": 7 },
+      "sitemapSubmission": "not verified",
+      "sitemapSubmissionVerifiedOn": null
+    },
+    "bingWebmaster": "",
+    "indexNow": ""
+  },
+  "publication": {
+    "usesSitemap": true,
+    "sitemapUrl": "https://www.example.com/sitemap.xml",
+    "robotsUrl": "https://www.example.com/robots.txt",
+    "navigation": {
+      "primary": "",
+      "footer": ""
+    },
+    "indexNow": {},
+    "bingWebmaster": "unknown"
+  },
+  "paths": {
+    "businessProfile": "seo/business-profile.json",
+    "contentInventory": "seo/content-inventory.json",
+    "docs": "docs/seo",
+    "data": "seo/data",
+    "sources": "seo/sources"
+  },
+  "notes": ""
+}

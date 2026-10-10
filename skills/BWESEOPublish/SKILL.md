@@ -3,9 +3,8 @@ name: BWESEOPublish
 description: Mandatory post-publication SEO check for a page that has just gone live in the current website project, using the BWESEO engine — environment-aware (LOCAL: not applicable; STAGING/PREVIEW: a technical check with SEARCH ENGINE INDEXING ACTIONS DISABLED; PRODUCTION: the full workflow). On production it verifies the page is really live (not just staging), free of staging/preview/localhost URLs in links, schema, social metadata and the sitemap, indexable (no noindex, robots.txt allows it, correct canonical, clean duplicates, crawlable HTML, title/description/H1, valid structured data), in the production sitemap, linked from relevant pages and not orphaned; decides navigation placement; gives the exact URL to inspect in Google Search Console and records the indexing-request status honestly; sets 7/30/90-day monitoring checkpoints; updates the SEO inventory; and writes a plain-language report. Never deploys, pushes, requests indexing or changes Search Console. Use when the user says "run the SEO post-publication checklist for this page", "post-publication SEO check", "the page is live — check it", "help Google find the new page", "is the new page indexable", or invokes /BWESEOPublish <page id or URL>, in any website project with a seo/ folder.
 ---
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (see `/BWESEOInstall`). Engine code lives in `$BWESEO_ENGINE/src`, methodology in
-> `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 # BWESEOPublish
 

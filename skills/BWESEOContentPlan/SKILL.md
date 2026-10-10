@@ -3,9 +3,8 @@ name: BWESEOContentPlan
 description: Creates or updates the SEO page map, pillar/cluster architecture and prioritized content roadmap (about 10-20 opportunities, quality over quantity) for the current website project using the BWESEO engine, then presents the top ~5 P1 pages in an approval report and STOPS — it never creates pages. Use when the user says "content plan", "SEO roadmap", "page map", "which pages first", or invokes /BWESEOContentPlan, in any website project.
 ---
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (see `/BWESEOInstall`). Engine code lives in `$BWESEO_ENGINE/src`, methodology in
-> `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 # BWESEOContentPlan
 

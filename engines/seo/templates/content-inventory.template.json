@@ -1,0 +1,30 @@
+{
+  "$schema": "./schema/content-inventory.schema.json",
+  "schemaVersion": 1,
+  "projectId": "example-business",
+  "updated": "YYYY-MM-DD",
+  "pages": [
+    {
+      "id": "home",
+      "url": "/",
+      "type": "home",
+      "title": "",
+      "topic": "",
+      "primaryIntent": "navigational",
+      "audience": "",
+      "location": null,
+      "funnelStage": "decision",
+      "status": "published",
+      "priority": null,
+      "indexable": true,
+      "created": null,
+      "lastReviewed": null,
+      "parent": null,
+      "relatedPages": [],
+      "cta": "",
+      "cannibalization": { "decision": "existing", "competingUrl": null, "risk": "low", "notes": "" },
+      "source": "",
+      "notes": ""
+    }
+  ]
+}

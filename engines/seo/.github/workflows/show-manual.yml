@@ -1,0 +1,63 @@
+# Publishes the user manual (BWESEO-SKILLS-AND-PROCEDURES.md) as a web page on GitHub Pages, and shows it on the run page.
+# Runs on every push to main, and from a "Run workflow" button in the Actions tab.
+# One-time setup: Settings > Pages > Source = "GitHub Actions".
+name: Show user manual
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - BWESEO-SKILLS-AND-PROCEDURES.md
+      - .github/workflows/show-manual.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Show the manual on the run page
+        run: cat BWESEO-SKILLS-AND-PROCEDURES.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Render the manual to HTML
+        run: |
+          mkdir -p site
+          npx --yes marked@12 --gfm -i BWESEO-SKILLS-AND-PROCEDURES.md -o site/body.html
+          {
+            echo '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+            echo '<meta name="viewport" content="width=device-width,initial-scale=1">'
+            echo '<title>BWESEO user manual</title>'
+            echo '<style>body{font:16px/1.6 system-ui,sans-serif;max-width:60rem;margin:2rem auto;padding:0 1rem;color:#1a1a1a}'
+            echo 'pre,code{background:#f3f3f3;border-radius:4px}pre{padding:1rem;overflow:auto}code{padding:.1em .3em}pre code{padding:0}'
+            echo 'table{border-collapse:collapse}td,th{border:1px solid #ccc;padding:.4rem .6rem}'
+            echo '@media(prefers-color-scheme:dark){body{background:#161616;color:#e8e8e8}pre,code{background:#262626}td,th{border-color:#444}a{color:#8ab4f8}}</style>'
+            echo '</head><body>'
+            cat site/body.html
+            echo '</body></html>'
+          } > site/index.html
+          rm site/body.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

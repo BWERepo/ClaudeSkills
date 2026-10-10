@@ -5,9 +5,8 @@ description: The standard way to install the reusable BWESEO engine into a new w
 
 # BWESEOInstall
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (written once per machine by `node <engine>/scripts/register-engine.mjs`).
-> Nothing else is guessed; if neither exists, installation stops.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 ```
 NEW WEBSITE → /BWESEOInstall → clean BWESEO engine → /BWESEOSetup → customer profile → /BWESEO → state-aware SEO workflow
@@ -22,7 +21,7 @@ ever flows back into the canonical engine, and this skill never edits the canoni
 
 ## The canonical engine
 
-A standalone, versioned directory (the SEOEngine repository/folder) with an `engine-manifest.json`:
+The versioned engine directory bundled in this plugin (`engines/seo`, see `$BWESEO_ENGINE` above) with an `engine-manifest.json`:
 `engineVersion`, `schemaVersion`, `manifestVersion` — **never** a website's version number. Layout:
 `src/` (engine code, installed to `seo/tools/`), `schemas/` (installed to `seo/schema/`), `installer/`, `skills/`
 (canonical skill sources), `templates/`, `adapters/`, `docs/` (methodology, industry guides), `tests/`, `scripts/`,
@@ -30,7 +29,8 @@ A standalone, versioned directory (the SEOEngine repository/folder) with an `eng
 
 ## Run it
 
-From the customer's website project (open that project in Claude Code first):
+From the customer's website project (open that project in Claude Code first). Do not use `--sync-skills`: this plugin already provides the skills, and copying them into `~/.claude/skills` would duplicate them. `--verify` may list those skills as missing from `~/.claude/skills`; that is expected here.
+
 
 ```
 node "$BWESEO_ENGINE/installer/bweseo-install.mjs" [--dry-run | --verify | --update | --sync-skills] [--json]

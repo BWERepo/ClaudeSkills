@@ -3,9 +3,8 @@ name: BWESEOReport
 description: Generates a plain-language SEO progress/performance report for the current website project using the BWESEO engine — what shipped, Search Console summary (from owner exports), organic conversions against the business's primary success metric (qualified leads, appointments, sales, prototype requests), pages needing refresh, and next month's plan, with honest data caveats. Use when the user says "SEO report", "monthly SEO report", "how is SEO doing", or invokes /BWESEOReport, in any website project.
 ---
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (see `/BWESEOInstall`). Engine code lives in `$BWESEO_ENGINE/src`, methodology in
-> `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 # BWESEOReport
 

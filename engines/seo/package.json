@@ -1,0 +1,17 @@
+{
+  "name": "bweseo-engine",
+  "version": "1.10.0",
+  "description": "BWESEO — the reusable, customer-neutral SEO engine (state machine, validators, Google workflow, installer, skills).",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "vitest run",
+    "manifest": "node scripts/build-manifest.mjs",
+    "validate": "node scripts/validate-canonical.mjs",
+    "guide": "node scripts/show-guide.mjs"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.10"
+  }
+}

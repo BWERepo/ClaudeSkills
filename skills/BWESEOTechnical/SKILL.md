@@ -3,9 +3,8 @@ name: BWESEOTechnical
 description: Technical SEO audit of the current website project (or a single page) using the BWESEO engine — crawl/index rules, robots per-agent groups, environment protection (staging/preview hidden from search engines, production indexable, no staging URLs leaking into production canonicals, sitemap, links, schema or metadata), sitemap, canonicals, 404/503 status codes, redirects, SSR visibility, metadata uniqueness, OG tags, internal anchors, performance and SEO-relevant accessibility. Read-only; outputs a findings table with suggested regression tests. Use when the user says "technical SEO", "check robots/sitemap/canonicals", or invokes /BWESEOTechnical, in any website project.
 ---
 
-> `$BWESEO_ENGINE` = the canonical BWESEO engine directory: `$BWESEO_ENGINE_HOME` if set, else the `path` in
-> `~/.claude/bweseo/engine-location.json` (see `/BWESEOInstall`). Engine code lives in `$BWESEO_ENGINE/src`, methodology in
-> `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
+> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
 
 # BWESEOTechnical
 
