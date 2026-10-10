@@ -43,5 +43,135 @@
     "purpose": "Update the FAQ Engine and its skills in the current website.",
     "dependencies": "BWERepo/FAQEngine checkout ($BWEFAQ_ENGINE_HOME); Node",
     "projects": "website projects with the FAQ Engine installed"
+  },
+  "BWEBlog": {
+    "purpose": "The Blog Engine front door.",
+    "dependencies": "BWE Blog Engine installed in the project",
+    "projects": "website projects with the Blog Engine"
+  },
+  "BWEExport": {
+    "purpose": "Exports the current project's threads (title, status, what was asked and done, pull requests, what waits on the owner, next steps) plus the ",
+    "dependencies": "none",
+    "projects": "all"
+  },
+  "BWEImpeccableCommands": {
+    "purpose": "Lists every command of the installed Impeccable design skill with a one-line explanation of each.",
+    "dependencies": "Impeccable design skill (impeccable) and its agents/",
+    "projects": "website projects"
+  },
+  "BWEImport": {
+    "purpose": "Reads a handoff file written by /BWEExport in a new session, summarizes it, restores the standing rules, lists what is pending and asks whic",
+    "dependencies": "none",
+    "projects": "all"
+  },
+  "BWESEOAudit": {
+    "purpose": "Full read-only SEO baseline audit of the current website project using the BWESEO engine \u2014 architecture, page inventory, metadata, sitemap/r",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOCompetitors": {
+    "purpose": "Search-results and competitor gap analysis for approved target topics in the current website project using the BWESEO engine \u2014 who ranks, wh",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOContentPlan": {
+    "purpose": "Creates or updates the SEO page map, pillar/cluster architecture and prioritized content roadmap (about 10-20 opportunities, quality over qu",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOCreatePage": {
+    "purpose": "Creates exactly ONE user-approved SEO page in the current website project using the BWESEO engine \u2014 rechecks cannibalization, confirms inten",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOInstallDryRun": {
+    "purpose": "Shortcut for /BWESEOInstall --dry-run.",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOInstallUpdate": {
+    "purpose": "Shortcut for /BWESEOInstall --update.",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOInstallVerify": {
+    "purpose": "Shortcut for /BWESEOInstall --verify.",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOInternalLinks": {
+    "purpose": "Internal-link analysis for the current website project using the BWESEO engine \u2014 builds the link graph from nav, footer and body links, find",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOLocal": {
+    "purpose": "Local SEO analysis for the current website project using the BWESEO engine \u2014 NAP consistency, address type (storefront vs service-area vs ma",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOOpportunities": {
+    "purpose": "Identifies SEO customer-acquisition opportunities for the current website project using the BWESEO engine \u2014 maps searches that could bring a",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOPublish": {
+    "purpose": "Mandatory post-publication SEO check for a page that has just gone live in the current website project, using the BWESEO engine \u2014 environmen",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOQA": {
+    "purpose": "SEO QA gate for a page in the current website project using the BWESEO engine \u2014 content checks (every claim verified, no fabricated proof, l",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEORefresh": {
+    "purpose": "Finds published pages in the current website project that need updating using the BWESEO engine \u2014 stale facts or prices versus the business ",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOReport": {
+    "purpose": "Generates a plain-language SEO progress/performance report for the current website project using the BWESEO engine \u2014 what shipped, Search Co",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOSchema": {
+    "purpose": "Structured-data (JSON-LD / schema.org) audit for the current website project using the BWESEO engine \u2014 lists every schema block per page, wh",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOSearchConsole": {
+    "purpose": "The Google Search side of the BWESEO engine for the current website project.",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOSetup": {
+    "purpose": "Configures BWESEO for the current customer's website project AFTER the engine is installed (/BWESEOInstall) \u2014 creates the customer-specific ",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOTechnical": {
+    "purpose": "Technical SEO audit of the current website project (or a single page) using the BWESEO engine \u2014 crawl/index rules, robots per-agent groups, ",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
+  },
+  "BWESkills": {
+    "purpose": "Lists every BWE skill installed in this project (BWEOCA*, BWEFAQ*, BWESEO*, BWEBlog, BWEDeploy*, BWEE2E*, BWEWorkQueue*, bweimpeccable, BWEE",
+    "dependencies": "none",
+    "projects": "all"
+  },
+  "BWEWow": {
+    "purpose": "Universal website visual enhancement with a real WOW factor.",
+    "dependencies": "Node",
+    "projects": "website projects"
+  },
+  "bweimpeccable": {
+    "purpose": "Implements a design upgrade of a website by offering a checklist of every installed Impeccable command (default: the seven design stages in ",
+    "dependencies": "Impeccable design skill (impeccable) and its agents/",
+    "projects": "website projects"
+  },
+  "impeccable": {
+    "purpose": "Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, e",
+    "dependencies": "Node; agents/ (impeccable-*.md); third-party Apache 2.0, see NOTICE.md",
+    "projects": "website projects"
   }
 }
