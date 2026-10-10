@@ -13,7 +13,7 @@ Read-only. Shows what `/impeccable <command>` can do. It runs no command, edits 
 2. Show one table, grouped by the category column when the file has one: `/impeccable <command>` | one-line explanation (use the file's own description; shorten it only if it is long). Mark deprecated aliases as such.
 3. Add the extras the same file documents, if present: `pin`/`unpin` (standalone shortcut for a command), `hooks` (design detector hook on/off/status), and `teach` as an alias of `init`.
 4. If Impeccable is not installed, say so and stop. Do not invent a list.
-5. End with one line: `/bweimpeccable` runs a chosen set of these commands with before and after screenshots; type `/impeccable <command>` to run one directly.
+5. End with one line: `/BWEImpeccable` runs a chosen set of these commands with before and after screenshots; type `/impeccable <command>` to run one directly.
 
 ## Fallback list
 

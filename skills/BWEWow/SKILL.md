@@ -7,7 +7,7 @@ description: Universal website visual enhancement with a real WOW factor. Detect
 
 Portable: nothing here names a site, framework, host or colour. Read the repository's own instructions (`CLAUDE.md`, `AGENTS.md`, `README`, design docs) first; where they conflict with this file, they win. BWEWow is not a CSS polish pass: ENHANCE and TRANSFORM may recompose the page. WOW means memorable, professional, distinctive, easy to understand and use, and true to the page's purpose. It does not mean extra animation, random gradients, decoration, oversized controls, empty space or generic AI-looking design.
 
-Reference files (read the ones you need): `reference/design-guide.md` (assessment, modes, patterns, direction briefs), `reference/quality-checklist.md` (accessibility, performance, SEO, functionality, QA, report). Helper: `wow.mjs` in this folder (inspect, detect, gallery, find-compare). Screenshots, rollback, approval state and the report come from **bweimpeccable's `compare.mjs`**; this skill does not contain a second copy. Installed as a Claude Code skill, it is invoked as `/BWEWow`; the name is case independent.
+Reference files (read the ones you need): `reference/design-guide.md` (assessment, modes, patterns, direction briefs), `reference/quality-checklist.md` (accessibility, performance, SEO, functionality, QA, report). Helper: `wow.mjs` in this folder (inspect, detect, gallery, find-compare). Screenshots, rollback, approval state and the report come from **BWEImpeccable's `compare.mjs`**; this skill does not contain a second copy. Installed as a Claude Code skill, it is invoked as `/BWEWow`; the name is case independent.
 
 ## Invocation
 
@@ -109,5 +109,5 @@ DEPLOYMENT STATUS: Not deployed
 NEXT STEPS: concise
 ```
 
-## Bootstrap when bweimpeccable is not installed
-`wow.mjs find-compare` fails only when no `compare.mjs` exists. The repository that ships this skill also ships bweimpeccable; copy `.claude/skills/bweimpeccable/compare.mjs` next to this file (`.claude/skills/BWEWow/compare.mjs`) or install bweimpeccable. An account-level install of this skill carries the full helper inline at the end of its SKILL.md; write it to `.claude/skills/BWEWow/compare.mjs` then run `npm i -D playwright` only if Playwright is missing and the user agrees.
+## Bootstrap when BWEImpeccable is not installed
+`wow.mjs find-compare` fails only when no `compare.mjs` exists. The repository that ships this skill also ships BWEImpeccable; copy `.claude/skills/BWEImpeccable/compare.mjs` next to this file (`.claude/skills/BWEWow/compare.mjs`) or install BWEImpeccable. An account-level install of this skill carries the full helper inline at the end of its SKILL.md; write it to `.claude/skills/BWEWow/compare.mjs` then run `npm i -D playwright` only if Playwright is missing and the user agrees.
