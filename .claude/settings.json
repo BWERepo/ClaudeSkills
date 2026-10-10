@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "bwe-skills": {
+      "source": {
+        "source": "github",
+        "repo": "BWERepo/ClaudeSkills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "bwe-skills@bwe-skills": true
+  }
+}
