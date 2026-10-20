@@ -25,13 +25,24 @@ Docs to read first: `README.md`, `docs/ENGINE.md`, `docs/methodology/workflow-st
 BWESEO (front door), BWESEOAudit, Competitors, ContentPlan, CreatePage, Install, InternalLinks, Local, Opportunities,
 Publish, QA, Refresh, Report, Schema, SearchConsole, Setup, Technical.
 Engine maintenance skills (repository-owned, in `.claude/skills/`; load when Claude Code opens this repository, never
-installed into customer projects): BWESEOBegin, BWESEOCheckpoint, BWESEOEnd, BWESEOAll. Delete any older user-level copies
+installed into customer projects): BWESEOBegin, BWESEOCheckpoint, BWESEOEnd, BWESEOAll, BWESEORelease. Delete any older user-level copies
 of these four (see `docs/CLOUD-SETUP.md` §4). Not in this repository: the install shortcuts BWESEOInstallDryRun/Update/Verify.
 
 Gotcha: `skills/*/SKILL.md` must use **LF** line endings and start with `---\nname:\ndescription:\n---` (a canonical
 test checks it). Editing with tools that write CRLF on Windows breaks that test; convert with `sed -i 's/\r$//'`.
 
-## Last updated: 2026-10-10
+## Last updated: 2026-10-20 (engine 2026.10.20.01)
+
+### Session 2026-10-20 — SEO Landing Page Generator (released as 2026.10.20.01 as approved)
+- New: `src/landing-keywords.mjs` (CSV intake, intent grouping, unavailable-metrics model), `landing-opportunities.mjs` (new-vs-improve decision,
+  evidence-only ranking, URL/title proposals), `landing-quality.mjs` (quality gate + approval hash workflow), CLI `src/seo-landing.mjs`,
+  skill `/BWESEOLanding`, `templates/landing-dashboard.html`, `docs/methodology/landing-pages.md`, tests `landing-*.test.mjs`.
+- Lesson: the live site already had /pricing, /website-redesign (with a cost section) and a Knoxville page, so pricing/redesign-cost keywords
+  are "improve existing", not new pages. Customer-specific proposals live outside this repo (customer-neutral rule).
+- Not built: Search Console wiring of `performance` into landing state, before/after diff view, live SERP research (needs search access).
+- Validation READY, 716/716 tests.
+
+## Previous: 2026-10-10
 
 ### Session 2026-10-10 — Local SEO / Google Business Profile module, Phase 1 (manual mode; version NOT bumped, still 1.10.0)
 - New: `src/gbp-eligibility.mjs`, `gbp-discovery.mjs`, `gbp-profile.mjs`, `gbp-schema.mjs`, `gbp-state.mjs`, CLI `src/seo-local-gbp.mjs`, tests `src/gbp.test.mjs`

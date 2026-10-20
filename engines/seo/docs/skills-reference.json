@@ -138,6 +138,26 @@
       "approvalRequired": "Fixes only",
       "externalEffect": "None"
     },
+    "BWESEOLanding": {
+      "purpose": "SEO Landing Page Generator: keyword intake, intent grouping, new-page-versus-improve-existing decision, drafting, quality gate and administrator approval for landing pages.",
+      "whenToUse": "When you want pages that target a list of keywords without duplicating or cannibalizing existing pages.",
+      "syntax": [
+        "/BWESEOLanding"
+      ],
+      "arguments": "None; the skill walks the steps and uses seo-landing.mjs.",
+      "examples": [
+        "/BWESEOLanding"
+      ],
+      "inputs": "A keyword list (CSV or typed), the live site's pages, prices and terms.",
+      "outputs": "A table of page opportunities, drafts, quality-gate results and approval records in seo/data/landing/state.json.",
+      "automatic": "Read-only analysis and drafting.",
+      "approvalRequired": "Every new or changed page needs the administrator's explicit approval of the exact content before it is published.",
+      "externalEffect": "None; Search Console is read through /BWESEOSearchConsole when authorized.",
+      "safety": "Never invents search volume, prices, testimonials, results or locations; blocks stuffing, duplicates, thin and doorway pages; never publishes.",
+      "next": "/BWESEOCreatePage, /BWESEOQA, /BWESEOPublish.",
+      "approval": "Every new or changed page needs the administrator's explicit approval of the exact content before it is published.",
+      "external": "None; Search Console is read through /BWESEOSearchConsole when authorized."
+    },
     "BWESEOLocal": {
       "purpose": "Local SEO analysis for location-dependent businesses: NAP consistency, address type, service-area honesty, location pages, Google Business Profile actions for the owner.",
       "whenToUse": "Only when location matters to the business.",

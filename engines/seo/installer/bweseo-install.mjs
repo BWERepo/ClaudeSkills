@@ -960,6 +960,7 @@ const RULES = [
   [/^schemas\/[^/]+\.json$/, "ENGINE", (p) => `seo/schema/${basename(p)}`],
   [/^templates\/docs\/README\.md$/, "TEMPLATE", () => "docs/seo/README.md"],
   [/^templates\/[^/]+\.json$/, "TEMPLATE", () => null],
+  [/^templates\/landing-dashboard\.html$/, "TEMPLATE", () => "docs/seo/landing-dashboard.html"],
   [/^skills\/BWESEO[A-Za-z]*\/SKILL\.md$/, "ENGINE", () => null], // canonical SKILL source; installed by --sync-skills
   [/^(adapters|docs\/industries|docs\/methodology)\/[^/]+\.md$/, "ENGINE", () => null],
   [/^docs\/[^/]+\.md$/, "ENGINE", () => null],

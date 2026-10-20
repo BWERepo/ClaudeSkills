@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "engineId": "bweseo-engine",
-  "engineVersion": "2026.10.19.01",
+  "engineVersion": "2026.10.20.01",
   "schemaVersion": 1,
   "installer": "1.0.0",
   "requiredSkills": [
@@ -12,6 +12,7 @@
     "BWESEOCreatePage",
     "BWESEOInstall",
     "BWESEOInternalLinks",
+    "BWESEOLanding",
     "BWESEOLocal",
     "BWESEOOpportunities",
     "BWESEOPublish",
@@ -31,6 +32,36 @@
   ],
   "files": [
     {
+      "path": ".claude/skills/BWESEOAll/SKILL.md",
+      "class": "DEV",
+      "install": null,
+      "sha256": "3daaaf5fe9bd33b4c7d2645dd86a1dcb72ae13715900e9c1861fc8b103c5a222"
+    },
+    {
+      "path": ".claude/skills/BWESEOBegin/SKILL.md",
+      "class": "DEV",
+      "install": null,
+      "sha256": "b770e4e54568cfbcaf39523795e3e5933cff7117fcc856028ee78a3b3fc800a8"
+    },
+    {
+      "path": ".claude/skills/BWESEOCheckpoint/SKILL.md",
+      "class": "DEV",
+      "install": null,
+      "sha256": "8e7491dd5aab7a87c13521b952199382a65c77c55990b084cf1a51ce4abb17a0"
+    },
+    {
+      "path": ".claude/skills/BWESEOEnd/SKILL.md",
+      "class": "DEV",
+      "install": null,
+      "sha256": "5408090a5412add7a95cc4662f4d137801823c549391988955bcffd2c3e18106"
+    },
+    {
+      "path": ".claude/skills/BWESEORelease/SKILL.md",
+      "class": "DEV",
+      "install": null,
+      "sha256": "f3fc545d12a6d88b3cdea7effe7c5d2e84b9a0fa7e632ab6f27ecb56ef48fc5b"
+    },
+    {
       "path": ".gitattributes",
       "class": "ENGINE",
       "install": null,
@@ -46,7 +77,7 @@
       "path": ".github/workflows/show-manual.yml",
       "class": "DEV",
       "install": null,
-      "sha256": "3362fcd0c7ede3cafcb040f71f85d63bc225618e756546c44f2e9af566922f69"
+      "sha256": "1bc2daa77a4aaaed4d7088753c76275d1744403e1899a0080fb068eafbe7f2f1"
     },
     {
       "path": ".gitignore",
@@ -58,25 +89,31 @@
       "path": "BWESEO-SKILLS-AND-PROCEDURES.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "b2d8f380b732537b37c62eb9c3dc357a8f267af3bf0a5454ffb062a73a097b92"
+      "sha256": "08582978d0a04d72aca86e763c427eaa256fe3353e3dd903e084b9b2d4c852df"
+    },
+    {
+      "path": "CLAUDE.md",
+      "class": "DEV",
+      "install": null,
+      "sha256": "b4b4dcc6390dd3a7735e9681e62f47ebd8283f046f5970e3b3dad44637757bb4"
     },
     {
       "path": "PROJECT_STATUS.md",
       "class": "DEV",
       "install": null,
-      "sha256": "0d21e0aee915cc4bbc5a0422ef8a92d14d45625a1d85b34dcf19d663176287fd"
+      "sha256": "d35cbf384c697a0b45e0f16980d7d65d5fa865c70d4c7cac3441077f11c17bca"
     },
     {
       "path": "README.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "e2655299cf5332c2742e3e4645a415306f7cc87195474ecf5e3bedddb01c447e"
+      "sha256": "d2d8c90a9a8284f3aa18ce3c92cee9ad237d628772e320fd26dbf5fc37f94a98"
     },
     {
       "path": "VERSION",
       "class": "ENGINE",
       "install": null,
-      "sha256": "3c988465d92a92145d48af744cf30642173f9f316849c951abd10e3ec084f8ac"
+      "sha256": "869c8ec93a0b304ac821458963ae27a93ea0bd2191678ca1793039cd48cbe69f"
     },
     {
       "path": "adapters/_template.md",
@@ -160,7 +197,7 @@
       "path": "docs/OPERATING-GUIDE.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "6501f13d51983dbce688139690d2234e6a33ee449f19def8ac7828a367182326"
+      "sha256": "367e51d3415255ad1934fba2d34719d60c0be8f10c0ee3b7ba484df701291629"
     },
     {
       "path": "docs/industries/_template.md",
@@ -301,6 +338,12 @@
       "sha256": "b936c285d861c7529f9dd145e37d185d51e3ddf83677e5323fa8aebe91d202f3"
     },
     {
+      "path": "docs/methodology/landing-pages.md",
+      "class": "ENGINE",
+      "install": null,
+      "sha256": "a3ead7cd861b745232e568b62ebf1d575da20f500c883799cf06f013869c4128"
+    },
+    {
       "path": "docs/methodology/local-seo.md",
       "class": "ENGINE",
       "install": null,
@@ -382,13 +425,13 @@
       "path": "docs/skills-reference.json",
       "class": "ENGINE",
       "install": null,
-      "sha256": "3e90fa5d9c8bf064805cf73b3898820df5f563be89f2cb1f8058d4227a4b09f7"
+      "sha256": "313befe16703a9c47befa26dccba55700a3eeac7165000565cef1f4f8f5417f6"
     },
     {
       "path": "installer/bweseo-install.mjs",
       "class": "ENGINE",
       "install": null,
-      "sha256": "c84f2e836af1bab56449eebae4d82fe3ecbdad284a1b9b755f56b2edcaeaa1bb"
+      "sha256": "473cad61a2b906841ad1b0e8b200aa62e7e906c2f0019c2dd4e93228d7c240f0"
     },
     {
       "path": "installer/migrations/README.md",
@@ -406,13 +449,13 @@
       "path": "package-lock.json",
       "class": "ENGINE",
       "install": null,
-      "sha256": "fc0039708e8154e758f54b38c8b85bb9f7d081db51a443c51932fcaac375e248"
+      "sha256": "5e844dbf06dd10498b42192881c53e4304b65a8fe5c2d825f8c36687905b8808"
     },
     {
       "path": "package.json",
       "class": "ENGINE",
       "install": null,
-      "sha256": "5a59fe63554e5a9e67041a49972e3a7bbebf0a4438e92ce36ed94546bf9b75c1"
+      "sha256": "8051b5b6aa7d82b91885c24e3a44e0ca303f47bef1e2bbedaabe6d0037b37547"
     },
     {
       "path": "schemas/business-profile.schema.json",
@@ -509,6 +552,12 @@
       "class": "ENGINE",
       "install": null,
       "sha256": "d3999c1ca7d0ef5e694ffe52a58274201859340c6d400466592d550303314620"
+    },
+    {
+      "path": "skills/BWESEOLanding/SKILL.md",
+      "class": "ENGINE",
+      "install": null,
+      "sha256": "c91b6fc6df571ee3c2a16d15e947035ced72aff3d6de21109e2fd7bf981bb861"
     },
     {
       "path": "skills/BWESEOLocal/SKILL.md",
@@ -745,6 +794,36 @@
       "sha256": "d2b179b459c1d75c8b87c738d163b89b0bbacc0d86d3f5dfe8de22138a9873c3"
     },
     {
+      "path": "src/landing-keywords.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/landing-keywords.mjs",
+      "sha256": "35f62cfab7d3813414e5a952b38cfa30aced1154a39528f945cd5d425b785d07"
+    },
+    {
+      "path": "src/landing-keywords.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/landing-keywords.test.mjs",
+      "sha256": "26276adea165525701ad1fdf86f9ae34d5b43f84df342598b59143b4b1ab846d"
+    },
+    {
+      "path": "src/landing-opportunities.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/landing-opportunities.mjs",
+      "sha256": "42e9a46ae5a2a51773515629bfcece5e4a6b16fdfec591bb41aa81f58a9a8374"
+    },
+    {
+      "path": "src/landing-pipeline.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/landing-pipeline.test.mjs",
+      "sha256": "970828579204a5e4ad84c3dc2ce97e048c6b1f1151dc96d805380ef67f5a899b"
+    },
+    {
+      "path": "src/landing-quality.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/landing-quality.mjs",
+      "sha256": "c53fcc8328dbb409346a6f5194c3d40ac83c33f03bffe8141cf5e59034241681"
+    },
+    {
       "path": "src/post-publish-check.mjs",
       "class": "ENGINE",
       "install": "seo/tools/post-publish-check.mjs",
@@ -787,6 +866,12 @@
       "sha256": "4211f0debda847c30f34731cff3ca4124f0f3020f4489fc9651c40bb05b1e476"
     },
     {
+      "path": "src/seo-landing.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/seo-landing.mjs",
+      "sha256": "8f371ba773efae9900938ac1e801e5444a98c74b63084c2e37db7c8edf40bb4e"
+    },
+    {
       "path": "src/seo-local-gbp.mjs",
       "class": "ENGINE",
       "install": "seo/tools/seo-local-gbp.mjs",
@@ -826,7 +911,7 @@
       "path": "src/seo-state-core.mjs",
       "class": "ENGINE",
       "install": "seo/tools/seo-state-core.mjs",
-      "sha256": "f7b2650f158ed06e82b4d3cda61ddd9bfa80aa17104d5b7d653d20908b083a27"
+      "sha256": "a6eff0bbdd242a16b675fb9a25fba1df4253de0a74c873c3e46502b5d1f4bb53"
     },
     {
       "path": "src/seo-state.d.mts",
@@ -850,7 +935,7 @@
       "path": "src/validate-seo-data.mjs",
       "class": "ENGINE",
       "install": "seo/tools/validate-seo-data.mjs",
-      "sha256": "4e54cb4448f0da4c77e41881f5f53aaead81c6d450fbf65fa3c817848e0226ba"
+      "sha256": "74b4ae2205af495f4a804e2f71f39fcb19e6fff9b3efb64858b32b7bcba70088"
     },
     {
       "path": "templates/business-profile.template.json",
@@ -871,16 +956,22 @@
       "sha256": "dc3389e72e73350b535f5391b22041ea36b332bbe557cd70c2bf1e11743347f7"
     },
     {
+      "path": "templates/landing-dashboard.html",
+      "class": "TEMPLATE",
+      "install": "docs/seo/landing-dashboard.html",
+      "sha256": "10e1c67e2d46f3885effbeca81e774592dd437306cf695f60480484316244f6a"
+    },
+    {
       "path": "templates/seo-config.template.json",
       "class": "TEMPLATE",
       "install": null,
-      "sha256": "114200ddd55ba7e8a14aa7b380cbdd4229130b985db0ea84d060c5b6e1be16dc"
+      "sha256": "da57998459a7fe608b0ac4f256bf183f165e43e82d0f808217281eb9404e84da"
     },
     {
       "path": "tests/canonical/canonical.test.mjs",
       "class": "TEST",
       "install": null,
-      "sha256": "ba07df4be28b18abfabe7643e663fe4463830c5e33de2bcdd1824c93d78d7ba7"
+      "sha256": "55c54460ee4c3c1e674b183007ee3130134a8f9da9325b79d26703d60b38ae91"
     },
     {
       "path": "tests/canonical/docs.test.mjs",

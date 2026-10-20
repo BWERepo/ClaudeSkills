@@ -348,5 +348,10 @@
     "purpose": "End-of-session wrap-up for the FAQ Engine source repository - updates (or creates) PROJECT_STATUS.md with everything accomplished in the session so a brand-new ",
     "dependencies": "FAQEngine repository checkout",
     "projects": "FAQEngine source repository only"
+  },
+  "BWESEOLanding": {
+    "purpose": "SEO Landing Page Generator: keyword intake, intent grouping, new-page-versus-improve-existing decision, quality gate and administrator approval for landing pages.",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
+    "projects": "website projects with BWESEO installed"
   }
 }
