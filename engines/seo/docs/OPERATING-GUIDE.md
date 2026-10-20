@@ -186,7 +186,7 @@ backed up, validated, and rolled back if it fails.
 
 The four maintenance skills are shortcuts for the steps below. Each step is shown with its manual equivalent.
 
-### Start of a session (`/BWESEOBegin`)
+### Start of a session (`BWESEOBegin` routine)
 
 ```
 cd SEOEngine
@@ -208,7 +208,7 @@ git log --oneline -5
 6. If the change affects anything a person runs or follows (a command, subcommand or flag, a script, a skill, a file people edit,
    the maintenance workflow or the release steps), **update this guide in the same change**. See "Keeping this guide current" below.
 
-### Rebuild and validate (`/BWESEOCheckpoint`), always in this order
+### Rebuild and validate (`BWESEOCheckpoint` routine), always in this order
 
 ```
 node scripts/build-manual.mjs                       # regenerates BWESEO-SKILLS-AND-PROCEDURES.md
@@ -242,11 +242,11 @@ git push -u origin <branch>
 
 Then open a pull request on GitHub and merge it once it is reviewed. Never rewrite history or force-push without the owner's say-so.
 
-### End of a session (`/BWESEOEnd`)
+### End of a session (`BWESEOEnd` routine)
 
 Update `PROJECT_STATUS.md`: add a dated section at the top of the session log (what changed, the engine version, decisions made),
 and keep **Known follow-ups** to items that are still open. Write no customer names and no machine paths. Then rebuild the manifest,
-validate, commit and push as above. (`/BWESEOAll` is the checkpoint followed by this step.)
+validate, commit and push as above. (`BWESEOAll` routine is the checkpoint followed by this step.)
 
 ### Releasing a new version
 
