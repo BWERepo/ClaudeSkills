@@ -19,7 +19,7 @@ Skill names are namespaced, so they do not collide with project skills in `.clau
 Same commands after `git init` / cloning. `scripts/install.sh [tag]` wraps them.
 
 ## 3. Update a shared skill
-Edit `skills/<Name>/SKILL.md` on a branch, bump `version` in `.claude-plugin/plugin.json`, add a `CHANGELOG.md` entry, run `python3 scripts/catalog.py && scripts/validate.sh`, open a PR, merge, tag `vX.Y.Z`.
+Edit `skills/<Name>/SKILL.md` on a branch, bump `version` in `.claude-plugin/plugin.json`, add a `CHANGELOG.md` entry, run `python3 scripts/catalog.py && scripts/validate.sh`, open a PR, merge, tag `vYYYY.MM.DD.NN`.
 Consumers: `claude plugin marketplace update bwe-skills && claude plugin update bwe-skills@bwe-skills --scope project`, then restart the session.
 Auto-update is NOT verified in cloud environments; treat updates as explicit.
 
@@ -34,6 +34,9 @@ Pin to a prior tag: `claude plugin marketplace remove bwe-skills`, then `claude 
 
 ## Compatibility
 Requires a Claude Code version supporting `claude plugin` (tested with 2.1.296). `scripts/validate.sh` runs `claude plugin validate`, catalog sync and changelog checks.
+
+## Versioning
+Versions are `yyyy.mm.dd.nn`: the release date plus a two-digit sequence for that day (`2026.10.20.01`, then `2026.10.20.02`). Releases before 2026.10.20.01 used `0.x.y`; their tags (for example `v0.1.0`) still work. Tag new releases `v` plus the version, for example `v2026.10.20.01`.
 
 ## Excluded from release 0.1.0
 See `docs/MIGRATION.md`.
