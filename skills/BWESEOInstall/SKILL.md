@@ -43,6 +43,12 @@ preview). Extra flags: `--allow-subdir` (only if the subfolder really is the web
 
 ## Steps
 
+0. **Refresh the plugin first** (plain install, plain update, or `--update`; skip for `--dry-run`, `--verify` and `--sync-skills`, or when
+   the user says not to). Note the plugin version (`version` in `.claude-plugin/plugin.json` two levels above this skill's base directory),
+   then run `claude plugin marketplace update bwe-skills` and `claude plugin update bwe-skills@bwe-skills --scope project`
+   (needs the `claude` CLI and network; report any error and stop). If the plugin version changed, the skills in THIS session are
+   still the old ones: tell the owner "The plugin updated from <old> to <new>. Restart this session, then run /BWESEOInstall again." and **stop**.
+   If it was already current, continue with step 1.
 1. **Confirm the target.** State the repo root, `git remote get-url origin`, and that this is the customer's
    website project (not the BWESEO engine directory, and not another customer's repository). If the working
    tree has uncommitted work, say so and recommend committing or backing it up first — do not commit for them.

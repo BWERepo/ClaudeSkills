@@ -1,4 +1,7 @@
 # Changelog
+## [2026.10.20.05] - 2026-10-20
+- BWESEOInstall now refreshes the bwe-skills plugin first (and asks for a restart if the plugin changed), then installs or updates the website engine. It replaces BWESEOSync, which is removed (released earlier today as 2026.10.20.04).
+
 ## [2026.10.20.04] - 2026-10-20
 - Added skill BWESEOSync: refreshes the plugin, asks for a restart if it changed, then runs BWESEOInstallUpdate and BWESEOInstallVerify in the website.
 
