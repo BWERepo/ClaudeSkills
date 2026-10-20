@@ -1,4 +1,7 @@
 # Changelog
+## [2026.10.20.07] - 2026-10-20
+- BWESEOInstall now always runs the installer from the plugin's bundled engine (`--engine`), instead of the installer's own lookup, which could pick an older engine checkout recorded in `engine-location.json` and install that.
+
 ## [2026.10.20.06] - 2026-10-20
 - Refreshed the bundled SEO engine to 2026.10.20.03. Fixes updating a website from this bundled copy: the installer's manifest check no longer fails on the engine's own development files (CLAUDE.md, maintenance skills), which are intentionally not bundled.
 

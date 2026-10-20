@@ -59,6 +59,11 @@ preview). Extra flags: `--allow-subdir` (only if the subfolder really is the web
 2. **First customer installation → dry run first.** If this project has no `seo/bweseo-install.json` and is
    the first external/customer installation (or the user has not seen a dry run for this project in this
    conversation), run `--dry-run`, show the plan **verbatim**, and ask for approval before the real install.
+   **Always use the bundled engine.** Run every installer command as
+   `node "$BWESEO_ENGINE/installer/bweseo-install.mjs" <flags> --engine "$BWESEO_ENGINE"` (resolve `$BWESEO_ENGINE` to an absolute path first).
+   Never rely on the installer's own lookup (`BWESEO_ENGINE_HOME`, `BWESEO_ENGINE`, or `~/.claude/bweseo/engine-location.json`): it can point at an
+   older engine checkout on this machine and would install that instead. Before an update or verify, print the engine version being used
+   (`$BWESEO_ENGINE/VERSION`) and the receipt version, and stop if they are not what you expect.
 3. **Install.** Run the installer. It (a) locates and verifies the canonical engine and its manifest,
    (b) scans the payload for secrets and for the identity of every registered project, (c) installs only
    allowlisted files, (d) creates empty `seo/`, `seo/data/`, `docs/seo/`, (e) adds `.gitignore` rules,
