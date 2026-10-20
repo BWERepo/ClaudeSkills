@@ -3,7 +3,7 @@
 Reusable module inside BWESEO. **Phase 1 — manual mode** (this document). Later phases (Google OAuth and API sync, optimization, monitoring) are
 listed under "Not built yet"; none of them is claimed here.
 
-The module is customer-neutral. Each client website has its own `seo/` folder, so Business Web Express managing several clients means one
+The module is customer-neutral. Each client website has its own `seo/` folder, so an agency managing several clients means one
 isolated `seo/data/local-gbp/` per project: no state, credential or business fact is ever shared between clients.
 
 ## What manual mode does (no Google access needed)
