@@ -19,6 +19,13 @@ description: Technical SEO audit of the current website project (or a single pag
    each finding was measured on; production indexability is only ever measured on production. Prefer evidence from source + build output + `curl` against staging
    or a local preview (status codes, headers, server HTML). Don't use browser automation if the
    project forbids it — list visual checks for the user instead.
+   For a whole-site run, also run the read-only site checks against production:
+   `node seo/tools/seo-site-checks.mjs` (add `--demo-host <host>` for each demo or example site on the
+   business's domain). They cover http/www consolidation in one 301, robots.txt on every production host
+   (including CDN-managed blocks), every sitemap URL (200, indexable, self-canonical, dated), 301/308 for
+   trailing-slash and uppercase variants, linked pages that robots.txt blocks while they say noindex,
+   internal links to the key (P1) pages, image weight, and noindex on demo hosts. A host this machine
+   cannot reach is reported as skipped, never as an outage.
 4. Output a findings table (severity · check · evidence · fix · effort) and suggested regression
    tests. Append/merge into `docs/seo/SEO-BASELINE.md` → Findings when run site-wide.
 5. Change nothing unless the user explicitly approves specific fixes.

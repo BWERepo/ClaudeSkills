@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Install the catalog into the CURRENT project (run from the project root).
-# Usage: install.sh [version-tag]   e.g. install.sh v0.1.0  (default: latest main)
+# Usage: install.sh [version-tag]   e.g. install.sh v0.1.0 or v2026.10.20.01  (default: latest main)
 set -euo pipefail
 ref="${1:-}"
 src="BWERepo/ClaudeSkills${ref:+@$ref}"

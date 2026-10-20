@@ -113,7 +113,7 @@ permanent tests install into two fictional projects in both directions and check
 
 ## Versioning
 
-`engineVersion` (this engine, semantic — `VERSION`), `schemaVersion` (the shape of a project's data files) and
+`engineVersion` (this engine, `yyyy.mm.dd.nn` — `VERSION`), `schemaVersion` (the shape of a project's data files) and
 `manifestVersion` are independent of each other and of any website's version. Bump the engine version for any
 behavior change; bump the schema version only when a data file's shape changes (and add a migration).
 

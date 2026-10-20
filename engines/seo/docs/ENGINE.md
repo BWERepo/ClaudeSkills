@@ -83,6 +83,9 @@ engine/
   tools/seo-page-checks.mjs   reusable page checks (og:url vs canonical, social-image size, above-the-fold
                               visibility, shared navigation/footer); used by post-publish-check and runnable alone
                               on a saved page (vendored too)
+  tools/seo-site-checks.mjs   read-only whole-site indexing-readiness checks on production (http/www consolidation,
+                              robots.txt per host, sitemap sweep, redirect codes, blocked+noindex pages, key-page
+                              links, image weight, demo hosts noindex); run by /BWESEOTechnical (vendored too)
   tools/seo-state-core.mjs    the /BWESEO state machine: evidence → status dashboard → ONE next
                               action, plus the live checks. Imports nothing, so it also runs in a
                               Worker or browser (e.g. an admin status card). + .d.mts types

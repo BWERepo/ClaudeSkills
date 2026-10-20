@@ -909,7 +909,7 @@ describe.skipIf(!available)("/BWESEOInstall — installer", () => {
       expect(v.errors).toEqual([]);
       expect(v.unclassified).toEqual([]);
       expect(manifest).toMatchObject({ manifestVersion: 1, engineId: "bweseo-engine", schemaVersion: 1 });
-      expect(manifest.engineVersion).toMatch(/^\d+\.\d+\.\d+$/);
+      expect(manifest.engineVersion).toMatch(/^\d{4}\.\d{2}\.\d{2}\.\d{2}$/);
       // the engine has its own version (the VERSION file) — it is not any website's version
       expect(manifest.engineVersion).toBe(readFileSync(join(ENGINE_HOME, "VERSION"), "utf8").trim());
       expect(manifest.schemaVersion).toBe(1);

@@ -52,7 +52,7 @@ const stateConst = readConst("src/seo-state-core.mjs", "STATE_VERSION");
 const schemaConst = readConst("src/validate-seo-data.mjs", "SCHEMA_VERSION");
 check(
   "Versions",
-  !!version && /^\d+\.\d+\.\d+$/.test(version) && version === engineConst && version === stateConst && version === manifest?.engineVersion && Number(schemaConst) === manifest?.schemaVersion,
+  !!version && /^\d{4}\.\d{2}\.\d{2}\.\d{2}$/.test(version) && version === engineConst && version === stateConst && version === manifest?.engineVersion && Number(schemaConst) === manifest?.schemaVersion,
   `engine ${version} (VERSION / manifest / validator / state agree: ${version === engineConst && version === stateConst && version === manifest?.engineVersion}) · schema ${schemaConst} · manifest ${manifest?.manifestVersion}`,
 );
 

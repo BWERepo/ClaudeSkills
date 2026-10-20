@@ -1,9 +1,10 @@
 /**
  * The engine's own version. It is independent of any host website and of the BWE SEO Engine's version.
- * Keep in sync with /VERSION and package.json (a unit test enforces this).
+ * Format yyyy.mm.dd.nn (nn = same-day build counter, 01, 02, ...). Keep in sync with /VERSION.
+ * package.json keeps a semver value because npm rejects four-part versions.
  */
 export const ENGINE_NAME = "BWE Blog Engine";
-export const ENGINE_VERSION = "1.0.0";
+export const ENGINE_VERSION = "2026.10.19.01";
 /** Shape version of /blog-seo-index.json. Bump the minor for additive fields, the major for breaking changes. */
 export const INDEX_SCHEMA_VERSION = "1.0";
 /** Shape version of /.well-known/bwe-blog.json. */

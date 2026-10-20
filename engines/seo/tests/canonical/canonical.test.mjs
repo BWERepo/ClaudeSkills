@@ -67,9 +67,9 @@ describe("canonical engine — manifest is an allowlist", () => {
 });
 
 describe("canonical engine — identity and versions", () => {
-  it("has its own semantic version, independent of any website, plus schema and manifest versions", () => {
+  it("has its own date-based version (yyyy.mm.dd.nn), independent of any website, plus schema and manifest versions", () => {
     const version = readFileSync(join(ROOT, "VERSION"), "utf8").trim();
-    expect(version).toMatch(/^\d+\.\d+\.\d+$/);
+    expect(version).toMatch(/^\d{4}\.\d{2}\.\d{2}\.\d{2}$/);
     expect(manifest.engineVersion).toBe(version);
     expect(validator.ENGINE_VERSION).toBe(version);
     expect(core.STATE_VERSION).toBe(version);
