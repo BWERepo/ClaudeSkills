@@ -1,4 +1,7 @@
 # Changelog
+## [0.6.0] - 2026-10-20
+- Added 25 project-specific skills copied unchanged, at the owner's request: BWEDeployDisable, BWEDeployEnable, BWEDeployStaging, BWEE2EDisable, BWEE2EEnable, BWEOCAAll, BWEOCABackup, BWEOCABegin, BWEOCACheckpoint, BWEOCAEnd, BWEOCAGit, OCAAnswer, OCAArticle, OCAArticles, BWEWorkQueue, BWEWorkQueueNotStarted, BWEWorkQueueToday (One Click Answers only) and BWESEOAll/Begin/Checkpoint/End, BWEFAQAll/Begin/Checkpoint/End (engine source repositories only). They work only in those projects and are marked so in the catalog. This is an exception to the self-contained rule.
+
 ## [0.5.1] - 2026-10-20
 - Refreshed the bundled SEO engine (now 2026.10.19.01, adds `seo-site-checks`) and Blog engine (2026.10.19.01) from their source repositories; the FAQ engine was already current.
 - BWESEOLocal (adds Google Business Profile mode) and BWESEOTechnical (adds production site checks) now follow the SEOEngine versions, with the bundled-engine path wording.

@@ -223,5 +223,130 @@
     "purpose": "Publish approved blog articles through the validation gate.",
     "dependencies": "BWEBlogReview",
     "projects": "website projects with the Blog Engine installed"
+  },
+  "BWEDeployDisable": {
+    "purpose": "Turns OFF deploying for the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) by creating the .deploy-disabled flag file, so `npm run deploy:stagin",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEDeployEnable": {
+    "purpose": "Turns ON deploying for the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) by deleting the .deploy-disabled flag file, so `npm run deploy:staging",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEDeployStaging": {
+    "purpose": "Deploys the current work of the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) to STAGING only (staging.oneclickanswers.com).",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEE2EDisable": {
+    "purpose": "Turns OFF end-to-end (Playwright browser) testing for the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) by creating the .e2e-disabled flag file",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEE2EEnable": {
+    "purpose": "Turns ON end-to-end (Playwright browser) testing for the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) by deleting the .e2e-disabled flag file,",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEOCAAll": {
+    "purpose": "Full end-to-end wrap-up for the One Click Answers tool site (OneClickAnswers.com) \u2014 runs BWEOCACheckpoint (staging AND production release), then BWEOCAEnd.",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEOCABackup": {
+    "purpose": "Backs up the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) to timestamped zip files in Z:\\Backup\\Websites\\OCA\\Backup - a zip of the project fol",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEOCABegin": {
+    "purpose": "Start-of-session resume for the One Click Answers tool site (OneClickAnswers.com) \u2014 reads PROJECT_STATUS.md and continues development from where the last sessio",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEOCACheckpoint": {
+    "purpose": "Full release for the One Click Answers tool site (OneClickAnswers.com) at an explicit version (or auto-bumped minor if none given) \u2014 builds and deploys staging,",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEOCAEnd": {
+    "purpose": "End-of-session wrap-up for the One Click Answers tool site (OneClickAnswers.com) \u2014 updates PROJECT_STATUS.md with everything accomplished in the current session",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEOCAGit": {
+    "purpose": "Commits the current work in the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) to git and pushes it to the remote, and does nothing else.",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "OCAAnswer": {
+    "purpose": "Create or update one \"What Is?\" answer in the One Click Answers Answer Engine (Z:\\Backup\\websites\\OneClickAnswers) and prepare it for STAGING review.",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "OCAArticle": {
+    "purpose": "Research, write and test ONE consumer question article for the One Click Answers blog (Z:\\Backup\\websites\\OneClickAnswers) and save it as a DRAFT for staging re",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "OCAArticles": {
+    "purpose": "Review the One Click Answers blog Article Opportunity Registry (Z:\\Backup\\websites\\OneClickAnswers) and recommend which question article to write next.",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEWorkQueue": {
+    "purpose": "Lists the ENTIRE work queue of the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers\\docs\\QUEUE.md) as one table with the item number, a short descr",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEWorkQueueNotStarted": {
+    "purpose": "Lists only the work-queue items of the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers\\docs\\QUEUE.md) that have NOT been started, with the item nu",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWEWorkQueueToday": {
+    "purpose": "Lists the work-queue items of the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers\\docs\\QUEUE.md) that were ADDED or IMPLEMENTED TODAY, with the it",
+    "dependencies": "One Click Answers repository (project-specific scripts and files)",
+    "projects": "One Click Answers project only"
+  },
+  "BWESEOAll": {
+    "purpose": "Full end-to-end wrap-up for the BWESEO engine source repository \u2014 runs BWESEOCheckpoint (manual/manifest, validation + tests, commit, push), then BWESEOEnd (PRO",
+    "dependencies": "SEOEngine repository checkout",
+    "projects": "SEOEngine source repository only"
+  },
+  "BWESEOBegin": {
+    "purpose": "Start-of-session resume for the BWESEO engine source repository \u2014 reads PROJECT_STATUS.md and continues development from where the last session left off.",
+    "dependencies": "SEOEngine repository checkout",
+    "projects": "SEOEngine source repository only"
+  },
+  "BWESEOCheckpoint": {
+    "purpose": "Checkpoint for the BWESEO engine source repository \u2014 regenerates the manual and manifest, runs canonical validation with the test suite, then commits and pushes",
+    "dependencies": "SEOEngine repository checkout",
+    "projects": "SEOEngine source repository only"
+  },
+  "BWESEOEnd": {
+    "purpose": "End-of-session wrap-up for the BWESEO engine source repository \u2014 updates (or creates) PROJECT_STATUS.md with everything accomplished in the current session, the",
+    "dependencies": "SEOEngine repository checkout",
+    "projects": "SEOEngine source repository only"
+  },
+  "BWEFAQAll": {
+    "purpose": "Runs the FAQ Engine repository's end-of-work routine in one go - the checkpoint (tests and manual drift check) and then the end-of-session wrap-up.",
+    "dependencies": "FAQEngine repository checkout",
+    "projects": "FAQEngine source repository only"
+  },
+  "BWEFAQBegin": {
+    "purpose": "Start-of-session resume for the FAQ Engine source repository - reads PROJECT_STATUS.md and continues development from where the last session left off.",
+    "dependencies": "FAQEngine repository checkout",
+    "projects": "FAQEngine source repository only"
+  },
+  "BWEFAQCheckpoint": {
+    "purpose": "Verification checkpoint for the FAQ Engine source repository - runs the tests and the manual drift check, rebuilds nothing silently, and reports the real result",
+    "dependencies": "FAQEngine repository checkout",
+    "projects": "FAQEngine source repository only"
+  },
+  "BWEFAQEnd": {
+    "purpose": "End-of-session wrap-up for the FAQ Engine source repository - updates (or creates) PROJECT_STATUS.md with everything accomplished in the session so a brand-new ",
+    "dependencies": "FAQEngine repository checkout",
+    "projects": "FAQEngine source repository only"
   }
 }
