@@ -235,8 +235,11 @@ export function validateManifest(engineDir, manifest) {
       targets.add(inst);
     }
     const abs = join(engineDir, f.path);
-    if (!existsSync(abs)) errors.push(`${at}: listed but missing from the engine`);
-    else if (!/^[0-9a-f]{64}$/.test(f.sha256 ?? "")) errors.push(`${at}: sha256 missing`);
+    if (!existsSync(abs)) {
+      // DEV files (the engine's own CLAUDE.md, maintenance skills, workflows) are never installed, so a bundled copy of the engine
+      // may omit them. Missing is fine; if one is present its hash must still match.
+      if (!DEV_CLASSES.includes(f.class)) errors.push(`${at}: listed but missing from the engine`);
+    } else if (!/^[0-9a-f]{64}$/.test(f.sha256 ?? "")) errors.push(`${at}: sha256 missing`);
     else if (hashContent(readFileSync(abs)) !== f.sha256) errors.push(`${at}: content does not match its recorded hash (engine changed since the manifest was built)`);
   }
   // DENY by default: anything in the engine directory that the manifest does not list is unclassified.
