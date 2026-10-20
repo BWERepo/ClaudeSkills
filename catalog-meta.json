@@ -353,5 +353,10 @@
     "purpose": "SEO Landing Page Generator: keyword intake, intent grouping, new-page-versus-improve-existing decision, quality gate and administrator approval for landing pages.",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
+  },
+  "BWESEOSync": {
+    "purpose": "One command to refresh the bwe-skills plugin and update the current website's BWESEO engine (restart required if the plugin changed).",
+    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); claude CLI; Node",
+    "projects": "website projects with BWESEO installed"
   }
 }

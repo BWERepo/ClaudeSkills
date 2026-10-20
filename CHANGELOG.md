@@ -1,4 +1,7 @@
 # Changelog
+## [2026.10.20.04] - 2026-10-20
+- Added skill BWESEOSync: refreshes the plugin, asks for a restart if it changed, then runs BWESEOInstallUpdate and BWESEOInstallVerify in the website.
+
 ## [2026.10.20.03] - 2026-10-20
 - Refreshed the bundled SEO engine to 2026.10.20.02 (version bump and documentation; no change to what websites receive).
 
