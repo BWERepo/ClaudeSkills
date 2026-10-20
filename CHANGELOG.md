@@ -1,4 +1,7 @@
 # Changelog
+## [2026.10.20.08] - 2026-10-20
+- BWESEOInstall, BWEFAQInstall and BWEBlogInstall now fetch the latest engine from GitHub on every run (BWERepo/SEOEngine, BWERepo/FAQEngine, BWERepo/BlogEngine) instead of using the engine bundled in this plugin. Their other steps are unchanged. The Update skills and the other skills still use the bundled engines.
+
 ## [2026.10.20.07] - 2026-10-20
 - BWESEOInstall now always runs the installer from the plugin's bundled engine (`--engine`), instead of the installer's own lookup, which could pick an older engine checkout recorded in `engine-location.json` and install that.
 

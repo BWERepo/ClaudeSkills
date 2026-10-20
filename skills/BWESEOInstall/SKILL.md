@@ -5,8 +5,8 @@ description: The standard way to install the reusable BWESEO engine into a new w
 
 # BWESEOInstall
 
-> `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
-> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`. No separate engine checkout is needed.
+> `$BWESEO_ENGINE` = a fresh checkout of the **latest** BWESEO engine from **https://github.com/BWERepo/SEOEngine** (default branch), fetched on every run (see step 2). It is not the engine bundled in this plugin.
+> Engine code lives in `$BWESEO_ENGINE/src`, methodology in `$BWESEO_ENGINE/docs/methodology`, schemas in `$BWESEO_ENGINE/schemas`, adapters in `$BWESEO_ENGINE/adapters`.
 
 ```
 NEW WEBSITE → /BWESEOInstall → clean BWESEO engine → /BWESEOSetup → customer profile → /BWESEO → state-aware SEO workflow
@@ -21,7 +21,7 @@ ever flows back into the canonical engine, and this skill never edits the canoni
 
 ## The canonical engine
 
-The versioned engine directory bundled in this plugin (`engines/seo`, see `$BWESEO_ENGINE` above) with an `engine-manifest.json`:
+The versioned engine directory fetched from the SEOEngine repository (see `$BWESEO_ENGINE` above) with an `engine-manifest.json`:
 `engineVersion`, `schemaVersion`, `manifestVersion` — **never** a website's version number. Layout:
 `src/` (engine code, installed to `seo/tools/`), `schemas/` (installed to `seo/schema/`), `installer/`, `skills/`
 (canonical skill sources), `templates/`, `adapters/`, `docs/` (methodology, industry guides), `tests/`, `scripts/`,
@@ -59,8 +59,9 @@ preview). Extra flags: `--allow-subdir` (only if the subfolder really is the web
 2. **First customer installation → dry run first.** If this project has no `seo/bweseo-install.json` and is
    the first external/customer installation (or the user has not seen a dry run for this project in this
    conversation), run `--dry-run`, show the plan **verbatim**, and ask for approval before the real install.
-   **Always use the bundled engine.** Run every installer command as
-   `node "$BWESEO_ENGINE/installer/bweseo-install.mjs" <flags> --engine "$BWESEO_ENGINE"` (resolve `$BWESEO_ENGINE` to an absolute path first).
+   **Always use the freshly fetched engine.** First **Fetch the latest engine (every run, before anything else).** Always the latest default branch of **https://github.com/BWERepo/SEOEngine**, never a bundled or previously downloaded copy. Clone it (`git clone --depth 1`) into a fresh, empty directory **outside the website project** and use that directory as `$BWESEO_ENGINE` (in a Claude cloud session, first add the repo with `add_repo` for `BWERepo/SEOEngine`; allow a generous timeout; never run two clones at once). Check it contains `engine-manifest.json`, `VERSION` and `installer/bweseo-install.mjs`. Report the engine version and commit (`git -C "$BWESEO_ENGINE" log -1 --format='%h %cd %s'`). If the clone fails or the check fails, STOP; do not fall back to another copy. The checkout is read-only input: never edit it, commit or push from it, or write its path into the website repository.
+   Run every installer command as
+   `node "$BWESEO_ENGINE/installer/bweseo-install.mjs" <flags> --engine "$BWESEO_ENGINE"` (an absolute path).
    Never rely on the installer's own lookup (`BWESEO_ENGINE_HOME`, `BWESEO_ENGINE`, or `~/.claude/bweseo/engine-location.json`): it can point at an
    older engine checkout on this machine and would install that instead. Before an update or verify, print the engine version being used
    (`$BWESEO_ENGINE/VERSION`) and the receipt version, and stop if they are not what you expect.
