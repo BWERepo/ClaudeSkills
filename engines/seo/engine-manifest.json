@@ -31,30 +31,6 @@
   ],
   "files": [
     {
-      "path": ".claude/skills/BWESEOAll/SKILL.md",
-      "class": "DEV",
-      "install": null,
-      "sha256": "3daaaf5fe9bd33b4c7d2645dd86a1dcb72ae13715900e9c1861fc8b103c5a222"
-    },
-    {
-      "path": ".claude/skills/BWESEOBegin/SKILL.md",
-      "class": "DEV",
-      "install": null,
-      "sha256": "b770e4e54568cfbcaf39523795e3e5933cff7117fcc856028ee78a3b3fc800a8"
-    },
-    {
-      "path": ".claude/skills/BWESEOCheckpoint/SKILL.md",
-      "class": "DEV",
-      "install": null,
-      "sha256": "8e7491dd5aab7a87c13521b952199382a65c77c55990b084cf1a51ce4abb17a0"
-    },
-    {
-      "path": ".claude/skills/BWESEOEnd/SKILL.md",
-      "class": "DEV",
-      "install": null,
-      "sha256": "5408090a5412add7a95cc4662f4d137801823c549391988955bcffd2c3e18106"
-    },
-    {
       "path": ".gitattributes",
       "class": "ENGINE",
       "install": null,
@@ -82,13 +58,7 @@
       "path": "BWESEO-SKILLS-AND-PROCEDURES.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "1857d4b2d0d01fe058a76e81f09a0a90468fc0cb7804c23af7ca7dbf7b26ece2"
-    },
-    {
-      "path": "CLAUDE.md",
-      "class": "DEV",
-      "install": null,
-      "sha256": "f07b01ec594117335888f07042684325ff31c5846f928b29d182fe428c313293"
+      "sha256": "b2d8f380b732537b37c62eb9c3dc357a8f267af3bf0a5454ffb062a73a097b92"
     },
     {
       "path": "PROJECT_STATUS.md",
@@ -190,7 +160,7 @@
       "path": "docs/OPERATING-GUIDE.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "17a0843a28b1800cf1e65212d036341d37b296d24b5ec463d5c41a48a4d37011"
+      "sha256": "6501f13d51983dbce688139690d2234e6a33ee449f19def8ac7828a367182326"
     },
     {
       "path": "docs/industries/_template.md",
