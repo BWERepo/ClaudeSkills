@@ -1,6 +1,5 @@
-# Publishes the user manual (BWESEO-SKILLS-AND-PROCEDURES.md) as a web page on GitHub Pages, and shows it on the run page.
-# Runs on every push to main, and from a "Run workflow" button in the Actions tab.
-# One-time setup: Settings > Pages > Source = "GitHub Actions".
+# Shows the user manual (BWESEO-SKILLS-AND-PROCEDURES.md) on the run page and attaches it as a downloadable HTML run artifact.
+# Runs on every push to main, and from a "Run workflow" button in the Actions tab. Needs no GitHub Pages (works in private repositories).
 name: Show user manual
 
 on:
@@ -13,11 +12,9 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: show-manual
   cancel-in-progress: true
 
 jobs:
@@ -47,17 +44,8 @@ jobs:
             echo '</body></html>'
           } > site/index.html
           rm site/body.html
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload the manual as a downloadable artifact
+        uses: actions/upload-artifact@v4
         with:
-          path: site
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          name: bwe-seo-user-manual
+          path: site/index.html

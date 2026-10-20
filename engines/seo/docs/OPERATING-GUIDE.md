@@ -17,7 +17,7 @@ npm run guide -- --list          # the section headings
 On GitHub, without a checkout: open the repository's **Actions** tab, choose **Show operating guide**, press **Run workflow**
 (optionally type a section number or word), then open the finished run. The guide is shown on the run's summary page.
 
-To read the user manual as a web page: the **Show user manual** workflow publishes it to GitHub Pages on every push to `main` (or press **Run workflow**); it needs Settings > Pages > Source set to "GitHub Actions" once. The page shows times in your browser's local time.
+To read the user manual as a web page: the **Show user manual** workflow shows it on the run page and attaches it as a downloadable HTML artifact (`bwe-seo-user-manual`) on every push to `main` (or press **Run workflow**); open the run in the Actions tab. It needs no GitHub Pages, so it works in a private repository.
 
 Contents
 
@@ -149,12 +149,14 @@ All of these run from the website root and **read** the project's data. Commands
 | Google index monitoring snapshot | `node seo/tools/seo-google-index.mjs pull` · `status` · `investigate` · `explain <path>` | `/BWESEOSearchConsole index …` |
 | Keyword → page registry and keyword performance | `node seo/tools/seo-keywords.mjs validate` · `list` · `status` · `analyze "<keyword>"` · `table` · `page <path>` · `investigate` | `/BWESEO keyword <phrase>` |
 | Google Business Profile builder (manual mode): eligibility, duplicate check, draft, schema, website audit, approval, verification | `node seo/tools/seo-local-gbp.mjs status` · `questions` · `eligibility --answers a.json --by "<name>"` · `discover --method "<where>" --by "<name>"` · `draft --init` · `check` · `schema` · `audit --html page.html` · `approve --by "<name>"` · `created --by "<name>"` · `verification --status pending-owner-action --by "<name>"` · `recommend` · `queue --sync` · `reviews --unanswered` · `review-request` · `posts --suggest` · `performance` | `/BWESEOLocal gbp` |
+| Landing pages: import keywords, plan new-vs-improve, run the quality gate, approve | `node seo/tools/seo-landing.mjs import <csv>` · `add "<keyword>"` · `plan --pages site-pages.json` · `status` · `check <id> --page page.json` · `approve <id> --by "<name>"` · `move <id> --to <status>` | `/BWESEOLanding` |
 | Run the page checks on a saved page (og:url vs canonical, social image size, visible H1, shared navigation) | `node seo/tools/seo-page-checks.mjs --html page.html --url <url>` (add `--home home.html`, `--public-dir public`) | — |
 | Whole-site indexing-readiness checks on production (http/www redirects, robots.txt per host, sitemap sweep, redirect codes, blocked + noindex pages, key-page links, image weight, demo hosts) | `node seo/tools/seo-site-checks.mjs` (add `--demo-host <host>`, `--key-page </path>`, `--max-pages <n>`, `--json`) | `/BWESEOTechnical` |
 | Record this run's live-site health | `node seo/tools/seo-state.mjs --record-health` (writes `seo/data/live-health.json` only) | — |
 
 Commands that **change** files or call Google:
 - `seo-local-gbp.mjs eligibility` / `discover` / `draft` / `approve` / `created` / `verification` / `recommend` / `reviews` / `posts` / `performance` write only `seo/data/local-gbp/`; `queue --sync` also adds `gbp-…` entries to `seo/content-inventory.json` (running it is your approval); none calls Google or changes the website, and creating or verifying a profile is the owner's own action in Google's interface.
+- `seo-landing.mjs` writes only `seo/data/landing/`; it never publishes, and `approve` records approval of the exact draft content only.
 - `seo-keywords.mjs add` / `remove` edit `seo/content-inventory.json`; running them is your approval.
 - `seo-keywords.mjs refresh` and `seo-google.mjs sitemap --submit` call Google's official Search Console API and need the credential
   named in `seo-config.json` to be set in the environment.
@@ -186,7 +188,7 @@ backed up, validated, and rolled back if it fails.
 
 The four maintenance skills are shortcuts for the steps below. Each step is shown with its manual equivalent.
 
-### Start of a session (`BWESEOBegin` routine)
+### Start of a session (`/BWESEOBegin`)
 
 ```
 cd SEOEngine
@@ -208,7 +210,7 @@ git log --oneline -5
 6. If the change affects anything a person runs or follows (a command, subcommand or flag, a script, a skill, a file people edit,
    the maintenance workflow or the release steps), **update this guide in the same change**. See "Keeping this guide current" below.
 
-### Rebuild and validate (`BWESEOCheckpoint` routine), always in this order
+### Rebuild and validate (`/BWESEOCheckpoint`), always in this order
 
 ```
 node scripts/build-manual.mjs                       # regenerates BWESEO-SKILLS-AND-PROCEDURES.md
@@ -242,21 +244,22 @@ git push -u origin <branch>
 
 Then open a pull request on GitHub and merge it once it is reviewed. Never rewrite history or force-push without the owner's say-so.
 
-### End of a session (`BWESEOEnd` routine)
+### End of a session (`/BWESEOEnd`)
 
 Update `PROJECT_STATUS.md`: add a dated section at the top of the session log (what changed, the engine version, decisions made),
 and keep **Known follow-ups** to items that are still open. Write no customer names and no machine paths. Then rebuild the manifest,
-validate, commit and push as above. (`BWESEOAll` routine is the checkpoint followed by this step.)
+validate, commit and push as above. (`/BWESEOAll` is the checkpoint followed by this step.)
 
 ### Releasing a new version
 
-Only when the owner names a version, change these three together. Versions are `yyyy.mm.dd.nn`: the release date plus a two-digit
+Only when the owner names a version (or runs `/BWESEORelease`, which does all of this and then prepares the ClaudeSkills plugin update), change these together. Versions are `yyyy.mm.dd.nn`: the release date plus a two-digit
 sequence for that day, starting at `01` and counting up for each further release the same day (for example `2026.10.19.01`, then
 `2026.10.19.02`):
 
 - `VERSION`
 - `"version"` in `package.json`
 - `ENGINE_VERSION` in `src/validate-seo-data.mjs`
+- `STATE_VERSION` in `src/seo-state-core.mjs`, `"version"` in `templates/seo-config.template.json` and the top entries of `package-lock.json`
 
 Add a line for the release at the top of `docs/ENGINE.md`. Bump the schema version (`SCHEMA_VERSION` in the same file) only when the
 shape of a project's data file changes, and add a migration in `installer/migrations/` when you do. Then rebuild and validate.

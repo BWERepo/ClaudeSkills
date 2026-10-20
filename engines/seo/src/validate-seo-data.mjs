@@ -16,7 +16,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, resolve, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-export const ENGINE_VERSION = "2026.10.19.01";
+export const ENGINE_VERSION = "2026.10.20.01";
 // The version of the data files' shape (seo-config.json → schemaVersion). Separate from the engine version:
 // the engine changes often; the schema changes only when stored data needs migrating.
 export const SCHEMA_VERSION = 1;

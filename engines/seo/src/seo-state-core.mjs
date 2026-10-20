@@ -13,7 +13,7 @@
 // are documented in docs/methodology/workflow-state.md.
 
 // Kept in step with ENGINE_VERSION in validate-seo-data.mjs (a test checks it).
-export const STATE_VERSION = "2026.10.19.01";
+export const STATE_VERSION = "2026.10.20.01";
 
 // Status of one lifecycle step, for the project or for one page.
 export const S = {

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SEO Page Opportunities</title>
+<style>
+:root{--bg:#f6f7f9;--fg:#15181d;--mut:#5a6270;--card:#fff;--line:#dfe3ea;--acc:#1f5eff;--ok:#0a7a3d;--bad:#b3261e}
+@media(prefers-color-scheme:dark){:root{--bg:#101318;--fg:#eceff4;--mut:#9aa3b2;--card:#181c23;--line:#2a303a;--acc:#7aa2ff;--ok:#4cc38a;--bad:#ff8a80}}
+body{margin:0;font:16px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+main{max-width:1100px;margin:0 auto;padding:16px}h1{font-size:1.5rem}
+label.f{display:inline-block;padding:10px 14px;border:1px solid var(--acc);border-radius:8px;color:var(--acc);cursor:pointer}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;background:var(--card)}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}
+th{color:var(--mut);font-weight:600}.pill{padding:2px 8px;border-radius:99px;border:1px solid var(--line);font-size:.8rem}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.mut{color:var(--mut)}
+</style></head><body><main>
+<h1>SEO Page Opportunities</h1>
+<p class="mut">Open <code>seo/data/landing/state.json</code>. Nothing here publishes a page; publishing needs an approval recorded by <code>seo-landing.mjs approve</code>.</p>
+<label class="f">Choose state.json<input id="file" type="file" accept="application/json" hidden></label>
+<div class="wrap"><table id="t" aria-label="Page opportunities"><thead><tr>
+<th>Target keyword</th><th>Secondary keywords</th><th>Search intent</th><th>Opportunity</th><th>Action</th><th>Proposed URL</th><th>Quality checks</th><th>Status</th><th>Search performance</th>
+</tr></thead><tbody></tbody></table></div>
+<script>
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+document.getElementById("file").addEventListener("change",async e=>{
+  const f=e.target.files[0]; if(!f) return;
+  let s; try{ s=JSON.parse(await f.text()); }catch{ alert("Not a valid state.json"); return; }
+  const rows=(s.opportunities||[]).map(o=>{
+    const c=o.checks, perf=o.performance&&typeof o.performance==="object"?`${o.performance.impressions??"unavailable"} impr · ${o.performance.clicks??"unavailable"} clicks · CTR ${o.performance.ctr??"unavailable"} · pos ${o.performance.position??"unavailable"}`:"unavailable";
+    return `<tr><td>${esc(o.primary)}</td><td>${esc((o.secondary||[]).join(", "))||"—"}</td><td>${esc(o.intent)}</td><td>${esc(o.reason)}<br><span class="mut">${esc(o.score?.priority)} · competition ${esc(o.score?.competition?.value)} · volume ${esc(o.score?.volume)}</span></td><td>${esc(o.action)}</td><td>${esc(o.target)}</td><td>${c?(c.ok?'<span class="ok">pass</span>':'<span class="bad">'+c.errors+' error(s)</span>')+` · ${c.warnings} warning(s)`:'<span class="mut">not run</span>'}</td><td><span class="pill">${esc(o.status)}</span>${o.approval?`<br><span class="mut">approved by ${esc(o.approval.by)} ${esc(o.approval.on)}</span>`:""}</td><td>${esc(perf)}</td></tr>`;});
+  document.querySelector("#t tbody").innerHTML=rows.join("")||'<tr><td colspan="9">No opportunities yet. Run the plan command.</td></tr>';
+});
+</script></main></body></html>

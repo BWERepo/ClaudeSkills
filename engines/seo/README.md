@@ -127,7 +127,7 @@ node scripts/build-manual.mjs     regenerate the manual   (--check to verify)
 node scripts/validate-canonical.mjs --run-tests
 ```
 
-The engine's own maintenance skills (`/BWESEOBegin`, `/BWESEOCheckpoint`, `/BWESEOEnd`, `/BWESEOAll`) are repository-local:
+The engine's own maintenance skills (`/BWESEOBegin`, `/BWESEOCheckpoint`, `/BWESEOEnd`, `/BWESEOAll`, `/BWESEORelease`) are repository-local:
 they live in `.claude/skills/` in this repository and load automatically when Claude Code is opened here.
 
 Workflow: change the engine here → tests → security/leakage scan → version → manifest → disposable installation test →

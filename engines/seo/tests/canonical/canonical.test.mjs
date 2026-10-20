@@ -105,7 +105,7 @@ describe("canonical engine — skills have a canonical source", () => {
   it("the engine's own maintenance skills are repository-local, portable and well-formed", () => {
     const dir = join(ROOT, ".claude", "skills");
     const names = readdirSync(dir).sort();
-    expect(names).toEqual(["BWESEOAll", "BWESEOBegin", "BWESEOCheckpoint", "BWESEOEnd"]);
+    expect(names).toEqual(["BWESEOAll", "BWESEOBegin", "BWESEOCheckpoint", "BWESEOEnd", "BWESEORelease"]);
     for (const n of names) {
       const t = readFileSync(join(dir, n, "SKILL.md"), "utf8");
       expect(t, n).toMatch(new RegExp(`^---\\nname: ${n}\\ndescription: `));
