@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "engineId": "bweseo-engine",
-  "engineVersion": "2026.10.20.01",
+  "engineVersion": "2026.10.20.02",
   "schemaVersion": 1,
   "installer": "1.0.0",
   "requiredSkills": [
@@ -89,7 +89,7 @@
       "path": "BWESEO-SKILLS-AND-PROCEDURES.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "08582978d0a04d72aca86e763c427eaa256fe3353e3dd903e084b9b2d4c852df"
+      "sha256": "29c2d67bbcc8dd082888623004342274e5cc069fe2bac498d6fc181b473937db"
     },
     {
       "path": "CLAUDE.md",
@@ -101,7 +101,7 @@
       "path": "PROJECT_STATUS.md",
       "class": "DEV",
       "install": null,
-      "sha256": "d35cbf384c697a0b45e0f16980d7d65d5fa865c70d4c7cac3441077f11c17bca"
+      "sha256": "4ad68ba7b9e1ebfc0f378e4bcad259caf8f586d53652a196be0cfbeddaf6b4e8"
     },
     {
       "path": "README.md",
@@ -113,7 +113,7 @@
       "path": "VERSION",
       "class": "ENGINE",
       "install": null,
-      "sha256": "869c8ec93a0b304ac821458963ae27a93ea0bd2191678ca1793039cd48cbe69f"
+      "sha256": "46048487d6e9580eb7fc4691824619b95674e1afe7d4ae71746e1c06a87b2be9"
     },
     {
       "path": "adapters/_template.md",
@@ -185,7 +185,7 @@
       "path": "docs/ENGINE.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "a94e92df7347fae29d865e2fad39259c82f43a8ac5ff7f98d9aa2069846463bd"
+      "sha256": "2eb323bb528d5d6d6282d185df5d0424823540a5782fcdddc5eee19f6e439472"
     },
     {
       "path": "docs/GBP-IMPLEMENTATION-INVENTORY.md",
@@ -449,13 +449,13 @@
       "path": "package-lock.json",
       "class": "ENGINE",
       "install": null,
-      "sha256": "5e844dbf06dd10498b42192881c53e4304b65a8fe5c2d825f8c36687905b8808"
+      "sha256": "725892308115b180603c11ff5f4efe9890ea233de1d831ee6d49dd81c711f4c7"
     },
     {
       "path": "package.json",
       "class": "ENGINE",
       "install": null,
-      "sha256": "8051b5b6aa7d82b91885c24e3a44e0ca303f47bef1e2bbedaabe6d0037b37547"
+      "sha256": "8a2f2a089a70ff063a135c4b69b03cc3820f93c9bfb9c6864c75c1366d6c6732"
     },
     {
       "path": "schemas/business-profile.schema.json",
@@ -911,7 +911,7 @@
       "path": "src/seo-state-core.mjs",
       "class": "ENGINE",
       "install": "seo/tools/seo-state-core.mjs",
-      "sha256": "a6eff0bbdd242a16b675fb9a25fba1df4253de0a74c873c3e46502b5d1f4bb53"
+      "sha256": "e1788ba602839381b11bede79cf03ae91084e0f8031aa202522a6ba0ddf4789d"
     },
     {
       "path": "src/seo-state.d.mts",
@@ -935,7 +935,7 @@
       "path": "src/validate-seo-data.mjs",
       "class": "ENGINE",
       "install": "seo/tools/validate-seo-data.mjs",
-      "sha256": "74b4ae2205af495f4a804e2f71f39fcb19e6fff9b3efb64858b32b7bcba70088"
+      "sha256": "fdb59b811aff8caa19a02f94251dc59c6d9a16d9a6ad5142063c22229d0dfe42"
     },
     {
       "path": "templates/business-profile.template.json",
@@ -965,7 +965,7 @@
       "path": "templates/seo-config.template.json",
       "class": "TEMPLATE",
       "install": null,
-      "sha256": "da57998459a7fe608b0ac4f256bf183f165e43e82d0f808217281eb9404e84da"
+      "sha256": "0b4eb6b28197ac803cf147d69de6d73701c827bda4897f936377673f44d5a9ce"
     },
     {
       "path": "tests/canonical/canonical.test.mjs",

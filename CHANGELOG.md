@@ -1,4 +1,7 @@
 # Changelog
+## [2026.10.20.03] - 2026-10-20
+- Refreshed the bundled SEO engine to 2026.10.20.02 (version bump and documentation; no change to what websites receive).
+
 ## [2026.10.20.02] - 2026-10-20
 - Refreshed the bundled SEO engine to 2026.10.20.01 (from the SEOEngine repository). Adds the SEO Landing Page Generator: `seo-landing.mjs`, keyword intake, new-vs-improve planning, quality gate, approval workflow and a dashboard template.
 - Added skill BWESEOLanding. Websites keep their own installed engine copy; run BWESEOInstallUpdate in a website to take the new engine.
