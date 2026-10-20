@@ -3,7 +3,7 @@
 // tested by the co-located src/*.test.mjs files.) Fixtures are fictional and use reserved .test domains.
 
 import { describe, expect, it } from "vitest";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -63,6 +63,25 @@ describe("canonical engine — manifest is an allowlist", () => {
     expect(I.validateManifest(dir, m).errors.join("\n")).toMatch(/src\/seo-state\.mjs.*does not match its recorded hash/);
     writeFileSync(join(dir, "src", "extra.mjs"), "// unlisted\n");
     expect(I.validateManifest(dir, m).unclassified).toContain("src/extra.mjs");
+  });
+});
+
+describe("canonical engine — bundled copies", () => {
+  it("accepts a copy without DEV files (CLAUDE.md, maintenance skills) but not one missing an ENGINE file", () => {
+    const dir = mkdtempSync(join(tmpdir(), "bweseo-bundle-"));
+    for (const f of walk(ROOT).filter((x) => !x.startsWith("docs/refactor/") && !x.startsWith("tests/") && x !== "CLAUDE.md" && !x.startsWith(".claude/"))) {
+      mkdirSync(dirname(join(dir, f)), { recursive: true });
+      writeFileSync(join(dir, f), readFileSync(join(ROOT, f)));
+    }
+    const m = JSON.parse(readFileSync(join(dir, "engine-manifest.json"), "utf8"));
+    m.files = m.files.filter((f) => !f.path.startsWith("docs/refactor/") && !f.path.startsWith("tests/"));
+    expect(m.files.some((f) => f.path === "CLAUDE.md")).toBe(true);
+    expect(I.validateManifest(dir, m).errors).toEqual([]);
+    writeFileSync(join(dir, "CLAUDE.md"), "// tampered but present\n");
+    expect(I.validateManifest(dir, m).errors.join("\n")).toMatch(/CLAUDE\.md.*does not match its recorded hash/);
+    unlinkSync(join(dir, "CLAUDE.md"));
+    unlinkSync(join(dir, "src", "seo-state.mjs"));
+    expect(I.validateManifest(dir, m).errors.join("\n")).toMatch(/src\/seo-state\.mjs.*listed but missing/);
   });
 });
 

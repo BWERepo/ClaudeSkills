@@ -1,4 +1,7 @@
 # Changelog
+## [2026.10.20.06] - 2026-10-20
+- Refreshed the bundled SEO engine to 2026.10.20.03. Fixes updating a website from this bundled copy: the installer's manifest check no longer fails on the engine's own development files (CLAUDE.md, maintenance skills), which are intentionally not bundled.
+
 ## [2026.10.20.05] - 2026-10-20
 - BWESEOInstall now refreshes the bwe-skills plugin first (and asks for a restart if the plugin changed), then installs or updates the website engine. It replaces BWESEOSync, which is removed (released earlier today as 2026.10.20.04).
 
