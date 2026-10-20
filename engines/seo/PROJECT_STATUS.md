@@ -31,7 +31,7 @@ of these four (see `docs/CLOUD-SETUP.md` §4). Not in this repository: the insta
 Gotcha: `skills/*/SKILL.md` must use **LF** line endings and start with `---\nname:\ndescription:\n---` (a canonical
 test checks it). Editing with tools that write CRLF on Windows breaks that test; convert with `sed -i 's/\r$//'`.
 
-## Last updated: 2026-10-20 (engine 2026.10.20.01)
+## Last updated: 2026-10-20 (engine 2026.10.20.02)
 
 ### Session 2026-10-20 — SEO Landing Page Generator (released as 2026.10.20.01 as approved)
 - New: `src/landing-keywords.mjs` (CSV intake, intent grouping, unavailable-metrics model), `landing-opportunities.mjs` (new-vs-improve decision,
@@ -41,6 +41,7 @@ test checks it). Editing with tools that write CRLF on Windows breaks that test;
   are "improve existing", not new pages. Customer-specific proposals live outside this repo (customer-neutral rule).
 - Not built: Search Console wiring of `performance` into landing state, before/after diff view, live SERP research (needs search access).
 - Validation READY, 716/716 tests.
+- Later the same day: added the repo-local `/BWESEORelease` skill (PR #21) and released 2026.10.20.02; ClaudeSkills plugin PR #12 bundled 2026.10.20.01.
 
 ## Previous: 2026-10-10
 

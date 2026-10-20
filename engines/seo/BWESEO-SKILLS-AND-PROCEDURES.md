@@ -1,6 +1,6 @@
 # BWESEO Skills and Procedures
 
-Engine Version: 2026.10.20.01
+Engine Version: 2026.10.20.02
 Schema Version: 1
 Last Updated: 2026-10-03
 
