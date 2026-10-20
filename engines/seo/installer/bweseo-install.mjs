@@ -204,7 +204,7 @@ export function validateManifest(engineDir, manifest) {
   if (!manifest || typeof manifest !== "object") return { errors: ["manifest is not an object"], warnings, unclassified: [] };
   if (manifest.manifestVersion !== 1) errors.push("manifestVersion must be 1");
   if (!isStr(manifest.engineId)) errors.push("engineId is required");
-  if (!/^\d+\.\d+\.\d+$/.test(manifest.engineVersion ?? "")) errors.push("engineVersion must be semver (x.y.z)");
+  if (!/^(\d{4}\.\d{2}\.\d{2}\.\d{2}|\d+\.\d+\.\d+)$/.test(manifest.engineVersion ?? "")) errors.push("engineVersion must be yyyy.mm.dd.nn (date plus a two-digit daily sequence); the older x.y.z form is still read");
   if (!Number.isInteger(manifest.schemaVersion) || manifest.schemaVersion < 1) errors.push("schemaVersion must be an integer >= 1");
   if (!Array.isArray(manifest.files) || !manifest.files.length) errors.push("files must be a non-empty array");
   const files = Array.isArray(manifest.files) ? manifest.files : [];
@@ -904,7 +904,7 @@ export function verifyInstall({ projectDir, engineDir = null, registryPath = def
     const cmp = (a, b) => {
       const x = a.split(".").map(Number);
       const y = b.split(".").map(Number);
-      for (let i = 0; i < 3; i++) if ((x[i] ?? 0) !== (y[i] ?? 0)) return (x[i] ?? 0) - (y[i] ?? 0);
+      for (let i = 0; i < 4; i++) if ((x[i] ?? 0) !== (y[i] ?? 0)) return (x[i] ?? 0) - (y[i] ?? 0);
       return 0;
     };
     r.updateAvailable = cmp(manifest.engineVersion, receipt.engineVersion) > 0 ? `yes — ${receipt.engineVersion} → ${manifest.engineVersion}` : "no";

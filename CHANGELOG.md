@@ -1,4 +1,9 @@
 # Changelog
+## [0.5.1] - 2026-10-20
+- Refreshed the bundled SEO engine (now 2026.10.19.01, adds `seo-site-checks`) and Blog engine (2026.10.19.01) from their source repositories; the FAQ engine was already current.
+- BWESEOLocal (adds Google Business Profile mode) and BWESEOTechnical (adds production site checks) now follow the SEOEngine versions, with the bundled-engine path wording.
+- Compared the skills of BWE, HDBS, OneClickAnswers, SEOEngine, FAQEngine and BlogEngine with the catalog: BWE and HDBS carry the same set as OneClickAnswers. The 23 skills not in the catalog are project-specific (OneClickAnswers deploy/release/queue, repo maintenance) and were not imported.
+
 ## [0.5.0] - 2026-10-10
 - Skills are now self-contained. The SEO, FAQ and Blog engines are bundled under `engines/seo`, `engines/faq` and `engines/blog` (copied from the engine repositories at SEO 1.10.0, FAQ and Blog 1.0.0, without git history, tests of the host repos or their CLAUDE.md files). Skills locate them relative to the skill's base directory (`../../engines/<name>`); `BWESEO_ENGINE_HOME`, `BWEFAQ_ENGINE_HOME`, `BLOG_ENGINE_HOME` and `engine-location.json` are no longer used.
 - BWEBlog now runs the engine from the website's own `.bwe-engine/` copy. Added BWEBlogInstall, BWEBlogUpdate, BWEBlogSetup, BWEBlogGenerate, BWEBlogReview, BWEBlogPublish (written for this catalog from the engine's real commands; none existed before).

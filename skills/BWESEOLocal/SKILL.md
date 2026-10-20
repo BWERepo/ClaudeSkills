@@ -1,6 +1,6 @@
 ---
 name: BWESEOLocal
-description: Local SEO analysis for the current website project using the BWESEO engine — NAP consistency, address type (storefront vs service-area vs mailing), service-area honesty, location pages (keep/improve/merge/retire, doorway-page risk), and Google Business Profile actions for the owner. Only for location-dependent businesses. Use when the user says "local SEO", "location pages", "Google Business Profile", or invokes /BWESEOLocal, in any website project.
+description: Local SEO analysis for the current website project using the BWESEO engine — NAP consistency, address type (storefront vs service-area vs mailing), service-area honesty, location pages (keep/improve/merge/retire, doorway-page risk), and Google Business Profile builder (eligibility, duplicate check, draft, verification help) in manual mode. Only for location-dependent businesses. Use when the user says "local SEO", "location pages", "Google Business Profile", or invokes /BWESEOLocal, in any website project.
 ---
 
 > `$BWESEO_ENGINE` = the BWESEO engine bundled in this plugin: `../../engines/seo`, relative to this skill's base directory (printed when the skill loads; resolve it to an absolute path first).
@@ -23,3 +23,17 @@ description: Local SEO analysis for the current website project using the BWESEO
 6. Record state (`docs/methodology/workflow-state.md`): add new findings to the inventory's `issues[]` (see `/BWESEOAudit` step 4);
    when a fix is made set `status: "fixed"` + `fixedOn`, and `"verified"` + `verifiedOn` once
    production shows it.
+
+## GBP mode — `/BWESEOLocal gbp`
+Manual mode, no Google access needed. Follow `$BWESEO_ENGINE/docs/methodology/google-business-profile.md` and drive
+`node seo/tools/seo-local-gbp.mjs` (`status`, `questions`, `eligibility`, `discover`, `draft`, `check`, `schema`, `audit`, `approve`, `created`, `verification`, `recommend`, `queue`, `reviews`, `review-request`, `posts`, `performance`).
+- Recommendations go into the shared improvement queue with `queue --sync`; reviews, posts and performance figures are manual imports,
+  labelled as such. Replies and posts need a named approver and are posted by the owner, never by the engine. Review requests are
+  neutral (no rewards, no gating). Never invent figures, rankings or reviews.
+- Ask the eligibility questions of the administrator; never infer them from marketing copy. Online-only, PO box or virtual-office businesses
+  get website-SEO alternatives, never a profile.
+- Search for existing profiles first (official Google interface only; no scraping). Resolve every likely duplicate before creation.
+- Build the draft only from verified facts; never invent services, categories, hours, photos or credentials.
+- Show **USER INPUT NEEDED** wherever the owner must act in Google's interface. Record manual steps as owner-reported; never say Google
+  verified or published anything, and never promise a verification method.
+- API features (OAuth, sync, reviews, posts, performance) are not available until Google grants API access; say so.

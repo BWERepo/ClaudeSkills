@@ -150,6 +150,7 @@ All of these run from the website root and **read** the project's data. Commands
 | Keyword → page registry and keyword performance | `node seo/tools/seo-keywords.mjs validate` · `list` · `status` · `analyze "<keyword>"` · `table` · `page <path>` · `investigate` | `/BWESEO keyword <phrase>` |
 | Google Business Profile builder (manual mode): eligibility, duplicate check, draft, schema, website audit, approval, verification | `node seo/tools/seo-local-gbp.mjs status` · `questions` · `eligibility --answers a.json --by "<name>"` · `discover --method "<where>" --by "<name>"` · `draft --init` · `check` · `schema` · `audit --html page.html` · `approve --by "<name>"` · `created --by "<name>"` · `verification --status pending-owner-action --by "<name>"` · `recommend` · `queue --sync` · `reviews --unanswered` · `review-request` · `posts --suggest` · `performance` | `/BWESEOLocal gbp` |
 | Run the page checks on a saved page (og:url vs canonical, social image size, visible H1, shared navigation) | `node seo/tools/seo-page-checks.mjs --html page.html --url <url>` (add `--home home.html`, `--public-dir public`) | — |
+| Whole-site indexing-readiness checks on production (http/www redirects, robots.txt per host, sitemap sweep, redirect codes, blocked + noindex pages, key-page links, image weight, demo hosts) | `node seo/tools/seo-site-checks.mjs` (add `--demo-host <host>`, `--key-page </path>`, `--max-pages <n>`, `--json`) | `/BWESEOTechnical` |
 | Record this run's live-site health | `node seo/tools/seo-state.mjs --record-health` (writes `seo/data/live-health.json` only) | — |
 
 Commands that **change** files or call Google:
@@ -249,7 +250,9 @@ validate, commit and push as above. (`/BWESEOAll` is the checkpoint followed by 
 
 ### Releasing a new version
 
-Only when the owner names a version number, change these three together:
+Only when the owner names a version, change these three together. Versions are `yyyy.mm.dd.nn`: the release date plus a two-digit
+sequence for that day, starting at `01` and counting up for each further release the same day (for example `2026.10.19.01`, then
+`2026.10.19.02`):
 
 - `VERSION`
 - `"version"` in `package.json`

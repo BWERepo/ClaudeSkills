@@ -253,7 +253,8 @@ describe("the engine stays generic (usable on any website)", () => {
   it("no engine file hard-codes a website, a property or an id: only Google, standards and reserved example hosts appear", () => {
     const files = ["gsc-client.mjs", "index-monitor.mjs", "index-monitor-run.mjs", "seo-google-index.mjs", "../docs/methodology/google-index-monitoring.md"];
     const allowed = /(^|\.)(googleapis\.com|google\.com|example\.com|example\.org|schema\.org|sitemaps\.org|w3\.org|invalid|invalid.example|cloudflare\.com|github\.com)$/i;
-    for (const f of files) {
+    // The methodology doc stays in the engine; an installed website has only the code files.
+    for (const f of files.filter((f) => !f.startsWith("../") || existsSync(new URL(`./${f}`, import.meta.url)))) {
       const text = readFileSync(new URL(`./${f}`, import.meta.url), "utf8");
       for (const m of text.matchAll(/https?:\/\/([a-z0-9.-]+)/gi)) expect(m[1], `${f}: ${m[0]}`).toMatch(allowed);
       expect(text, f).not.toMatch(/[0-9a-f]{32}/); // no namespace / account ids

@@ -8,7 +8,7 @@
     "rootFolderName": ""
   },
   "engine": {
-    "version": "1.10.0"
+    "version": "2026.10.19.01"
   },
   "adapter": "static-html",
   "stack": {

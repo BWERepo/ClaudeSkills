@@ -13,7 +13,7 @@
 // are documented in docs/methodology/workflow-state.md.
 
 // Kept in step with ENGINE_VERSION in validate-seo-data.mjs (a test checks it).
-export const STATE_VERSION = "1.10.0";
+export const STATE_VERSION = "2026.10.19.01";
 
 // Status of one lifecycle step, for the project or for one page.
 export const S = {
@@ -1304,7 +1304,7 @@ export function installOf(evInstall, config) {
 function cmpSemver(a, b) {
   const x = String(a).split(".").map(Number);
   const y = String(b).split(".").map(Number);
-  for (let i = 0; i < 3; i++) if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) - (y[i] || 0);
+  for (let i = 0; i < 4; i++) if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) - (y[i] || 0);
   return 0;
 }
 

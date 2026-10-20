@@ -313,7 +313,7 @@ a car club, a recipe blog, or anything else.
 
 ## Engine versioning
 
-`ENGINE_VERSION` (`src/version.ts`, currently `1.0.0`) is attached to every generated article
+`ENGINE_VERSION` (`src/version.ts`, currently `2026.10.19.01`, format `yyyy.mm.dd.nn` where `nn` is the same-day build counter) is attached to every generated article
 (`BlogArticle.engineVersion`) and to the Blog SEO Index and discovery file. `INDEX_SCHEMA_VERSION` and
 `DISCOVERY_SCHEMA_VERSION` version the document *shapes* independently of the engine's own release number,
 so a consumer can tell "newer engine, same index shape" apart from "the index shape itself changed."

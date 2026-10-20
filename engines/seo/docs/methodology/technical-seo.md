@@ -32,7 +32,17 @@ through the project's normal change + test + deploy workflow.
   (`findEnvironmentLeaks` in `tools/seo-state-core.mjs`).
 - 404s return status 404 (and get their own title + noindex). Maintenance screens return 503 +
   `Retry-After`, never 200.
-- Redirects: www↔apex and http→https are 301; trailing-slash normalization is consistent.
+- Redirects: www↔apex and http→https are 301 (or 308) and reach the canonical URL in ONE hop;
+  trailing-slash and uppercase variants of a page redirect permanently (a 307 tells Google to keep
+  both URLs). robots.txt on every production host is the canonical file or a redirect to it — a CDN
+  can answer robots.txt on a second host before the site's own redirect runs, and can prepend its
+  own "managed" rules; both are findings to show the owner.
+- Whole-site sweep: `node seo/tools/seo-site-checks.mjs` checks all of the redirect and robots
+  rules above plus every sitemap URL (200, no redirect, indexable, self-canonical, real past
+  `lastmod`), linked pages that are both Disallowed and noindex, internal links to the key (P1)
+  pages, preloaded/oversized images and noindex on demo hosts. It is read-only, and a host it
+  cannot reach is "skip" — never evidence of an outage (a sandbox, firewall or a Worker fetching
+  its own zone can all fail where the public site is fine).
 - No duplicate routes serving the same content under two URLs without a canonical.
 
 **Rendering**

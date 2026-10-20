@@ -1,6 +1,6 @@
 # BWESEO Skills and Procedures
 
-Engine Version: 1.10.0
+Engine Version: 2026.10.19.01
 Schema Version: 1
 Last Updated: 2026-10-03
 
@@ -993,6 +993,13 @@ declared vs real social-image size, H1 visible in the server HTML (no `opacity:0
 every public sub-page, and dead `#anchors` in the navigation/footer. Each is ✓ pass, ✗ fail (reliably established), ? **REVIEW REQUIRED**
 (uncertain — a person looks) or – skip (not enough information; e.g. a remote image is never fetched).
 
+The site checks (`seo-site-checks.mjs`, run by `/BWESEOTechnical` on a whole-site run) look at production as a whole: every
+`http://` and second-host variant reaches the canonical HTTPS URL in one 301/308; robots.txt is the same (or a redirect) on every
+production host and has a Sitemap line, with CDN-managed rules flagged; every sitemap URL is 200, indexable, self-canonical and has
+a valid past `lastmod`; trailing-slash and uppercase variants redirect permanently; no linked page is blocked by robots.txt while
+it says noindex; the key (P1) pages have enough internal links; no preloaded image is over 100 KB (or any over 200 KB); and demo
+hosts on the domain say noindex where Google can read it. A host that can't be reached is a skip, never a failure.
+
 ## Local SEO Procedure
 
 `/BWESEOLocal` (only for location-dependent businesses) reviews: business identity, service areas, location claims,
@@ -1237,7 +1244,7 @@ An approval covers one action and never carries over to the next.
 | `src/` | Reusable engine code: the state machine (`seo-state-core.mjs`, `seo-state.mjs`), the post-publication checker, the Google/Search Console layer, the validator, type declarations, and the generic tests that ship with them. Installed into a project's `seo/tools/`. |
 | `templates/` | Blank, customer-neutral starter files (profile, config, inventory, docs shells). Never overwritten once a project has its own. |
 | `tests/` | The engine's own regression tests: canonical-package validation and installer behavior (isolation, dry run, verify, update, migration, preservation). |
-| `VERSION` | The engine's own semantic version — independent of any website's version. |
+| `VERSION` | The engine's own date-based version (yyyy.mm.dd.nn) — independent of any website's version. |
 | `vitest.config.mjs` | Test runner configuration. |
 
 Customer-specific data lives **only** in the customer's website project (`seo/`, `docs/seo/`): the business profile,

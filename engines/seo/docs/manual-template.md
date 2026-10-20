@@ -341,6 +341,13 @@ declared vs real social-image size, H1 visible in the server HTML (no `opacity:0
 every public sub-page, and dead `#anchors` in the navigation/footer. Each is ✓ pass, ✗ fail (reliably established), ? **REVIEW REQUIRED**
 (uncertain — a person looks) or – skip (not enough information; e.g. a remote image is never fetched).
 
+The site checks (`seo-site-checks.mjs`, run by `/BWESEOTechnical` on a whole-site run) look at production as a whole: every
+`http://` and second-host variant reaches the canonical HTTPS URL in one 301/308; robots.txt is the same (or a redirect) on every
+production host and has a Sitemap line, with CDN-managed rules flagged; every sitemap URL is 200, indexable, self-canonical and has
+a valid past `lastmod`; trailing-slash and uppercase variants redirect permanently; no linked page is blocked by robots.txt while
+it says noindex; the key (P1) pages have enough internal links; no preloaded image is over 100 KB (or any over 200 KB); and demo
+hosts on the domain say noindex where Google can read it. A host that can't be reached is a skip, never a failure.
+
 ## Local SEO Procedure
 
 `/BWESEOLocal` (only for location-dependent businesses) reviews: business identity, service areas, location claims,
