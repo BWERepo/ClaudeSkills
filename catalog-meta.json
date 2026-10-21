@@ -354,8 +354,8 @@
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWEList": {
-    "purpose": "List every skill in the catalog with a one-line description.",
+  "BWEListSkills": {
+    "purpose": "Print a nicely formatted list of every skill in the catalog with a one-line description.",
     "dependencies": "none",
     "projects": "all projects"
   }
