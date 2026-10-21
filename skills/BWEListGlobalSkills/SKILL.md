@@ -1,9 +1,9 @@
 ---
-name: BWEListSkills
-description: Prints a nicely formatted list of every skill in the bwe-skills catalog, grouped by area, each with its invocation name and a one-line description, plus the total and catalog version. Read-only. Use when the user says "list skills", "list the skills", "what skills are there", "show the skill catalog", or invokes /BWEListSkills, in any project.
+name: BWEListGlobalSkills
+description: Prints a nicely formatted list of every skill in the bwe-skills catalog, grouped by area, each with its invocation name and a one-line description, plus the total and catalog version. Read-only. Use when the user says "list skills", "list the skills", "what skills are there", "show the skill catalog", or invokes /BWEListGlobalSkills, in any project.
 ---
 
-# BWEListSkills
+# BWEListGlobalSkills
 
 Read-only. Changes nothing. Lists the skills of this plugin's catalog, not the skills of the current project (`/BWEListProjectSkills` does that).
 
