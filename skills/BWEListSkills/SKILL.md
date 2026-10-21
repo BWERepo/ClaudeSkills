@@ -5,7 +5,7 @@ description: Prints a nicely formatted list of every skill in the bwe-skills cat
 
 # BWEListSkills
 
-Read-only. Changes nothing. Lists the skills of this plugin's catalog, not the skills of the current project (`/BWESkills` does that).
+Read-only. Changes nothing. Lists the skills of this plugin's catalog, not the skills of the current project (`/BWEListProjectSkills` does that).
 
 ## Steps
 1. The plugin root is two folders above this skill's base directory (printed when the skill loads): `../../`. Read `SKILL-CATALOG.md` there and `.claude-plugin/plugin.json` for the version. If the catalog is missing, read `skills/*/SKILL.md` in the plugin root and take each `name:` and `description:` from the frontmatter.

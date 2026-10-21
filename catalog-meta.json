@@ -154,7 +154,7 @@
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESkills": {
+  "BWEListProjectSkills": {
     "purpose": "Lists every BWE skill installed in this project (BWEOCA*, BWEFAQ*, BWESEO*, BWEBlog, BWEDeploy*, BWEE2E*, BWEWorkQueue*, bweimpeccable, BWEE",
     "dependencies": "none",
     "projects": "all"

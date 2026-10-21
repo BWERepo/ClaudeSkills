@@ -1,5 +1,6 @@
 # Changelog
 ## [2026.10.21.01] - 2026-10-21
+- Renamed BWESkills to BWEListProjectSkills (it lists the BWE skills installed in the current project). Invoke as `/bwe-skills:BWEListProjectSkills`; the old name no longer exists in the plugin.
 - Added BWESEOVersion, BWEFAQVersion, BWEBlogVersion (engine version bundled in the plugin) and BWESEOInstalledVersion, BWEFAQInstalledVersion, BWEBlogInstalledVersion (engine version installed in the current website). All read-only.
 - Added BWEListSkills: a read-only skill that prints a formatted list of every skill in the catalog (grouped, one line each, with the total and version) from `SKILL-CATALOG.md`.
 

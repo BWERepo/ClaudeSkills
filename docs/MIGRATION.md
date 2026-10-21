@@ -18,3 +18,5 @@ Not copied (OneClickAnswers-specific): the BWEOCA*, BWEDeploy*, BWEE2E*, BWEWork
 ## Bundled engines (0.5.0)
 
 The SEO, FAQ and Blog engines live in `engines/`. To refresh one, copy the new engine source over `engines/<name>` (omit `.git`, `node_modules`, the engine repo's `CLAUDE.md`), bump the plugin version and re-run `scripts/validate.sh`. Websites keep their own installed copy; updating the plugin does not change a website until its Update skill is run.
+
+Renamed in 2026.10.21.01: BWESkills is now BWEListProjectSkills.
