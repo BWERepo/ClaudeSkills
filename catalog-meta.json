@@ -353,5 +353,10 @@
     "purpose": "SEO Landing Page Generator: keyword intake, intent grouping, new-page-versus-improve-existing decision, quality gate and administrator approval for landing pages.",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
+  },
+  "BWEList": {
+    "purpose": "List every skill in the catalog with a one-line description.",
+    "dependencies": "none",
+    "projects": "all projects"
   }
 }

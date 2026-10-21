@@ -1,4 +1,7 @@
 # Changelog
+## [2026.10.21.01] - 2026-10-21
+- Added BWEList: a read-only skill that lists every skill in the catalog (grouped, one line each, with the total) from `SKILL-CATALOG.md`.
+
 ## [2026.10.20.08] - 2026-10-20
 - BWESEOInstall, BWEFAQInstall and BWEBlogInstall now fetch the latest engine from GitHub on every run (BWERepo/SEOEngine, BWERepo/FAQEngine, BWERepo/BlogEngine) instead of using the engine bundled in this plugin. Their other steps are unchanged. The Update skills and the other skills still use the bundled engines.
 
