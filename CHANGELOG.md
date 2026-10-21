@@ -1,5 +1,6 @@
 # Changelog
 ## [2026.10.21.01] - 2026-10-21
+- Added BWESEOVersion, BWEFAQVersion, BWEBlogVersion (engine version bundled in the plugin) and BWESEOInstalledVersion, BWEFAQInstalledVersion, BWEBlogInstalledVersion (engine version installed in the current website). All read-only.
 - Added BWEListSkills: a read-only skill that prints a formatted list of every skill in the catalog (grouped, one line each, with the total and version) from `SKILL-CATALOG.md`.
 
 ## [2026.10.20.08] - 2026-10-20
