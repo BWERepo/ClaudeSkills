@@ -154,7 +154,7 @@
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESkills": {
+  "BWEListProjectSkills": {
     "purpose": "Lists every BWE skill installed in this project (BWEOCA*, BWEFAQ*, BWESEO*, BWEBlog, BWEDeploy*, BWEE2E*, BWEWorkQueue*, bweimpeccable, BWEE",
     "dependencies": "none",
     "projects": "all"
@@ -353,5 +353,40 @@
     "purpose": "SEO Landing Page Generator: keyword intake, intent grouping, new-page-versus-improve-existing decision, quality gate and administrator approval for landing pages.",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
+  },
+  "BWEListGlobalSkills": {
+    "purpose": "Print a nicely formatted list of every skill in the catalog with a one-line description.",
+    "dependencies": "none",
+    "projects": "all projects"
+  },
+  "BWESEOVersion": {
+    "purpose": "Show the SEO engine version bundled in the plugin.",
+    "dependencies": "none",
+    "projects": "all projects"
+  },
+  "BWESEOInstalledVersion": {
+    "purpose": "Show the SEO engine version installed in the current website.",
+    "dependencies": "SEO engine installed (/BWESEOInstall)",
+    "projects": "website projects with the engine installed"
+  },
+  "BWEFAQVersion": {
+    "purpose": "Show the FAQ engine version bundled in the plugin.",
+    "dependencies": "none",
+    "projects": "all projects"
+  },
+  "BWEFAQInstalledVersion": {
+    "purpose": "Show the FAQ engine version installed in the current website.",
+    "dependencies": "FAQ engine installed (/BWEFAQInstall)",
+    "projects": "website projects with the engine installed"
+  },
+  "BWEBlogVersion": {
+    "purpose": "Show the Blog engine version bundled in the plugin.",
+    "dependencies": "none",
+    "projects": "all projects"
+  },
+  "BWEBlogInstalledVersion": {
+    "purpose": "Show the Blog engine version installed in the current website.",
+    "dependencies": "Blog engine installed (/BWEBlogInstall)",
+    "projects": "website projects with the engine installed"
   }
 }

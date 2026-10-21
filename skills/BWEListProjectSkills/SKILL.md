@@ -1,9 +1,9 @@
 ---
-name: BWESkills
-description: Lists every BWE skill installed in this project (BWESEO*, BWEFAQ*, BWEBlog*, BWEImpeccable, BWEExport, BWEImport and any other BWE skill), grouped by area with a one-line explanation each. Use when the user says "list skills", "what BWE skills are there", "BWE skills", or invokes /BWESkills.
+name: BWEListProjectSkills
+description: Lists every BWE skill installed in this project (BWESEO*, BWEFAQ*, BWEBlog*, BWEImpeccable, BWEExport, BWEImport and any other BWE skill), grouped by area with a one-line explanation each. Use when the user says "list skills", "what BWE skills are there", "BWE skills", or invokes /BWEListProjectSkills.
 ---
 
-# BWESkills
+# BWEListProjectSkills
 
 Read-only. Builds the list from what is actually installed, never from a memorised list. Changes nothing.
 
@@ -19,7 +19,7 @@ Read-only. Builds the list from what is actually installed, never from a memoris
    - **FAQ** (BWEFAQ*), **Blog** (BWEBlog*)
    - **Design** (BWEImpeccable)
    - **Data** (BWEExport, BWEImport)
-   - **Other** BWE skills that fit nowhere above, and BWESkills itself
+   - **Other** BWE skills that fit nowhere above, and BWEListProjectSkills itself
 5. Print one table per group: `/Name` | one-line explanation. End with the total count.
 6. If no `.claude/skills/` folder exists, fall back to `docs/SKILLS.md` and say the list came from that file, which may lag the installed skills.
 7. If an installed skill has no description, show it with "(no description)" instead of guessing.
