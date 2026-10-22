@@ -1,0 +1,237 @@
+{
+  "_note": "Synthetic test fixture. Not Mobbin data.",
+  "project": "Fixture: local dental practice",
+  "weights": {
+    "visual": 20,
+    "relevance": 25,
+    "usability": 30,
+    "mobile": 15,
+    "distinct": 10
+  },
+  "required": [
+    "homepage",
+    "navigation",
+    "services",
+    "forms",
+    "mobile",
+    "conversion"
+  ],
+  "candidates": [
+    {
+      "id": "d01",
+      "app": "Fixture Wellness",
+      "source": "fixture",
+      "kind": "section",
+      "function": "homepage",
+      "pattern": "calm hero with booking CTA",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d01",
+      "image_url": "https://example.invalid/fixture/d01.png",
+      "scores": {
+        "visual": 8,
+        "relevance": 8,
+        "usability": 9,
+        "mobile": 8,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "d02",
+      "app": "Fixture Clinic",
+      "source": "fixture",
+      "kind": "section",
+      "function": "services",
+      "pattern": "service cards with prices",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d02",
+      "image_url": "https://example.invalid/fixture/d02.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 9,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 5
+      }
+    },
+    {
+      "id": "d03",
+      "app": "Fixture Fitness",
+      "source": "fixture",
+      "kind": "flow",
+      "function": "conversion",
+      "pattern": "class booking flow",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d03",
+      "image_url": "https://example.invalid/fixture/d03.png",
+      "scores": {
+        "visual": 8,
+        "relevance": 7,
+        "usability": 9,
+        "mobile": 8,
+        "distinct": 7
+      }
+    },
+    {
+      "id": "d04",
+      "app": "Fixture Clinic",
+      "source": "fixture",
+      "kind": "section",
+      "function": "forms",
+      "pattern": "new patient form",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d04",
+      "image_url": "https://example.invalid/fixture/d04.png",
+      "scores": {
+        "visual": 6,
+        "relevance": 9,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 4
+      }
+    },
+    {
+      "id": "d05",
+      "app": "Fixture Insurance",
+      "source": "fixture",
+      "kind": "section",
+      "function": "navigation",
+      "pattern": "simple top bar with phone link",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d05",
+      "image_url": "https://example.invalid/fixture/d05.png",
+      "scores": {
+        "visual": 6,
+        "relevance": 7,
+        "usability": 9,
+        "mobile": 8,
+        "distinct": 4
+      }
+    },
+    {
+      "id": "d06",
+      "app": "Fixture Wellness",
+      "source": "fixture",
+      "kind": "section",
+      "function": "mobile",
+      "pattern": "tap to call sticky bar",
+      "platform": "ios",
+      "link": "https://example.invalid/fixture/d06",
+      "image_url": "https://example.invalid/fixture/d06.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 8,
+        "usability": 9,
+        "mobile": 9,
+        "distinct": 5
+      }
+    },
+    {
+      "id": "d07",
+      "app": "Fixture Spa",
+      "source": "fixture",
+      "kind": "section",
+      "function": "homepage",
+      "pattern": "editorial hero, serif",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d07",
+      "image_url": "https://example.invalid/fixture/d07.png",
+      "scores": {
+        "visual": 9,
+        "relevance": 6,
+        "usability": 7,
+        "mobile": 6,
+        "distinct": 8
+      }
+    },
+    {
+      "id": "d08",
+      "app": "Fixture Clinic",
+      "source": "fixture",
+      "kind": "section",
+      "function": "services",
+      "pattern": "before and after gallery",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d08",
+      "image_url": "https://example.invalid/fixture/d08.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 8,
+        "usability": 7,
+        "mobile": 6,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "d09",
+      "app": "Fixture Hotel",
+      "source": "fixture",
+      "kind": "flow",
+      "function": "conversion",
+      "pattern": "date picker booking",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d09",
+      "image_url": "https://example.invalid/fixture/d09.png",
+      "scores": {
+        "visual": 8,
+        "relevance": 6,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "d10",
+      "app": "Fixture Team",
+      "source": "fixture",
+      "kind": "section",
+      "function": "homepage",
+      "pattern": "team portraits as hero",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d10",
+      "image_url": "https://example.invalid/fixture/d10.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 8,
+        "usability": 7,
+        "mobile": 6,
+        "distinct": 7
+      }
+    },
+    {
+      "id": "d11",
+      "app": "Fixture Bank",
+      "source": "fixture",
+      "kind": "section",
+      "function": "forms",
+      "pattern": "inline validation form",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d11",
+      "image_url": "https://example.invalid/fixture/d11.png",
+      "scores": {
+        "visual": 6,
+        "relevance": 6,
+        "usability": 9,
+        "mobile": 7,
+        "distinct": 4
+      }
+    },
+    {
+      "id": "d12",
+      "app": "Fixture Map",
+      "source": "fixture",
+      "kind": "section",
+      "function": "navigation",
+      "pattern": "location finder",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/d12",
+      "image_url": "https://example.invalid/fixture/d12.png",
+      "scores": {
+        "visual": 6,
+        "relevance": 7,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 5
+      }
+    }
+  ]
+}

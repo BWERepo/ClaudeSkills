@@ -1,0 +1,236 @@
+{
+  "_note": "Synthetic test fixture. Not Mobbin data.",
+  "project": "Fixture: consumer calculator site",
+  "weights": {
+    "visual": 20,
+    "relevance": 20,
+    "usability": 30,
+    "mobile": 20,
+    "distinct": 10
+  },
+  "required": [
+    "homepage",
+    "tool-input",
+    "tool-result",
+    "directory",
+    "mobile"
+  ],
+  "candidates": [
+    {
+      "id": "k01",
+      "app": "Fixture Fintech",
+      "source": "fixture",
+      "kind": "section",
+      "function": "tool-input",
+      "pattern": "loan inputs with sliders",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k01",
+      "image_url": "https://example.invalid/fixture/k01.png",
+      "scores": {
+        "visual": 8,
+        "relevance": 9,
+        "usability": 9,
+        "mobile": 8,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "k02",
+      "app": "Fixture Fintech",
+      "source": "fixture",
+      "kind": "section",
+      "function": "tool-result",
+      "pattern": "result card with breakdown chart",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k02",
+      "image_url": "https://example.invalid/fixture/k02.png",
+      "scores": {
+        "visual": 8,
+        "relevance": 9,
+        "usability": 9,
+        "mobile": 8,
+        "distinct": 7
+      }
+    },
+    {
+      "id": "k03",
+      "app": "Fixture Tax",
+      "source": "fixture",
+      "kind": "section",
+      "function": "tool-input",
+      "pattern": "stepper inputs",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k03",
+      "image_url": "https://example.invalid/fixture/k03.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 8,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 5
+      }
+    },
+    {
+      "id": "k04",
+      "app": "Fixture Dev Tools",
+      "source": "fixture",
+      "kind": "section",
+      "function": "directory",
+      "pattern": "searchable tool directory",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k04",
+      "image_url": "https://example.invalid/fixture/k04.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 7,
+        "usability": 9,
+        "mobile": 7,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "k05",
+      "app": "Fixture Weather",
+      "source": "fixture",
+      "kind": "section",
+      "function": "homepage",
+      "pattern": "utility home with search first",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k05",
+      "image_url": "https://example.invalid/fixture/k05.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 7,
+        "usability": 8,
+        "mobile": 8,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "k06",
+      "app": "Fixture Budget",
+      "source": "fixture",
+      "kind": "section",
+      "function": "tool-result",
+      "pattern": "comparison table result",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k06",
+      "image_url": "https://example.invalid/fixture/k06.png",
+      "scores": {
+        "visual": 6,
+        "relevance": 8,
+        "usability": 8,
+        "mobile": 6,
+        "distinct": 5
+      }
+    },
+    {
+      "id": "k07",
+      "app": "Fixture Travel",
+      "source": "fixture",
+      "kind": "section",
+      "function": "mobile",
+      "pattern": "mobile keypad input",
+      "platform": "ios",
+      "link": "https://example.invalid/fixture/k07",
+      "image_url": "https://example.invalid/fixture/k07.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 7,
+        "usability": 9,
+        "mobile": 9,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "k08",
+      "app": "Fixture Fintech",
+      "source": "fixture",
+      "kind": "section",
+      "function": "homepage",
+      "pattern": "hero with embedded calculator",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k08",
+      "image_url": "https://example.invalid/fixture/k08.png",
+      "scores": {
+        "visual": 8,
+        "relevance": 8,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 7
+      }
+    },
+    {
+      "id": "k09",
+      "app": "Fixture Fintech",
+      "source": "fixture",
+      "kind": "section",
+      "function": "directory",
+      "pattern": "category tabs",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k09",
+      "image_url": "https://example.invalid/fixture/k09.png",
+      "scores": {
+        "visual": 6,
+        "relevance": 7,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 5
+      }
+    },
+    {
+      "id": "k10",
+      "app": "Fixture Tax",
+      "source": "fixture",
+      "kind": "section",
+      "function": "tool-result",
+      "pattern": "explainer under result",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k10",
+      "image_url": "https://example.invalid/fixture/k10.png",
+      "scores": {
+        "visual": 6,
+        "relevance": 8,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 5
+      }
+    },
+    {
+      "id": "k11",
+      "app": "Fixture Dev Tools",
+      "source": "fixture",
+      "kind": "section",
+      "function": "tool-input",
+      "pattern": "monospace input with copy",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k11",
+      "image_url": "https://example.invalid/fixture/k11.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 5,
+        "usability": 8,
+        "mobile": 6,
+        "distinct": 7
+      }
+    },
+    {
+      "id": "k12",
+      "app": "Fixture Budget",
+      "source": "fixture",
+      "kind": "section",
+      "function": "homepage",
+      "pattern": "popular tools grid",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/k12",
+      "image_url": "https://example.invalid/fixture/k12.png",
+      "scores": {
+        "visual": 6,
+        "relevance": 7,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 5
+      }
+    }
+  ]
+}
