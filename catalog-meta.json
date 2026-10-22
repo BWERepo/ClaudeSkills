@@ -408,5 +408,10 @@
     "purpose": "List all BWE skills and create or edit skills in the shared ClaudeSkills repo.",
     "dependencies": "GitHub access",
     "projects": "all"
+  },
+  "BWE_MobbinResearch": {
+    "purpose": "Mobbin design research: ranked reference shortlist, three design directions, approval gate, developer-ready design spec.",
+    "dependencies": "Mobbin MCP connector (falls back to chat or manual references); Node 18+ for scripts/score.mjs",
+    "projects": "all (website and web app projects)"
   }
 }

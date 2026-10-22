@@ -1,0 +1,240 @@
+{
+  "_note": "Synthetic test fixture. Not Mobbin data.",
+  "project": "Fixture: premium tabletop event rental",
+  "candidates": [
+    {
+      "id": "c01",
+      "app": "Fixture Home Goods",
+      "source": "fixture",
+      "kind": "section",
+      "function": "homepage",
+      "pattern": "full-bleed editorial hero, serif headline",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c01",
+      "image_url": "https://example.invalid/fixture/c01.png",
+      "scores": {
+        "visual": 9,
+        "relevance": 8,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 8
+      }
+    },
+    {
+      "id": "c02",
+      "app": "Fixture Home Goods",
+      "source": "fixture",
+      "kind": "section",
+      "function": "catalog",
+      "pattern": "collection grid with large imagery",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c02",
+      "image_url": "https://example.invalid/fixture/c02.png",
+      "scores": {
+        "visual": 9,
+        "relevance": 9,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 7
+      }
+    },
+    {
+      "id": "c03",
+      "app": "Fixture Home Goods",
+      "source": "fixture",
+      "kind": "section",
+      "function": "detail",
+      "pattern": "product detail with gallery and specs",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c03",
+      "image_url": "https://example.invalid/fixture/c03.png",
+      "scores": {
+        "visual": 8,
+        "relevance": 8,
+        "usability": 9,
+        "mobile": 7,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "c04",
+      "app": "Fixture Wedding Co",
+      "source": "fixture",
+      "kind": "section",
+      "function": "forms",
+      "pattern": "quote request form, three steps",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c04",
+      "image_url": "https://example.invalid/fixture/c04.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 9,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "c05",
+      "app": "Fixture Furniture",
+      "source": "fixture",
+      "kind": "section",
+      "function": "navigation",
+      "pattern": "mega menu with category imagery",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c05",
+      "image_url": "https://example.invalid/fixture/c05.png",
+      "scores": {
+        "visual": 8,
+        "relevance": 7,
+        "usability": 7,
+        "mobile": 6,
+        "distinct": 7
+      }
+    },
+    {
+      "id": "c06",
+      "app": "Fixture Hotel",
+      "source": "fixture",
+      "kind": "section",
+      "function": "homepage",
+      "pattern": "split hero with booking CTA",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c06",
+      "image_url": "https://example.invalid/fixture/c06.png",
+      "scores": {
+        "visual": 8,
+        "relevance": 6,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "c07",
+      "app": "Fixture Decor",
+      "source": "fixture",
+      "kind": "flow",
+      "function": "conversion",
+      "pattern": "wishlist to inquiry flow",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c07",
+      "image_url": "https://example.invalid/fixture/c07.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 9,
+        "usability": 8,
+        "mobile": 8,
+        "distinct": 7
+      }
+    },
+    {
+      "id": "c08",
+      "app": "Fixture Decor",
+      "source": "fixture",
+      "kind": "section",
+      "function": "mobile",
+      "pattern": "mobile collection browsing with sticky filter",
+      "platform": "mobile-web",
+      "link": "https://example.invalid/fixture/c08",
+      "image_url": "https://example.invalid/fixture/c08.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 8,
+        "usability": 8,
+        "mobile": 9,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "c09",
+      "app": "Fixture Retail",
+      "source": "fixture",
+      "kind": "section",
+      "function": "catalog",
+      "pattern": "filter sidebar with swatches",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c09",
+      "image_url": "https://example.invalid/fixture/c09.png",
+      "scores": {
+        "visual": 6,
+        "relevance": 7,
+        "usability": 9,
+        "mobile": 6,
+        "distinct": 5
+      }
+    },
+    {
+      "id": "c10",
+      "app": "Fixture Retail",
+      "source": "fixture",
+      "kind": "section",
+      "function": "catalog",
+      "pattern": "filter sidebar with swatches",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c10",
+      "image_url": "https://example.invalid/fixture/c10.png",
+      "scores": {
+        "visual": 6,
+        "relevance": 7,
+        "usability": 9,
+        "mobile": 6,
+        "distinct": 5
+      }
+    },
+    {
+      "id": "c11",
+      "app": "Fixture Florist",
+      "source": "fixture",
+      "kind": "section",
+      "function": "homepage",
+      "pattern": "layered collage hero",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c11",
+      "image_url": "https://example.invalid/fixture/c11.png",
+      "scores": {
+        "visual": 8,
+        "relevance": 7,
+        "usability": 6,
+        "mobile": 5,
+        "distinct": 9
+      }
+    },
+    {
+      "id": "c12",
+      "app": "Fixture Wedding Co",
+      "source": "fixture",
+      "kind": "flow",
+      "function": "journey",
+      "pattern": "planner consultation booking",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c12",
+      "image_url": "https://example.invalid/fixture/c12.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 8,
+        "usability": 8,
+        "mobile": 7,
+        "distinct": 6
+      }
+    },
+    {
+      "id": "c13",
+      "app": "Fixture Venue",
+      "source": "fixture",
+      "kind": "section",
+      "function": "detail",
+      "pattern": "venue detail with floor plans",
+      "platform": "web",
+      "link": "https://example.invalid/fixture/c13",
+      "image_url": "https://example.invalid/fixture/c03.png",
+      "scores": {
+        "visual": 7,
+        "relevance": 6,
+        "usability": 7,
+        "mobile": 6,
+        "distinct": 6
+      }
+    }
+  ]
+}

@@ -1,4 +1,7 @@
 # Changelog
+## [2026.10.22.02] - 2026-10-22
+- Added BWE_MobbinResearch: design research with the Mobbin MCP connector. Reads the project, searches Mobbin screens, flows and sections (including adjacent industries), scores candidates on a configurable weighted rubric, narrows them to a ranked 5-8 reference shortlist, proposes three distinct design directions, stops for the owner's approval, then writes `docs/design/BWE-DESIGN-SPEC.md`. Modes research, audit, refresh, compare, handoff. Falls back to chat-research or manual references when Mobbin is not available in the session; never fabricates results and never edits application code. Includes `scripts/score.mjs` (weighted scores, duplicates, shortlist diversity, spec check) with tests, the BWE website workflow guide and a worked event-rental example. Separate from Impeccable: Mobbin research decides what to build; Impeccable refines what was built.
+
 ## [2026.10.22.01] - 2026-10-22
 - Added BWE_FAQEngine, BWE_SEOEngine, BWE_BlogEngine: one control-panel skill per engine with the same three actions (latest version, version installed in each client site, install latest). Added BWE_Skills to list skills and to create or edit skills through a PR, with no terminal. New skills use the BWE_ prefix.
 
