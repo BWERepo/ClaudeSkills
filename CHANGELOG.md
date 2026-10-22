@@ -1,4 +1,8 @@
 # Changelog
+## [2026.10.22.03] - 2026-10-22
+- Added BWE_UpdateSkills: runs `claude plugin marketplace update bwe-skills` and `claude plugin update bwe-skills@bwe-skills` at the scope the plugin is installed with in the current project, reports the version before and after, and says when to restart the session. Asks before installing or enabling the plugin where it is missing or disabled.
+- BWE_MobbinResearch troubleshooting now points to BWE_UpdateSkills.
+
 ## [2026.10.22.02] - 2026-10-22
 - Added BWE_MobbinResearch: design research with the Mobbin MCP connector. Reads the project, searches Mobbin screens, flows and sections (including adjacent industries), scores candidates on a configurable weighted rubric, narrows them to a ranked 5-8 reference shortlist, proposes three distinct design directions, stops for the owner's approval, then writes `docs/design/BWE-DESIGN-SPEC.md`. Modes research, audit, refresh, compare, handoff. Falls back to chat-research or manual references when Mobbin is not available in the session; never fabricates results and never edits application code. Includes `scripts/score.mjs` (weighted scores, duplicates, shortlist diversity, spec check) with tests, the BWE website workflow guide and a worked event-rental example. Separate from Impeccable: Mobbin research decides what to build; Impeccable refines what was built.
 
