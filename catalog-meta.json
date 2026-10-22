@@ -413,5 +413,10 @@
     "purpose": "Mobbin design research: ranked reference shortlist, three design directions, approval gate, developer-ready design spec.",
     "dependencies": "Mobbin MCP connector (falls back to chat or manual references); Node 18+ for scripts/score.mjs",
     "projects": "all (website and web app projects)"
+  },
+  "BWE_UpdateSkills": {
+    "purpose": "Update the bwe-skills plugin in the current project and report the version before and after.",
+    "dependencies": "claude CLI; GitHub access to BWERepo/ClaudeSkills",
+    "projects": "all"
   }
 }

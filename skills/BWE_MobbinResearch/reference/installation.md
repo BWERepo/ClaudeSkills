@@ -55,7 +55,7 @@ Ask: "Can you access Mobbin MCP? List the available Mobbin tools and find exampl
 | Zero results | Broaden the query (pattern words, not brand names); check the Mobbin plan |
 | Images no longer load in an old report | Mobbin `image_url`s expire after 30 days; run `refresh` mode |
 | `score.mjs` errors | Run `node scripts/score.mjs help`; check the candidates JSON against `templates/reference-scorecard.md` |
-| Skill not listed | Update the plugin: `claude plugin marketplace update bwe-skills && claude plugin update bwe-skills@bwe-skills --scope project`, then restart |
+| Skill not listed | Run `/bwe-skills:BWE_UpdateSkills` (or `claude plugin marketplace update bwe-skills` then `claude plugin update bwe-skills@bwe-skills --scope project`), then restart |
 
 ## Versions and updates
 
