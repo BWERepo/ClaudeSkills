@@ -388,5 +388,25 @@
     "purpose": "Show the Blog engine version installed in the current website.",
     "dependencies": "Blog engine installed (/BWEBlogInstall)",
     "projects": "website projects with the engine installed"
+  },
+  "BWE_FAQEngine": {
+    "purpose": "FAQ engine control panel: latest version, installed version per client site, install latest.",
+    "dependencies": "GitHub access; delegates to BWEFAQInstall",
+    "projects": "all"
+  },
+  "BWE_SEOEngine": {
+    "purpose": "SEO engine control panel: latest version, installed version per client site, install latest.",
+    "dependencies": "GitHub access; delegates to BWESEOInstall/BWESEOUpdate",
+    "projects": "all"
+  },
+  "BWE_BlogEngine": {
+    "purpose": "Blog engine control panel: latest version, installed version per client site, install latest.",
+    "dependencies": "GitHub access; delegates to BWEBlogInstall/BWEBlogUpdate",
+    "projects": "all"
+  },
+  "BWE_Skills": {
+    "purpose": "List all BWE skills and create or edit skills in the shared ClaudeSkills repo.",
+    "dependencies": "GitHub access",
+    "projects": "all"
   }
 }

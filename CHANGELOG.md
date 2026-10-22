@@ -1,4 +1,7 @@
 # Changelog
+## [2026.10.22.01] - 2026-10-22
+- Added BWE_FAQEngine, BWE_SEOEngine, BWE_BlogEngine: one control-panel skill per engine with the same three actions (latest version, version installed in each client site, install latest). Added BWE_Skills to list skills and to create or edit skills through a PR, with no terminal. New skills use the BWE_ prefix.
+
 ## [2026.10.21.01] - 2026-10-21
 - Renamed BWESkills to BWEListProjectSkills (it lists the BWE skills installed in the current project). Invoke as `/bwe-skills:BWEListProjectSkills`; the old name no longer exists in the plugin.
 - Added BWESEOVersion, BWEFAQVersion, BWEBlogVersion (engine version bundled in the plugin) and BWESEOInstalledVersion, BWEFAQInstalledVersion, BWEBlogInstalledVersion (engine version installed in the current website). All read-only.
