@@ -1,6 +1,6 @@
 ---
 name: BWE_FAQEngine
-description: FAQ Engine control panel. Actions - version (latest engine version), installed (version installed in each client website), install (install or update the latest engine in a chosen client website). Use when the user says "FAQ engine version", "which sites have the FAQ engine", "install the latest FAQ engine in <site>", or invokes /BWE_FAQEngine.
+description: FAQ Engine control panel. Actions - version (latest engine version), installed (version installed in each client website), install (install or update the latest engine in a chosen client website). Use when the user says "FAQ engine version", "which sites have the FAQ engine", "install the latest FAQ engine in the site name", or invokes /BWE_FAQEngine.
 ---
 
 # BWE_FAQEngine

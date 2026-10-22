@@ -1,6 +1,6 @@
 ---
 name: BWE_SEOEngine
-description: SEO Engine control panel. Actions - version (latest engine version), installed (version installed in each client website), install (install or update the latest engine in a chosen client website). Use when the user says "SEO engine version", "which sites have the SEO engine", "install the latest SEO engine in <site>", or invokes /BWE_SEOEngine.
+description: SEO Engine control panel. Actions - version (latest engine version), installed (version installed in each client website), install (install or update the latest engine in a chosen client website). Use when the user says "SEO engine version", "which sites have the SEO engine", "install the latest SEO engine in the site name", or invokes /BWE_SEOEngine.
 ---
 
 # BWE_SEOEngine

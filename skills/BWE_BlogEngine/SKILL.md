@@ -1,6 +1,6 @@
 ---
 name: BWE_BlogEngine
-description: Blog Engine control panel. Actions - version (latest engine version), installed (version installed in each client website), install (install or update the latest engine in a chosen client website). Use when the user says "blog engine version", "which sites have the blog engine", "install the latest blog engine in <site>", or invokes /BWE_BlogEngine.
+description: Blog Engine control panel. Actions - version (latest engine version), installed (version installed in each client website), install (install or update the latest engine in a chosen client website). Use when the user says "blog engine version", "which sites have the blog engine", "install the latest blog engine in the site name", or invokes /BWE_BlogEngine.
 ---
 
 # BWE_BlogEngine
