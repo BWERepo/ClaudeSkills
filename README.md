@@ -4,7 +4,7 @@ Single authoritative Claude Code plugin (`bwe-skills`) holding shared skills. Se
 
 Each Claude Code project (and each Claude account / cloud environment) installs the plugin itself; user-level skills in `~/.claude/skills` are NOT shared across accounts or cloud containers. Skills run as `/bwe-skills:<SkillName>`.
 
-**Claude desktop users:** you do not need the terminal. Add `BWERepo/ClaudeSkills` as a plugin source in the desktop app's plugin settings, and ask Claude in a thread to create or edit skills (`/bwe-skills:BWE_Skills`). The `claude plugin` commands below are the equivalent terminal steps.
+**Claude desktop users:** you do not need the terminal. Add `BWERepo/ClaudeSkills` as a plugin source in the desktop app's plugin settings, and ask Claude in a thread to create or edit skills (`/bwe-skills:BWE-SKILLS`). The `claude plugin` commands below are the equivalent terminal steps.
 
 ## 1. Install in an existing project
 From the project root, commit the result so cloud sessions pick it up:

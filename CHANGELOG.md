@@ -1,4 +1,10 @@
 # Changelog
+## [2026.10.23.02] - 2026-10-23
+- Consolidated 85 skills to 60 and renamed every BWE skill to the upper-case `BWE-<AREA>-<ACTION>` scheme (for example BWESEOAudit is now BWE-SEO-AUDIT). The upstream `impeccable` skill keeps its name.
+- BWE-BLOG-ENGINE, BWE-FAQ-ENGINE and BWE-SEO-ENGINE are now the single control panel per engine (version, installed, install, update; SEO also verify and dry-run). Their detailed procedures moved to each panel's `reference/` folder. Removed as separate skills: BWE{Blog,FAQ,SEO}Install, BWE{Blog,FAQ,SEO}Version, BWE{Blog,FAQ,SEO}InstalledVersion, BWEBlogUpdate, BWESEOUpdate, BWESEOInstallDryRun, BWESEOInstallUpdate, BWESEOInstallVerify.
+- BWEListGlobalSkills and BWEListProjectSkills merged into BWE-SKILLS; BWEImpeccableCommands merged into BWE-IMPECCABLE.
+- Removed BWEFAQBegin, BWEFAQCheckpoint, BWEFAQEnd, BWEFAQAll, BWESEOBegin, BWESEOCheckpoint, BWESEOEnd, BWESEOAll from the plugin (the engine repositories carry them in their own `.claude/skills`).
+- BWEFAQUpdate renamed BWE-FAQ-REFRESH so UPDATE only means updating an engine. BWE_UpdateSkills renamed BWE-SKILLS-UPDATE. The One Click Answers skills are now BWE-OCA-*.
 ## [2026.10.23.01] - 2026-10-23
 - Added BWEInstallAllEngines: installs or updates the latest SEO, FAQ and Blog engines into one website in a single run (reusing the single-engine install logic), then displays the installed version of each engine. Never deploys.
 ## [2026.10.22.03] - 2026-10-22
