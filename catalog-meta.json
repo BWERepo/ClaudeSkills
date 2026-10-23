@@ -298,5 +298,10 @@
     "purpose": "Install the latest SEO, FAQ and Blog engines into one website in a single run and show each engine version.",
     "dependencies": "Node 20+, git, access to the BWERepo engine repos",
     "projects": "website projects"
+  },
+  "BWE-ALL-ENGINES-CHECK": {
+    "purpose": "Check whether the SEO, FAQ and Blog engines in a website need updating (read-only, per-engine verdict).",
+    "dependencies": "access to the BWERepo engine and website repos",
+    "projects": "website projects"
   }
 }
