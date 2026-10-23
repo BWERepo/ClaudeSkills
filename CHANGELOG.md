@@ -1,4 +1,6 @@
 # Changelog
+## [2026.10.23.03] - 2026-10-23
+- Added BWE-ALL-ENGINES-CHECK: takes a website project name and, read-only, compares the installed SEO, FAQ and Blog engine versions with the latest in each BWERepo engine repo, then prints a table and an update needed / up to date verdict per engine.
 ## [2026.10.23.02] - 2026-10-23
 - Consolidated 85 skills to 60 and renamed every BWE skill to the upper-case `BWE-<AREA>-<ACTION>` scheme (for example BWESEOAudit is now BWE-SEO-AUDIT). The upstream `impeccable` skill keeps its name.
 - BWE-BLOG-ENGINE, BWE-FAQ-ENGINE and BWE-SEO-ENGINE are now the single control panel per engine (version, installed, install, update; SEO also verify and dry-run). Their detailed procedures moved to each panel's `reference/` folder. Removed as separate skills: BWE{Blog,FAQ,SEO}Install, BWE{Blog,FAQ,SEO}Version, BWE{Blog,FAQ,SEO}InstalledVersion, BWEBlogUpdate, BWESEOUpdate, BWESEOInstallDryRun, BWESEOInstallUpdate, BWESEOInstallVerify.
