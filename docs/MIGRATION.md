@@ -1,22 +1,22 @@
 # Migration review (2026-10-10)
 Source reviewed: backup of the user's `~/.claude/skills` (111 skills) and `~/.agents/skills/impeccable`.
 
-Migrated verbatim (generic): BWEClaudeHung, BWEClaudeStatus, BWEProductionReady.
+Migrated verbatim (generic): BWE-CLAUDE-HUNG, BWE-CLAUDE-STATUS, BWE-PRODUCTION-READY.
 
-Added in 0.2.0 from BWERepo/SEOEngine: BWESEO, BWESEOInstall, BWESEOUpdate (the other BWESEO* skills remain in that repo).
+Added in 0.2.0 from BWERepo/SEOEngine: BWE-SEO, BWE-SEO-ENGINE install, BWE-SEO-ENGINE update (the other BWE-SEO* skills remain in that repo).
 
 Excluded:
 - `bweimpeccable`: not found in the backup; only upstream `impeccable` (third-party, installed from its own source; the project instructions already say to install it if missing).
 - Cloudflare / wrangler / agents-sdk / durable-objects / sandbox-* / web-perf / workers-best-practices / turnstile-spin / Supabase: third-party or vendor content, not redistributed without permission.
-- BWESEO* (engine + 25 skills): has its own versioned installer (BWESEOInstall) and a large engine directory; migrate deliberately in a later release.
-- Project-specific: BWEOCA*, BWEDeploy*/E2E*/Reset/WorkQueue/ClaudeQuestions/ClaudeSettings (hard-coded to the OneClickAnswers path), BWEHDBS*, BWEJJS*, BWEJKCB*, BWEHVAC*, BWEFLF*, BWEDeepSprings*, BWESHS*, ETCC*, OCAArticle(s), BWEBegin/End/Checkpoint/All (BWE site), BWELogin, BWENewWebsite, BWEBackup (contains infrastructure details), BWEBackupSkills (Windows-only).
+- BWE-SEO* (engine + 25 skills): has its own versioned installer (BWE-SEO-ENGINE install) and a large engine directory; migrate deliberately in a later release.
+- Project-specific: BWEOCA*, BWEDeploy*/E2E*/Reset/WorkQueue/ClaudeQuestions/ClaudeSettings (hard-coded to the OneClickAnswers path), BWEHDBS*, BWEJJS*, BWEJKCB*, BWEHVAC*, BWEFLF*, BWEDeepSprings*, BWESHS*, ETCC*, BWE-OCA-ARTICLE(s), BWEBegin/End/Checkpoint/All (BWE site), BWELogin, BWENewWebsite, BWEBackup (contains infrastructure details), BWEBackupSkills (Windows-only).
 
-Added in 0.4.0 from BWERepo/OneClickAnswers `.claude/skills`: BWEBlog, BWEExport, BWEImport, BWESkills, BWEWow, BWEImpeccableCommands, bweimpeccable, impeccable and 18 BWESEO* skills, plus the four Impeccable agents in `agents/`.
+Added in 0.4.0 from BWERepo/OneClickAnswers `.claude/skills`: BWE-BLOG, BWE-EXPORT, BWE-IMPORT, BWESkills, BWE-WOW, BWE-IMPECCABLE commands, bweimpeccable, impeccable and 18 BWE-SEO* skills, plus the four Impeccable agents in `agents/`.
 `skills/impeccable` is third-party (Apache 2.0) and ships with its own LICENSE and NOTICE.md, which must stay with it.
-Not copied (OneClickAnswers-specific): the BWEOCA*, BWEDeploy*, BWEE2E*, BWEWorkQueue*, OCA* skills and the BWEFAQ* skills not picked.
+Not copied (OneClickAnswers-specific): the BWEOCA*, BWEDeploy*, BWEE2E*, BWE-OCA-QUEUE*, OCA* skills and the BWE-FAQ* skills not picked.
 
 ## Bundled engines (0.5.0)
 
 The SEO, FAQ and Blog engines live in `engines/`. To refresh one, copy the new engine source over `engines/<name>` (omit `.git`, `node_modules`, the engine repo's `CLAUDE.md`), bump the plugin version and re-run `scripts/validate.sh`. Websites keep their own installed copy; updating the plugin does not change a website until its Update skill is run.
 
-Renamed in 2026.10.21.01: BWESkills is now BWEListProjectSkills.
+Renamed in 2026.10.21.01: BWESkills is now BWE-SKILLS list.

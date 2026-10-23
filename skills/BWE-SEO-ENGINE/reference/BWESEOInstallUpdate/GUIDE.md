@@ -1,0 +1,1 @@
+Invoke the `BWE-SEO-ENGINE install` skill via the Skill tool with args `--update`, and follow its instructions exactly (dry run first if the owner hasn't seen one this conversation; report conflicts and stop for the owner's decision; run `--verify` afterwards).

@@ -1,165 +1,125 @@
 {
-  "BWEClaudeHung": {
+  "BWE-CLAUDE-HUNG": {
     "purpose": "Diagnose whether another Claude Code session is hung or working.",
     "dependencies": "none",
     "projects": "all"
   },
-  "BWEClaudeStatus": {
+  "BWE-CLAUDE-STATUS": {
     "purpose": "Summarize what this session and its agents are doing.",
     "dependencies": "none",
     "projects": "all"
   },
-  "BWEProductionReady": {
+  "BWE-PRODUCTION-READY": {
     "purpose": "Project-aware production-readiness gate (GO / NO-GO).",
     "dependencies": "project test/build tooling",
     "projects": "all"
   },
-  "BWESEO": {
+  "BWE-SEO": {
     "purpose": "SEO front door: state-aware controller for the BWESEO engine.",
     "dependencies": "bundled SEO engine (engines/seo); Node; delegates to other BWESEO* skills",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOInstall": {
-    "purpose": "Install, verify or sync the BWESEO engine in a website project.",
-    "dependencies": "bundled SEO engine (engines/seo); Node",
-    "projects": "website projects"
-  },
-  "BWESEOUpdate": {
-    "purpose": "Update the BWESEO engine and its skills in the current website.",
-    "dependencies": "bundled SEO engine (engines/seo); Node",
-    "projects": "website projects with BWESEO installed"
-  },
-  "BWEFAQ": {
+  "BWE-FAQ": {
     "purpose": "FAQ front door for the BWE FAQ Engine.",
     "dependencies": "bundled FAQ engine (engines/faq); Node; delegates to other BWEFAQ* skills",
     "projects": "website projects with the FAQ Engine installed"
   },
-  "BWEFAQInstall": {
-    "purpose": "Install, verify or sync the FAQ Engine in a website project.",
-    "dependencies": "bundled FAQ engine (engines/faq); Node",
-    "projects": "website projects"
-  },
-  "BWEFAQUpdate": {
+  "BWE-FAQ-REFRESH": {
     "purpose": "Update the FAQ Engine and its skills in the current website.",
     "dependencies": "bundled FAQ engine (engines/faq); Node",
     "projects": "website projects with the FAQ Engine installed"
   },
-  "BWEBlog": {
+  "BWE-BLOG": {
     "purpose": "The Blog Engine front door.",
     "dependencies": "bundled Blog engine (engines/blog), installed by BWEBlogInstall; Node 20+",
     "projects": "website projects with the Blog Engine"
   },
-  "BWEExport": {
+  "BWE-EXPORT": {
     "purpose": "Exports the current project's threads (title, status, what was asked and done, pull requests, what waits on the owner, next steps) plus the ",
     "dependencies": "none",
     "projects": "all"
   },
-  "BWEImpeccableCommands": {
-    "purpose": "Lists every command of the installed Impeccable design skill with a one-line explanation of each.",
-    "dependencies": "Impeccable design skill (impeccable) and its agents/",
-    "projects": "website projects"
-  },
-  "BWEImport": {
+  "BWE-IMPORT": {
     "purpose": "Reads a handoff file written by /BWEExport in a new session, summarizes it, restores the standing rules, lists what is pending and asks whic",
     "dependencies": "none",
     "projects": "all"
   },
-  "BWESEOAudit": {
+  "BWE-SEO-AUDIT": {
     "purpose": "Full read-only SEO baseline audit of the current website project using the BWESEO engine \u2014 architecture, page inventory, metadata, sitemap/r",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOCompetitors": {
+  "BWE-SEO-COMPETITORS": {
     "purpose": "Search-results and competitor gap analysis for approved target topics in the current website project using the BWESEO engine \u2014 who ranks, wh",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOContentPlan": {
+  "BWE-SEO-CONTENT-PLAN": {
     "purpose": "Creates or updates the SEO page map, pillar/cluster architecture and prioritized content roadmap (about 10-20 opportunities, quality over qu",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOCreatePage": {
+  "BWE-SEO-CREATE-PAGE": {
     "purpose": "Creates exactly ONE user-approved SEO page in the current website project using the BWESEO engine \u2014 rechecks cannibalization, confirms inten",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOInstallDryRun": {
-    "purpose": "Shortcut for /BWESEOInstall --dry-run.",
-    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
-    "projects": "website projects with BWESEO installed"
-  },
-  "BWESEOInstallUpdate": {
-    "purpose": "Shortcut for /BWESEOInstall --update.",
-    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
-    "projects": "website projects with BWESEO installed"
-  },
-  "BWESEOInstallVerify": {
-    "purpose": "Shortcut for /BWESEOInstall --verify.",
-    "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
-    "projects": "website projects with BWESEO installed"
-  },
-  "BWESEOInternalLinks": {
+  "BWE-SEO-INTERNAL-LINKS": {
     "purpose": "Internal-link analysis for the current website project using the BWESEO engine \u2014 builds the link graph from nav, footer and body links, find",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOLocal": {
+  "BWE-SEO-LOCAL": {
     "purpose": "Local SEO analysis for the current website project using the BWESEO engine \u2014 NAP consistency, address type (storefront vs service-area vs ma",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOOpportunities": {
+  "BWE-SEO-OPPORTUNITIES": {
     "purpose": "Identifies SEO customer-acquisition opportunities for the current website project using the BWESEO engine \u2014 maps searches that could bring a",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOPublish": {
+  "BWE-SEO-PUBLISH": {
     "purpose": "Mandatory post-publication SEO check for a page that has just gone live in the current website project, using the BWESEO engine \u2014 environmen",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOQA": {
+  "BWE-SEO-QA": {
     "purpose": "SEO QA gate for a page in the current website project using the BWESEO engine \u2014 content checks (every claim verified, no fabricated proof, l",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEORefresh": {
+  "BWE-SEO-REFRESH": {
     "purpose": "Finds published pages in the current website project that need updating using the BWESEO engine \u2014 stale facts or prices versus the business ",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOReport": {
+  "BWE-SEO-REPORT": {
     "purpose": "Generates a plain-language SEO progress/performance report for the current website project using the BWESEO engine \u2014 what shipped, Search Co",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOSchema": {
+  "BWE-SEO-SCHEMA": {
     "purpose": "Structured-data (JSON-LD / schema.org) audit for the current website project using the BWESEO engine \u2014 lists every schema block per page, wh",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOSearchConsole": {
+  "BWE-SEO-SEARCH-CONSOLE": {
     "purpose": "The Google Search side of the BWESEO engine for the current website project.",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOSetup": {
+  "BWE-SEO-SETUP": {
     "purpose": "Configures BWESEO for the current customer's website project AFTER the engine is installed (/BWESEOInstall) \u2014 creates the customer-specific ",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWESEOTechnical": {
+  "BWE-SEO-TECHNICAL": {
     "purpose": "Technical SEO audit of the current website project (or a single page) using the BWESEO engine \u2014 crawl/index rules, robots per-agent groups, ",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWEListProjectSkills": {
-    "purpose": "Lists every BWE skill installed in this project (BWEOCA*, BWEFAQ*, BWESEO*, BWEBlog, BWEDeploy*, BWEE2E*, BWEWorkQueue*, bweimpeccable, BWEE",
-    "dependencies": "none",
-    "projects": "all"
-  },
-  "BWEWow": {
+  "BWE-WOW": {
     "purpose": "Universal website visual enhancement with a real WOW factor.",
     "dependencies": "Node",
     "projects": "website projects"
@@ -169,257 +129,172 @@
     "dependencies": "Node; agents/ (impeccable-*.md); third-party Apache 2.0, see NOTICE.md",
     "projects": "website projects"
   },
-  "BWEImpeccable": {
+  "BWE-IMPECCABLE": {
     "purpose": "Implements a design upgrade of a website by offering a checklist of every installed Impeccable command (default: the seven design stages in ",
     "dependencies": "Impeccable design skill (impeccable) and its agents/",
     "projects": "website projects"
   },
-  "BWEFAQSetup": {
+  "BWE-FAQ-SETUP": {
     "purpose": "Set up the FAQ Engine configuration for the current website.",
     "dependencies": "BWEFAQInstall; Node",
     "projects": "website projects with the FAQ Engine installed"
   },
-  "BWEFAQGenerate": {
+  "BWE-FAQ-GENERATE": {
     "purpose": "Generate FAQ candidates from the site's own content.",
     "dependencies": "BWEFAQInstall, BWEFAQSetup; Node",
     "projects": "website projects with the FAQ Engine installed"
   },
-  "BWEFAQReview": {
+  "BWE-FAQ-REVIEW": {
     "purpose": "Review FAQ candidates and approve answers the site supports.",
     "dependencies": "BWEFAQGenerate",
     "projects": "website projects with the FAQ Engine installed"
   },
-  "BWEFAQPublish": {
+  "BWE-FAQ-PUBLISH": {
     "purpose": "Publish approved FAQs to the site's FAQ registry.",
     "dependencies": "BWEFAQReview",
     "projects": "website projects with the FAQ Engine installed"
   },
-  "BWEBlogInstall": {
-    "purpose": "Install the bundled Blog Engine into the current website.",
-    "dependencies": "bundled Blog engine (engines/blog); Node 20+; npm",
-    "projects": "website projects"
-  },
-  "BWEBlogUpdate": {
-    "purpose": "Update the website's Blog Engine to the bundled version.",
-    "dependencies": "BWEBlogInstall",
-    "projects": "website projects with the Blog Engine installed"
-  },
-  "BWEBlogSetup": {
+  "BWE-BLOG-SETUP": {
     "purpose": "Configure the Blog Engine for the current website.",
     "dependencies": "BWEBlogInstall",
     "projects": "website projects with the Blog Engine installed"
   },
-  "BWEBlogGenerate": {
+  "BWE-BLOG-GENERATE": {
     "purpose": "Analyze, recommend and generate blog articles the owner selects.",
     "dependencies": "BWEBlogSetup",
     "projects": "website projects with the Blog Engine installed"
   },
-  "BWEBlogReview": {
+  "BWE-BLOG-REVIEW": {
     "purpose": "Review and approve generated blog drafts.",
     "dependencies": "BWEBlogGenerate",
     "projects": "website projects with the Blog Engine installed"
   },
-  "BWEBlogPublish": {
+  "BWE-BLOG-PUBLISH": {
     "purpose": "Publish approved blog articles through the validation gate.",
     "dependencies": "BWEBlogReview",
     "projects": "website projects with the Blog Engine installed"
   },
-  "BWEDeployDisable": {
+  "BWE-OCA-DEPLOY-DISABLE": {
     "purpose": "Turns OFF deploying for the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) by creating the .deploy-disabled flag file, so `npm run deploy:stagin",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEDeployEnable": {
+  "BWE-OCA-DEPLOY-ENABLE": {
     "purpose": "Turns ON deploying for the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) by deleting the .deploy-disabled flag file, so `npm run deploy:staging",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEDeployStaging": {
+  "BWE-OCA-DEPLOY-STAGING": {
     "purpose": "Deploys the current work of the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) to STAGING only (staging.oneclickanswers.com).",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEE2EDisable": {
+  "BWE-OCA-E2E-DISABLE": {
     "purpose": "Turns OFF end-to-end (Playwright browser) testing for the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) by creating the .e2e-disabled flag file",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEE2EEnable": {
+  "BWE-OCA-E2E-ENABLE": {
     "purpose": "Turns ON end-to-end (Playwright browser) testing for the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) by deleting the .e2e-disabled flag file,",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEOCAAll": {
+  "BWE-OCA-ALL": {
     "purpose": "Full end-to-end wrap-up for the One Click Answers tool site (OneClickAnswers.com) \u2014 runs BWEOCACheckpoint (staging AND production release), then BWEOCAEnd.",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEOCABackup": {
+  "BWE-OCA-BACKUP": {
     "purpose": "Backs up the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) to timestamped zip files in Z:\\Backup\\Websites\\OCA\\Backup - a zip of the project fol",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEOCABegin": {
+  "BWE-OCA-BEGIN": {
     "purpose": "Start-of-session resume for the One Click Answers tool site (OneClickAnswers.com) \u2014 reads PROJECT_STATUS.md and continues development from where the last sessio",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEOCACheckpoint": {
+  "BWE-OCA-CHECKPOINT": {
     "purpose": "Full release for the One Click Answers tool site (OneClickAnswers.com) at an explicit version (or auto-bumped minor if none given) \u2014 builds and deploys staging,",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEOCAEnd": {
+  "BWE-OCA-END": {
     "purpose": "End-of-session wrap-up for the One Click Answers tool site (OneClickAnswers.com) \u2014 updates PROJECT_STATUS.md with everything accomplished in the current session",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEOCAGit": {
+  "BWE-OCA-GIT": {
     "purpose": "Commits the current work in the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) to git and pushes it to the remote, and does nothing else.",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "OCAAnswer": {
+  "BWE-OCA-ANSWER": {
     "purpose": "Create or update one \"What Is?\" answer in the One Click Answers Answer Engine (Z:\\Backup\\websites\\OneClickAnswers) and prepare it for STAGING review.",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "OCAArticle": {
+  "BWE-OCA-ARTICLE": {
     "purpose": "Research, write and test ONE consumer question article for the One Click Answers blog (Z:\\Backup\\websites\\OneClickAnswers) and save it as a DRAFT for staging re",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "OCAArticles": {
+  "BWE-OCA-ARTICLES": {
     "purpose": "Review the One Click Answers blog Article Opportunity Registry (Z:\\Backup\\websites\\OneClickAnswers) and recommend which question article to write next.",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEWorkQueue": {
+  "BWE-OCA-QUEUE": {
     "purpose": "Lists the ENTIRE work queue of the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers\\docs\\QUEUE.md) as one table with the item number, a short descr",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEWorkQueueNotStarted": {
+  "BWE-OCA-QUEUE-NOT-STARTED": {
     "purpose": "Lists only the work-queue items of the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers\\docs\\QUEUE.md) that have NOT been started, with the item nu",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWEWorkQueueToday": {
+  "BWE-OCA-QUEUE-TODAY": {
     "purpose": "Lists the work-queue items of the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers\\docs\\QUEUE.md) that were ADDED or IMPLEMENTED TODAY, with the it",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
-  "BWESEOAll": {
-    "purpose": "Full end-to-end wrap-up for the BWESEO engine source repository \u2014 runs BWESEOCheckpoint (manual/manifest, validation + tests, commit, push), then BWESEOEnd (PRO",
-    "dependencies": "SEOEngine repository checkout",
-    "projects": "SEOEngine source repository only"
-  },
-  "BWESEOBegin": {
-    "purpose": "Start-of-session resume for the BWESEO engine source repository \u2014 reads PROJECT_STATUS.md and continues development from where the last session left off.",
-    "dependencies": "SEOEngine repository checkout",
-    "projects": "SEOEngine source repository only"
-  },
-  "BWESEOCheckpoint": {
-    "purpose": "Checkpoint for the BWESEO engine source repository \u2014 regenerates the manual and manifest, runs canonical validation with the test suite, then commits and pushes",
-    "dependencies": "SEOEngine repository checkout",
-    "projects": "SEOEngine source repository only"
-  },
-  "BWESEOEnd": {
-    "purpose": "End-of-session wrap-up for the BWESEO engine source repository \u2014 updates (or creates) PROJECT_STATUS.md with everything accomplished in the current session, the",
-    "dependencies": "SEOEngine repository checkout",
-    "projects": "SEOEngine source repository only"
-  },
-  "BWEFAQAll": {
-    "purpose": "Runs the FAQ Engine repository's end-of-work routine in one go - the checkpoint (tests and manual drift check) and then the end-of-session wrap-up.",
-    "dependencies": "FAQEngine repository checkout",
-    "projects": "FAQEngine source repository only"
-  },
-  "BWEFAQBegin": {
-    "purpose": "Start-of-session resume for the FAQ Engine source repository - reads PROJECT_STATUS.md and continues development from where the last session left off.",
-    "dependencies": "FAQEngine repository checkout",
-    "projects": "FAQEngine source repository only"
-  },
-  "BWEFAQCheckpoint": {
-    "purpose": "Verification checkpoint for the FAQ Engine source repository - runs the tests and the manual drift check, rebuilds nothing silently, and reports the real result",
-    "dependencies": "FAQEngine repository checkout",
-    "projects": "FAQEngine source repository only"
-  },
-  "BWEFAQEnd": {
-    "purpose": "End-of-session wrap-up for the FAQ Engine source repository - updates (or creates) PROJECT_STATUS.md with everything accomplished in the session so a brand-new ",
-    "dependencies": "FAQEngine repository checkout",
-    "projects": "FAQEngine source repository only"
-  },
-  "BWESEOLanding": {
+  "BWE-SEO-LANDING": {
     "purpose": "SEO Landing Page Generator: keyword intake, intent grouping, new-page-versus-improve-existing decision, quality gate and administrator approval for landing pages.",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
-  "BWEListGlobalSkills": {
-    "purpose": "Print a nicely formatted list of every skill in the catalog with a one-line description.",
-    "dependencies": "none",
-    "projects": "all projects"
-  },
-  "BWESEOVersion": {
-    "purpose": "Show the SEO engine version bundled in the plugin.",
-    "dependencies": "none",
-    "projects": "all projects"
-  },
-  "BWESEOInstalledVersion": {
-    "purpose": "Show the SEO engine version installed in the current website.",
-    "dependencies": "SEO engine installed (/BWESEOInstall)",
-    "projects": "website projects with the engine installed"
-  },
-  "BWEFAQVersion": {
-    "purpose": "Show the FAQ engine version bundled in the plugin.",
-    "dependencies": "none",
-    "projects": "all projects"
-  },
-  "BWEFAQInstalledVersion": {
-    "purpose": "Show the FAQ engine version installed in the current website.",
-    "dependencies": "FAQ engine installed (/BWEFAQInstall)",
-    "projects": "website projects with the engine installed"
-  },
-  "BWEBlogVersion": {
-    "purpose": "Show the Blog engine version bundled in the plugin.",
-    "dependencies": "none",
-    "projects": "all projects"
-  },
-  "BWEBlogInstalledVersion": {
-    "purpose": "Show the Blog engine version installed in the current website.",
-    "dependencies": "Blog engine installed (/BWEBlogInstall)",
-    "projects": "website projects with the engine installed"
-  },
-  "BWE_FAQEngine": {
+  "BWE-FAQ-ENGINE": {
     "purpose": "FAQ engine control panel: latest version, installed version per client site, install latest.",
     "dependencies": "GitHub access; delegates to BWEFAQInstall",
     "projects": "all"
   },
-  "BWE_SEOEngine": {
+  "BWE-SEO-ENGINE": {
     "purpose": "SEO engine control panel: latest version, installed version per client site, install latest.",
     "dependencies": "GitHub access; delegates to BWESEOInstall/BWESEOUpdate",
     "projects": "all"
   },
-  "BWE_BlogEngine": {
+  "BWE-BLOG-ENGINE": {
     "purpose": "Blog engine control panel: latest version, installed version per client site, install latest.",
     "dependencies": "GitHub access; delegates to BWEBlogInstall/BWEBlogUpdate",
     "projects": "all"
   },
-  "BWE_Skills": {
+  "BWE-SKILLS": {
     "purpose": "List all BWE skills and create or edit skills in the shared ClaudeSkills repo.",
     "dependencies": "GitHub access",
     "projects": "all"
   },
-  "BWE_MobbinResearch": {
+  "BWE-MOBBIN-RESEARCH": {
     "purpose": "Mobbin design research: ranked reference shortlist, three design directions, approval gate, developer-ready design spec.",
     "dependencies": "Mobbin MCP connector (falls back to chat or manual references); Node 18+ for scripts/score.mjs",
     "projects": "all (website and web app projects)"
   },
-  "BWE_UpdateSkills": {
+  "BWE-SKILLS-UPDATE": {
     "purpose": "Update the bwe-skills plugin in the current project and report the version before and after.",
     "dependencies": "claude CLI; GitHub access to BWERepo/ClaudeSkills",
     "projects": "all"
   },
-  "BWEInstallAllEngines": {
+  "BWE-ALL-ENGINES-INSTALL": {
     "purpose": "Install the latest SEO, FAQ and Blog engines into one website in a single run and show each engine version.",
     "dependencies": "Node 20+, git, access to the BWERepo engine repos",
     "projects": "website projects"
