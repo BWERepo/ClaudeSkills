@@ -1,4 +1,6 @@
 # Changelog
+## [2026.10.23.01] - 2026-10-23
+- Added BWEInstallAllEngines: installs or updates the latest SEO, FAQ and Blog engines into one website in a single run (reusing the single-engine install logic), then displays the installed version of each engine. Never deploys.
 ## [2026.10.22.03] - 2026-10-22
 - Added BWE_UpdateSkills: runs `claude plugin marketplace update bwe-skills` and `claude plugin update bwe-skills@bwe-skills` at the scope the plugin is installed with in the current project, reports the version before and after, and says when to restart the session. Asks before installing or enabling the plugin where it is missing or disabled.
 - BWE_MobbinResearch troubleshooting now points to BWE_UpdateSkills.
