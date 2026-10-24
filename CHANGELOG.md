@@ -1,4 +1,6 @@
 # Changelog
+## [2026.10.24.01] - 2026-10-24
+- Added BWE-BACKUP: a general, project-neutral backup of the current project folder (with git history) to a timestamped zip at an owner-named destination, leaving out rebuildable folders and secrets. Local-only; BWE-OCA-BACKUP stays the skill for One Click Answers.
 ## [2026.10.23.03] - 2026-10-23
 - Added BWE-ALL-ENGINES-CHECK: takes a website project name and, read-only, compares the installed SEO, FAQ and Blog engine versions with the latest in each BWERepo engine repo, then prints a table and an update needed / up to date verdict per engine.
 ## [2026.10.23.02] - 2026-10-23
