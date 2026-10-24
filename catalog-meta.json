@@ -303,5 +303,10 @@
     "purpose": "Check whether the SEO, FAQ and Blog engines in a website need updating (read-only, per-engine verdict).",
     "dependencies": "access to the BWERepo engine and website repos",
     "projects": "website projects"
+  },
+  "BWE-BACKUP": {
+    "purpose": "Back up the current project (with git history) to a timestamped zip, without secrets.",
+    "dependencies": "local machine and a backup destination",
+    "projects": "all"
   }
 }
