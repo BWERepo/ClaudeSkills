@@ -313,5 +313,10 @@
     "purpose": "Back up the current project (with git history) to a timestamped zip, without secrets.",
     "dependencies": "local machine and a backup destination",
     "projects": "all"
+  },
+  "ui-ux-pro-max": {
+    "purpose": "Searchable UI/UX design intelligence: styles, palettes, font pairings, UX guidelines, charts and stack guidance, plus a design-system generator.",
+    "dependencies": "Python 3 (local scripts, no network); third-party MIT (nextlevelbuilder/ui-ux-pro-max-skill), see skills/ui-ux-pro-max/LICENSE.txt",
+    "projects": "all"
   }
 }

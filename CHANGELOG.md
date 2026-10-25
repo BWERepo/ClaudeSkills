@@ -1,4 +1,6 @@
 # Changelog
+## [2026.10.25.02] - 2026-10-25
+- Added ui-ux-pro-max, the upstream skill from github.com/nextlevelbuilder/ui-ux-pro-max-skill (MIT, LICENSE.txt included), keeping its upstream name. Searchable local design data (styles, palettes, font pairings, UX guidelines, charts, 22 stacks) and a design-system generator, run through its Python scripts (no network, no dependencies). Only change from upstream: script paths in SKILL.md point at the plugin layout (`${CLAUDE_PLUGIN_ROOT}/skills/ui-ux-pro-max`), and the upstream test suite was left out. Reviewed: scripts only read bundled data and write files only when `--persist` is used.
 ## [2026.10.25.01] - 2026-10-25
 - Added frontend-design, the upstream skill from github.com/anthropics/skills (Apache 2.0, LICENSE.txt included), unmodified and keeping its upstream name like `impeccable`. Guidance for distinctive visual design when building or reshaping UI: a design plan reviewed against the brief, deliberate typography, avoiding templated defaults, and copy as design material. Available to every project that installs bwe-skills.
 ## [2026.10.24.01] - 2026-10-24
