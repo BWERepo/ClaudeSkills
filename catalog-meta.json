@@ -129,6 +129,11 @@
     "dependencies": "Node; agents/ (impeccable-*.md); third-party Apache 2.0, see NOTICE.md",
     "projects": "website projects"
   },
+  "frontend-design": {
+    "purpose": "Distinctive, intentional visual design for new or reworked UI: design plan, typography, anti-template review, copy.",
+    "dependencies": "none; third-party Apache 2.0 (anthropics/skills), see skills/frontend-design/LICENSE.txt",
+    "projects": "all"
+  },
   "BWE-IMPECCABLE": {
     "purpose": "Implements a design upgrade of a website by offering a checklist of every installed Impeccable command (default: the seven design stages in ",
     "dependencies": "Impeccable design skill (impeccable) and its agents/",

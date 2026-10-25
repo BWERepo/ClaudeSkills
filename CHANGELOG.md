@@ -1,4 +1,6 @@
 # Changelog
+## [2026.10.25.01] - 2026-10-25
+- Added frontend-design, the upstream skill from github.com/anthropics/skills (Apache 2.0, LICENSE.txt included), unmodified and keeping its upstream name like `impeccable`. Guidance for distinctive visual design when building or reshaping UI: a design plan reviewed against the brief, deliberate typography, avoiding templated defaults, and copy as design material. Available to every project that installs bwe-skills.
 ## [2026.10.24.01] - 2026-10-24
 - Added BWE-BACKUP: a general, project-neutral backup of the current project folder (with git history) to a timestamped zip at an owner-named destination, leaving out rebuildable folders and secrets. Local-only; BWE-OCA-BACKUP stays the skill for One Click Answers.
 ## [2026.10.23.03] - 2026-10-23
