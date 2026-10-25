@@ -1,4 +1,6 @@
 # Changelog
+## [2026.10.25.03] - 2026-10-25
+- Added scroll-craft, the upstream skill from github.com/nateherkai/scroll-craft (MIT, LICENSE.txt included), unmodified and keeping its upstream name. Builds scroll-driven landing pages with a layered hero and verified desktop, mobile and reduced-motion states. Reviewed: scripts only run locally (static server, Playwright screenshots, ffmpeg); the only network calls are to api.kie.ai when the owner supplies KIE_AI_API_KEY to generate imagery, and it is optional.
 ## [2026.10.25.02] - 2026-10-25
 - Added ui-ux-pro-max, the upstream skill from github.com/nextlevelbuilder/ui-ux-pro-max-skill (MIT, LICENSE.txt included), keeping its upstream name. Searchable local design data (styles, palettes, font pairings, UX guidelines, charts, 22 stacks) and a design-system generator, run through its Python scripts (no network, no dependencies). Only change from upstream: script paths in SKILL.md point at the plugin layout (`${CLAUDE_PLUGIN_ROOT}/skills/ui-ux-pro-max`), and the upstream test suite was left out. Reviewed: scripts only read bundled data and write files only when `--persist` is used.
 ## [2026.10.25.01] - 2026-10-25

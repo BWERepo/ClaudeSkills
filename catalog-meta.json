@@ -129,6 +129,11 @@
     "dependencies": "Node; agents/ (impeccable-*.md); third-party Apache 2.0, see NOTICE.md",
     "projects": "website projects"
   },
+  "scroll-craft": {
+    "purpose": "Premium scroll-driven landing pages: journey plan, layered hero, signature move, optional kie.ai assets, visual scroll verification.",
+    "dependencies": "Node; Chrome + Playwright for screenshots; ffmpeg for video; optional KIE_AI_API_KEY (generation only); third-party MIT (nateherkai/scroll-craft), see skills/scroll-craft/LICENSE.txt",
+    "projects": "website projects"
+  },
   "frontend-design": {
     "purpose": "Distinctive, intentional visual design for new or reworked UI: design plan, typography, anti-template review, copy.",
     "dependencies": "none; third-party Apache 2.0 (anthropics/skills), see skills/frontend-design/LICENSE.txt",
