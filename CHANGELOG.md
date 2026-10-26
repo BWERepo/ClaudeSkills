@@ -1,4 +1,6 @@
 # Changelog
+## [2026.10.26.01] - 2026-10-26
+- Added BWE-SEO-WATCH: runs and verifies the Google search monitoring workflow (`seo-watch.mjs`: sitemap kept current from page events, a daily check of new pages plus a rotating sample, flags for pages Google has not indexed, crawl failures and unexpected canonicals, a weekly report with the three most useful fixes). Its `setup` mode walks the owner through the customer-site validation steps one at a time. Needs SEO engine 2026.10.26.02 or newer; the engine bundled in this plugin is still 2026.10.20.03, so the skill stops with an update message until a newer engine is bundled (a separate release step).
 ## [2026.10.25.03] - 2026-10-25
 - Added scroll-craft, the upstream skill from github.com/nateherkai/scroll-craft (MIT, LICENSE.txt included), unmodified and keeping its upstream name. Builds scroll-driven landing pages with a layered hero and verified desktop, mobile and reduced-motion states. Reviewed: scripts only run locally (static server, Playwright screenshots, ffmpeg); the only network calls are to api.kie.ai when the owner supplies KIE_AI_API_KEY to generate imagery, and it is optional.
 ## [2026.10.25.02] - 2026-10-25

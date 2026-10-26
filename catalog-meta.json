@@ -109,6 +109,11 @@
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
+  "BWE-SEO-WATCH": {
+    "purpose": "Run and verify the Google search monitoring workflow (sitemap sync, daily check, flags, weekly report), with a guided customer-site setup.",
+    "dependencies": "BWE-SEO engine 2026.10.26.02 or newer installed in the project (BWE-SEO-ENGINE install); Node",
+    "projects": "website projects with BWESEO installed"
+  },
   "BWE-SEO-SETUP": {
     "purpose": "Configures BWESEO for the current customer's website project AFTER the engine is installed (/BWESEOInstall) \u2014 creates the customer-specific ",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
