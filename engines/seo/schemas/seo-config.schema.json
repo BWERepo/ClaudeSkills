@@ -318,6 +318,21 @@
                 "thresholds": { "type": "object", "additionalProperties": { "type": "number", "minimum": 0 }, "description": "Optional overrides of the engine defaults (see docs/methodology/keyword-performance.md)" }
               }
             },
+            "searchWatch": {
+              "type": "object",
+              "description": "Google search monitoring workflow (seo-watch.mjs): sitemap sync on page events, a daily check of new pages plus a rotating sample, findings for the improvement queue, a weekly report. ON unless enabled is false. Site configuration only; never credentials.",
+              "properties": {
+                "enabled": { "type": "boolean", "description": "Default true after an install; false switches the whole workflow off" },
+                "sitemapPath": { "type": "string", "description": "Where the generated sitemap is written, relative to the project (default public/sitemap.xml)" },
+                "sampleSize": { "type": "integer", "minimum": 1 },
+                "newPerRun": { "type": "integer", "minimum": 0 },
+                "dailyInspectionCap": { "type": "integer", "minimum": 0 },
+                "graceDays": { "type": "integer", "minimum": 0 },
+                "confirmAfter": { "type": "integer", "minimum": 1 },
+                "maxShrinkPercent": { "type": "integer", "minimum": 0, "maximum": 100 },
+                "crawlDelayMs": { "type": "integer", "minimum": 0 }
+              }
+            },
             "indexMonitor": {
               "type": "object",
               "description": "Engine 1.9.0 — Google Index Monitoring: scheduled URL Inspection / Search Analytics / sitemap checks of PRODUCTION URLs only, run by the site's own scheduler. Site configuration only; the engine code is generic. Never holds credentials.",

@@ -13,16 +13,24 @@ th{color:var(--mut);font-weight:600}.pill{padding:2px 8px;border-radius:99px;bor
 .ok{color:var(--ok)}.bad{color:var(--bad)}.mut{color:var(--mut)}
 </style></head><body><main>
 <h1>SEO Page Opportunities</h1>
-<p class="mut">Open <code>seo/data/landing/state.json</code>. Nothing here publishes a page; publishing needs an approval recorded by <code>seo-landing.mjs approve</code>.</p>
-<label class="f">Choose state.json<input id="file" type="file" accept="application/json" hidden></label>
+<p class="mut">Open <code>seo/data/landing/state.json</code> (page opportunities) or <code>seo/data/landing/cities.json</code> (city pages). Nothing here publishes a page; publishing needs an approval recorded by <code>seo-landing.mjs approve</code>.</p>
+<label class="f">Choose state.json or cities.json<input id="file" type="file" accept="application/json" hidden></label>
 <div class="wrap"><table id="t" aria-label="Page opportunities"><thead><tr>
 <th>Target keyword</th><th>Secondary keywords</th><th>Search intent</th><th>Opportunity</th><th>Action</th><th>Proposed URL</th><th>Quality checks</th><th>Status</th><th>Search performance</th>
 </tr></thead><tbody></tbody></table></div>
+<h2 id="ch" hidden>City pages</h2>
+<div class="wrap" id="cw" hidden><table aria-label="City pages"><thead><tr><th>City</th><th>URL</th><th>Content</th><th>Approval</th><th>Published</th><th>Sitemap lastmod</th><th>Verified</th></tr></thead><tbody id="ct"></tbody></table></div>
 <script>
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 document.getElementById("file").addEventListener("change",async e=>{
   const f=e.target.files[0]; if(!f) return;
-  let s; try{ s=JSON.parse(await f.text()); }catch{ alert("Not a valid state.json"); return; }
+  let s; try{ s=JSON.parse(await f.text()); }catch{ alert("Not a valid state.json or cities.json"); return; }
+  if(Array.isArray(s.entries)){
+    const ap=s.approval;
+    document.getElementById("ch").hidden=false; document.getElementById("cw").hidden=false;
+    document.getElementById("ct").innerHTML=s.entries.map(c=>`<tr><td>${esc(c.city)}, ${esc(c.state)}</td><td>${esc(c.path)}</td><td><span class="pill">${esc(c.status)}</span></td><td>${ap&&ap.packageHash&&["approved","published"].includes(c.status)?`approved by ${esc(ap.by)} ${esc(ap.on)}`:'<span class="mut">not approved</span>'}</td><td>${c.publishedOn?esc(c.publishedOn):'<span class="mut">not recorded</span>'}</td><td>${esc(c.lastmod||"—")}</td><td>${c.verifiedOn?'<span class="ok">'+esc(c.verifiedOn)+"</span>":'<span class="mut">not verified</span>'}</td></tr>`).join("")||'<tr><td colspan="7">No city pages yet.</td></tr>';
+    document.querySelector("#t tbody").innerHTML='<tr><td colspan="9">This file holds city pages (shown below).</td></tr>'; return;
+  }
   const rows=(s.opportunities||[]).map(o=>{
     const c=o.checks, perf=o.performance&&typeof o.performance==="object"?`${o.performance.impressions??"unavailable"} impr · ${o.performance.clicks??"unavailable"} clicks · CTR ${o.performance.ctr??"unavailable"} · pos ${o.performance.position??"unavailable"}`:"unavailable";
     return `<tr><td>${esc(o.primary)}</td><td>${esc((o.secondary||[]).join(", "))||"—"}</td><td>${esc(o.intent)}</td><td>${esc(o.reason)}<br><span class="mut">${esc(o.score?.priority)} · competition ${esc(o.score?.competition?.value)} · volume ${esc(o.score?.volume)}</span></td><td>${esc(o.action)}</td><td>${esc(o.target)}</td><td>${c?(c.ok?'<span class="ok">pass</span>':'<span class="bad">'+c.errors+' error(s)</span>')+` · ${c.warnings} warning(s)`:'<span class="mut">not run</span>'}</td><td><span class="pill">${esc(o.status)}</span>${o.approval?`<br><span class="mut">approved by ${esc(o.approval.by)} ${esc(o.approval.on)}</span>`:""}</td><td>${esc(perf)}</td></tr>`;});

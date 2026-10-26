@@ -2520,3 +2520,25 @@ describe("Google workflow — separate stages, each with its own evidence", () =
     expect(g.sitemap).toMatchObject({ url: "https://acme-heating.example.com/sitemap.xml", submitted: "yes", submissionMethod: "manual", status: "success", lastVerifiedAt: "2026-10-01", lastReadAt: "2026-10-29", discoveredUrlCount: 15 });
   });
 });
+
+describe("improvement queue in the state machine", () => {
+  const queueNext = (over = {}) => ({ id: "q-keyword-abc", title: "Improve a page", action: "work", reason: "no approval needed", why: "severity: high", severity: "high", source: "keywords", waiting: 0, ...over });
+  const quiet = { pages: [home, doneIdea], docs: planned };
+  it("recommends the queue's next item only when nothing earlier is outstanding", () => {
+    const idle = run({ ...evidence(quiet), queueNext: queueNext() });
+    expect(idle.recommendation).toMatchObject({ kind: "queue-next", queueId: "q-keyword-abc", actor: "claude" });
+    expect(idle.recommendation.next).toMatch(/seo-queue\.mjs explain q-keyword-abc/);
+    expect(run({ ...evidence(quiet), queueNext: queueNext({ action: "approve" }) }).recommendation).toMatchObject({ kind: "queue-next", actor: "user", approval: "change" });
+  });
+  it("never outranks a blocking issue, an approval already routed, or setup work", () => {
+    const withIssue = run({ ...evidence({ ...quiet, issues: [{ id: "robots-blocks-all", title: "Robots blocks all", severity: "critical", area: "technical", status: "open", blocking: true }] }), queueNext: queueNext() });
+    expect(withIssue.recommendation.kind).toBe("approve-issue");
+    expect(run({ ...evidence({ pages: [home] }), queueNext: queueNext() }).recommendation.kind).not.toBe("queue-next");
+  });
+  it("does not duplicate inventory issues, which the state machine already routes", () => {
+    expect(run({ ...evidence(quiet), queueNext: queueNext({ source: "inventory" }) }).recommendation.kind).toBe("idle");
+  });
+  it("is absent when no queue exists", () => {
+    expect(run(evidence(quiet)).recommendation.kind).toBe("idle");
+  });
+});

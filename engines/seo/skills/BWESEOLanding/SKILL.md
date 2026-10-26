@@ -31,3 +31,12 @@ Read `docs/methodology/landing-pages.md` first. This skill reuses `/BWESEOOpport
 8. Approval: `approve <id> --by "<administrator>"` approves the exact content; any later edit voids it. `move <id> --to published`
    is refused without a valid approval and only records state — deploying is a separate, owner-authorised step.
 9. After publishing: `/BWESEOSearchConsole`. A sitemap update or submission is never proof of indexing; only Search Console says "indexed".
+
+## City pages (wizard)
+For a page about one city: `node seo/tools/seo-landing-city.mjs add "<City>" <ST> --home-base "<where the business really is>"`, then
+`brief <id> --file brief.json` (service availability must be confirmed by the owner; every fact marked verified, business-provided or
+assumption; sources with URL and date), `draft <id> --page page.json` (quality gate, near-duplicate and local-presence checks),
+`package --origin <url> --sitemap sitemap.xml --robots robots.txt` (sitemap additions with stable lastmod, robots check, link report),
+and stop: **Approval needed** from the owner for that package hash. `approve --package <hash> --by "<name>"`, the owner deploys,
+`published <id> --by "<name>"`, then `verify --origin <url>`. Verified is never "indexed"; Search Console submission is a separate owner decision.
+Never claim an office, staff, licence or response time in a city without evidence; a city that already has a page is improved, not duplicated.

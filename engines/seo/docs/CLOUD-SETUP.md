@@ -16,7 +16,7 @@ npm ci
 ```
 
 `npm ci` installs exactly what `package-lock.json` pins (the test runner only; the engine has no runtime dependencies). It is needed to
-run the engine's own tests and checkpoint. It is **not** needed just to install the engine into a website, which uses Node 18+ alone.
+run the engine's own tests and checkpoint, and needs Node 20.19+ or 22.12+ (the test runner's requirement). It is **not** needed just to install the engine into a website, which uses Node 18+ alone.
 
 ## 2. Tell everything where it is: `BWESEO_ENGINE_HOME`
 

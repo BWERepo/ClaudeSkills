@@ -219,3 +219,19 @@ describe("5. no obsolete engine path outside the deprecated fallback", () => {
     expect(hits.filter((h) => !allowed.some((re) => re.test(h)))).toEqual([]);
   });
 });
+
+describe("5. search watch after an install", () => {
+  it("is reported as on by default, as off when the project's own configuration says so, and the configuration is never edited", async () => {
+    const fresh = ctxFor("watch-default");
+    const a = await run([], fresh);
+    expect(a.code).toBe(0);
+    expect(a.out).toMatch(/Search watch is on by default/);
+    const off = ctxFor("watch-off");
+    mkdirSync(join(off.project, "seo"), { recursive: true });
+    const cfg = '{ "projectId": "demo-shop", "website": "https://demo-shop.example", "analytics": { "searchConsole": { "searchWatch": { "enabled": false } } } }\n';
+    writeFileSync(join(off.project, "seo", "seo-config.json"), cfg);
+    const b = await run([], off);
+    expect(b.out).toMatch(/Search watch is switched off/);
+    expect(readFileSync(join(off.project, "seo", "seo-config.json"), "utf8")).toBe(cfg);
+  });
+});

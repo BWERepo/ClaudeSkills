@@ -25,7 +25,8 @@
 // Data: reads seo/business-profile.json; writes only seo/data/local-gbp/ (private, git-ignored). It never changes the website and
 // never submits anything to Google. Creating and verifying a profile in manual mode is the owner's action in Google's own interface.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync } from "node:fs";
+import { writeJsonAtomic } from "./safe-write.mjs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { eligibilityQuestions } from "./gbp-eligibility.mjs";
@@ -41,7 +42,7 @@ import { loadState, setEligibility, recordSearch, resolveCandidate, creationGate
 const dirOf = (project) => join(project, "seo", "data", "local-gbp");
 const readJson = (p) => JSON.parse(readFileSync(p, "utf8"));
 const readIf = (p) => (existsSync(p) ? readJson(p) : null);
-const writeJson = (p, v) => { mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, JSON.stringify(v, null, 2) + "\n"); };
+const writeJson = (p, v) => writeJsonAtomic(p, v);
 
 export function parseArgs(argv) {
   const out = { _: [], html: [] };

@@ -35,11 +35,13 @@
 
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { writeJsonAtomic } from "./safe-write.mjs";
 import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ENGINE_VERSION, validateProject } from "./validate-seo-data.mjs";
 import { credentialStatus } from "./seo-google.mjs";
+import { migrateQueue, nextAction } from "./improvement-queue.mjs";
 import {
   assessPage,
   evaluateState,
@@ -221,6 +223,18 @@ export async function collectEvidence(
   // Keyword performance summary (engine 1.10.0): written by seo-keywords.mjs pull/refresh, never committed (seo/data is ignored).
   ev.keywordPerformance = read(join(projectDir, paths.data ?? "seo/data", "keyword-performance", "summary.json"));
 
+  // Unified improvement queue (seo-queue.mjs): only its single next eligible item is passed to the state machine.
+  try {
+    const qf = read(join(projectDir, paths.data ?? "seo/data", "improvement-queue.json"));
+    if (qf) {
+      const { queue } = migrateQueue(qf);
+      const n = nextAction(queue, { now: Date.parse(`${today}T12:00:00Z`) });
+      if (n.item) ev.queueNext = { id: n.item.id, title: n.item.title, action: n.action, reason: n.reason, why: n.why.join("; "), severity: n.item.severity, source: n.item.source.module, waiting: n.skipped.length };
+    }
+  } catch (e) {
+    ev.parseErrors.push(`improvement queue: ${e.message}`);
+  }
+
   ev.sources = {};
   for (const p of ev.inventory?.pages ?? []) {
     if (p.status !== "rejected" && isStr(p.source))
@@ -277,7 +291,7 @@ async function cli(argv) {
   if (argv.includes("--record-health")) {
     const file = join(project, ev.config?.paths?.data ?? "seo/data", "live-health.json");
     mkdirSync(join(file, ".."), { recursive: true });
-    writeFileSync(file, JSON.stringify(nextHealthHistory(state.liveHealth, ev.healthHistory), null, 2) + "\n");
+    writeJsonAtomic(file, nextHealthHistory(state.liveHealth, ev.healthHistory));
   }
   if (argv.includes("--page")) {
     const ref = arg("--page");

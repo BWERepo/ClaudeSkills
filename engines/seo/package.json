@@ -1,17 +1,23 @@
 {
   "name": "bweseo-engine",
-  "version": "2026.10.20.03",
+  "version": "2026.10.26.02",
   "description": "BWESEO — the reusable, customer-neutral SEO engine (state machine, validators, Google workflow, installer, skills).",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "scripts": {
     "test": "vitest run",
     "manifest": "node scripts/build-manifest.mjs",
     "validate": "node scripts/validate-canonical.mjs",
-    "guide": "node scripts/show-guide.mjs"
+    "guide": "node scripts/show-guide.mjs",
+    "check:generated": "node scripts/build-manual.mjs --check && node scripts/show-guide.mjs --check && node scripts/build-manifest.mjs --check"
   },
   "devDependencies": {
     "vitest": "^4.1.10"
+  },
+  "bweseo": {
+    "consumerNode": ">=18"
   }
 }

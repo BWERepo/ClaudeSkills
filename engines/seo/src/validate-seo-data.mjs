@@ -16,7 +16,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, resolve, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-export const ENGINE_VERSION = "2026.10.20.03";
+export const ENGINE_VERSION = "2026.10.26.02";
 // The version of the data files' shape (seo-config.json → schemaVersion). Separate from the engine version:
 // the engine changes often; the schema changes only when stored data needs migrating.
 export const SCHEMA_VERSION = 1;
@@ -357,6 +357,19 @@ function checkKeywordPerformance(m, at, r) {
   for (const k of Object.keys(m)) if (/token|secret|password|private|refresh|client_email|service_?account|credential/i.test(k)) r.errors.push(`${p}.${k}: never store credentials in the project - the key lives in the host's secret store`);
 }
 
+// Search watch (seo-watch.mjs) configuration: site settings only, never credentials. Absent means ON with the engine defaults.
+function checkSearchWatch(m, at, r) {
+  if (m == null) return;
+  const p = `${at}.searchWatch`;
+  if (!isObj(m)) return void r.errors.push(`${p} must be an object`);
+  if (m.enabled != null && typeof m.enabled !== "boolean") r.errors.push(`${p}.enabled must be true or false`);
+  if (m.sitemapPath != null && !(isStr(m.sitemapPath) && !/^([A-Za-z]:|[\\/])/.test(m.sitemapPath) && !m.sitemapPath.split(/[\\/]/).includes(".."))) r.errors.push(`${p}.sitemapPath must be a path inside the project (relative, no "..")`);
+  for (const k of ["sampleSize", "newPerRun", "dailyInspectionCap", "graceDays", "confirmAfter", "maxShrinkPercent", "crawlDelayMs"])
+    if (m[k] != null && !(Number.isInteger(m[k]) && m[k] >= 0)) r.errors.push(`${p}.${k} must be a non-negative whole number`);
+  if (m.maxShrinkPercent != null && m.maxShrinkPercent > 100) r.errors.push(`${p}.maxShrinkPercent must be 0-100`);
+  for (const k of Object.keys(m)) if (/token|secret|password|private|refresh|client_email|service_?account|credential/i.test(k)) r.errors.push(`${p}.${k}: never store credentials in the project`);
+}
+
 // Engine 1.4.0: the site-level Search Console record. `configured: yes` needs a property and a
 // verification date; a verification token or other secret is never stored in the project.
 function checkSearchConsoleSite(sc, r) {
@@ -383,6 +396,7 @@ function checkSearchConsoleSite(sc, r) {
     r.errors.push(`${at}.propertyType must be domain / url-prefix / unknown`);
   checkIndexMonitor(sc.indexMonitor, at, r);
   checkKeywordPerformance(sc.keywordPerformance, at, r);
+  checkSearchWatch(sc.searchWatch, at, r);
   const sm = sc.sitemap;
   if (sm == null) return;
   if (!isObj(sm)) return void r.errors.push(`${at}.sitemap must be an object`);

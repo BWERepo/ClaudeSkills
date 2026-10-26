@@ -461,9 +461,11 @@ async function cli(argv) {
     console.log("usage: node seo/tools/seo-page-checks.mjs --html <page.html> --url <page URL> [--home <home.html>] [--is-home] [--public-dir <dir>]... [--json]");
     return htmlFile ? 0 : 1;
   }
-  const html = readFileSync(htmlFile, "utf8");
+  let html;
+  try { html = readFileSync(htmlFile, "utf8"); } catch (e) { console.error(`cannot read ${htmlFile}: ${e.code ?? e.message}`); return 3; }
   const pageUrl = arg("--url") ?? undefined;
-  const homeHtml = arg("--home") ? readFileSync(arg("--home"), "utf8") : null;
+  let homeHtml = null;
+  if (arg("--home")) { try { homeHtml = readFileSync(arg("--home"), "utf8"); } catch (e) { console.error(`cannot read ${arg("--home")}: ${e.code ?? e.message}`); return 3; } }
   const publicDirs = argv.flatMap((a, i) => (a === "--public-dir" ? [join(process.cwd(), argv[i + 1])] : []));
   const head = headFromHtml(html);
   const checks = await runPageChecks({

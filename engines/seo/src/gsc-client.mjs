@@ -163,19 +163,38 @@ export function createSearchConsoleClient({ config, env = {}, fetchImpl = global
       status.reason ?? "the Search Console API is not available",
     );
 
+  // Every outbound request (token exchange and API call) gets the same bound: the request is aborted after `timeoutMs`, and the
+  // wait itself is capped too, so a fetch that ignores its signal cannot hang the caller. No retries: a call is one request, so the
+  // callers' own call budgets count requests exactly (the token exchange is not a Search Console API call and is cached).
+  const timed = async (run) => {
+    const ctl = new AbortController();
+    let timer;
+    const limit = new Promise((_, reject) => { timer = setTimeout(() => { ctl.abort(); reject(Object.assign(new Error("request timed out"), { name: "TimeoutError" })); }, timeoutMs); });
+    try { return await Promise.race([run(ctl.signal), limit]); } finally { clearTimeout(timer); }
+  };
+  let exchange = null; // one token exchange in flight at a time; concurrent callers share it
   async function token(scope) {
     if (cached && cached.scope === scope && cached.exp > now() + 60_000) return cached.value;
-    const sa = JSON.parse(env[status.credentialsSource.split(":")[1]]);
-    const jwt = await signJwt(sa, scope, Math.floor(now() / 1000));
-    const res = await fetchImpl(TOKEN_URL, {
-      method: "POST",
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion: jwt }),
-    });
-    if (!res.ok) throw Object.assign(new Error(`token exchange failed (HTTP ${res.status})`), { http: res.status });
-    const j = await res.json();
-    cached = { scope, value: j.access_token, exp: now() + (Number(j.expires_in) || 3600) * 1000 };
-    return cached.value;
+    if (exchange?.scope === scope) return exchange.promise;
+    const promise = (async () => {
+      const sa = JSON.parse(env[status.credentialsSource.split(":")[1]]);
+      const jwt = await signJwt(sa, scope, Math.floor(now() / 1000));
+      const j = await timed(async (signal) => {
+        const res = await fetchImpl(TOKEN_URL, {
+          method: "POST",
+          headers: { "content-type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion: jwt }),
+          signal,
+        });
+        if (!res.ok) throw Object.assign(new Error(`token exchange failed (HTTP ${res.status})`), { http: res.status });
+        try { return await res.json(); } catch { throw Object.assign(new Error("token response was not JSON"), { http: 502 }); }
+      });
+      if (!isStr(j?.access_token)) throw Object.assign(new Error("token response had no access token"), { http: 502 });
+      cached = { scope, value: j.access_token, exp: now() + (Number(j.expires_in) || 3600) * 1000 };
+      return cached.value;
+    })();
+    exchange = { scope, promise };
+    try { return await promise; } finally { if (exchange?.promise === promise) exchange = null; }
   }
 
   async function call(method, url, { body, scope = SCOPE_RO } = {}) {
@@ -183,13 +202,15 @@ export function createSearchConsoleClient({ config, env = {}, fetchImpl = global
     if (!siteUrl) return failure("not-configured", "the Search Console property (verifiedProperty / propertyType) is not configured");
     try {
       const t = await token(scope);
-      const res = await fetchImpl(url, {
-        method,
-        headers: { authorization: `Bearer ${t}`, ...(body ? { "content-type": "application/json" } : {}) },
-        ...(body ? { body: JSON.stringify(body) } : {}),
-        ...(timeoutMs && globalThis.AbortSignal?.timeout ? { signal: globalThis.AbortSignal.timeout(timeoutMs) } : {}),
+      const { res, text } = await timed(async (signal) => {
+        const res = await fetchImpl(url, {
+          method,
+          headers: { authorization: `Bearer ${t}`, ...(body ? { "content-type": "application/json" } : {}) },
+          ...(body ? { body: JSON.stringify(body) } : {}),
+          signal,
+        });
+        return { res, text: await res.text() };
       });
-      const text = await res.text();
       let data = null;
       try {
         data = text ? JSON.parse(text) : null;
@@ -207,6 +228,8 @@ export function createSearchConsoleClient({ config, env = {}, fetchImpl = global
       if (e?.name === "TimeoutError" || e?.name === "AbortError") return failure("timeout", `Google did not answer within ${Math.round(timeoutMs / 1000)} seconds`);
       if (e?.http === 400 || e?.http === 401) return failure("auth-failed", `Google rejected the service-account sign-in (HTTP ${e.http}) — the key may be revoked, expired or malformed`);
       if (e?.http === 403) return failure("permission-denied", `Google refused the service-account sign-in (HTTP 403)`);
+      if (e?.http === 429) return failure("quota", "Google's sign-in service is rate limiting this client (HTTP 429); try again later");
+      if (e?.http >= 500) return failure("api-error", `Google's sign-in service is unavailable (HTTP ${e.http}); try again later`);
       return failure("network", `could not reach Google: ${e?.message ?? e}`);
     }
   }

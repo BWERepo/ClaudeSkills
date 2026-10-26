@@ -8,7 +8,7 @@
     "rootFolderName": ""
   },
   "engine": {
-    "version": "2026.10.20.03"
+    "version": "2026.10.26.02"
   },
   "adapter": "static-html",
   "stack": {
@@ -83,6 +83,7 @@
       "statusCheckDays": 7,
       "indexMonitor": { "enabled": false },
       "keywordPerformance": { "enabled": false, "defaultRange": "28d", "staleAfterDays": 7 },
+      "searchWatch": { "enabled": true, "sitemapPath": "public/sitemap.xml", "sampleSize": 10, "newPerRun": 25, "dailyInspectionCap": 40 },
       "sitemapSubmission": "not verified",
       "sitemapSubmissionVerifiedOn": null
     },

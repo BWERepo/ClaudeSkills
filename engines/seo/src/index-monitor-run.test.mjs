@@ -232,6 +232,20 @@ describe("administrator actions are throttled", () => {
     expect((await runMonitor(ctx)).ok).toBe(true);
     expect(await ctx.store.get(KEYS.lock)).toBeNull();
   });
+  it("simultaneous runs on an atomic store: exactly one executes, the other reports busy, and the lock is released", async () => {
+    const ctx = ctxOf();
+    const slow = { ...ctx, discover: async () => { await new Promise((r) => setTimeout(r, 5)); return items("/a", "/b", "/c"); } };
+    const [a, b] = await Promise.all([runMonitor(slow), runMonitor(slow)]);
+    expect([a, b].filter((r) => r.skipped === "busy")).toHaveLength(1);
+    expect([a, b].find((r) => !r.skipped).lock).toEqual({ atomic: true });
+    expect(await ctx.store.get(KEYS.lock)).toBeNull();
+  });
+  it("does not delete a lock that a newer run now owns", async () => {
+    const ctx = ctxOf();
+    const slow = { ...ctx, discover: async () => { await ctx.store.put(KEYS.lock, { at: new Date(NOW).toISOString(), owner: "newer-run" }); return items("/a"); } };
+    await runMonitor(slow);
+    expect(await ctx.store.get(KEYS.lock)).toMatchObject({ owner: "newer-run" });
+  });
 });
 
 describe("site-level state, alerts and staging", () => {

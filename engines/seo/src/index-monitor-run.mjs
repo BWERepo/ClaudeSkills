@@ -17,7 +17,14 @@
 //   gi:meta       site-level state: Google API status, quota, sitemap, staging check, alerts, run log
 //   gi:summary    the compact snapshot /BWESEO and the admin header read
 //   gi:links      { <path>: [internal link paths] }            outbound links per page, for the internal-link check
-//   gi:lock       { at }                                       soft lock so a cron run and a manual refresh never overlap
+//   gi:lock       { at, owner }                                run lock so a cron run and a manual refresh do not overlap — see "Concurrency contract"
+//
+// Concurrency contract. Single-flight is guaranteed ONLY when the store provides an atomic `acquire(key, record, { staleBefore })`
+// (and `release(key, owner)`): memoryStore does (one process), and a host may supply one backed by a Durable Object, a database row
+// with a unique key, or similar. kvStore (Cloudflare KV) has no compare-and-set and is eventually consistent, so it gets a
+// best-effort write-then-verify lock that narrows, but does not close, the window; runs report `lock.atomic: false` then. On such a
+// store two runs that start at nearly the same moment can both proceed, and a locally enforced budget can be exceeded by at most
+// the other run's own spend (every run re-reads its budget after taking the lock and stays within its own subrequest budget).
 
 import {
   DEFAULTS, resolveConfig, normalizeUrl, isProductionUrl, newRecord, applyInspection, applyInspectionFailure, applyAnalytics,
@@ -41,6 +48,7 @@ export function kvStore(kv) {
     },
     put: (key, value) => kv.put(key, JSON.stringify(value)),
     delete: (key) => kv.delete(key),
+    atomic: false, // KV has no compare-and-set; acquireLock falls back to write-then-verify
   };
 }
 
@@ -50,8 +58,37 @@ export function memoryStore(initial = {}) {
     get: async (key) => (m.has(key) ? JSON.parse(JSON.stringify(m.get(key))) : null),
     put: async (key, value) => void m.set(key, JSON.parse(JSON.stringify(value))),
     delete: async (key) => void m.delete(key),
+    // Atomic within one process: no await between the check and the write, so two callers cannot both win.
+    atomic: true,
+    acquire: async (key, record, { staleBefore = -Infinity } = {}) => {
+      const cur = m.get(key);
+      if (cur && !(Date.parse(cur.at) <= staleBefore)) return false;
+      m.set(key, JSON.parse(JSON.stringify(record)));
+      return true;
+    },
+    release: async (key, owner) => { const cur = m.get(key); if (!cur || cur.owner === undefined || cur.owner === owner) m.delete(key); },
     _dump: () => Object.fromEntries(m),
   };
+}
+
+let lockSeq = 0;
+// Take a named run lock. Returns { ok: true, owner, atomic } or { ok: false }. Never throws for a busy lock.
+export async function acquireLock(store, key, { now, ttlMs, owner = `${now}-${++lockSeq}-${Math.random().toString(36).slice(2, 10)}` }) {
+  const record = { at: iso(now), owner };
+  if (typeof store.acquire === "function") {
+    return (await store.acquire(key, record, { staleBefore: now - ttlMs })) ? { ok: true, owner, atomic: store.atomic === true } : { ok: false };
+  }
+  const cur = await store.get(key);
+  if (cur && now - Date.parse(cur.at) < ttlMs) return { ok: false };
+  await store.put(key, record);
+  const back = await store.get(key); // write-then-verify: a best-effort check, not an atomic guarantee
+  return back?.owner === owner ? { ok: true, owner, atomic: false } : { ok: false };
+}
+// Release only a lock that is still ours (a run that outlived its TTL must not delete the next run's lock).
+export async function releaseLock(store, key, owner) {
+  if (typeof store.release === "function") return store.release(key, owner);
+  const cur = await store.get(key);
+  if (!cur || cur.owner === undefined || cur.owner === owner) await store.delete(key);
 }
 
 export async function loadState(store) {
@@ -160,9 +197,9 @@ export async function runMonitor(ctx, { mode = "cron", paths = [] } = {}) {
   const out = { ok: true, mode, at: iso(now), inspected: 0, added: [], removed: [], skipped: null, errors: [], quotaUsed: 0, subrequests: 0 };
 
   // lock
-  const lock = await store.get(KEYS.lock); budget.use();
-  if (lock && now - Date.parse(lock.at) < LOCK_MINUTES * 60_000) return { ...out, ok: false, skipped: "busy", message: "Another monitoring run is in progress." };
-  await store.put(KEYS.lock, { at: iso(now) }); budget.use();
+  const lock = await acquireLock(store, KEYS.lock, { now, ttlMs: LOCK_MINUTES * 60_000 }); budget.use(2);
+  if (!lock.ok) return { ...out, ok: false, skipped: "busy", message: "Another monitoring run is in progress." };
+  out.lock = { atomic: lock.atomic };
   try {
     let { registry, meta } = await loadState(store); budget.use(2);
     meta.googleApi = meta.googleApi ?? { status: "NOT_CONFIGURED", consecutiveFailures: 0 };
@@ -315,7 +352,7 @@ export async function runMonitor(ctx, { mode = "cron", paths = [] } = {}) {
     if (out.errors.length && !out.inspected && out.errors.some((e) => e.stage === "inspect")) out.ok = false;
     return out;
   } finally {
-    await store.delete(KEYS.lock);
+    await releaseLock(store, KEYS.lock, lock.owner);
   }
 }
 

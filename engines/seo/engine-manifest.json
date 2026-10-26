@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "engineId": "bweseo-engine",
-  "engineVersion": "2026.10.20.03",
+  "engineVersion": "2026.10.26.02",
   "schemaVersion": 1,
   "installer": "1.0.0",
   "requiredSkills": [
@@ -21,6 +21,7 @@
     "BWESEOReport",
     "BWESEOSchema",
     "BWESEOSearchConsole",
+    "BWESEOSearchWatch",
     "BWESEOSetup",
     "BWESEOTechnical",
     "BWESEOUpdate"
@@ -36,6 +37,12 @@
       "class": "ENGINE",
       "install": null,
       "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c"
+    },
+    {
+      "path": ".github/workflows/pr-validation.yml",
+      "class": "DEV",
+      "install": null,
+      "sha256": "8e51918b6a8d074793ee4c20fe23f351be9351dc1b0cf14aa889365f37ef29d3"
     },
     {
       "path": ".github/workflows/show-guide.yml",
@@ -59,25 +66,25 @@
       "path": "BWESEO-SKILLS-AND-PROCEDURES.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "9feca4ea6da483275e495d4a22c261e9f35228a6c3a02906c177040e55093bb7"
+      "sha256": "3add3380376b2ffd1b408346a30d919c111594eb0d0644006210f0be7d60322e"
     },
     {
       "path": "PROJECT_STATUS.md",
       "class": "DEV",
       "install": null,
-      "sha256": "f8b1477e377b94280a49594194dfeef3c98bb310d16b311d4f20fde8fdd44170"
+      "sha256": "196fb9ad6744b55b947bbddf4138c6afae1fc0d7a709a1f3eadda2f3102a87cd"
     },
     {
       "path": "README.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "d2d8c90a9a8284f3aa18ce3c92cee9ad237d628772e320fd26dbf5fc37f94a98"
+      "sha256": "a912f97be98a68a54e35175ee0d2fc145dfcb5da3912baccc3ff80248b4054ac"
     },
     {
       "path": "VERSION",
       "class": "ENGINE",
       "install": null,
-      "sha256": "2314dc7e584556ee507609469b78b2820ba15b55b8ee81fa7e12492657354128"
+      "sha256": "6c3543406c5d61879cddb3403ef288acf4ec42fafae344d9c38f7f4968b7daa0"
     },
     {
       "path": "adapters/_template.md",
@@ -143,13 +150,13 @@
       "path": "docs/CLOUD-SETUP.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "d19e59fbec74b2ce7a43d6c9ccb81884e1015decff8c9468aa8d75c3f3dcd526"
+      "sha256": "bce7f7f1b5c257f7ae917d2a0200d78b9c998ce07cee836d2b2c0d6516c1a15e"
     },
     {
       "path": "docs/ENGINE.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "de578418ca81a27be2b31f57e1e81ff9d50f3c88bc615143580d6d6e30f63893"
+      "sha256": "e3473680219be4c5cfc7ab28ae1d61c8be30d20a700e8bc080b310f836c90fed"
     },
     {
       "path": "docs/GBP-IMPLEMENTATION-INVENTORY.md",
@@ -161,7 +168,7 @@
       "path": "docs/OPERATING-GUIDE.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "367e51d3415255ad1934fba2d34719d60c0be8f10c0ee3b7ba484df701291629"
+      "sha256": "4502408ab3d5555cef07f86baf89dd09b2067d0266084e52d66de8e4c1e7d9e4"
     },
     {
       "path": "docs/industries/_template.md",
@@ -236,6 +243,12 @@
       "sha256": "0e2035cf30bfa8a9fe69e5495e2fbbcab95023455c7262275ff415d3a4594db9"
     },
     {
+      "path": "docs/methodology/change-outcomes.md",
+      "class": "ENGINE",
+      "install": null,
+      "sha256": "545c6ee7f2a9a7a876fba9950b06c7dfa02e273c3670317fcb68a45df34f8137"
+    },
+    {
       "path": "docs/methodology/competitor-research.md",
       "class": "ENGINE",
       "install": null,
@@ -281,7 +294,13 @@
       "path": "docs/methodology/google-index-monitoring.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "ee762555f053e511abe18a4f3d19cd6dbd68c8dc07b5ef5c261478c06e6bf830"
+      "sha256": "9f72c3bcd57af52ec01ca94d883b8eac0a2fd18725ca804959df19d189b55f16"
+    },
+    {
+      "path": "docs/methodology/improvement-queue.md",
+      "class": "ENGINE",
+      "install": null,
+      "sha256": "daa188049f44b1a18e1b923ef4592c58d4a649bd28beeb0e35ceb04114b09ad9"
     },
     {
       "path": "docs/methodology/intent-model.md",
@@ -299,13 +318,13 @@
       "path": "docs/methodology/keyword-performance.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "b936c285d861c7529f9dd145e37d185d51e3ddf83677e5323fa8aebe91d202f3"
+      "sha256": "353cb81fa37838a7ede276e9d5e3962aee7a571d8e51c922eee1963e27bf5018"
     },
     {
       "path": "docs/methodology/landing-pages.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "a3ead7cd861b745232e568b62ebf1d575da20f500c883799cf06f013869c4128"
+      "sha256": "f461fe1040238007638eefdfc27e5c65e7b37e58c04298e798d2e5f3865661b5"
     },
     {
       "path": "docs/methodology/local-seo.md",
@@ -356,10 +375,22 @@
       "sha256": "324129f54bdaccf52388d7515f158fe423e55825a320d63532895fd4359ff025"
     },
     {
+      "path": "docs/methodology/regression-detection.md",
+      "class": "ENGINE",
+      "install": null,
+      "sha256": "9c6fc6da3541d1a1e3e9647f2fb9b00f65a4a9186dd22318d33766746f640e6a"
+    },
+    {
       "path": "docs/methodology/search-console.md",
       "class": "ENGINE",
       "install": null,
       "sha256": "de6b9034cb7ef2a1f64a92c7a53774a52bcf45470aa80b2908682b9ffab2d70e"
+    },
+    {
+      "path": "docs/methodology/search-watch.md",
+      "class": "ENGINE",
+      "install": null,
+      "sha256": "94095dcea1d579ba798e1437e2b0574c25c5eee1c07953b81a5a146b7d9c9142"
     },
     {
       "path": "docs/methodology/structured-data.md",
@@ -389,13 +420,13 @@
       "path": "docs/skills-reference.json",
       "class": "ENGINE",
       "install": null,
-      "sha256": "313befe16703a9c47befa26dccba55700a3eeac7165000565cef1f4f8f5417f6"
+      "sha256": "30d9271034d5676b6fb092fdb1fded3798265947591ab6da7d8daffad728cdc9"
     },
     {
       "path": "installer/bweseo-install.mjs",
       "class": "ENGINE",
       "install": null,
-      "sha256": "164aaec3fa6533b1aba1b8c90276a8048aa727e64df8ad34c7022df1fd52c21a"
+      "sha256": "a65ad09568a9fdf3ae36e672777fdbed6b57521edc77666ff676bea7cb3717e0"
     },
     {
       "path": "installer/migrations/README.md",
@@ -413,13 +444,13 @@
       "path": "package-lock.json",
       "class": "ENGINE",
       "install": null,
-      "sha256": "2e2bf43431f7ad916285fb87d98f602409c51eb03ace62389835dcb3c92edc74"
+      "sha256": "547b67a60769bd86862fb8c3e3b7db77d7702aee1e473fd2d2639548580d0641"
     },
     {
       "path": "package.json",
       "class": "ENGINE",
       "install": null,
-      "sha256": "55aae5f40e0eca6af59425d824a1689477e36aee0f1f9e73bb0842ec042bb103"
+      "sha256": "91a88bce601fc89e8f574861bff7970dd0a48c4d302a4e5e3774c5ad7e104c53"
     },
     {
       "path": "schemas/business-profile.schema.json",
@@ -437,7 +468,7 @@
       "path": "schemas/seo-config.schema.json",
       "class": "ENGINE",
       "install": "seo/schema/seo-config.schema.json",
-      "sha256": "2a29f0d14dc73df9cbdf02b859b2c9703b7dc19dc7ad087af5b6051e88bd6a2f"
+      "sha256": "998c8baa0eff293ea8b111eb9a00e343952b62c1330d442b0ba95e2d91e1cc65"
     },
     {
       "path": "scripts/bootstrap.mjs",
@@ -449,13 +480,13 @@
       "path": "scripts/build-manifest.mjs",
       "class": "ENGINE",
       "install": null,
-      "sha256": "0fc1f5443352083fbca09cbf5b0886f084df5a82eb572f4a90acd6f3a3299b46"
+      "sha256": "46797615d8fd3d1e9fc4c02b2ec5859b2efc71d1e3386970236f847d78a5ef2c"
     },
     {
       "path": "scripts/build-manual.mjs",
       "class": "ENGINE",
       "install": null,
-      "sha256": "f2276d307cf7633618b51cf078e2aa8084a27a673bc82321b65c00526fc03d7e"
+      "sha256": "58264226a520036dd2470a60252a6909702297d0219ba2b40cb1e8e6cba5463f"
     },
     {
       "path": "scripts/register-engine.mjs",
@@ -521,7 +552,7 @@
       "path": "skills/BWESEOLanding/SKILL.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "c91b6fc6df571ee3c2a16d15e947035ced72aff3d6de21109e2fd7bf981bb861"
+      "sha256": "5c30a6b7f3c6552287a2934fce6192b4520b31a9e05252421833dc14419e5956"
     },
     {
       "path": "skills/BWESEOLocal/SKILL.md",
@@ -569,7 +600,13 @@
       "path": "skills/BWESEOSearchConsole/SKILL.md",
       "class": "ENGINE",
       "install": null,
-      "sha256": "a6c65d33244c8942c7b11baaf25d3ae4317d9f7704584d0a0ec951f5f80cf36f"
+      "sha256": "7e7b215cba36ad7e827dced983a76626f54ba0f2a4954986014034616b2644cd"
+    },
+    {
+      "path": "skills/BWESEOSearchWatch/SKILL.md",
+      "class": "ENGINE",
+      "install": null,
+      "sha256": "407f0a1666b0d8ddcb65e6830056ef3f9bcbba026c7462dbc0ed6f6c26b9f03e"
     },
     {
       "path": "skills/BWESEOSetup/SKILL.md",
@@ -588,6 +625,12 @@
       "class": "ENGINE",
       "install": null,
       "sha256": "d37205ed0c29771ea95b62654b45ebd6f92c69e56953878cdc45a4adbd8a0e0f"
+    },
+    {
+      "path": "src/evidence.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/evidence.mjs",
+      "sha256": "0e42c2f7fadfc47e4f2909c5a0a73577400b1b62743f54a7011b2536944fb5d9"
     },
     {
       "path": "src/gbp-discovery.mjs",
@@ -665,25 +708,49 @@
       "path": "src/gsc-client.mjs",
       "class": "ENGINE",
       "install": "seo/tools/gsc-client.mjs",
-      "sha256": "d69c10c99eb1d573d807193858cb433bacb048839df561158040835127b1393c"
+      "sha256": "65a87bdc65b21d66b8a92ce2db86a1b5d92a020f826ed76722224ca81899c18b"
+    },
+    {
+      "path": "src/improvement-cli.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/improvement-cli.test.mjs",
+      "sha256": "28363b41e6c4cfcb0bbc5eb4ca9c7922eab1396f9944d961300d1cbafdf8b01e"
+    },
+    {
+      "path": "src/improvement-queue.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/improvement-queue.mjs",
+      "sha256": "7c2da8897b3d2908e60f5689d9d4f9e9e1defb7b6af1c5c7776029e2428a13e5"
+    },
+    {
+      "path": "src/improvement-queue.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/improvement-queue.test.mjs",
+      "sha256": "cfe1db3ab76da2ffa9e784175b5c570d79a463816a77619225a8c5ffa18202b4"
+    },
+    {
+      "path": "src/improvement-sources.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/improvement-sources.mjs",
+      "sha256": "2998e0f95ec95da2d804e6d6e5402d5b0110e5e349fc358d3ea15d38aa14dfff"
     },
     {
       "path": "src/index-monitor-run.d.mts",
       "class": "ENGINE",
       "install": "seo/tools/index-monitor-run.d.mts",
-      "sha256": "ae42fa58dc93cc9c336ff6060d8d8f1bfa3c80636d8720d2f76deb21014e1922"
+      "sha256": "012cf44f82c3e058c833fe0d5bb062d2c0c3272101c9609e5afd34875a4b1c26"
     },
     {
       "path": "src/index-monitor-run.mjs",
       "class": "ENGINE",
       "install": "seo/tools/index-monitor-run.mjs",
-      "sha256": "b25eb8da3a55695940fb287dc3936f9d032421491102918964383bcccc199cd9"
+      "sha256": "308d86055b78968d8454732e05c0239d2f3483caf60af6dde6813da50db06dea"
     },
     {
       "path": "src/index-monitor-run.test.mjs",
       "class": "TEST",
       "install": "seo/tools/index-monitor-run.test.mjs",
-      "sha256": "34a04b9e289454df4cfc264ada90c820d35ca56a2cd3c6c822a9bf06a96fa3e8"
+      "sha256": "349390676e57e2ded945c138600323581d6ec221332ca3a03a930df794e2da6f"
     },
     {
       "path": "src/index-monitor-state.test.mjs",
@@ -713,13 +780,13 @@
       "path": "src/keyword-performance-run.d.mts",
       "class": "ENGINE",
       "install": "seo/tools/keyword-performance-run.d.mts",
-      "sha256": "911ff73fe384a0a1329ddb2de3aa27a3e1e67e85c4384c96b3fe08cd8ecf0f10"
+      "sha256": "691e649daca88b341a8484bd873160fc881fc702bec2af22c1f5c27ea2248012"
     },
     {
       "path": "src/keyword-performance-run.mjs",
       "class": "ENGINE",
       "install": "seo/tools/keyword-performance-run.mjs",
-      "sha256": "76d092b0cbcc0e682d5b7659696000e57abf829e17e9ca19d850ea256a9a09ed"
+      "sha256": "c4a9d77d767b0096405b155c48232806210e66e2426e8e932299cb7d03104ade"
     },
     {
       "path": "src/keyword-performance.d.mts",
@@ -758,6 +825,36 @@
       "sha256": "d2b179b459c1d75c8b87c738d163b89b0bbacc0d86d3f5dfe8de22138a9873c3"
     },
     {
+      "path": "src/keyword-targets-rotation.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/keyword-targets-rotation.test.mjs",
+      "sha256": "c500478b16f03a7533fd6c567f8f349c271d9d5a21b17b2d7ad286ee18e9b892"
+    },
+    {
+      "path": "src/landing-city-cli.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/landing-city-cli.test.mjs",
+      "sha256": "8f1b21a0dbcac6c097d5c140c1eb43e283e7bec2c24ebf26b0fdbc0894f1c86c"
+    },
+    {
+      "path": "src/landing-city.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/landing-city.mjs",
+      "sha256": "3ea5f83a06967e4ed855350f987f39baf95ed29f4fc19a983de3e038335c50dc"
+    },
+    {
+      "path": "src/landing-city.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/landing-city.test.mjs",
+      "sha256": "52aa783bda9a6788f554f1cca2bc2b20954a096eaeb3888b4fd0b420b9484d23"
+    },
+    {
+      "path": "src/landing-hash.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/landing-hash.mjs",
+      "sha256": "a50b9d1bc4a008e15e121beaf5c7e9c91d22b4fa709f0242fb9b6d4b53cb861c"
+    },
+    {
       "path": "src/landing-keywords.mjs",
       "class": "ENGINE",
       "install": "seo/tools/landing-keywords.mjs",
@@ -773,31 +870,109 @@
       "path": "src/landing-opportunities.mjs",
       "class": "ENGINE",
       "install": "seo/tools/landing-opportunities.mjs",
-      "sha256": "42e9a46ae5a2a51773515629bfcece5e4a6b16fdfec591bb41aa81f58a9a8374"
+      "sha256": "079ba9260fd26f31f6c8883b9f73c13e3921a37b45f90dd66b1f32cd8c7ac611"
     },
     {
       "path": "src/landing-pipeline.test.mjs",
       "class": "TEST",
       "install": "seo/tools/landing-pipeline.test.mjs",
-      "sha256": "970828579204a5e4ad84c3dc2ce97e048c6b1f1151dc96d805380ef67f5a899b"
+      "sha256": "00346fb2b7f4b369b742da40814122934fa50a54dd2e07db98aac8ed4d771d9f"
     },
     {
       "path": "src/landing-quality.mjs",
       "class": "ENGINE",
       "install": "seo/tools/landing-quality.mjs",
-      "sha256": "c53fcc8328dbb409346a6f5194c3d40ac83c33f03bffe8141cf5e59034241681"
+      "sha256": "ca6c329b9ec34aac8532a82b274ded6018bd3feb53830d1f4c5847f15f8a852a"
+    },
+    {
+      "path": "src/landing-replan.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/landing-replan.test.mjs",
+      "sha256": "aa0e4a66859d8862ccbed910b1d3f78b25ae03fdf150182ddd9f8b467b4ce99d"
+    },
+    {
+      "path": "src/outcome-history.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/outcome-history.mjs",
+      "sha256": "e0624a0deafd3f697f0a45eb927b6672a66c23f84162ce17825bea3ee3d0dbbe"
+    },
+    {
+      "path": "src/outcome-history.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/outcome-history.test.mjs",
+      "sha256": "275f1549c8afe9960520105ea2c22c3a45954191f24e5cb96aa7a5c021f8b6ba"
     },
     {
       "path": "src/post-publish-check.mjs",
       "class": "ENGINE",
       "install": "seo/tools/post-publish-check.mjs",
-      "sha256": "3ba82b170a83734a8d7669315a2cc10474565739683bdfd897e23125b8414b17"
+      "sha256": "d51b6f47053adceb5fcd0f91365e9394480675f7a08922df4c1dba46a6ce8983"
     },
     {
       "path": "src/post-publish-check.test.mjs",
       "class": "TEST",
       "install": "seo/tools/post-publish-check.test.mjs",
       "sha256": "767beb7ee46a8ac67172862a6203afc5f3f2c51e5020cf8c51da592c2e47ab61"
+    },
+    {
+      "path": "src/regression-collect.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/regression-collect.mjs",
+      "sha256": "8a884998d8dcfcfe7ad4c67e667760397c2bb760982479323b2ac932d22b71fc"
+    },
+    {
+      "path": "src/regression-detect.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/regression-detect.mjs",
+      "sha256": "0b2a52b32146558fffdcf6d2a5d724d621628806ebc6514e918615564bb3c652"
+    },
+    {
+      "path": "src/regression-detect.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/regression-detect.test.mjs",
+      "sha256": "7f1b4dfa7e8db2a7699af3d8fca8f248364b8b49100369e074570f0e786740f5"
+    },
+    {
+      "path": "src/regression-store.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/regression-store.mjs",
+      "sha256": "f5f2908015334e544d29242a4501a77e8c1c9830fd241092580353c5f45fe62c"
+    },
+    {
+      "path": "src/regression-workflow.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/regression-workflow.mjs",
+      "sha256": "b0a870dee5f560f4b41b572552d6157d54162fa083b4562ddebfae09339a5051"
+    },
+    {
+      "path": "src/safe-write.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/safe-write.mjs",
+      "sha256": "fccd584410b7e26dbb0fd4aaa26126b640c64fc9b8662de8ccdaf19d208df396"
+    },
+    {
+      "path": "src/safe-write.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/safe-write.test.mjs",
+      "sha256": "64cf331feec6f98a18f266b307332caf9061d111b23fc96fb7df03251b8cfb21"
+    },
+    {
+      "path": "src/search-watch.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/search-watch.mjs",
+      "sha256": "f8a35226177a68837317682d8ad143e8a176e9015a590bceb9fc685066963f15"
+    },
+    {
+      "path": "src/search-watch.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/search-watch.test.mjs",
+      "sha256": "fa717e41e0153ccea7bddc2e2bd0b62f69ddfd8aff67db064c8acc658ce2d462"
+    },
+    {
+      "path": "src/seo-doctor.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/seo-doctor.mjs",
+      "sha256": "ffa94eea80ab7d8548a5c091d77e36b226e2db93ef65bdd35fe7b735334a813d"
     },
     {
       "path": "src/seo-google-index.mjs",
@@ -815,13 +990,13 @@
       "path": "src/seo-google.test.mjs",
       "class": "TEST",
       "install": "seo/tools/seo-google.test.mjs",
-      "sha256": "4faa6dfee43f58e721c39ee20945b11f4bcb805d93ec0df75f6070503f168458"
+      "sha256": "21bdf82b058c3ab019515b7849ec75c1a3f9edf301d40be2e7a692cfb6b39a68"
     },
     {
       "path": "src/seo-keywords.mjs",
       "class": "ENGINE",
       "install": "seo/tools/seo-keywords.mjs",
-      "sha256": "48f8d8914706e8804a7a3fdc66f891382756eea61814a1abf94e7972f22aefe6"
+      "sha256": "5b3770486d15a27758bc9e42ba0a5b96465c8054ad472631d5e2547078334bde"
     },
     {
       "path": "src/seo-keywords.test.mjs",
@@ -830,28 +1005,58 @@
       "sha256": "4211f0debda847c30f34731cff3ca4124f0f3020f4489fc9651c40bb05b1e476"
     },
     {
+      "path": "src/seo-landing-city.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/seo-landing-city.mjs",
+      "sha256": "d271415d08f9ea253f5d49d042c591e19808f66bd831e464e3950344675c94cc"
+    },
+    {
       "path": "src/seo-landing.mjs",
       "class": "ENGINE",
       "install": "seo/tools/seo-landing.mjs",
-      "sha256": "8f371ba773efae9900938ac1e801e5444a98c74b63084c2e37db7c8edf40bb4e"
+      "sha256": "0eb7fc7942170c0ca23fea7977407df783cd2bebae55d89046dc8879538ab364"
     },
     {
       "path": "src/seo-local-gbp.mjs",
       "class": "ENGINE",
       "install": "seo/tools/seo-local-gbp.mjs",
-      "sha256": "c9fb34f0829a1d908c32671fd0e6de4627aff10061787be1974f771df0d4f933"
+      "sha256": "5fe9eecc8ad36e13f6af841863dc6dd4883340f2153ac1fb46234e8b5145deaf"
+    },
+    {
+      "path": "src/seo-outcomes.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/seo-outcomes.mjs",
+      "sha256": "370223bda980c149e130105869af91c442eac75bf6ae019440cba9d31aeec33f"
     },
     {
       "path": "src/seo-page-checks.mjs",
       "class": "ENGINE",
       "install": "seo/tools/seo-page-checks.mjs",
-      "sha256": "3765b87ff8c5195481b793cc9fcb9679d4493024f75cad193fc218810a17f3ba"
+      "sha256": "6533ddcdb4d918db558fd0ec193cc23e643c036ed89fb0a3da16f89bec04bd47"
     },
     {
       "path": "src/seo-page-checks.test.mjs",
       "class": "TEST",
       "install": "seo/tools/seo-page-checks.test.mjs",
       "sha256": "2f5c6743d020ea235aa4d9f7cb894c58b3ca6521d06dde60d6ea122625911988"
+    },
+    {
+      "path": "src/seo-queue.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/seo-queue.mjs",
+      "sha256": "8542968d39c8e5a36b2f1dcdf0191658634c9a7088f5873805dc37a9ad8b6d42"
+    },
+    {
+      "path": "src/seo-regression.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/seo-regression.mjs",
+      "sha256": "759e835b85e7077f4326548fc0d43ab50b4f33a782838abdbb5c1c886401cb9a"
+    },
+    {
+      "path": "src/seo-regression.test.mjs",
+      "class": "TEST",
+      "install": "seo/tools/seo-regression.test.mjs",
+      "sha256": "29043830c7057eee5d91b36c142ad9c0a4c51cf7f30f244038b0ea231a26d51a"
     },
     {
       "path": "src/seo-site-checks.mjs",
@@ -875,7 +1080,7 @@
       "path": "src/seo-state-core.mjs",
       "class": "ENGINE",
       "install": "seo/tools/seo-state-core.mjs",
-      "sha256": "bf2cfb04ce165830bffb0c5b30c6ba46db6af15c3b83bb9ac32d7cb3ebfac9ad"
+      "sha256": "fd5896188bae0d8d5f420370e96142cb725c05922378230de1fcb2c53cab33ad"
     },
     {
       "path": "src/seo-state.d.mts",
@@ -887,19 +1092,31 @@
       "path": "src/seo-state.mjs",
       "class": "ENGINE",
       "install": "seo/tools/seo-state.mjs",
-      "sha256": "6526acce0de93b912fd7f0eadc37b77b40404299e61b34ee1cee3ce43f8dbe27"
+      "sha256": "e887a0eacbc1187ae8a14805eaab7de6f3b7a11cb24dd10aaf1b197b8d8a1c73"
     },
     {
       "path": "src/seo-state.test.mjs",
       "class": "TEST",
       "install": "seo/tools/seo-state.test.mjs",
-      "sha256": "ff509a8ebfdbc03cb5f2090b04f0ac56973286569a417961008320e1197703ce"
+      "sha256": "de44653e7daebde40b9f08ed8f0b9d1240c8e4bab816decfc391b5b7cef56711"
+    },
+    {
+      "path": "src/seo-watch.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/seo-watch.mjs",
+      "sha256": "ffd5f5a403661332c02d177cd4a6e2e806fe2ab9591a1e78a1477f7791f22f4f"
     },
     {
       "path": "src/validate-seo-data.mjs",
       "class": "ENGINE",
       "install": "seo/tools/validate-seo-data.mjs",
-      "sha256": "76b0cf7540c2dba35a0f834d696769217c4a3399dce530e88d90637d21ab7661"
+      "sha256": "9678acdd2216c214a6d7fa5af4bdf9dc6ac135ede998cf3ade2309deac25123f"
+    },
+    {
+      "path": "src/web-parse.mjs",
+      "class": "ENGINE",
+      "install": "seo/tools/web-parse.mjs",
+      "sha256": "5fe25cf480f514aa87dcd3c56fd2ad255007a98988669b7892e13bffc3770c57"
     },
     {
       "path": "templates/business-profile.template.json",
@@ -923,13 +1140,13 @@
       "path": "templates/landing-dashboard.html",
       "class": "TEMPLATE",
       "install": "docs/seo/landing-dashboard.html",
-      "sha256": "10e1c67e2d46f3885effbeca81e774592dd437306cf695f60480484316244f6a"
+      "sha256": "f50252ae85c047d31d607a4ebf11f89299df9b8a12e0bd8c0eceb29e2f006c5f"
     },
     {
       "path": "templates/seo-config.template.json",
       "class": "TEMPLATE",
       "install": null,
-      "sha256": "c73e82d7cfd5e683b1fd1da2661d65b77f81d1e3f3ddb91bb9dde9d5c86c447b"
+      "sha256": "398838b37326ee55ff7f030d6313a0abc6a6bdb71507af39ab9aaff2391a3cfe"
     },
     {
       "path": "tests/canonical/canonical.test.mjs",
@@ -941,7 +1158,7 @@
       "path": "tests/canonical/docs.test.mjs",
       "class": "TEST",
       "install": null,
-      "sha256": "4c60be4294623f2b190f1554be8dc587ada4e3b17a9373c0e47c94e4a429ece4"
+      "sha256": "7a92ba9256e3094b0222cb57823cb87d87bfd2e94cf2f5df748fd5f03c674a2d"
     },
     {
       "path": "tests/canonical/guide.test.mjs",
@@ -953,7 +1170,7 @@
       "path": "tests/canonical/page-checks.test.mjs",
       "class": "TEST",
       "install": null,
-      "sha256": "169bc8656c424abab0a30b7088950a00fc7391482b1a787962dce0ce2f71bca5"
+      "sha256": "d3a33a50c5cff6a163a9405cc53331fb32c90ca1f8eac251c44e997c6d7056fa"
     },
     {
       "path": "tests/installer/bootstrap.test.mjs",
@@ -977,7 +1194,7 @@
       "path": "tests/installer/hardening.test.mjs",
       "class": "TEST",
       "install": null,
-      "sha256": "1f9a824b2360a391b1eb6832398302fdca3258e4a335d9ddb52238c2533e0cbd"
+      "sha256": "b1dd86c2acc32ff93645ecc68c4b0012e68818b670daad8cf2e84da5beb4287f"
     },
     {
       "path": "vitest.config.mjs",

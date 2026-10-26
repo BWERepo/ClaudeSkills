@@ -85,7 +85,7 @@ everything removed.
 | `gi:meta` | site-level: Google API status, quota, sitemap, staging check, analytics, alerts, last run |
 | `gi:summary` | the compact snapshot `/BWESEO` and the admin header read |
 | `gi:links` | outbound internal links per page, for the internal-link check |
-| `gi:lock` | soft lock so a cron run and a manual refresh never overlap |
+| `gi:lock` | run lock `{ at, owner }` so a cron run and a manual refresh do not overlap (see "Concurrency contract" below) |
 
 A record holds the normalized fields (`indexState`, `google.*` — verdict, coverage, last crawl, fetch state, robots,
 indexing state, Google/declared canonical, sitemaps, referring URLs, mobile/rich-result verdicts), `metrics`
@@ -224,3 +224,24 @@ source are Cloudflare-specific. For any other host set `snapshot.source` to `fil
 | *Quota* | the daily allowance was reached; it resets at midnight UTC |
 | `UNKNOWN` states | Google used coverage wording not mapped yet; the original text is shown |
 | `/BWESEO` says "no monitoring data" | run `seo-google-index.mjs pull` (needs a `wrangler` login) |
+
+## Concurrency contract
+
+The monitor, keyword refresh (`kw:lock:refresh`) and target validation (`kw:lock:targets`) each take a run lock with `acquireLock` and
+release it only if they still own it (`releaseLock`). What is guaranteed depends on the store the site supplies:
+
+| Store | Guarantee |
+|---|---|
+| `memoryStore()` (one process: tests, the local CLI) | **Single-flight.** `acquire` is atomic; a second overlapping run returns `busy`. |
+| A host store with atomic `acquire(key, record, { staleBefore })` and `release(key, owner)` (Durable Object, a database row with a unique key) | **Single-flight**, as above. Set `atomic: true`. |
+| `kvStore(kv)` (Cloudflare KV) | **Best effort only.** KV has no compare-and-set and is eventually consistent, so the lock is write-then-verify and narrows the window without closing it. Runs report `lock.atomic: false`. Two runs started at nearly the same instant, in different locations, can both proceed. |
+
+Consequences on a non-atomic store: a locally enforced daily call cap (`kw:meta.calls`) can be exceeded by at most the other run's own spend
+(each run re-reads the budget after taking the lock and stays inside its own subrequest budget), and the last writer wins on a shared key.
+Sites that need a hard guarantee must supply an atomic store or run the schedule from a single serialized trigger. A lock older than its TTL
+(5 minutes) is treated as abandoned. Customer isolation is unchanged: every key lives in the site's own store.
+
+For the local CLIs (`seo-landing.mjs`, `seo-keywords.mjs add|remove|refresh|pull`) the contract is a file lock beside the data file plus atomic
+replacement (`src/safe-write.mjs`): cooperating BWESEO processes on one machine take turns, a crash leaves the old file or the new one, never a
+half-written file, a leftover temp file is cleaned on the next write, and a data file that is not valid JSON stops the command without being
+overwritten. This does not coordinate network file systems or other programs editing the same file.
