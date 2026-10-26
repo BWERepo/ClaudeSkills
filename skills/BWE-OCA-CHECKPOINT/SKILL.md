@@ -43,8 +43,9 @@ patch bump) and never reach production outside this skill.
    If they still fail after one retry, roll back with
    `npx wrangler@4.121.0 rollback <id> -y --message "auto-rollback: checkpoint check failed"`, skip the commit, and
    report. On a first deploy with nothing to roll back to, report the failure and leave production as it is.
-6. **Commit and push:** check `git status` and stage by name (`dist/`, `.astro/` and `.wrangler/` are gitignored).
-   Commit with a message like `Release vX.Y.Z` plus the attribution trailer. Push only if `git remote -v` shows a
+6. **Commit and push:** check `git status` and stage every real change by name (`dist/`, `.astro/` and `.wrangler/` are gitignored;
+   never `.env*` or secrets). Commit with a descriptive message like `Release vX.Y.Z: <what changed>` plus the
+   attribution trailer. Push only if `git remote -v` shows a
    remote; if there is none, say so plainly.
 7. **Report:** both URLs, the version (and whether it was supplied or auto-computed), both Version IDs, the commit hash,
    and whether it was pushed.

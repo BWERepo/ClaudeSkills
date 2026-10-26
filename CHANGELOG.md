@@ -1,4 +1,6 @@
 # Changelog
+## [2026.10.26.05] - 2026-10-26
+- BWE-OCA-CHECKPOINT now commits every real change (not only the release files) with a descriptive message (Release vX.Y.Z: <what changed>), never secrets, then pushes and reports the commit hash.
 ## [2026.10.26.04] - 2026-10-26
 - Added BWENew: a minimal skill that just says "Hello". Named as requested (no hyphen), unlike the BWE-* convention of other skills.
 ## [2026.10.26.03] - 2026-10-26

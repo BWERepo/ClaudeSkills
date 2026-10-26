@@ -1,6 +1,6 @@
 {
   "name": "bwe-skills",
-  "version": "2026.10.26.04",
+  "version": "2026.10.26.05",
   "description": "Business Web Express shared Claude Code skills (central catalog).",
   "author": { "name": "Business Web Express" },
   "repository": "https://github.com/BWERepo/ClaudeSkills"
