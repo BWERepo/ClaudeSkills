@@ -328,5 +328,10 @@
     "purpose": "Searchable UI/UX design intelligence: styles, palettes, font pairings, UX guidelines, charts and stack guidance, plus a design-system generator.",
     "dependencies": "Python 3 (local scripts, no network); third-party MIT (nextlevelbuilder/ui-ux-pro-max-skill), see skills/ui-ux-pro-max/LICENSE.txt",
     "projects": "all"
+  },
+  "BWENew": {
+    "purpose": "Says Hello.",
+    "dependencies": "none",
+    "projects": "all"
   }
 }

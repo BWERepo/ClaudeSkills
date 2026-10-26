@@ -1,4 +1,6 @@
 # Changelog
+## [2026.10.26.04] - 2026-10-26
+- Added BWENew: a minimal skill that just says "Hello". Named as requested (no hyphen), unlike the BWE-* convention of other skills.
 ## [2026.10.26.03] - 2026-10-26
 - Quoted unparseable YAML descriptions in 6 skills (BWE-CLAUDE-STATUS, BWE-IMPECCABLE, BWE-OCA-DEPLOY-STAGING, BWE-SEO-PUBLISH, BWE-SEO-QA, BWE-SEO-SEARCH-CONSOLE) so their metadata loads; catalog.py now writes UTF-8/LF on Windows; added scripts/release.ps1 and scripts/install.ps1 (user-scope install, one-command release with install verification); README quick path.
 ## [2026.10.26.02] - 2026-10-26
