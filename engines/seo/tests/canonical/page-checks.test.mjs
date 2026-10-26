@@ -140,3 +140,13 @@ describe("the inherited-homepage og:url problem is detected", () => {
       expect(checks.compareCanonicalAndOgUrl({ canonical: ["https://example.com/pricing"], ogUrl: og, pageUrl: "https://example.com/pricing" }).status, og).toBe("pass");
   });
 });
+
+describe("page checks command line", () => {
+  it("names an unreadable --html file and exits 3 instead of printing a stack trace", async () => {
+    const { spawnSync } = await import("node:child_process");
+    const r = spawnSync(process.execPath, [join(ROOT, "src", "seo-page-checks.mjs"), "--html", join(ROOT, "no-such-page.html"), "--url", "https://site.example/"], { encoding: "utf8" });
+    expect(r.status).toBe(3);
+    expect(r.stderr).toMatch(/cannot read .*no-such-page\.html: ENOENT/);
+    expect(r.stderr).not.toMatch(/at .*\.mjs:\d+/);
+  });
+});

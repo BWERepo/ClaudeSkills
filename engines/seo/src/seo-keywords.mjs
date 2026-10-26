@@ -22,7 +22,8 @@
 // Local data lives in seo/data/keyword-performance/ (ignored by git: it is the customer's own data). No credential is stored there;
 // `refresh` reads the service-account key from the environment variable NAMED by analytics.searchConsole.credentialsSource.
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync } from "node:fs";
+import { writeJsonAtomic, withFileLock } from "./safe-write.mjs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createSearchConsoleClient, redact } from "./gsc-client.mjs";
@@ -51,7 +52,7 @@ export function loadLocalStore(config, project) {
 export function saveLocalStore(config, project, store) {
   const dir = dataDirOf(config, project);
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, "store.json"), JSON.stringify(store._dump(), null, 2) + "\n");
+  writeJsonAtomic(join(dir, "store.json"), store._dump());
 }
 
 export function summaryFile(data, now = Date.now()) {
@@ -70,7 +71,7 @@ async function rebuildSummary(config, project, store, inventory) {
   const data = await getKeywordPerformance(ctxOf(config, store), { inventory });
   const dir = dataDirOf(config, project);
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, "summary.json"), JSON.stringify(summaryFile(data), null, 2) + "\n");
+  writeJsonAtomic(join(dir, "summary.json"), summaryFile(data));
   return data;
 }
 
@@ -99,7 +100,17 @@ export function pullFromKv(config, project, { exec = execFileSync } = {}) {
 
 // ---------------------------------------------------------------- CLI
 
-export async function cli(argv, { out = console.log, err = console.error, exec = execFileSync, fetchImpl = globalThis.fetch, env = process.env } = {}) {
+// Commands that load the local store, change it and save it run under a file lock, so a scheduled and a manual run cannot overwrite
+// each other's store.json (a lock held by another live process makes the command stop with a message instead of racing).
+const MUTATING = new Set(["add", "remove", "refresh", "pull"]);
+export async function cli(argv, o = {}) {
+  const project = resolve((argv.indexOf("--project") >= 0 ? argv[argv.indexOf("--project") + 1] : undefined) ?? ".");
+  const cfgPath = join(project, "seo", "seo-config.json");
+  if (!MUTATING.has(argv[0]) || !existsSync(cfgPath)) return cliRun(argv, o);
+  let config; try { config = JSON.parse(readFileSync(cfgPath, "utf8")); } catch { return cliRun(argv, o); }
+  try { return await withFileLock(join(dataDirOf(config, project), "store.json"), () => cliRun(argv, o)); } catch (e) { if (e.code === "BUSY") { (o.err ?? console.error)(e.message); return 1; } throw e; }
+}
+async function cliRun(argv, { out = console.log, err = console.error, exec = execFileSync, fetchImpl = globalThis.fetch, env = process.env } = {}) {
   const flag = (n) => argv.includes(n);
   const opt = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : undefined; };
   const project = resolve(opt("--project") ?? ".");
@@ -109,7 +120,7 @@ export async function cli(argv, { out = console.log, err = console.error, exec =
   const config = JSON.parse(readFileSync(cfgPath, "utf8"));
   const invPath = join(project, config.paths?.contentInventory ?? "seo/content-inventory.json");
   const inventory = existsSync(invPath) ? JSON.parse(readFileSync(invPath, "utf8")) : { pages: [] };
-  const saveInventory = (inv) => writeFileSync(invPath, JSON.stringify(inv, null, 2) + "\n");
+  const saveInventory = (inv) => writeJsonAtomic(invPath, inv);
   const siteId = config.projectId ?? null;
   const store = loadLocalStore(config, project);
   try {
@@ -147,7 +158,8 @@ export async function cli(argv, { out = console.log, err = console.error, exec =
       out(r.ok ? `${r.message}${r.cached ? ` (data from ${r.fetchedAt})` : ""}` : `Not refreshed (${r.kind}): ${r.message}${r.stale ? " The previous data is kept." : ""}`);
       if (flag("--targets") || !(await store.get(KW_KEYS.targets))) {
         const t = await refreshTargets(ctx, registryOf(inventory, { siteId }), { force: flag("--force") });
-        out(t.ok ? (t.cached ? "Target pages: served from cache." : `Target pages checked: ${t.checked}.`) : `Target pages not checked (${t.kind}): ${t.message}`);
+        const cov = t.coverage ? ` Coverage: ${t.coverage.checked}/${t.coverage.total} checked, ${t.coverage.pending} pending${t.coverage.failing ? `, ${t.coverage.failing} failing` : ""}${t.coverage.oldestCheckedAt ? `; oldest check ${t.coverage.oldestCheckedAt}` : ""}.` : "";
+        out(t.ok ? (t.cached ? `Target pages: served from cache.${cov}` : `Target pages checked this run: ${t.checked}${t.failed ? ` (${t.failed} fetch(es) failed; earlier results kept)` : ""}.${cov}${t.coverage?.pending ? " Run again to continue with the pending pages." : ""}`) : `Target pages not checked (${t.kind}): ${t.message}`);
       }
       saveLocalStore(config, project, store);
       await rebuildSummary(config, project, store, inventory);

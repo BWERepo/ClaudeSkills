@@ -1231,6 +1231,7 @@ export async function runCli(argv, { cwd = process.cwd(), env = process.env, hom
     `✓ Project data directories initialized (empty)`,
     `${plan.target.adapter ? "✓" : "⚠"} ${plan.target.adapter ? `${plan.target.adapter} adapter detected` : "Website adapter requires configuration"}`,
     ...(plan.conflicts.length ? [`⚠ ${plan.conflicts.length} conflict(s) left untouched — REVIEW REQUIRED`] : []),
+    searchWatchLine(projectDir),
     "",
     ...(plan.alreadyInstalled
       ? [
@@ -1253,6 +1254,16 @@ export async function runCli(argv, { cwd = process.cwd(), env = process.env, hom
   ];
   out({ ...res, plan: { engine: plan.engine, conflicts: plan.conflicts } }, lines.join("\n"));
   return plan.conflicts.length ? 2 : 0;
+}
+
+// Search watch (seo-watch.mjs) is ON after an install unless the project's own configuration switches it off. The installer only reports
+// this; it never edits the configuration and starts nothing (scheduling is the website owner's step).
+function searchWatchLine(projectDir) {
+  let off = false;
+  try { off = JSON.parse(readFileSync(join(projectDir, "seo/seo-config.json"), "utf8"))?.analytics?.searchConsole?.searchWatch?.enabled === false; } catch { /* no configuration yet: the default applies */ }
+  return off
+    ? "✓ Search watch is switched off in this project's configuration (turn on: node seo/tools/seo-watch.mjs enable --by \"<name>\")"
+    : "✓ Search watch is on by default (sitemap sync, daily check, weekly report; switch off: node seo/tools/seo-watch.mjs disable --by \"<name>\")";
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

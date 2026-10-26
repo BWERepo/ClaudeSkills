@@ -20,6 +20,7 @@ export declare const LIMITS: Readonly<Record<string, number>>;
 export declare function kvStore(kv: { get(k: string, t: "json"): Promise<any>; put(k: string, v: string): Promise<void>; delete(k: string): Promise<void> }): Store;
 export declare function memoryStore(initial?: Record<string, any>): Store & { _dump(): Record<string, any> };
 export declare function refreshKeywordPerformance(ctx: RunContext, opts?: { range?: RangeSpec; force?: boolean }): Promise<Record<string, any>>;
+export declare function targetCoverage(cache: Record<string, any> | null, registry: Record<string, any>[], now: number, limits?: Record<string, number>): { total: number; checked: number; fresh: number; pending: number; neverChecked: number; failing: number; oldestCheckedAt: string | null; newestCheckedAt: string | null };
 export declare function refreshTargets(ctx: RunContext, registry: Record<string, any>[], opts?: { force?: boolean }): Promise<Record<string, any>>;
 export declare function getKeywordPerformance(ctx: RunContext, opts: { inventory: unknown; siteId?: string | null }): Promise<Record<string, any>>;
 export declare function lookupKeyword(ctx: RunContext, opts: { inventory: unknown; keyword: string }): Promise<{ ok: true; source: string; lastUpdated: string | null; analysis: Record<string, any> }>;

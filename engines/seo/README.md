@@ -120,12 +120,17 @@ behavior change; bump the schema version only when a data file's shape changes (
 ## Development
 
 ```
+npm ci                            install the test tooling from the lockfile
 npm test                          engine + installer + canonical tests
+npm run check:generated           verify the manual, guide and manifest are current (changes nothing; pull requests run this)
 npm run guide                     print the operating guide (add -- <section>, -- --list, or -- --check for drift)
-node scripts/build-manifest.mjs   rebuild engine-manifest.json after ANY engine file change
+node scripts/build-manifest.mjs   rebuild engine-manifest.json after ANY engine file change (--check to verify)
 node scripts/build-manual.mjs     regenerate the manual   (--check to verify)
 node scripts/validate-canonical.mjs --run-tests
 ```
+
+Two runtimes: working on this repository (the test runner) needs Node 20.19+ or 22.12+; the engine itself, once installed in a website or a Worker,
+keeps its zero-dependency Node 18+ support. Pull requests are validated by `.github/workflows/pr-validation.yml`.
 
 The engine's own maintenance skills (`/BWESEOBegin`, `/BWESEOCheckpoint`, `/BWESEOEnd`, `/BWESEOAll`, `/BWESEORelease`) are repository-local:
 they live in `.claude/skills/` in this repository and load automatically when Claude Code is opened here.

@@ -41,12 +41,11 @@ export const DIRECTORY_DESCRIPTIONS = {
   docs: "Methodology, industry guides, the engine overview (`ENGINE.md`), the step-by-step operating guide for people working without Claude (`OPERATING-GUIDE.md`), the per-skill reference data, this manual's template, and the refactor records (development only).",
   scripts: "Engine maintenance: rebuild the manifest, generate/check this manual, validate the whole package, register the engine location, install into a website in one command (`bootstrap.mjs`), print the operating guide (`npm run guide`).",
   tests: "The engine's own regression tests: canonical-package validation and installer behavior (isolation, dry run, verify, update, migration, preservation).",
-  node_modules: "Development dependencies (not part of the package).",
 };
 
 const walkTop = (root) =>
   readdirSync(root)
-    .filter((n) => n !== ".git")
+    .filter((n) => n !== ".git" && n !== "node_modules") // installed tooling: its presence must not change the generated manual
     .sort((a, b) => a.localeCompare(b));
 
 const skillNames = (root) =>
@@ -85,9 +84,32 @@ export function loadReference(root) {
   return JSON.parse(readFileSync(join(root, "docs", "skills-reference.json"), "utf8"));
 }
 
+// ---------------------------------------------------------------- release facts in PROJECT_STATUS.md
+// The "current" lines of the status briefing are validated against the authoritative sources (VERSION, skills/) so they cannot go
+// stale silently. Historical session records are free text and are not checked.
+export function checkStatusFacts(root) {
+  const file = join(root, "PROJECT_STATUS.md");
+  if (!existsSync(file)) return [];
+  const text = readFileSync(file, "utf8");
+  const problems = [];
+  const version = existsSync(join(root, "VERSION")) ? readFileSync(join(root, "VERSION"), "utf8").trim() : null;
+  const cur = /^- Current engine version: \*\*([^*]+)\*\*/m.exec(text)?.[1];
+  if (!cur) problems.push('PROJECT_STATUS.md: missing the line "- Current engine version: **<version>**"');
+  else if (version && cur !== version) problems.push(`PROJECT_STATUS.md says the current engine version is ${cur}, but VERSION is ${version}`);
+  const n = /^## Skills \((\d+) canonical sources/m.exec(text)?.[1];
+  const actual = skillNames(root).length;
+  if (!n) problems.push('PROJECT_STATUS.md: missing the "## Skills (<n> canonical sources in `skills/`)" heading');
+  else if (Number(n) !== actual) problems.push(`PROJECT_STATUS.md says ${n} canonical skills, but skills/ has ${actual}`);
+  const listed = (/^## Skills \(\d+ canonical[^\n]*\n([\s\S]*?)\n(?:Engine maintenance|\n)/m.exec(text)?.[1] ?? "").replace(/\n/g, " ");
+  if (n) for (const name of skillNames(root)) if (!new RegExp(`\\b${name.replace(/^BWESEO/, "")}\\b|\\b${name}\\b`).test(listed) && name !== "BWESEO") problems.push(`PROJECT_STATUS.md skill list does not mention ${name}`);
+  const last = /^## Last updated: [\d-]+ \(engine ([^,)]+)/m.exec(text)?.[1];
+  if (last && version && last !== version) problems.push(`PROJECT_STATUS.md "Last updated" names engine ${last}, but VERSION is ${version}`);
+  return problems;
+}
+
 // ---------------------------------------------------------------- consistency checks
 export function checkConsistency(root) {
-  const problems = [];
+  const problems = [...checkStatusFacts(root)];
   const names = skillNames(root);
   const ref = loadReference(root);
   const refNames = Object.keys(ref.skills);

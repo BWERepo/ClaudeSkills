@@ -1,6 +1,6 @@
 // Types for index-monitor-run.mjs (BWESEO engine 1.9.0, Google Index Monitoring: storage and orchestration).
 import type { SearchConsoleClient } from "./gsc-client.mjs";
-export interface MonitorStore { get(key: string): Promise<any>; put(key: string, value: unknown): Promise<void>; delete(key: string): Promise<void> }
+export interface MonitorStore { get(key: string): Promise<any>; put(key: string, value: unknown): Promise<void>; delete(key: string): Promise<void>; atomic?: boolean; acquire?(key: string, record: { at: string; owner: string }, opts?: { staleBefore?: number }): Promise<boolean>; release?(key: string, owner: string): Promise<void> }
 export interface MonitorContext {
   store: MonitorStore;
   client: SearchConsoleClient | { available: boolean; status?: any; [k: string]: any };
@@ -24,3 +24,5 @@ export declare function discoverFromSitemap(opts: { sitemapXml: string; fetchTex
 export declare function runMonitor(ctx: MonitorContext, opts?: { mode?: "cron" | "refresh" | "url"; paths?: string[] }): Promise<Record<string, any>>;
 export declare function submitSitemapNow(ctx: MonitorContext, opts?: { force?: boolean }): Promise<Record<string, any>>;
 export declare function sitemapView(data: unknown, url: string, now: number, submittedHint?: string): Record<string, any>;
+export declare function acquireLock(store: MonitorStore, key: string, opts: { now: number; ttlMs: number; owner?: string }): Promise<{ ok: boolean; owner?: string; atomic?: boolean }>;
+export declare function releaseLock(store: MonitorStore, key: string, owner: string | undefined): Promise<void>;

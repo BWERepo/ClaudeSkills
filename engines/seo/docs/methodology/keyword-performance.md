@@ -182,8 +182,14 @@ computed from **stored** data only (it never calls Google and never fetches a pa
 
 - A pull younger than 6 hours is served from cache without calling Google (`Last updated` is always available). A forced refresh has a
   15-minute cooldown and an own daily request ceiling (40 Search Analytics requests per UTC day, far under Google's quota).
-- Target-page checks are cached 24 hours and limited to 25 pages per run.
-- Failures never wipe data: `auth-failed`, `permission-denied`, `quota`, `network`, `timeout`, `budget`, `cooldown`, `not-configured`, `disabled`
+- Target-page checks are limited to 25 pages per run but cover every target over successive runs: never-checked targets go first, then the
+  least recently attempted. Each target is re-validated after 24 hours; a target whose fetch failed keeps its last valid result (marked with the
+  error, freshness not advanced) and is retried after an hour. Targets added to the registry are picked up at once and removed ones leave the
+  cache. `refreshTargets` and `getKeywordPerformance` report coverage: `total`, `checked`, `fresh`, `pending`, `neverChecked`, `failing`, and the
+  oldest/newest successful check - "pending" means not yet validated within the last 24 hours. `--force` re-checks regardless of age, still 25 per run.
+- A second refresh that starts while one is running returns `busy` instead of calling Google again; see "Concurrency contract" in
+  `google-index-monitoring.md` for what that guarantees on each kind of store.
+- Failures never wipe data: `auth-failed`, `permission-denied`, `quota`, `network`, `timeout`, `budget`, `cooldown`, `busy`, `not-configured`, `disabled`
   are typed results; the previous snapshot is kept and flagged `stale`. An API problem is never shown as "no impressions".
 - Staging, preview and local never call Google (`not-production`), only production pages are fetched, and rows for any other origin are dropped.
 

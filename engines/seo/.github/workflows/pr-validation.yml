@@ -1,0 +1,69 @@
+# Pull-request validation for the engine repository. Every check here is read-only: a stale generated file FAILS the run, it is never
+# regenerated and then passed. Fix a failure locally with the command named in the failure message, commit, and push.
+#
+# Two different runtimes are involved:
+#   development  - what it takes to run this repository's tooling (vitest): Node 20.19+ or 22.12+ (see "engines" in package.json)
+#   consumers    - what the engine itself supports once installed in a website or Worker: Node 18+, zero dependencies
+name: Pull request validation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Tests, canonical validation and generated files (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - name: Install dependencies from the lockfile
+        run: npm ci
+      - name: Full test suite (engine, installer, disposable installation and isolation tests)
+        run: npm test
+      - name: Generated manual is current (verify only)
+        run: node scripts/build-manual.mjs --check
+      - name: Operating guide matches the engine (verify only)
+        run: node scripts/show-guide.mjs --check
+      - name: Manifest is current and every hash matches (verify only)
+        run: node scripts/build-manifest.mjs --check
+      - name: Canonical validation
+        run: node scripts/validate-canonical.mjs
+      - name: Tests left the working tree unchanged
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::The working tree changed during validation (a generated file is stale or a test wrote into the repository):"
+            git status --porcelain
+            git diff --stat
+            exit 1
+          fi
+
+  consumer-runtime:
+    name: Engine loads on the oldest supported consumer runtime (Node 18)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Every engine module parses and the zero-dependency scripts run
+        run: |
+          for f in src/*.mjs installer/*.mjs scripts/*.mjs; do node --check "$f"; done
+          node scripts/build-manifest.mjs --check
+          node scripts/build-manual.mjs --check
+          node scripts/validate-canonical.mjs

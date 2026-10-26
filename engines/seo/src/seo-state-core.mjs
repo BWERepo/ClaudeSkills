@@ -13,7 +13,7 @@
 // are documented in docs/methodology/workflow-state.md.
 
 // Kept in step with ENGINE_VERSION in validate-seo-data.mjs (a test checks it).
-export const STATE_VERSION = "2026.10.20.03";
+export const STATE_VERSION = "2026.10.26.02";
 
 // Status of one lifecycle step, for the project or for one page.
 export const S = {
@@ -1017,6 +1017,12 @@ function action(kind, rank, c = {}) {
       what: `Deciding whether to fix a problem the site audit found: ${c.title}.`,
       why: `It's a ${c.severity}-priority problem${c.pages ? ` affecting ${c.pages}` : ""}. Changes to the site need your approval.`,
       next: "If you approve, Claude shows the exact change first, then it goes through the normal change, test and release process. If not, it can be marked as deferred so it stops coming up.",
+    },
+    "queue-next": {
+      headline: `Next from the improvement queue: ${c.title}.`,
+      what: c.queueAction === "approve" ? `Deciding whether to go ahead with: ${c.title}.` : c.queueAction === "verify" ? `Confirming a recorded fix: ${c.title}.` : c.queueAction === "recheck" ? `Re-running the check before acting on: ${c.title}.` : `Working on: ${c.title}.`,
+      why: `${c.queueWhy} (ranked by blocking status, severity, impact, evidence freshness, effort, then age; ${c.queueWaiting ? `${c.queueWaiting} higher-ranked item(s) are waiting on prerequisites` : "nothing ranked higher is waiting"}).`,
+      next: `${c.queueReason}. See node seo/tools/seo-queue.mjs explain ${c.queueId}.`,
     },
     "refresh-page": {
       headline: `Improve ${n}.`,
@@ -3442,6 +3448,26 @@ export function evaluateState(ev, opts = {}) {
       add(action("fix-issue", rank - 5, common));
     else add(action("approve-issue", rank, { ...common, actor: "user", approval: "change" }));
   }
+
+  // ---- the unified improvement queue (seo-queue.mjs). Its next eligible item comes after every lifecycle prerequisite above and
+  // after inventory issues (which are routed above already); it never outranks a blocker, a setup step or a pending approval.
+  const qn = ev.queueNext;
+  if (qn?.id && qn.source !== "inventory")
+    add(
+      action("queue-next", 650, {
+        title: qn.title,
+        queueId: qn.id,
+        queueAction: qn.action,
+        queueReason: qn.reason,
+        queueWhy: qn.why,
+        queueWaiting: qn.waiting ?? 0,
+        severity: qn.severity,
+        actor: qn.action === "approve" ? "user" : "claude",
+        approval: qn.action === "approve" ? "change" : null,
+        skill: null,
+        row: "queue",
+      }),
+    );
 
   // ---- maintenance, then waiting
   if (staleForRefresh.length) {

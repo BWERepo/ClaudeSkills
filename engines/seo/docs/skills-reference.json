@@ -355,6 +355,33 @@
       "approvalRequired": "Sitemap registration",
       "externalEffect": "Search Console API (when enabled)"
     },
+    "BWESEOSearchWatch": {
+      "purpose": "Runs and verifies the Google search monitoring workflow: sitemap kept current from page events, a daily check of new pages plus a rotating sample, flags for pages Google has not indexed, crawl failures and unexpected canonicals, and a weekly report with the three most useful fixes. `setup` walks the owner through the customer-site validation steps one at a time.",
+      "whenToUse": "After installing the engine in a website, to switch the workflow on or off, to run the daily check or weekly report, and to verify it on the real site.",
+      "syntax": [
+        "/BWESEOSearchWatch",
+        "/BWESEOSearchWatch setup",
+        "/BWESEOSearchWatch daily",
+        "/BWESEOSearchWatch weekly",
+        "/BWESEOSearchWatch enable",
+        "/BWESEOSearchWatch disable"
+      ],
+      "arguments": "None (status and findings), or `setup`, `daily`, `weekly`, `enable`, `disable`.",
+      "examples": [
+        "/BWESEOSearchWatch",
+        "/BWESEOSearchWatch setup",
+        "/BWESEOSearchWatch weekly"
+      ],
+      "inputs": "The project's seo-config.json (analytics.searchConsole.searchWatch), the site's sitemap and page events, an optional Search Console credential by name, optional saved page rows for the weekly report.",
+      "outputs": "Status, findings (not indexed, crawl failures, unexpected canonicals), an updated sitemap, queue items, a weekly report in seo/data/search-watch/reports/, and for `setup` a step-by-step pass/fail table.",
+      "automatic": "Nothing runs by itself: the owner's scheduler runs sync, daily and weekly.",
+      "approvalRequired": "Switching the workflow on or off asks for the owner's name. Using --allow-shrink or submitting the sitemap to Search Console needs the owner's explicit say-so.",
+      "externalEffect": "`daily` makes read-only requests to the site's production pages and the Search Console API; `sync` rewrites the sitemap file in the project. Nothing is deployed or submitted.",
+      "safety": "Not indexed only from Search Console evidence; an outage is never reported as not indexed; credentials by name only; staging is never checked; traffic comparisons are never presented as proof of cause.",
+      "next": "/BWESEOSearchConsole",
+      "approval": "Owner's name for enable/disable.",
+      "external": "Read-only production requests and the Search Console API."
+    },
     "BWESEORefresh": {
       "purpose": "Finds published pages that need updating (stale facts, weak performance, broken links, changed intent) and produces a prioritized refresh queue.",
       "whenToUse": "After a review, or on a periodic content review.",

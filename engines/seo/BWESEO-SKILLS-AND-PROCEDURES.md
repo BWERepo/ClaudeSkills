@@ -1,6 +1,6 @@
 # BWESEO Skills and Procedures
 
-Engine Version: 2026.10.20.03
+Engine Version: 2026.10.26.02
 Schema Version: 1
 Last Updated: 2026-10-03
 
@@ -618,6 +618,45 @@ next step.
 
 **NEXT TYPICAL STEP:** /BWESEORefresh or /BWESEOReport.
 
+### BWESEOSearchWatch
+
+**SKILL NAME:** `/BWESEOSearchWatch`
+
+**PURPOSE:** Runs and verifies the Google search monitoring workflow: sitemap kept current from page events, a daily check of new pages plus a rotating sample, flags for pages Google has not indexed, crawl failures and unexpected canonicals, and a weekly report with the three most useful fixes. `setup` walks the owner through the customer-site validation steps one at a time.
+
+**WHEN TO USE:** After installing the engine in a website, to switch the workflow on or off, to run the daily check or weekly report, and to verify it on the real site.
+
+**SYNTAX:**
+
+- `/BWESEOSearchWatch`
+- `/BWESEOSearchWatch setup`
+- `/BWESEOSearchWatch daily`
+- `/BWESEOSearchWatch weekly`
+- `/BWESEOSearchWatch enable`
+- `/BWESEOSearchWatch disable`
+
+**ARGUMENTS:** None (status and findings), or `setup`, `daily`, `weekly`, `enable`, `disable`.
+
+**EXAMPLES:**
+
+- `/BWESEOSearchWatch`
+- `/BWESEOSearchWatch setup`
+- `/BWESEOSearchWatch weekly`
+
+**INPUTS:** The project's seo-config.json (analytics.searchConsole.searchWatch), the site's sitemap and page events, an optional Search Console credential by name, optional saved page rows for the weekly report.
+
+**OUTPUTS:** Status, findings (not indexed, crawl failures, unexpected canonicals), an updated sitemap, queue items, a weekly report in seo/data/search-watch/reports/, and for `setup` a step-by-step pass/fail table.
+
+**AUTOMATIC ACTIONS:** Nothing runs by itself: the owner's scheduler runs sync, daily and weekly.
+
+**HUMAN APPROVAL REQUIREMENTS:** Owner's name for enable/disable.
+
+**EXTERNAL ACTIONS:** Read-only production requests and the Search Console API.
+
+**SAFETY RULES:** Not indexed only from Search Console evidence; an outage is never reported as not indexed; credentials by name only; staging is never checked; traffic comparisons are never presented as proof of cause.
+
+**NEXT TYPICAL STEP:** /BWESEOSearchConsole
+
 ### BWESEORefresh
 
 **SKILL NAME:** `/BWESEORefresh`
@@ -736,6 +775,7 @@ next step.
 | `/BWESEOQA` | The SEO QA gate for a page (content, on-page, technical), and with `staging` the staging review of the page on the staging site. | `/BWESEOQA service-page` | `<page>` · `<page> staging` | Staging approval is the owner's | None (read-only) |
 | `/BWESEOPublish` | The mandatory post-publication check on production: live, indexable, canonical, robots, sitemap, internal links, metadata, structured data, no staging leakage; then Google readiness and the monitoring checkpoints. | `/BWESEOPublish service-page` | `<page id or URL>` | No (read-only) | None (read-only) |
 | `/BWESEOSearchConsole` | The Google side: idempotent sitemap registration through the official Search Console API, page discovery/crawl/index status through the URL Inspection API, performance analysis and the 7/30/90-day reviews. | `/BWESEOSearchConsole` | `index pull` · `index status` · `index investigate` · `index explain <path>` · `index impressions` · `keywords pull` · `keywords status` · `keywords analyze <keyword>` · `keywords discovered` · `keywords add <page-id> <keyword>` | Sitemap registration | Search Console API (when enabled) |
+| `/BWESEOSearchWatch` | Runs and verifies the Google search monitoring workflow: sitemap kept current from page events, a daily check of new pages plus a rotating sample, flags for pages Google has not indexed, crawl failures and unexpected canonicals, and a weekly report with the three most useful fixes. | `/BWESEOSearchWatch` | `setup` · `daily` · `weekly` · `enable` · `disable` | Switching the workflow on or off asks for the owner's name. Using --allow-shrink or submitting the sitemap to Search Console needs the owner's explicit say-so. | `daily` makes read-only requests to the site's production pages and the Search Console API; `sync` rewrites the sitemap file in the project. Nothing is deployed or submitted. |
 | `/BWESEORefresh` | Finds published pages that need updating (stale facts, weak performance, broken links, changed intent) and produces a prioritized refresh queue. | `/BWESEORefresh` | `<page id>` | Page changes | None |
 | `/BWESEOReport` | A plain-language SEO progress and performance report with honest data caveats. | `/BWESEOReport` | none | No | None |
 | `/BWESEOUpdate` | Updates the BWESEO engine and its Claude skills in the current website to the latest canonical engine version in one guided pass: pull the engine checkout, preview, apply, sync skills, verify. | `/BWESEOUpdate` | none | Dry run first; conflicts need the owner | None (writes engine files to the project) |

@@ -439,3 +439,57 @@ describe("Google's Indexing API is never used for ordinary pages", () => {
     expect(code).not.toMatch(/writeFile|appendFile|unlink|rmSync/);
   });
 });
+
+// ---------------------------------------------------------------- bounded requests (mocked fetch only)
+describe("token exchange and API calls are time-bounded and classified", () => {
+  const key = () => { const { privateKey } = generateKeyPairSync("rsa", { modulusLength: 2048 }); return JSON.stringify({ client_email: "svc@example.com", private_key: privateKey.export({ type: "pkcs8", format: "pem" }) }); };
+  const config = { ...CONFIG, analytics: { searchConsole: { ...CONFIG.analytics.searchConsole, enabled: true, credentialsSource: "env:BWESEO_GSC_SERVICE_ACCOUNT_JSON" } } };
+  const mk = (fetchImpl, timeoutMs = 30) => createSearchConsoleClient({ config, env: { BWESEO_GSC_SERVICE_ACCOUNT_JSON: key() }, fetchImpl, timeoutMs });
+  const ok = (o) => new Response(JSON.stringify(o), { status: 200 });
+
+  it("aborts a token exchange that never answers (signal honoured) and reports a timeout without calling the API", async () => {
+    const urls = []; let signal;
+    const c = mk((url, init) => { urls.push(String(url)); signal = init.signal; return new Promise((_, rej) => init.signal.addEventListener("abort", () => rej(Object.assign(new Error("aborted"), { name: "AbortError" })))); });
+    const r = await c.getSitemap(SITEMAP);
+    expect(r).toMatchObject({ ok: false, kind: "timeout" });
+    expect(urls).toHaveLength(1); expect(urls[0]).toContain("oauth2.googleapis.com");
+    expect(signal.aborted).toBe(true);
+  });
+  it("still returns when a fetch ignores its signal entirely", async () => {
+    const c = mk(() => new Promise(() => {}));
+    const t0 = Date.now();
+    expect(await c.getSitemap(SITEMAP)).toMatchObject({ ok: false, kind: "timeout" });
+    expect(Date.now() - t0).toBeLessThan(2000);
+  });
+  it("covers a token response body that stalls after the headers", async () => {
+    const c = mk(async () => ({ ok: true, status: 200, json: () => new Promise(() => {}) }));
+    expect((await c.getSitemap(SITEMAP)).kind).toBe("timeout");
+  });
+  it("sends exactly one token request per failure — no hidden retries — and does not retry permanent auth failures", async () => {
+    let n = 0;
+    const c = mk(async () => { n++; return new Response('{"error":"invalid_grant","error_description":"Bearer ya29.secret"}', { status: 400 }); });
+    const r = await c.getSitemap(SITEMAP);
+    expect(r).toMatchObject({ ok: false, kind: "auth-failed" });
+    expect(n).toBe(1);
+    expect(JSON.stringify(r)).not.toMatch(/ya29|secret/);
+  });
+  it.each([[429, "quota"], [503, "api-error"], [403, "permission-denied"]])("classifies token HTTP %i as %s", async (status, kind) => {
+    const c = mk(async () => new Response("{}", { status }));
+    expect((await c.getSitemap(SITEMAP)).kind).toBe(kind);
+  });
+  it("treats a token reply without an access token as an error, not a success", async () => {
+    const c = mk(async () => ok({ expires_in: 3600 }));
+    expect(await c.getSitemap(SITEMAP)).toMatchObject({ ok: false, kind: "api-error" });
+  });
+  it("shares one in-flight token exchange between concurrent calls and caches it", async () => {
+    let tokens = 0, api = 0;
+    const c = mk(async (url) => { if (String(url).includes("oauth2")) { tokens++; await new Promise((r) => setTimeout(r, 5)); return ok({ access_token: "t", expires_in: 3600 }); } api++; return ok({}); });
+    await Promise.all([c.getSitemap(SITEMAP), c.listSitemaps(), c.getSitemap(SITEMAP)]);
+    await c.getSitemap(SITEMAP);
+    expect(tokens).toBe(1); expect(api).toBe(4);
+  });
+  it("bounds an API call that hangs after a good token", async () => {
+    const c = mk(async (url) => (String(url).includes("oauth2") ? ok({ access_token: "t", expires_in: 3600 }) : new Promise(() => {})));
+    expect(await c.getSitemap(SITEMAP)).toMatchObject({ ok: false, kind: "timeout" });
+  });
+});

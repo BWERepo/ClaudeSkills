@@ -13,7 +13,7 @@ an install; `disable` / `enable` switch it. Nothing here deploys, requests index
 requests: read-only GETs of the site's own production pages and the official Search Console API with the credential NAMED in `seo-config.json`.
 
 ## Engine requirement
-This skill needs engine **2026.10.26.02 or newer** (the `seo-watch.mjs` tool). Check `seo/tools/seo-watch.mjs` exists in the project. If it does not, stop and say: "This project's BWE-SEO engine is too old for search watch. Run /BWE-SEO-ENGINE install --dry-run --update, then /BWE-SEO-ENGINE install --update." If the update still leaves it missing, the plugin's bundled engine is older than 2026.10.26.02; report that plainly (bundling a newer engine is a separate release step the owner must approve) and do not improvise the tool.
+This skill needs engine **2026.10.26.02 or newer** (the `seo-watch.mjs` tool). Check `seo/tools/seo-watch.mjs` exists in the project. If it does not, stop and say: "This project's BWE-SEO engine is too old for search watch. Run /BWE-SEO-ENGINE install --dry-run --update, then /BWE-SEO-ENGINE install --update." If the update still leaves it missing, the plugin's bundled engine is older than 2026.10.26.02; report that plainly and do not improvise the tool.
 
 ## Project guard
 Run from the website project root (`seo/seo-config.json` must exist, else stop and suggest `/BWE-SEO-SETUP`). Start with `node seo/tools/seo-watch.mjs status`.

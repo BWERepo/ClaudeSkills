@@ -98,6 +98,14 @@ outage is "Google status temporarily unavailable", never "not indexed"; recommen
 guarantees about ranking; never edit a canonical tag until the reason Google disagrees is understood; never automate or loop
 indexing requests; staging is never monitored or submitted. Website health and Google-indexing health are reported separately.
 
+## 4b. Search watch (site-wide, on by default)
+
+`node seo/tools/seo-watch.mjs status` shows whether the workflow is on, the pages tracked, the inbox and the last daily run. It keeps the sitemap current from the
+website's page events (`notify`, `sync`), checks new pages plus a rotating sample every day (`daily`), flags pages Google has not indexed (**only** from URL
+Inspection evidence), crawl failures and unexpected canonicals (`findings`, which also feed `seo-queue.mjs build`), and writes a weekly report with the three most
+useful fixes (`weekly`). `enable` / `disable --by "<name>"` switch it on or off. Report what the commands print; never call a page not indexed without the
+inspection evidence, and never present the weekly comparison as proof of cause. Details: `docs/methodology/search-watch.md`.
+
 ## 5. Keyword performance (site-wide, engine 1.10.0)
 
 Read `docs/methodology/keyword-performance.md`. The registry is `pages[].keywords` (ONE primary + secondary keywords) in the site's own

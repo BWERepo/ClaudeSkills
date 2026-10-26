@@ -142,7 +142,35 @@ describe("documentation validation — the manual cannot silently go stale", () 
   });
 
   it("every top-level entry of the engine has a directory description (the reference cannot go stale)", () => {
-    const top = readdirSync(ROOT).filter((n) => n !== ".git");
+    const top = readdirSync(ROOT).filter((n) => n !== ".git" && n !== "node_modules");
     for (const n of top) expect(M.DIRECTORY_DESCRIPTIONS[n], `top-level "${n}" has no description`).toBeTruthy();
+  });
+});
+
+describe("PROJECT_STATUS.md current-status lines are validated against VERSION and skills/", () => {
+  const withStatus = (edit) => {
+    const d = copy(); cpSync(join(ROOT, "PROJECT_STATUS.md"), join(d, "PROJECT_STATUS.md"));
+    const f = join(d, "PROJECT_STATUS.md"); writeFileSync(f, edit(readFileSync(f, "utf8")));
+    return d;
+  };
+  it("the real status file agrees with the engine", () => {
+    expect(M.checkStatusFacts(ROOT)).toEqual([]);
+  });
+  it("catches a stale current version", () => {
+    const d = withStatus((t) => t.replace(/(Current engine version: \*\*)[^*]+/, "$11.10.0"));
+    expect(M.checkStatusFacts(d).join(" ")).toMatch(/current engine version is 1\.10\.0, but VERSION is/);
+    rmSync(d, { recursive: true, force: true });
+  });
+  it("catches a stale skill count and a skill missing from the list", () => {
+    const d = withStatus((t) => t.replace(/## Skills \(\d+/, "## Skills (17").replace(" Landing,", ""));
+    const msg = M.checkStatusFacts(d).join(" ");
+    expect(msg).toMatch(/says 17 canonical skills/);
+    expect(msg).toMatch(/does not mention BWESEOLanding/);
+    rmSync(d, { recursive: true, force: true });
+  });
+  it("is part of checkConsistency", () => {
+    const d = withStatus((t) => t.replace(/(Current engine version: \*\*)[^*]+/, "$10.0.1"));
+    expect(M.checkConsistency(d).join(" ")).toMatch(/PROJECT_STATUS\.md/);
+    rmSync(d, { recursive: true, force: true });
   });
 });
