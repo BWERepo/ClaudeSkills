@@ -6,6 +6,11 @@ Each Claude Code project (and each Claude account / cloud environment) installs 
 
 **Claude desktop users:** you do not need the terminal. Add `BWERepo/ClaudeSkills` as a plugin source in the desktop app's plugin settings, and ask Claude in a thread to create or edit skills (`/bwe-skills:BWE-SKILLS`). The `claude plugin` commands below are the equivalent terminal steps.
 
+## 0. Quick path (this machine)
+- **Once per machine:** `powershell -File scripts/install.ps1` installs `bwe-skills` at **user scope**, so every local project sees the skills with no per-project step. It prints `VERIFIED` or fails loudly. Restart open Claude sessions afterwards.
+- **Every release:** `powershell -File scripts/release.ps1 -Message "what changed"` picks the next `yyyy.mm.dd.nn`, updates `plugin.json` and `CHANGELOG.md`, regenerates the catalog, validates, commits, tags, pushes, updates the local plugin and verifies the new version and every skill are installed. `-SkipGit` stops after validation. It pushes `main` directly, so use it after your PR is merged and `git pull` is done (or for a direct-to-main release).
+- Project-scope install (sections 1-2) is still needed for cloud sessions and teammates, because they read the committed `.claude/settings.json`.
+
 ## 1. Install in an existing project
 From the project root, commit the result so cloud sessions pick it up:
 ```

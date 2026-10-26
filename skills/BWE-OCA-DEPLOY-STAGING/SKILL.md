@@ -1,6 +1,6 @@
 ---
 name: BWE-OCA-DEPLOY-STAGING
-description: Deploys the current work of the One Click Answers project (Z:\Backup\websites\OneClickAnswers) to STAGING only (staging.oneclickanswers.com). It OVERRIDES the deploy-disabled and e2e-disabled switches for this one run: first runs the full browser (Playwright) suite, then, only if that passes, runs the staging deployment with a patch version bump, and reports the live staging URL and the real results. The switch files are left in place. Never touches production. Use when the user says "deploy to staging", "push to staging", or invokes /BWE-OCA-DEPLOY-STAGING, in the context of the One Click Answers project.
+description: "Deploys the current work of the One Click Answers project (Z:\\Backup\\websites\\OneClickAnswers) to STAGING only (staging.oneclickanswers.com). It OVERRIDES the deploy-disabled and e2e-disabled switches for this one run: first runs the full browser (Playwright) suite, then, only if that passes, runs the staging deployment with a patch version bump, and reports the live staging URL and the real results. The switch files are left in place. Never touches production. Use when the user says \"deploy to staging\", \"push to staging\", or invokes /BWE-OCA-DEPLOY-STAGING, in the context of the One Click Answers project."
 ---
 
 # BWE-OCA-DEPLOY-STAGING

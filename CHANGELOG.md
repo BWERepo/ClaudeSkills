@@ -1,4 +1,6 @@
 # Changelog
+## [2026.10.26.03] - 2026-10-26
+- Quoted unparseable YAML descriptions in 6 skills (BWE-CLAUDE-STATUS, BWE-IMPECCABLE, BWE-OCA-DEPLOY-STAGING, BWE-SEO-PUBLISH, BWE-SEO-QA, BWE-SEO-SEARCH-CONSOLE) so their metadata loads; catalog.py now writes UTF-8/LF on Windows; added scripts/release.ps1 and scripts/install.ps1 (user-scope install, one-command release with install verification); README quick path.
 ## [2026.10.26.02] - 2026-10-26
 - Bundled SEO engine 2026.10.26.02 (was 2026.10.20.03), which provides the tool BWE-SEO-WATCH needs. The bundle also brings everything the engine gained since 2026.10.20.03: the improvement queue (`seo-queue`), change-to-outcome history (`seo-outcomes`), the diagnostics command (`seo-doctor`), SEO regression detection (`seo-regression`), city landing pages (`seo-landing-city`), the shared safe-write helper and the search watch workflow (`seo-watch`, on by default after an install). Maintainer-only files are left out as before, the bundled operating guide names the maintenance steps as routines, and the bundle's manual and manifest were rebuilt (validation: READY). Websites receive the new tools on `/BWE-SEO-ENGINE install --update`. The existing BWE-SEO-* skills were not changed to mention the other new tools.
 ## [2026.10.26.01] - 2026-10-26

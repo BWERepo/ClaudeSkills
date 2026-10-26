@@ -1,6 +1,6 @@
 ---
 name: BWE-CLAUDE-STATUS
-description: Summarizes the current status of this Claude session: what Claude itself (the main session) is working on right now, and a one-line description of what each agent (subagent, teammate or other local Claude session) is doing, with its state (running, idle, done). Use when the user says "status", "what is Claude doing", "what are the agents doing", "who is working", or invokes /BWE-CLAUDE-STATUS, in any project.
+description: "Summarizes the current status of this Claude session: what Claude itself (the main session) is working on right now, and a one-line description of what each agent (subagent, teammate or other local Claude session) is doing, with its state (running, idle, done). Use when the user says \"status\", \"what is Claude doing\", \"what are the agents doing\", \"who is working\", or invokes /BWE-CLAUDE-STATUS, in any project."
 ---
 
 # BWE-CLAUDE-STATUS

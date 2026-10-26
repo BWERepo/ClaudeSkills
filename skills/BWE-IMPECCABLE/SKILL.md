@@ -1,6 +1,6 @@
 ---
 name: BWE-IMPECCABLE
-description: Implements a design upgrade of a website by offering a checklist of every installed Impeccable command (default: the seven design stages in order). Every change is PROPOSED: it captures before and after screenshots (1440 and 375 pixels) with a slider, side-by-side, highlighted differences and an HTML report, then asks the user to approve, revise or reject (reject restores only the files of this run), then validates. Supports whole site, one page or component, --audit-only and --staging. Never deploys to production. Use when the user says "run impeccable", "improve the design of the site", or invokes /BWE-IMPECCABLE, in any BWE website repository.
+description: "Implements a design upgrade of a website by offering a checklist of every installed Impeccable command (default: the seven design stages in order). Every change is PROPOSED: it captures before and after screenshots (1440 and 375 pixels) with a slider, side-by-side, highlighted differences and an HTML report, then asks the user to approve, revise or reject (reject restores only the files of this run), then validates. Supports whole site, one page or component, --audit-only and --staging. Never deploys to production. Use when the user says \"run impeccable\", \"improve the design of the site\", or invokes /BWE-IMPECCABLE, in any BWE website repository."
 ---
 
 # BWE-IMPECCABLE: Impeccable design upgrade, implemented and validated
