@@ -66,15 +66,18 @@ what will be checked after the (separately authorized) deploy.
    discovered, crawled or indexed it. A production 5xx / 522 / timeout records `UNKNOWN` (health), never `FAILED`.
    **Search Console & other engines:** the sitemap is a site-level fact — if it is already registered (see
    `seo-config.json`) say so and do not ask for anything; otherwise `/BWE-SEO` routes registration to
-   `/BWE-SEO-SEARCH-CONSOLE`. Manual **Request Indexing** is an *optional accelerator*, mentioned once at most
-   and never required. Mention the project's existing Bing/IndexNow mechanism only if it has one; never add services.
+   `/BWE-SEO-SEARCH-CONSOLE`. **Request Indexing** is an *optional accelerator*, never required: when readiness
+   is PASSED, the session runs on the owner's computer, and the page's `indexingRequest` is not already
+   `REQUESTED` or an owner's "not requested" decision, run `/BWE-SEO-REQUEST-INDEXING` for the page's production
+   URL (it records the result). Otherwise, for example in a cloud session or when readiness is not PASSED,
+   mention the manual Request Indexing click once at most. Mention the project's existing Bing/IndexNow mechanism only if it has one; never add services.
 8. **Update the inventory** (only if live): apply the checker's `inventoryPatch` plus
    `navigation`, keep unknowns as `"unknown"`, then re-run the validator.
 9. **Write the report** `docs/seo/reports/publish-<id>-<YYYY-MM-DD>.md` in the methodology's
    format, ending with **WHAT YOU NEED TO DO** (as few steps as possible; "nothing" if so).
     (If the check reports `PRODUCTION CHECK UNAVAILABLE` — a 5xx, 522 or timeout — nothing is recorded or
     changed: it is a health failure, not evidence the page isn't live. Try again shortly.)
-10. **When the owner tells you** they ran a Live URL Test or clicked Request Indexing (both optional), record it
+10. **When the owner tells you** they ran a Live URL Test or clicked Request Indexing themselves (both optional), record it
     (`liveUrlTest`, `urlInspection: "verified"`, `indexingRequest: "REQUESTED"`, `requestedOn`,
     `requestSource: "owner:<date> chat"`). If they decide not to, keep `NOT REQUESTED` and put
     that decision in `requestSource` so /BWE-SEO stops asking. Never infer either. If the page had a

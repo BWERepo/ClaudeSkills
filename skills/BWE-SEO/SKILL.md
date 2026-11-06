@@ -177,10 +177,10 @@ The tool names the skill; this table is the reference:
 | Sitemap not registered, no API | Manual: confirm it in Search Console → Sitemaps, once for the whole site |
 | Sitemap already registered | Nothing — never ask for it again |
 | Indexed unverified, API usable, check due | Check Google's discovery / crawl / index status (`/BWE-SEO-SEARCH-CONSOLE <id>`, read-only) |
-| Manual Request Indexing / Live URL test | **Optional accelerators** — never required, never repeated once recorded |
+| Request Indexing / Live URL test | **Optional accelerators**: never required, never repeated once recorded. Request Indexing can run through `/BWE-SEO-REQUEST-INDEXING` |
 | Live, Search Console not set up (site) | Manual action: set up Search Console (owner's own Google account) — once per site |
 | Live URL Test not done / failed | Manual action: URL Inspection → Test Live URL; a failure is fixed and retested |
-| Live URL Test passed, indexing not requested | Manual action: Request Indexing (retry if it failed) |
+| Live URL Test passed, indexing not requested | Request Indexing: run `/BWE-SEO-REQUEST-INDEXING` on the owner's computer, or the owner clicks it manually (retry if it failed) |
 | Requested, sitemap not verified (site) | Manual action: Search Console → Sitemaps |
 | All Google steps done, indexing not verified | **Wait** — "Waiting for Google — not yet verified as indexed"; at the review date, ask the owner to check URL Inspection once |
 | Verified indexed | Move to monitoring (`/BWE-SEO-SEARCH-CONSOLE` reviews) |
@@ -247,7 +247,7 @@ Then run `node seo/tools/validate-seo-data.mjs` and the state tool again.
 
 Create more than one page per approval, mass-publish, deploy/push/commit without being asked, buy
 or connect paid tools, handle credentials, fabricate facts, proof or history, promise rankings,
-request indexing or change Search Console for the owner, rewrite a page just to create activity,
+change Search Console settings for the owner, request indexing other than through `/BWE-SEO-REQUEST-INDEXING`, rewrite a page just to create activity,
 call a page indexable or "ready for Google" before `/BWE-SEO-PUBLISH` has verified it live on
 production, let staging status stand in for production status, or recommend any search-engine
 indexing action for a staging, preview or local URL. Never read or write another project's `seo/`
