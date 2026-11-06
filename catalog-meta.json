@@ -109,6 +109,11 @@
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
+  "BWE-SEO-REQUEST-INDEXING": {
+    "purpose": "Request indexing in Google Search Console for production URLs, by driving the Search Console website on the owner's computer; run on request or automatically by BWE-SEO-PUBLISH.",
+    "dependencies": "bundled tool (tools/gsc-request-indexing); Node 18+; Playwright (npm install on first run); Google Chrome; owner's Google sign-in; local-only",
+    "projects": "all"
+  },
   "BWE-SEO-WATCH": {
     "purpose": "Run and verify the Google search monitoring workflow (sitemap sync, daily check, flags, weekly report), with a guided customer-site setup.",
     "dependencies": "BWE-SEO engine 2026.10.26.02 or newer installed in the project (BWE-SEO-ENGINE install); Node",

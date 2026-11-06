@@ -18,12 +18,12 @@ import { parseArgs } from 'node:util';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import readline from 'node:readline/promises';
 
 const HELP = `
 Request indexing in Google Search Console for a list of URLs.
 
-  node gsc-request-indexing.mjs --login                 Sign in once (opens a browser window)
+  node gsc-request-indexing.mjs --login                 Sign in once (opens a browser window,
+                                                        closes itself when you are signed in)
   node gsc-request-indexing.mjs <url|file>... [options] Request indexing
 
 Inputs: any mix of URLs and files. A file can be .txt (one URL per line) or .csv;
@@ -193,8 +193,8 @@ async function screenshot(page, label) {
   return file;
 }
 
-const isSignInPage = (u) =>
-  /accounts\.google\.com|ServiceLogin|\/search-console\/(about|welcome)/i.test(u);
+// Signed-out visitors are sent to Google sign-in or the Search Console "about" page.
+const isSignInPage = (u) => /accounts\.google\.com|ServiceLogin|\/search-console\/about/i.test(u);
 
 // If Google sends us to a sign-in page, let the user sign in in the open window.
 async function ensureSignedIn(page, target) {
@@ -307,16 +307,37 @@ async function openBrowser() {
 
 // ---------------------------------------------------------------- main
 
+// Opens Search Console and waits until the owner has signed in, then saves the
+// session. Needs no keyboard input, so it also works when started by Claude.
 async function loginOnly() {
   const context = await openBrowser();
   const page = context.pages()[0] || (await context.newPage());
   await page.goto(`${BASE}/search-console?hl=en`, { waitUntil: 'domcontentloaded' });
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-  await rl.question(
-    '\nSign in to the Google account that owns your Search Console properties in the\n' +
-      'browser window. When you can see Search Console, press Enter here to save the session. ',
-  );
-  rl.close();
+  await sleep(3000);
+  const signedIn = () => {
+    const u = page.url();
+    return u.includes('/search-console') && !isSignInPage(u);
+  };
+  if (signedIn()) {
+    console.log('Already signed in to Search Console.');
+  } else {
+    console.log(
+      'Sign in to the Google account that has your Search Console properties in the browser\n' +
+        'window (waiting up to 10 minutes). The window closes by itself once you are signed in.',
+    );
+    const deadline = Date.now() + 10 * 60 * 1000;
+    let stable = 0;
+    while (stable < 3) {
+      if (Date.now() > deadline || page.isClosed()) {
+        await context.close().catch(() => {});
+        console.error('Sign-in was not completed. Run --login again.');
+        process.exit(1);
+      }
+      stable = signedIn() ? stable + 1 : 0;
+      await sleep(2000);
+    }
+    await sleep(3000); // let Google finish writing the session cookies
+  }
   await context.close();
   console.log(`Session saved in ${opt.profile}. You can now run the script with your URL list.`);
 }

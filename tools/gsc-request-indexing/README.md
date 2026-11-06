@@ -4,6 +4,8 @@ Takes a list of URLs and clicks **URL Inspection → Request indexing** for each
 
 Google has no API for the "Request indexing" button. The URL Inspection API can only read status, and the Indexing API is limited to job-posting and livestream pages. So this script drives the Search Console website in a real browser (Playwright).
 
+From Claude, use the **`/bwe-skills:BWE-SEO-REQUEST-INDEXING`** skill. It sets up this tool in `~/.bwe/gsc-request-indexing`, previews the list, and runs the tool for you.
+
 ## Setup (once)
 
 You need Node.js 18 or newer and Google Chrome (or Edge).
@@ -14,7 +16,7 @@ npm install
 node gsc-request-indexing.mjs --login
 ```
 
-`--login` opens a browser window. Sign in to the Google account that has access to your Search Console properties, then press Enter in the terminal. The sign-in is saved in a separate browser profile (`~/.gsc-indexer-profile`) and used again on later runs. The script never sees or stores your password.
+`--login` opens a browser window. Sign in to the Google account that has access to your Search Console properties. The window closes by itself once you are signed in. The sign-in is saved in a separate browser profile (`~/.gsc-indexer-profile`) and used again on later runs. The script never sees or stores your password.
 
 ## Run
 
