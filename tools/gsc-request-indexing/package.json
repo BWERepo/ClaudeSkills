@@ -1,0 +1,14 @@
+{
+  "name": "gsc-request-indexing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Request indexing in Google Search Console for a list of URLs (drives the Search Console UI with Playwright).",
+  "type": "module",
+  "bin": { "gsc-request-indexing": "gsc-request-indexing.mjs" },
+  "scripts": {
+    "login": "node gsc-request-indexing.mjs --login",
+    "start": "node gsc-request-indexing.mjs"
+  },
+  "engines": { "node": ">=18.3" },
+  "dependencies": { "playwright": "^1.50.0" }
+}
