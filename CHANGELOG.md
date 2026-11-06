@@ -1,4 +1,6 @@
 # Changelog
+## [2026.11.06.01] - 2026-11-06
+- Added BWE-SEO-REQUEST-INDEXING: requests indexing in Google Search Console for a list of production URLs the owner gives, using the bundled tool `tools/gsc-request-indexing` (Playwright drives the Search Console website, because Google has no API for Request indexing). The owner signs in once in a browser window on their own computer and Claude never handles the password. The tool picks the property for each site, stops for a property at Google's daily quota, skips URLs requested in the last 24 hours, and logs each result with screenshots for problems. Local-only, and only on the owner's direct request. BWE-SEO-SEARCH-CONSOLE keeps its rule against automating Request indexing inside the SEO workflows. The tool's `--login` now detects the finished sign-in itself (no Enter key needed), and signed-in accounts with no properties are no longer treated as signed out.
 ## [2026.10.26.05] - 2026-10-26
 - BWE-OCA-CHECKPOINT now commits every real change (not only the release files) with a descriptive message (Release vX.Y.Z: <what changed>), never secrets, then pushes and reports the commit hash.
 ## [2026.10.26.04] - 2026-10-26
