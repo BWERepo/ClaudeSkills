@@ -7,14 +7,23 @@ description: "Sends a batch of blind (cold outreach) lead emails from the Busine
 
 Drives the BWE backoffice in a browser to send one batch of Blind Lead Emails. Sending email to prospects cannot be undone, so this skill always stops for the owner's explicit OK right before it sends.
 
-## Parameters (ask only if the owner gave none; otherwise use the defaults)
+## Questions and defaults (always do this first)
+Before opening the browser, ask the owner for the three values, offering the default for each so one word ("ok", "defaults") accepts it. Ask all three together in one message, for example:
+
+> Which category (default General Dentistry), how many emails (default 10), and send from which mailbox (default alvin@businesswebexpress.net)?
+
 | Parameter | Default |
 |---|---|
 | Category | `General Dentistry` |
 | Row count | `10` |
 | Send from | `alvin@businesswebexpress.net` |
 
-The owner can override any of them in the request, for example `/BWE-LEAD-EMAIL-SEND category=Plumbers count=20 from=alvin@businesswebexpress.net`.
+Rules:
+- Any value the owner already gave in the request (for example `/BWE-LEAD-EMAIL-SEND category=Plumbers count=20 from=alvin@businesswebexpress.net`) is used as given: do not ask for it again; ask only for the ones missing.
+- An answer of "ok", "defaults", "same", or no answer to a value means use its default. Read the chosen values back in one line before starting.
+- Substitute the chosen values everywhere below: the category and count wherever steps and the step 14 summary say "category", "count" or "N", and the Send from value in steps 12, 14 and 15. Do not hard-code the defaults in later steps.
+- Validate before using: the category must be one of the category pills on the card, the count a positive whole number, and Send from a mailbox in the Send from list. If one is not valid, say so and ask again; do not guess a close match.
+- If fewer than `count` unsent rows with an email exist in the category, tell the owner how many there are and ask whether to send that many instead.
 
 ## Credentials: never handle them
 - Never ask for, type, store, log or write down the 6-digit code or any password, in chat, in files or in memory.
@@ -29,13 +38,13 @@ Labels below are the real ones in the BWE admin (`LeadEmailManage.tsx`, `admin.t
 3. Click **Admin dashboard**.
 4. Click the **Cards** tab.
 5. Click the **Blind Lead Email** card.
-6. Select the category (default **General Dentistry**) from the category pills. The card's Subject and body load from the category; do not edit them.
+6. Select the category (the chosen category) from the category pills. The card's Subject and body load from the category; do not edit them.
 7. Expand **Prospect tracker** (collapsed by default; click its title).
-8. Scroll down the grid and tick the **Staged** checkbox on `count` rows (default 10) whose **Date email sent** is empty. Only stage rows that have an email address and no sent date, one row at a time, and stay in the same category. (The footer's "Stage next N emails" control does the same job and is an acceptable shortcut, but verify the result as in step 9.)
+8. Scroll down the grid and tick the **Staged** checkbox on `count` rows whose **Date email sent** is empty. Only stage rows that have an email address and no sent date, one row at a time, and stay in the same category. (The footer's "Stage next N emails" control does the same job and is an acceptable shortcut, but verify the result as in step 9.)
 9. Verify the staging: use the Staged header filter ("Show only staged rows") or count the ticks. There must be exactly `count` staged rows, every one with a blank Date email sent and the right category. If the count is wrong or a row already has a sent date, fix it before continuing (the **Clear staged** button unstages everything).
 10. Close the **Prospect tracker** (click its title again).
 11. Expand **Compose** (click its title).
-12. Set **Send from** to the Send from parameter (default `alvin@businesswebexpress.net`). If that mailbox is not in the list, stop and tell the owner; do not pick another.
+12. Set **Send from** to the Send from parameter (the chosen mailbox). If that mailbox is not in the list, stop and tell the owner; do not pick another.
 13. Uncheck **Rotate through all N mailboxes**. Confirm **Test send** is unchecked.
 14. **Stop and confirm with the owner.** Show this summary and wait for an explicit yes in chat:
     - Category, Send from address (read back from the page), number of staged rows, and their email addresses (or the first and last few).

@@ -1,4 +1,6 @@
 # Changelog
+## [2026.11.10.02] - 2026-11-10
+- BWE-LEAD-EMAIL-SEND now always asks the owner for category, row count and Send from (offering the defaults General Dentistry, 10 and alvin@businesswebexpress.net), uses values already given in the request without re-asking, substitutes the chosen values in every step instead of the defaults, and validates them (category pill exists, mailbox in the list, enough unsent rows) before starting.
 ## [2026.11.10.01] - 2026-11-10
 - Added BWE-LEAD-EMAIL-SEND: signs in to the BWE backoffice (the owner supplies the saved 6-digit code; Claude never handles it), opens Cards > Blind Lead Email, picks a category, stages the first N prospects with no Date email sent, sets Send from, turns off Rotate, and sends only after the owner explicitly confirms. Parameters default to General Dentistry, 10 rows and alvin@businesswebexpress.net. A 535 BadCredentials error means that mailbox's LEAD_EMAIL_SMTP_PASSWORD_<KEY> secret needs a new Gmail app password; the skill stops, never retries in a loop, and leaves the emails staged.
 ## [2026.11.06.01] - 2026-11-06
