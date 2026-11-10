@@ -45,12 +45,12 @@
     "projects": "all"
   },
   "BWE-SEO-AUDIT": {
-    "purpose": "Full read-only SEO baseline audit of the current website project using the BWESEO engine \u2014 architecture, page inventory, metadata, sitemap/r",
+    "purpose": "Full read-only SEO baseline audit of the current website project using the BWESEO engine — architecture, page inventory, metadata, sitemap/r",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-COMPETITORS": {
-    "purpose": "Search-results and competitor gap analysis for approved target topics in the current website project using the BWESEO engine \u2014 who ranks, wh",
+    "purpose": "Search-results and competitor gap analysis for approved target topics in the current website project using the BWESEO engine — who ranks, wh",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
@@ -60,47 +60,47 @@
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-CREATE-PAGE": {
-    "purpose": "Creates exactly ONE user-approved SEO page in the current website project using the BWESEO engine \u2014 rechecks cannibalization, confirms inten",
+    "purpose": "Creates exactly ONE user-approved SEO page in the current website project using the BWESEO engine — rechecks cannibalization, confirms inten",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-INTERNAL-LINKS": {
-    "purpose": "Internal-link analysis for the current website project using the BWESEO engine \u2014 builds the link graph from nav, footer and body links, find",
+    "purpose": "Internal-link analysis for the current website project using the BWESEO engine — builds the link graph from nav, footer and body links, find",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-LOCAL": {
-    "purpose": "Local SEO analysis for the current website project using the BWESEO engine \u2014 NAP consistency, address type (storefront vs service-area vs ma",
+    "purpose": "Local SEO analysis for the current website project using the BWESEO engine — NAP consistency, address type (storefront vs service-area vs ma",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-OPPORTUNITIES": {
-    "purpose": "Identifies SEO customer-acquisition opportunities for the current website project using the BWESEO engine \u2014 maps searches that could bring a",
+    "purpose": "Identifies SEO customer-acquisition opportunities for the current website project using the BWESEO engine — maps searches that could bring a",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-PUBLISH": {
-    "purpose": "Mandatory post-publication SEO check for a page that has just gone live in the current website project, using the BWESEO engine \u2014 environmen",
+    "purpose": "Mandatory post-publication SEO check for a page that has just gone live in the current website project, using the BWESEO engine — environmen",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-QA": {
-    "purpose": "SEO QA gate for a page in the current website project using the BWESEO engine \u2014 content checks (every claim verified, no fabricated proof, l",
+    "purpose": "SEO QA gate for a page in the current website project using the BWESEO engine — content checks (every claim verified, no fabricated proof, l",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-REFRESH": {
-    "purpose": "Finds published pages in the current website project that need updating using the BWESEO engine \u2014 stale facts or prices versus the business ",
+    "purpose": "Finds published pages in the current website project that need updating using the BWESEO engine — stale facts or prices versus the business ",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-REPORT": {
-    "purpose": "Generates a plain-language SEO progress/performance report for the current website project using the BWESEO engine \u2014 what shipped, Search Co",
+    "purpose": "Generates a plain-language SEO progress/performance report for the current website project using the BWESEO engine — what shipped, Search Co",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-SCHEMA": {
-    "purpose": "Structured-data (JSON-LD / schema.org) audit for the current website project using the BWESEO engine \u2014 lists every schema block per page, wh",
+    "purpose": "Structured-data (JSON-LD / schema.org) audit for the current website project using the BWESEO engine — lists every schema block per page, wh",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
@@ -120,12 +120,12 @@
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-SETUP": {
-    "purpose": "Configures BWESEO for the current customer's website project AFTER the engine is installed (/BWESEOInstall) \u2014 creates the customer-specific ",
+    "purpose": "Configures BWESEO for the current customer's website project AFTER the engine is installed (/BWESEOInstall) — creates the customer-specific ",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
   "BWE-SEO-TECHNICAL": {
-    "purpose": "Technical SEO audit of the current website project (or a single page) using the BWESEO engine \u2014 crawl/index rules, robots per-agent groups, ",
+    "purpose": "Technical SEO audit of the current website project (or a single page) using the BWESEO engine — crawl/index rules, robots per-agent groups, ",
     "dependencies": "BWESEO engine installed in the project (BWESEOInstall); Node",
     "projects": "website projects with BWESEO installed"
   },
@@ -220,7 +220,7 @@
     "projects": "One Click Answers project only"
   },
   "BWE-OCA-ALL": {
-    "purpose": "Full end-to-end wrap-up for the One Click Answers tool site (OneClickAnswers.com) \u2014 runs BWEOCACheckpoint (staging AND production release), then BWEOCAEnd.",
+    "purpose": "Full end-to-end wrap-up for the One Click Answers tool site (OneClickAnswers.com) — runs BWEOCACheckpoint (staging AND production release), then BWEOCAEnd.",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
@@ -230,17 +230,17 @@
     "projects": "One Click Answers project only"
   },
   "BWE-OCA-BEGIN": {
-    "purpose": "Start-of-session resume for the One Click Answers tool site (OneClickAnswers.com) \u2014 reads PROJECT_STATUS.md and continues development from where the last sessio",
+    "purpose": "Start-of-session resume for the One Click Answers tool site (OneClickAnswers.com) — reads PROJECT_STATUS.md and continues development from where the last sessio",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
   "BWE-OCA-CHECKPOINT": {
-    "purpose": "Full release for the One Click Answers tool site (OneClickAnswers.com) at an explicit version (or auto-bumped minor if none given) \u2014 builds and deploys staging,",
+    "purpose": "Full release for the One Click Answers tool site (OneClickAnswers.com) at an explicit version (or auto-bumped minor if none given) — builds and deploys staging,",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
   "BWE-OCA-END": {
-    "purpose": "End-of-session wrap-up for the One Click Answers tool site (OneClickAnswers.com) \u2014 updates PROJECT_STATUS.md with everything accomplished in the current session",
+    "purpose": "End-of-session wrap-up for the One Click Answers tool site (OneClickAnswers.com) — updates PROJECT_STATUS.md with everything accomplished in the current session",
     "dependencies": "One Click Answers repository (project-specific scripts and files)",
     "projects": "One Click Answers project only"
   },
@@ -338,5 +338,10 @@
     "purpose": "Says Hello.",
     "dependencies": "none",
     "projects": "all"
+  },
+  "BWE-AUTH": {
+    "purpose": "Explain and walk through the /auth sign-in page (Client Portal and Backoffice) without handling credentials.",
+    "dependencies": "a browser; the owner enters credentials",
+    "projects": "BWE website"
   }
 }
