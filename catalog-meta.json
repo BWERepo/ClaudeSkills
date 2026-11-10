@@ -338,5 +338,10 @@
     "purpose": "Says Hello.",
     "dependencies": "none",
     "projects": "all"
+  },
+  "BWE-LEAD-EMAIL-SEND": {
+    "purpose": "Send a batch of blind lead emails from the BWE backoffice, with owner confirmation before sending.",
+    "dependencies": "a browser the owner can see (Claude in Chrome or computer use); owner signs in",
+    "projects": "all"
   }
 }
