@@ -10,13 +10,13 @@ Drives the BWE backoffice in a browser to add one PCR (a row in `software_change
 ## Questions and defaults (always do this first)
 Ask for everything in one message, offering the default for each so one word accepts it:
 
-> Which customer (default For The Table), what is the change (title and description in your words), and which website version (default: read live from the site)?
+> Which customer (default For The Table), what is the subject (the PCR title) and the description of the change, in your words, and which website version (default: read live from the site)?
 
 | Parameter | Default |
 |---|---|
 | Customer | `For The Table` |
 | Website version | the version shown live in the customer site's footer (see below) |
-| Title | optional; blank means the backoffice derives it from the description |
+| Subject (the PCR **Title** field) | **asked every time, from the owner.** Never invented. Only if the owner says to leave it blank does the backoffice derive it from the description |
 | Description | **required, from the owner. Never invent or embellish it.** |
 | Page, Needed by, Requested by, Priority, Status | optional; defaults Requested by `Admin`, Priority `Medium`, Status `New`. Ask only if the owner mentioned them |
 
@@ -44,8 +44,8 @@ Labels are the real ones in the BWE admin (`SoftwareChangeRequestsManage.tsx`).
 3. Click **Admin dashboard**, then find the customer in the customers list and open them (search by name; the exact customer must match, otherwise stop and ask).
 4. Open the **Program change requests (PCRs)** card (use **Search cards by name** if needed). Note the current **Total reported** count.
 5. Expand **New change request** (collapsed by default). The PCR number is assigned automatically.
-6. Fill in: **Title** (if given), **Page** (if given), the description box (placeholder "Describe the change…"), **Needed by** (if given), **Website version** (the version above), **Requested by**, **Priority**, **Status**. Leave **Resolution Comments** and attachments empty unless the owner supplied them.
-7. **Stop and confirm with the owner.** Show: customer name (read back from the page), title, page, full description, website version and where it came from, Requested by, Priority, Status, Needed by. Wait for an explicit yes in chat. Approval for a previous PCR does not carry over.
+6. Fill in: **Title** (the subject), **Page** (if given), the description box (placeholder "Describe the change…"), **Needed by** (if given), **Website version** (the version above), **Requested by**, **Priority**, **Status**. Leave **Resolution Comments** and attachments empty unless the owner supplied them.
+7. **Stop and confirm with the owner.** Show: customer name (read back from the page), subject (title), page, full description, website version and where it came from, Requested by, Priority, Status, Needed by. Wait for an explicit yes in chat. Approval for a previous PCR does not carry over.
 8. After the yes, click **Add**. Wait for the button to stop showing "Adding…".
 9. Verify: **Total reported** went up by one and the new row appears in the list with its PCR number, title and status. Report the PCR number, and the link if the row offers one. If anything differs, report it exactly; do not retry adding (that would create a duplicate).
 
