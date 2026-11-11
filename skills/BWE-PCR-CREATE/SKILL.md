@@ -8,9 +8,13 @@ description: "Creates one Program Change Request (PCR) for a customer in the Bus
 Drives the BWE backoffice in the Claude desktop app's built-in (in-app) browser to add one PCR (a row in `software_change_requests`) for a customer. Adding a PCR is visible in the customer's PCR list and numbering, so this skill always stops for the owner's explicit OK right before it adds.
 
 ## Questions and defaults (always do this first)
-Ask for everything in one message, offering the default for each so one word accepts it:
+Ask **one question at a time**. Send a single short question, wait for the owner's answer, then ask the next. Never list several questions in one message. Offer the default where there is one so one word ("ok", "default") accepts it. Ask in this order, skipping any value the owner already gave in the request:
 
-> Which customer (default For The Table), what is the subject (the PCR title) and the description of the change, in your words, and which website version (default: read live from the site)?
+1. **Customer:** "Which customer? (default: For The Table)"
+2. **Website version:** read the live version first (see below), then ask "Which website version? (default: <the version you read>, from <URL>)".
+3. **Subject:** "What is the subject (the PCR title)?" No default.
+4. **Description:** "What is the description of the change?" No default.
+5. **Optional extras, one at a time:** Page (for example /about), Needed by, Priority (default Medium), Requested by (default Admin), Status (default New). Ask each as its own question, and accept "skip" or "none" to stop asking the remaining extras and use their defaults. If the owner already mentioned an extra, use it without asking.
 
 | Parameter | Default |
 |---|---|
@@ -21,11 +25,12 @@ Ask for everything in one message, offering the default for each so one word acc
 | Page, Needed by, Requested by, Priority, Status | optional; defaults Requested by `Admin`, Priority `Medium`, Status `New`. Ask only if the owner mentioned them |
 
 Rules:
-- Values already given in the request are used as given; ask only for what is missing. The description can never default: if the owner has not given one, ask.
+- Values already given in the request are used as given; ask only for what is missing. The subject and description can never default: if the owner has not given them, ask.
 - Never write, rewrite or "improve" the description or title. Type exactly what the owner supplied (fixing nothing silently). Do not invent pages, dates, priorities or resolution comments.
 - Read the final values back in one line before starting.
 
 ## Reading the current version live
+Do this before question 2 so the default can be shown. It needs the browser, so open the in-app browser first (see Browser below).
 The customer's site footer ends with `Website by <business> businesswebexpress.com — v<version>` (stamped by each deploy).
 - For The Table: open `https://forthetable.businesswebexpress.com` in the built-in browser (use `get_page_text` on the footer), scroll to the footer, read the `v…` text, and use the number without the `v` (for example `v1.4.2` becomes `1.4.2`).
 - Another customer: ask the owner for that customer's site URL, or the version itself. Do not guess a domain.
