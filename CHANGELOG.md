@@ -1,4 +1,6 @@
 # Changelog
+## [2026.11.11.02] - 2026-11-11
+- BWE-PCR-CREATE now always asks the owner for the subject (the PCR Title field) along with the description, never invents it, fills it into the form's Title box and shows it in the confirmation summary.
 ## [2026.11.11.01] - 2026-11-11
 - Added BWE-PCR-CREATE: creates one Program Change Request (PCR, the software change request records on the backoffice Program change requests card) for a customer. Defaults to the customer For The Table and to the website version read live from the footer of forthetable.businesswebexpress.com. The owner supplies the description (never invented), signs in themselves (Claude never handles the code), and the skill stops for explicit confirmation before clicking Add, then verifies the new row.
 ## [2026.11.10.02] - 2026-11-10
