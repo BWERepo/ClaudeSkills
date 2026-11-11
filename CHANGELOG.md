@@ -1,4 +1,6 @@
 # Changelog
+## [2026.11.11.01] - 2026-11-11
+- Added BWE-PCR-CREATE: creates one Program Change Request (PCR, the software change request records on the backoffice Program change requests card) for a customer. Defaults to the customer For The Table and to the website version read live from the footer of forthetable.businesswebexpress.com. The owner supplies the description (never invented), signs in themselves (Claude never handles the code), and the skill stops for explicit confirmation before clicking Add, then verifies the new row.
 ## [2026.11.10.02] - 2026-11-10
 - BWE-LEAD-EMAIL-SEND now always asks the owner for category, row count and Send from (offering the defaults General Dentistry, 10 and alvin@businesswebexpress.net), uses values already given in the request without re-asking, substitutes the chosen values in every step instead of the defaults, and validates them (category pill exists, mailbox in the list, enough unsent rows) before starting.
 ## [2026.11.10.01] - 2026-11-10
