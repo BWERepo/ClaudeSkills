@@ -45,7 +45,7 @@ Labels are the real ones in the BWE admin (`SoftwareChangeRequestsManage.tsx`).
 4. Open the **Program change requests (PCRs)** card (use **Search cards by name** if needed). Note the current **Total reported** count.
 5. Expand **New change request** (collapsed by default). The PCR number is assigned automatically.
 6. Fill in: **Title** (the subject), **Page** (if given), the description box (placeholder "Describe the change…"), **Needed by** (if given), **Website version** (the version above), **Requested by**, **Priority**, **Status**. Leave **Resolution Comments** and attachments empty unless the owner supplied them.
-7. **Stop and confirm with the owner.** Show: customer name (read back from the page), title, page, full description, website version and where it came from, Requested by, Priority, Status, Needed by. Wait for an explicit yes in chat. Approval for a previous PCR does not carry over.
+7. **Stop and confirm with the owner.** Show: customer name (read back from the page), subject (title), page, full description, website version and where it came from, Requested by, Priority, Status, Needed by. Wait for an explicit yes in chat. Approval for a previous PCR does not carry over.
 8. After the yes, click **Add**. Wait for the button to stop showing "Adding…".
 9. Verify: **Total reported** went up by one and the new row appears in the list with its PCR number, title and status. Report the PCR number, and the link if the row offers one. If anything differs, report it exactly; do not retry adding (that would create a duplicate).
 
