@@ -5,7 +5,7 @@ description: "Creates one Program Change Request (PCR) for a customer in the Bus
 
 # BWE-PCR-CREATE
 
-Drives the BWE backoffice in a browser to add one PCR (a row in `software_change_requests`) for a customer. Adding a PCR is visible in the customer's PCR list and numbering, so this skill always stops for the owner's explicit OK right before it adds.
+Drives the BWE backoffice in the Claude desktop app's built-in (in-app) browser to add one PCR (a row in `software_change_requests`) for a customer. Adding a PCR is visible in the customer's PCR list and numbering, so this skill always stops for the owner's explicit OK right before it adds.
 
 ## Questions and defaults (always do this first)
 Ask for everything in one message, offering the default for each so one word accepts it:
@@ -27,14 +27,18 @@ Rules:
 
 ## Reading the current version live
 The customer's site footer ends with `Website by <business> businesswebexpress.com — v<version>` (stamped by each deploy).
-- For The Table: open `https://forthetable.businesswebexpress.com` in the browser, scroll to the footer, read the `v…` text, and use the number without the `v` (for example `v1.4.2` becomes `1.4.2`).
+- For The Table: open `https://forthetable.businesswebexpress.com` in the built-in browser (use `get_page_text` on the footer), scroll to the footer, read the `v…` text, and use the number without the `v` (for example `v1.4.2` becomes `1.4.2`).
 - Another customer: ask the owner for that customer's site URL, or the version itself. Do not guess a domain.
 - If the owner gave a version, use it instead and skip the lookup. If the footer shows no version, say so and ask; do not make one up. Mention which version you read and from which URL.
 
 ## Credentials: never handle them
 - Never ask for, type, store, log or write down the 6-digit code or any password, in chat, in files or in memory.
-- The owner signs in themselves; use the browser's saved-credential autofill if offered, otherwise ask the owner to enter the code and say when they are in.
-- Use a real browser the owner can see (Claude in Chrome, or computer use). Not a headless browser.
+- The owner signs in themselves. The built-in browser keeps its own persistent profile, so the owner may already be signed in; check first. Otherwise use saved-credential autofill if offered, or ask the owner to enter the code in the browser pane and say when they are in. Never sign out or touch other accounts.
+
+## Browser: use the in-app browser
+- Use the Claude desktop app's built-in browser (tools `mcp__Claude_Browser__*`, or `mcp__remote-devices__Claude_Browser__*` when the session runs in the cloud). Load them all with one ToolSearch on that prefix; if only `enable__mcp__remote-devices__Claude_Browser` is present, call it first. Invoke the `built-in-browser` skill if available.
+- Before asking the owner to do anything in the pane (sign in, confirm), call `tabs_context` to check the pane is displayed. If hidden, ask them to press Ctrl+Shift+B (Cmd+Shift+B on Mac) in the desktop app. If a site is refused, call `request_access` if present, otherwise tell the owner.
+- Prefer `get_page_text`, `read_page` and `find` over screenshots. Do not use Chrome or other browsers unless the in-app browser is unavailable, and then say so and ask first.
 
 ## Steps
 Labels are the real ones in the BWE admin (`SoftwareChangeRequestsManage.tsx`).

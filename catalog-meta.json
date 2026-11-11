@@ -346,7 +346,7 @@
   },
   "BWE-PCR-CREATE": {
     "purpose": "Create one Program Change Request for a customer in the BWE backoffice (default For The Table, version read live from the site footer), with owner confirmation before adding.",
-    "dependencies": "a browser the owner can see (Claude in Chrome or computer use); owner signs in",
+    "dependencies": "Claude desktop app built-in browser; owner signs in",
     "projects": "all"
   }
 }
