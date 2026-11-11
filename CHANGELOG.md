@@ -1,4 +1,6 @@
 # Changelog
+## [2026.11.11.04] - 2026-11-11
+- BWE-PCR-CREATE now asks for its data one question at a time (customer, version, subject, description, then optional extras one by one, with "skip" to accept the remaining defaults) instead of one multi-part question. The live version is read before the version question so the default can be shown.
 ## [2026.11.11.03] - 2026-11-11
 - BWE-PCR-CREATE now uses the Claude desktop app's built-in (in-app) browser instead of Claude in Chrome or computer use: loads the Claude_Browser tools, checks the pane is displayed before asking the owner to act, reuses the owner's existing sign-in in that browser, and reads pages with get_page_text.
 ## [2026.11.11.02] - 2026-11-11
