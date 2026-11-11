@@ -1,4 +1,6 @@
 # Changelog
+## [2026.11.11.03] - 2026-11-11
+- BWE-PCR-CREATE now uses the Claude desktop app's built-in (in-app) browser instead of Claude in Chrome or computer use: loads the Claude_Browser tools, checks the pane is displayed before asking the owner to act, reuses the owner's existing sign-in in that browser, and reads pages with get_page_text.
 ## [2026.11.11.02] - 2026-11-11
 - BWE-PCR-CREATE now always asks the owner for the subject (the PCR Title field) along with the description, never invents it, fills it into the form's Title box and shows it in the confirmation summary.
 ## [2026.11.11.01] - 2026-11-11
